@@ -15,11 +15,11 @@ export default function Home() {
   const [moduleKeys, setModuleKeys] = useState([]);
   const [sortBy, setSortBy] = useState();
   const [entriesMarkedAsFinished, setEntriesMarkedAsFinished] = useState({
-    movies: {},
-    games: {},
-    books: {},
-    comics: {},
-    series: {},
+    movies: [],
+    games: [],
+    books: [],
+    comics: [],
+    series: [],
   });
 
   useEffect(() => {
@@ -50,15 +50,35 @@ export default function Home() {
     setFetchedData(_.orderBy(fetchedData, event.target.value, order));
   }
 
-  function markEntryAsFinished(event, entry) {
+  function toggleEntryAsFinished(event, entry) {
     let title = entry.title.replace(/\s+/g, "-").toLowerCase();
     let btn = document.querySelector("#" + title + "btn");
     let card = document.getElementById(title + "-card");
-    card.classList.toggle("finished");
-    if (card.classList.contains("finished"))
+
+    if (card.classList.contains("finished")) {
       btn.innerText = "Mark as Unfinished";
-    if (!card.classList.contains("finished"))
+      let arrWithoutEntry = _.pull(
+        entriesMarkedAsFinished[currentlyOpenedModule],
+        title
+      );
+
+      setEntriesMarkedAsFinished({
+        ...entriesMarkedAsFinished,
+        [currentlyOpenedModule]: arrWithoutEntry,
+      });
+    }
+
+    if (!card.classList.contains("finished")) {
       btn.innerText = "Mark as Finished";
+      setEntriesMarkedAsFinished({
+        ...entriesMarkedAsFinished,
+        [currentlyOpenedModule]: [
+          ...entriesMarkedAsFinished[currentlyOpenedModule],
+          title,
+        ],
+      });
+    }
+    card.classList.toggle("finished");
   }
 
   return (
@@ -71,36 +91,38 @@ export default function Home() {
       <Header displayData={displayData} />
 
       <div id={styles.viewer}>
-        <div id={styles.sortContainer}>
-          <button>Filters</button>
-          <Box sx={{ marginLeft: "auto" }}>
-            <FormControl sx={{ width: "200px" }}>
-              <InputLabel>Sort By</InputLabel>
-              <Select value={sortBy} label="Sort By" onChange={orderBy}>
-                <MenuItem value={"title"}>Title</MenuItem>
-                <MenuItem value={"releaseDate"}>Date</MenuItem>
-                {"author" in fetchedData[0] ? (
-                  <MenuItem value={"author"}>Author</MenuItem>
-                ) : null}
-                {"seasons" in fetchedData[0] ? (
-                  <MenuItem value={"seasons"}>Seasons</MenuItem>
-                ) : null}
-                {"episodes" in fetchedData[0] ? (
-                  <MenuItem value={"episodes"}>Episodes</MenuItem>
-                ) : null}
-                {"createdBy" in fetchedData[0] ? (
-                  <MenuItem value={"createdBy"}>Created By</MenuItem>
-                ) : null}
-                {"era" in fetchedData[0] ? (
-                  <MenuItem value={"era"}>Era</MenuItem>
-                ) : null}
-                {"isCanon" in fetchedData[0] ? (
-                  <MenuItem value={"isCanon"}>Canonicity</MenuItem>
-                ) : null}
-              </Select>
-            </FormControl>
-          </Box>
-        </div>
+        {fetchedData.length ? (
+          <div id={styles.sortContainer}>
+            <button>Filters</button>
+            <Box sx={{ marginLeft: "auto" }}>
+              <FormControl sx={{ width: "200px" }}>
+                <InputLabel>Sort By</InputLabel>
+                <Select value={sortBy} label="Sort By" onChange={orderBy}>
+                  <MenuItem value={"title"}>Title</MenuItem>
+                  <MenuItem value={"releaseDate"}>Date</MenuItem>
+                  {"author" in fetchedData[0] ? (
+                    <MenuItem value={"author"}>Author</MenuItem>
+                  ) : null}
+                  {"seasons" in fetchedData[0] ? (
+                    <MenuItem value={"seasons"}>Seasons</MenuItem>
+                  ) : null}
+                  {"episodes" in fetchedData[0] ? (
+                    <MenuItem value={"episodes"}>Episodes</MenuItem>
+                  ) : null}
+                  {"createdBy" in fetchedData[0] ? (
+                    <MenuItem value={"createdBy"}>Created By</MenuItem>
+                  ) : null}
+                  {"era" in fetchedData[0] ? (
+                    <MenuItem value={"era"}>Era</MenuItem>
+                  ) : null}
+                  {"isCanon" in fetchedData[0] ? (
+                    <MenuItem value={"isCanon"}>Canonicity</MenuItem>
+                  ) : null}
+                </Select>
+              </FormControl>
+            </Box>
+          </div>
+        ) : null}
 
         <div id={styles.moduleContainer}>
           {fetchedData.map((e1, i1) => {
@@ -169,7 +191,7 @@ export default function Home() {
                   );
                 })}
                 <button
-                  onClick={(e) => markEntryAsFinished(e, e1)}
+                  onClick={(e) => toggleEntryAsFinished(e, e1)}
                   className={styles.finishedBtn}
                   id={e1.title.replace(/\s+/g, "-").toLowerCase() + "btn"}
                 >
