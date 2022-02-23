@@ -1,7 +1,7 @@
 import "../styles/globals.css";
 import React from "react";
 
-function MyApp({ Component, pageProps }) {
+function StarWarsLoretracker({ Component, pageProps }) {
   return (
     <div>
       <Component {...pageProps} />
@@ -9,4 +9,4 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export default MyApp;
+export default StarWarsLoretracker;

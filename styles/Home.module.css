@@ -3,24 +3,32 @@
   margin-top: 0;
 }
 
+.viewerContainer {
+  min-height: 100vh;
+}
+
 #moduleContainer {
   display: flex;
   flex-wrap: wrap;
   gap: 1em;
 }
 
-.card {
+.cardUnfinished,
+.cardFinished {
   margin: auto;
   flex-basis: 24%;
   border: 1px solid black;
 }
 
-.card h2,
-.card p {
+.cardUnfinished h2,
+.cardUnfinished p,
+.cardFinished h2,
+.cardFinished p {
   margin-left: 20px;
 }
 
-.card h2 {
+.cardUnfinished h2,
+.cardFinished h2 {
   font-size: 1rem;
   font-family: "Josefin Sans";
   font-weight: 300;
@@ -29,10 +37,25 @@
   margin-bottom: 0;
 }
 
-.card p {
+.cardUnfinished p,
+.cardFinished p {
   font-weight: 900;
   text-transform: uppercase;
   margin-top: 0;
+}
+
+.cardFinished {
+  background: black;
+}
+
+.cardFinished p {
+  color: white;
+}
+
+.cardFinished button {
+  background: white;
+  color: black;
+  border: 1px solid white;
 }
 
 .coverImageContainer {
