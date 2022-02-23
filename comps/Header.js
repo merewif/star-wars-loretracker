@@ -3,18 +3,26 @@ import styles from "../styles/Header.module.css";
 import logo from "../assets/logo.png";
 import Image from "next/image";
 
-const Header = () => {
+const Header = ({ displayData }) => {
+  const listElements = ["Movies", "Games", "Books", "Comics", "Series"];
+
   return (
     <nav id={styles.navbar}>
-      <div>
-        <Image src={logo} alt="Logo" height={200} width={300} />
+      <div id={styles.image}>
+        <Image src={logo} alt="Logo" height={100} width={150} />
       </div>
       <ul>
-        <li>Movies</li>
-        <li>Games</li>
-        <li>Books</li>
-        <li>Comics</li>
-        <li>Series</li>
+        {listElements.map((e, i) => {
+          return (
+            <li
+              onClick={(e) => displayData(e)}
+              key={i}
+              id={listElements[i].toLowerCase()}
+            >
+              {listElements[i]}
+            </li>
+          );
+        })}
         <li>Login</li>
       </ul>
     </nav>

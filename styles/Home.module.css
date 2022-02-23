@@ -1,0 +1,35 @@
+#viewer {
+  margin: 100px;
+}
+
+#moduleContainer {
+  display: flex;
+  gap: 1em;
+}
+
+.card {
+  width: 32%;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid black;
+}
+
+.coverImage {
+  box-shadow: 0px 0px 15px 5px #000000;
+}
+
+.linksContainer {
+  text-align: center;
+}
+
+.finishedBtn {
+  width: 100%;
+  background: black;
+  color: white;
+  padding: 10px;
+  border: 0;
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  font-weight: 900;
+  cursor: pointer;
+}
