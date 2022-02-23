@@ -1,12 +1,36 @@
 import Head from "next/head";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../styles/Home.module.css";
 import Header from "../comps/Header";
+import _ from "lodash";
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 export default function Home() {
   const [fetchedData, setFetchedData] = useState([]);
   const [currentlyOpenedModule, setCurrentlyOpenedModule] = useState();
   const [moduleKeys, setModuleKeys] = useState([]);
+  const [sortBy, setSortBy] = useState();
+  const [entriesMarkedAsFinished, setEntriesMarkedAsFinished] = useState({
+    movies: {},
+    games: {},
+    books: {},
+    comics: {},
+    series: {},
+  });
+
+  useEffect(() => {
+    let btns = document.getElementsByClassName("navbtn");
+    for (const btn of btns) {
+      btn.style.color = "white";
+    }
+
+    if (currentlyOpenedModule)
+      document.getElementById(currentlyOpenedModule).style.color = "#ffe81f";
+  }, [currentlyOpenedModule]);
 
   function displayData(e) {
     setCurrentlyOpenedModule(e.target.id);
@@ -22,8 +46,19 @@ export default function Home() {
       });
   }
 
-  function markEntryAsFinished(entry) {
-    console.log("Finished " + entry.title);
+  function orderBy(event, order = "asc") {
+    setFetchedData(_.orderBy(fetchedData, event.target.value, order));
+  }
+
+  function markEntryAsFinished(event, entry) {
+    let title = entry.title.replace(/\s+/g, "-").toLowerCase();
+    let btn = document.querySelector("#" + title + "btn");
+    let card = document.getElementById(title + "-card");
+    card.classList.toggle("finished");
+    if (card.classList.contains("finished"))
+      btn.innerText = "Mark as Unfinished";
+    if (!card.classList.contains("finished"))
+      btn.innerText = "Mark as Finished";
   }
 
   return (
@@ -36,32 +71,55 @@ export default function Home() {
       <Header displayData={displayData} />
 
       <div id={styles.viewer}>
-        <h1 style={{ textAlign: "center" }}>
-          {currentlyOpenedModule
-            ? currentlyOpenedModule.toUpperCase()
-            : "Hello there."}
-        </h1>
+        <div id={styles.sortContainer}>
+          <button>Filters</button>
+          <Box sx={{ marginLeft: "auto" }}>
+            <FormControl sx={{ width: "200px" }}>
+              <InputLabel>Sort By</InputLabel>
+              <Select value={sortBy} label="Sort By" onChange={orderBy}>
+                <MenuItem value={"title"}>Title</MenuItem>
+                <MenuItem value={"releaseDate"}>Date</MenuItem>
+                {"author" in fetchedData[0] ? (
+                  <MenuItem value={"author"}>Author</MenuItem>
+                ) : null}
+                {"seasons" in fetchedData[0] ? (
+                  <MenuItem value={"seasons"}>Seasons</MenuItem>
+                ) : null}
+                {"episodes" in fetchedData[0] ? (
+                  <MenuItem value={"episodes"}>Episodes</MenuItem>
+                ) : null}
+                {"createdBy" in fetchedData[0] ? (
+                  <MenuItem value={"createdBy"}>Created By</MenuItem>
+                ) : null}
+                {"era" in fetchedData[0] ? (
+                  <MenuItem value={"era"}>Era</MenuItem>
+                ) : null}
+                {"isCanon" in fetchedData[0] ? (
+                  <MenuItem value={"isCanon"}>Canonicity</MenuItem>
+                ) : null}
+              </Select>
+            </FormControl>
+          </Box>
+        </div>
+
         <div id={styles.moduleContainer}>
           {fetchedData.map((e1, i1) => {
             return (
-              <div className={styles.card} key={"1" + i1}>
+              <div
+                className={styles.card}
+                id={e1.title.replace(/\s+/g, "-").toLowerCase() + "-card"}
+                key={"1" + i1}
+              >
                 {moduleKeys.map((e2, i2) => {
                   let currentKey = moduleKeys[i2];
                   let currentValue = e1[currentKey];
                   return (
                     <div key={"2" + i2}>
                       {currentKey === "coverImage" ? (
-                        <div
-                          style={{
-                            width: "250px",
-                            margin: "20px",
-                            float: "left",
-                          }}
-                        >
+                        <div className={styles.coverImageContainer}>
                           <img
                             className={styles.coverImage}
                             src={currentValue}
-                            style={{ objectFit: "cover", width: "100%" }}
                           />
                         </div>
                       ) : currentKey === "links" ? (
@@ -76,7 +134,7 @@ export default function Home() {
                                 <img
                                   src={currentValue[e3].icon}
                                   style={{
-                                    width: "10%",
+                                    width: "35px",
                                     aspectRatio: "1/1",
                                     objectFit: "cover",
                                     margin: "10px",
@@ -88,30 +146,32 @@ export default function Home() {
                           })}
                         </div>
                       ) : currentKey === "isCanon" ? null : (
-                        <h2
-                          style={{
-                            textTransform: "uppercase",
-                            fontWeight: "900",
-                          }}
-                        >
-                          {currentKey.replace(/([A-Z])/g, " $1")}:
-                        </h2>
+                        <h2>{currentKey.replace(/([A-Z])/g, " $1")}:</h2>
                       )}
 
-                      {currentKey === "title" ? <p>{currentValue}</p> : null}
-                      {currentKey === "author" ? <p>{currentValue}</p> : null}
-                      {currentKey === "releaseDate" ? (
+                      {typeof currentValue === "string" &&
+                      currentKey !== "coverImage" ? (
                         <p>{currentValue}</p>
                       ) : null}
-                      {currentKey === "era" ? <p>{currentValue}</p> : null}
-                      {currentKey === "date" ? <p>{currentValue}</p> : null}
-                      {currentKey === "isCanon" ? <p>{currentValue}</p> : null}
+
+                      {currentKey === "isCanon" ? (
+                        currentValue ? (
+                          <div className={styles.canonDiv}>
+                            <h3 className={styles.canon}>Canon</h3>
+                          </div>
+                        ) : (
+                          <div className={styles.legendsDiv}>
+                            <h3 className={styles.legends}>Legends</h3>
+                          </div>
+                        )
+                      ) : null}
                     </div>
                   );
                 })}
                 <button
-                  onClick={() => markEntryAsFinished(e1)}
+                  onClick={(e) => markEntryAsFinished(e, e1)}
                   className={styles.finishedBtn}
+                  id={e1.title.replace(/\s+/g, "-").toLowerCase() + "btn"}
                 >
                   Mark as Finished
                 </button>

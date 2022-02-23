@@ -16,3 +16,17 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.finished {
+  background: black;
+}
+
+.finished p {
+  color: white;
+}
+
+.finished button {
+  background: white;
+  color: black;
+  border: 1px solid white;
+}

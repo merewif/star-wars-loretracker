@@ -1,21 +1,53 @@
 #viewer {
   margin: 100px;
+  margin-top: 0;
 }
 
 #moduleContainer {
   display: flex;
+  flex-wrap: wrap;
   gap: 1em;
 }
 
 .card {
-  width: 32%;
   margin: auto;
-  padding: 20px;
+  flex-basis: 24%;
   border: 1px solid black;
+}
+
+.card h2,
+.card p {
+  margin-left: 20px;
+}
+
+.card h2 {
+  font-size: 1rem;
+  font-family: "Josefin Sans";
+  font-weight: 300;
+  color: gray;
+  text-transform: capitalize;
+  margin-bottom: 0;
+}
+
+.card p {
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-top: 0;
+}
+
+.coverImageContainer {
+  width: 100px;
+  height: 175px;
+  margin: 20px;
+  float: left;
+  display: grid;
 }
 
 .coverImage {
   box-shadow: 0px 0px 15px 5px #000000;
+  width: 100%;
+  object-fit: cover;
+  margin: auto;
 }
 
 .linksContainer {
@@ -32,4 +64,57 @@
   text-transform: uppercase;
   font-weight: 900;
   cursor: pointer;
+}
+
+.legendsDiv,
+.canonDiv {
+  width: 100%;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  font-weight: 900;
+  margin-bottom: 30px;
+  padding: 1px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.legendsDiv {
+  background: black;
+  box-shadow: inset 0px 0px 0px 5px #ffe81f, 0px 0px 0px 1px #ffe81f;
+}
+
+.legends {
+  color: #ffe81f;
+}
+
+.canonDiv {
+  background: white;
+}
+
+.canonDiv {
+  box-shadow: inset 0px 0px 0px 5px #000;
+}
+
+#sortContainer {
+  display: flex;
+  padding: 20px;
+  margin: 20px;
+}
+
+#sortContainer button {
+  border: none;
+  background: none;
+  font-family: "Josefin Sans";
+  cursor: pointer;
+}
+
+#filterContainer {
+  padding: 20px;
+  margin: 20px;
+  display: flex;
 }

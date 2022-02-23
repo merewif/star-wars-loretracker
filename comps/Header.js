@@ -18,6 +18,7 @@ const Header = ({ displayData }) => {
               onClick={(e) => displayData(e)}
               key={i}
               id={listElements[i].toLowerCase()}
+              className="navbtn"
             >
               {listElements[i]}
             </li>
