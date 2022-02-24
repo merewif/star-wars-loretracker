@@ -96,26 +96,15 @@ export default function Home() {
                 <FormControl sx={{ width: "200px" }}>
                   <InputLabel>Sort By</InputLabel>
                   <Select value={sortBy} label="Sort By" onChange={orderBy}>
-                    <MenuItem value={"title"}>Title</MenuItem>
-                    <MenuItem value={"releaseDate"}>Date</MenuItem>
-                    {"author" in fetchedData[0] ? (
-                      <MenuItem value={"author"}>Author</MenuItem>
-                    ) : null}
-                    {"seasons" in fetchedData[0] ? (
-                      <MenuItem value={"seasons"}>Seasons</MenuItem>
-                    ) : null}
-                    {"episodes" in fetchedData[0] ? (
-                      <MenuItem value={"episodes"}>Episodes</MenuItem>
-                    ) : null}
-                    {"createdBy" in fetchedData[0] ? (
-                      <MenuItem value={"createdBy"}>Created By</MenuItem>
-                    ) : null}
-                    {"era" in fetchedData[0] ? (
-                      <MenuItem value={"era"}>Era</MenuItem>
-                    ) : null}
-                    {"isCanon" in fetchedData[0] ? (
-                      <MenuItem value={"isCanon"}>Canonicity</MenuItem>
-                    ) : null}
+                    {moduleKeys.map((key) => {
+                      <MenuItem value={key}>
+                        {key
+                          .replace(/([A-Z])/g, " $1")
+                          .replace(/^./, function (str) {
+                            return str.toUpperCase();
+                          })}
+                      </MenuItem>;
+                    })}
                   </Select>
                 </FormControl>
               </Box>

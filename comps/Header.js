@@ -2,6 +2,7 @@ import React from "react";
 import styles from "../styles/Header.module.css";
 import logo from "../assets/logo.png";
 import Image from "next/image";
+import Link from "next/link";
 
 const Header = ({ displayData }) => {
   const listElements = ["Movies", "Games", "Books", "Comics", "Series"];
