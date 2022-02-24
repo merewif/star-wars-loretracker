@@ -71,6 +71,12 @@
   width: 100%;
   object-fit: cover;
   margin: auto;
+  transition: transform 0.5s ease;
+}
+
+.coverImage:hover {
+  transition-delay: 0.5s;
+  transform: scale(2.5);
 }
 
 .linksContainer {

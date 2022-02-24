@@ -16,3 +16,8 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.js-image-zoom__zoomed-image {
+  position: absolute !important;
+  width: 100%;
+}
