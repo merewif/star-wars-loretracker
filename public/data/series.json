@@ -1,12 +1,12 @@
 [
   {
     "isCanon": true,
+    "coverImage": "https://static.posters.cz/image/750/plakatok/star-wars-the-mandalorian-nightfall-i103406.jpg",
     "title": "The Mandalorian",
-    "createdBy": "",
-    "seasons": "",
-    "episodes": "",
-    "releaseDate": "",
-    "coverImage": "",
+    "createdBy": "Jon Favreau",
+    "seasons": "2",
+    "episodes": "16",
+    "releaseDate": "2019",
     "links": {}
   }
 ]

@@ -60,14 +60,16 @@
 
 .coverImageContainer {
   width: 100px;
-  height: 175px;
+  height: 100% !important;
   margin: 20px;
+  margin-top: auto;
+  margin-bottom: auto;
   float: left;
   display: grid;
 }
 
 .coverImage {
-  box-shadow: 0px 0px 15px 5px #000000;
+  box-shadow: 0px 0px 15px 0px #000000;
   width: 100%;
   object-fit: cover;
   margin: auto;
