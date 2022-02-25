@@ -26,3 +26,8 @@ a {
   font-family: "Montserrat" !important;
   background-color: black !important;
 }
+
+.MuiRadio-root,
+.MuiCheckbox-root {
+  color: black !important;
+}

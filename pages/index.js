@@ -202,10 +202,10 @@ export default function Home() {
     if (finishedParameter === "finished") {
       for (const entry of listOfFinishedEntries) {
         const title = entry.replace(/-/g, " ");
-        let result = _.filter(defaultFetchedData, { title: title });
+        let result = _.filter(filteredResults, { title: title });
         listFilteredByFinished.push(result);
       }
-      filteredResults = listFilteredByFinished;
+      filteredResults = _.flatten(listFilteredByFinished);
     }
 
     if (finishedParameter === "unfinished") {
@@ -325,7 +325,12 @@ export default function Home() {
                         </RadioGroup>
                       </FormControl>
                     </div>
-                    <div style={{ marginLeft: "15px", textAlign: "center" }}>
+                    <div
+                      style={{
+                        marginLeft: "15px",
+                        textAlign: "center",
+                      }}
+                    >
                       <FormControl>
                         <RadioGroup
                           row
@@ -355,7 +360,7 @@ export default function Home() {
                       </FormControl>
                     </div>
                     <div>
-                      <FormControl sx={{ m: 1, width: 300 }}>
+                      <FormControl sx={{ m: 1, width: 500 }}>
                         <InputLabel>Creators</InputLabel>
                         <Select
                           multiple
@@ -380,7 +385,7 @@ export default function Home() {
                       </FormControl>
                     </div>
                     <div>
-                      <FormControl sx={{ m: 1, width: 300 }}>
+                      <FormControl sx={{ m: 1, width: 500 }}>
                         <InputLabel>Eras</InputLabel>
                         <Select
                           multiple
