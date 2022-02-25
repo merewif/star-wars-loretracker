@@ -294,69 +294,100 @@ export default function Home() {
                       style={{
                         marginLeft: "15px",
                         textAlign: "center",
+                        display: "grid",
+                        gridTemplateColumns: "1fr 1fr",
                       }}
                     >
-                      <FormControl>
-                        <RadioGroup
-                          row
-                          aria-labelledby="radio-buttons-group-label"
-                          name="row-radio-buttons-group"
-                          value={canonicityFilterValue}
-                          onChange={(e) => {
-                            filterEntries(e.target.value, "canonicity");
-                          }}
-                        >
-                          <FormControlLabel
-                            value="all"
-                            control={<Radio />}
-                            label="All"
-                          />
-                          <FormControlLabel
-                            value="legends"
-                            control={<Radio />}
-                            label="Legends"
-                          />
-                          <FormControlLabel
-                            value="canon"
-                            control={<Radio />}
-                            label="Canon"
-                          />
-                        </RadioGroup>
-                      </FormControl>
-                    </div>
-                    <div
-                      style={{
-                        marginLeft: "15px",
-                        textAlign: "center",
-                      }}
-                    >
-                      <FormControl>
-                        <RadioGroup
-                          row
-                          aria-labelledby="radio-buttons-group-label"
-                          name="row-radio-buttons-group"
-                          value={finishedFilterValue}
-                          onChange={(e) => {
-                            filterEntries(e.target.value, "finished");
-                          }}
-                        >
-                          <FormControlLabel
-                            value="all"
-                            control={<Radio />}
-                            label="All"
-                          />
-                          <FormControlLabel
-                            value="finished"
-                            control={<Radio />}
-                            label="Finished"
-                          />
-                          <FormControlLabel
-                            value="unfinished"
-                            control={<Radio />}
-                            label="Unfinished"
-                          />
-                        </RadioGroup>
-                      </FormControl>
+                      <div
+                        style={{
+                          marginLeft: "15px",
+                          textAlign: "center",
+                        }}
+                      >
+                        <FormControl sx={{ display: "flex" }}>
+                          <FormLabel
+                            sx={{
+                              display: "flex",
+                            }}
+                          >
+                            Filter by Canonicity
+                          </FormLabel>
+                          <RadioGroup
+                            sx={{
+                              display: "grid",
+                              gridTemplateColumns: "1fr",
+                            }}
+                            row
+                            aria-labelledby="radio-buttons-group-label"
+                            name="row-radio-buttons-group"
+                            value={canonicityFilterValue}
+                            onChange={(e) => {
+                              filterEntries(e.target.value, "canonicity");
+                            }}
+                          >
+                            <FormControlLabel
+                              value="all"
+                              control={<Radio />}
+                              label="All"
+                            />
+                            <FormControlLabel
+                              value="legends"
+                              control={<Radio />}
+                              label="Legends"
+                            />
+                            <FormControlLabel
+                              value="canon"
+                              control={<Radio />}
+                              label="Canon"
+                            />
+                          </RadioGroup>
+                        </FormControl>
+                      </div>
+                      <div
+                        style={{
+                          marginLeft: "15px",
+                          textAlign: "center",
+                        }}
+                      >
+                        <FormControl sx={{ display: "flex" }}>
+                          <FormLabel
+                            sx={{
+                              display: "flex",
+                            }}
+                          >
+                            Filter by Finished
+                          </FormLabel>
+                          <RadioGroup
+                            sx={{
+                              display: "grid",
+                              gridTemplateColumns: "1fr",
+                            }}
+                            row
+                            aria-labelledby="radio-buttons-group-label"
+                            name="row-radio-buttons-group"
+                            value={finishedFilterValue}
+                            onChange={(e) => {
+                              filterEntries(e.target.value, "finished");
+                            }}
+                          >
+                            <FormControlLabel
+                              value="all"
+                              control={<Radio />}
+                              label="All"
+                            />
+                            <FormControlLabel
+                              value="finished"
+                              control={<Radio />}
+                              label="Finished"
+                            />
+                            <FormControlLabel
+                              value="unfinished"
+                              control={<Radio />}
+                              label="Unfinished"
+                            />
+                          </RadioGroup>
+                        </FormControl>
+                      </div>
                     </div>
                     <div>
                       <FormControl sx={{ m: 1, width: 500 }}>
