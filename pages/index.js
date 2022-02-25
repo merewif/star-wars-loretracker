@@ -229,7 +229,6 @@ export default function Home() {
         );
         listFilteredByCreators.push(entriesByPerson);
       }
-
       filteredResults = _.flatten(listFilteredByCreators);
     }
 
