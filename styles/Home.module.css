@@ -149,3 +149,9 @@
   margin: 20px;
   display: flex;
 }
+
+#filterbox {
+  width: 30vw;
+  height: 30vh;
+  padding: 20px;
+}

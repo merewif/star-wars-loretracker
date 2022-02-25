@@ -11,6 +11,8 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import Popover from "@mui/material/Popover";
+import FilterListIcon from "@mui/icons-material/FilterList";
 
 export default function Home() {
   const [fetchedData, setFetchedData] = useState([]);
@@ -25,6 +27,8 @@ export default function Home() {
     comics: [],
     series: [],
   });
+  const [filterboxAnchorEl, setFilterboxAnchorEl] = useState(null);
+  const [filterParameters, setFilterParameters] = useState([]);
 
   useEffect(() => {
     let btns = document.getElementsByClassName("navbtn");
@@ -53,7 +57,10 @@ export default function Home() {
         results.push(entry);
       }
     }
-    setFetchedData(results);
+
+    if (results.length) {
+      setFetchedData(results);
+    }
   }
 
   function fetchData(target) {
@@ -104,6 +111,8 @@ export default function Home() {
     }
   }
 
+  function filterByParameters() {}
+
   return (
     <div className={styles.appcontainer}>
       <Head>
@@ -121,7 +130,21 @@ export default function Home() {
           {fetchedData.length ? (
             <div id={styles.sortContainer}>
               <div style={{ display: "flex", width: "25%" }}>
-                <button>Filters</button>
+                <button onClick={(e) => setFilterboxAnchorEl(e.currentTarget)}>
+                  <FilterListIcon />
+                </button>
+                <Popover
+                  id={open ? "simple-popover" : undefined}
+                  open={Boolean(filterboxAnchorEl)}
+                  anchorEl={filterboxAnchorEl}
+                  onClose={() => setFilterboxAnchorEl(null)}
+                  anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "left",
+                  }}
+                >
+                  <div id={styles.filterbox}>The content of the Popover.</div>
+                </Popover>
               </div>
               <Box
                 component="form"
@@ -143,7 +166,13 @@ export default function Home() {
                   )}
                 />
               </Box>
-              <Box sx={{ marginLeft: "auto" }}>
+              <Box
+                sx={{
+                  marginLeft: "auto",
+                  marginTop: "auto",
+                  marginBottom: "auto",
+                }}
+              >
                 <FormControl sx={{ width: "200px" }}>
                   <InputLabel>Sort By</InputLabel>
                   <Select value={sortBy} label="Sort By" onChange={orderBy}>
