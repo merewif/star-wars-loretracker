@@ -10,13 +10,14 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
 
 export default function Home() {
   const [fetchedData, setFetchedData] = useState([]);
+  const [fetchedTitles, setFetchedTitles] = useState([]);
   const [currentlyOpenedModule, setCurrentlyOpenedModule] = useState();
   const [moduleKeys, setModuleKeys] = useState([]);
   const [sortBy, setSortBy] = useState();
-  const [searchInput, setSearchInput] = useState();
   const [entriesMarkedAsFinished, setEntriesMarkedAsFinished] = useState({
     movies: [],
     games: [],
@@ -40,19 +41,19 @@ export default function Home() {
     fetchData(e.target.id);
   }
 
-  function searchEntries(e) {
-    setSearchInput(e.target.value);
+  function searchEntries(input) {
+    if (!input) {
+      fetchData(currentlyOpenedModule);
+      return;
+    }
+
     let results = [];
     for (const entry of fetchedData) {
-      if (entry.title.toLowerCase().includes(e.target.value.toLowerCase())) {
+      if (entry.title.toLowerCase().includes(input.toLowerCase())) {
         results.push(entry);
       }
     }
     setFetchedData(results);
-
-    if (!e.target.value.length) {
-      fetchData(currentlyOpenedModule);
-    }
   }
 
   function fetchData(target) {
@@ -61,6 +62,13 @@ export default function Home() {
       .then((data) => {
         setFetchedData(data);
         setModuleKeys(Object.keys(data[0]));
+
+        let titles = [];
+        for (const entry of data) {
+          let currentTitle = entry.title;
+          titles.push(currentTitle);
+        }
+        setFetchedTitles(titles);
       });
   }
 
@@ -95,6 +103,7 @@ export default function Home() {
       });
     }
   }
+
   return (
     <div className={styles.appcontainer}>
       <Head>
@@ -122,12 +131,16 @@ export default function Home() {
                 noValidate
                 autoComplete="off"
               >
-                <TextField
-                  sx={{ width: "100%", marginRight: "20px" }}
-                  id="search-basic"
-                  label="Search by Title"
-                  variant="outlined"
-                  onChange={(e) => searchEntries(e)}
+                <Autocomplete
+                  disablePortal
+                  id="fullWidth"
+                  options={fetchedTitles}
+                  onInputChange={(e, newInputValue) =>
+                    searchEntries(newInputValue)
+                  }
+                  renderInput={(params) => (
+                    <TextField {...params} label="Search by Title" />
+                  )}
                 />
               </Box>
               <Box sx={{ marginLeft: "auto" }}>
