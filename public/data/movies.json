@@ -1,6 +1,6 @@
 [
   {
-    "isCanon": true,
+    "canonicity": true,
     "coverImage": "https://upload.wikimedia.org/wikipedia/en/8/87/StarWarsMoviePoster1977.jpg",
     "title": "A New Hope",
     "directedBy": "George Lucas",

@@ -1,6 +1,6 @@
 [
   {
-    "isCanon": false,
+    "canonicity": false,
     "coverImage": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1405546262l/11099729.jpg",
     "title": "Darth Plagueis",
     "author": "James Luceno",
@@ -22,7 +22,7 @@
     }
   },
   {
-    "isCanon": false,
+    "canonicity": false,
     "coverImage": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1617708841l/57631718.jpg",
     "title": "Path of Destruction",
     "author": "Drew Karpyshyn",
@@ -44,7 +44,7 @@
     }
   },
   {
-    "isCanon": true,
+    "canonicity": true,
     "coverImage": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1541691242l/40917496._SY475_.jpg",
     "title": "Master and Apprentice",
     "author": " Claudia Gray",
@@ -66,7 +66,7 @@
     }
   },
   {
-    "isCanon": true,
+    "canonicity": true,
     "coverImage": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1582619576l/51637946.jpg",
     "title": "Light of the Jedi",
     "author": "Charles Soule",
