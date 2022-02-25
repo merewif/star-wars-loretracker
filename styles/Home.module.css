@@ -151,7 +151,16 @@
 }
 
 #filterbox {
-  width: 30vw;
-  height: 30vh;
   padding: 20px;
+}
+
+#filterbox h3 {
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "Montserrat";
+  font-weight: 900;
+}
+
+#filterResetBtnContainer {
+  margin-top: 10px;
 }

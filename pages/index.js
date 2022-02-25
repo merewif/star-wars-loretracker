@@ -8,13 +8,22 @@ import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormLabel from "@mui/material/FormLabel";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Popover from "@mui/material/Popover";
 import FilterListIcon from "@mui/icons-material/FilterList";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import ListItemText from "@mui/material/ListItemText";
+import Checkbox from "@mui/material/Checkbox";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import Button from "@mui/material/Button";
 
 export default function Home() {
+  const [defaultFetchedData, setDefaultFetchedData] = useState([]);
   const [fetchedData, setFetchedData] = useState([]);
   const [fetchedTitles, setFetchedTitles] = useState([]);
   const [currentlyOpenedModule, setCurrentlyOpenedModule] = useState();
@@ -28,7 +37,13 @@ export default function Home() {
     series: [],
   });
   const [filterboxAnchorEl, setFilterboxAnchorEl] = useState(null);
-  const [filterParameters, setFilterParameters] = useState([]);
+  const [creators, setCreators] = useState([]);
+  const [eras, setEras] = useState([]);
+  const [filteredCreatorsName, setFilteredCreatorsName] = useState([]);
+  const [filteredEras, setFilteredEras] = useState([]);
+  const [canonicityFilterValue, setCanonicityFilterValue] = useState("all");
+  const [finishedFilterValue, setFinishedFilterValue] = useState("all");
+  const [searchValue, setSearchValue] = useState();
 
   useEffect(() => {
     let btns = document.getElementsByClassName("navbtn");
@@ -46,6 +61,7 @@ export default function Home() {
   }
 
   function searchEntries(input) {
+    setSearchValue(input);
     if (!input) {
       fetchData(currentlyOpenedModule);
       return;
@@ -64,19 +80,51 @@ export default function Home() {
   }
 
   function fetchData(target) {
+    setCanonicityFilterValue("all");
+    setFilteredCreatorsName([]);
+    setFilteredEras([]);
     fetch("./data/" + target + ".json")
       .then((response) => response.json())
       .then((data) => {
         setFetchedData(data);
+        setDefaultFetchedData(data);
         setModuleKeys(Object.keys(data[0]));
-
-        let titles = [];
-        for (const entry of data) {
-          let currentTitle = entry.title;
-          titles.push(currentTitle);
-        }
-        setFetchedTitles(titles);
+        fetchAllTitles(data);
+        fetchAllCreators(data);
+        fetchAllEras(data);
       });
+  }
+
+  function fetchAllTitles(data) {
+    let titles = [];
+    for (const entry of data) {
+      titles.push(entry.title);
+    }
+
+    setFetchedTitles(titles);
+  }
+
+  function fetchAllCreators(data) {
+    let creators = [];
+
+    for (const entry of data) {
+      if (entry.author && !creators.includes(entry.author))
+        creators.push(entry.author);
+      if (entry.createdBy && !creators.includes(entry.createdBy))
+        creators.push(entry.createdBy);
+      if (entry.directedBy && !creators.includes(entry.directedBy))
+        creators.push(entry.directedBy);
+    }
+    setCreators(creators);
+  }
+
+  function fetchAllEras(data) {
+    let fetchedEras = [];
+    for (const entry of data) {
+      if (entry.era && !fetchedEras.includes(entry.era))
+        fetchedEras.push(entry.era);
+    }
+    setEras(fetchedEras);
   }
 
   function orderBy(event, order = "asc") {
@@ -111,7 +159,84 @@ export default function Home() {
     }
   }
 
-  function filterByParameters() {}
+  function filterEntries(value, source) {
+    let canonicityParameter = canonicityFilterValue;
+    let creatorsParameters = filteredCreatorsName;
+    let erasParameters = filteredEras;
+
+    if (source === "canonicity") {
+      setCanonicityFilterValue(value);
+      canonicityParameter = value;
+    }
+    if (source === "creators") {
+      let persons = typeof value === "string" ? value.split(",") : value;
+      setFilteredCreatorsName(persons);
+      creatorsParameters = persons;
+    }
+    if (source === "eras") {
+      let erasToFilter = typeof value === "string" ? value.split(",") : value;
+      setFilteredEras(erasToFilter);
+      erasParameters = erasToFilter;
+    }
+
+    let filteredResults = defaultFetchedData;
+
+    // Filter by Canon
+    if (canonicityParameter === "legends") {
+      filteredResults = _.filter(defaultFetchedData, { canonicity: false });
+    }
+
+    if (canonicityParameter === "canon") {
+      filteredResults = _.filter(defaultFetchedData, { canonicity: true });
+    }
+
+    // Filter by Creator
+    if (creatorsParameters.length) {
+      let listFilteredByCreators = [];
+      for (const person of creatorsParameters) {
+        let entriesByPerson = _.filter(
+          filteredResults,
+          {
+            author: person,
+          } || { directedBy: person } || {
+              createdBy: person,
+            }
+        );
+        listFilteredByCreators.push(entriesByPerson);
+      }
+
+      filteredResults = _.flatten(listFilteredByCreators);
+    }
+
+    // Filter by Era
+    if (erasParameters.length) {
+      let listFilteredByEras = [];
+      for (const era of erasParameters) {
+        let entriesByEra = _.filter(filteredResults, {
+          era: era,
+        });
+
+        listFilteredByEras.push(entriesByEra);
+      }
+      filteredResults = _.flatten(listFilteredByEras);
+    }
+
+    setFetchedData(_.flatten(filteredResults));
+  }
+
+  function filterByFinished(parameter) {
+    setFinishedFilterValue(parameter);
+  }
+
+  function resetFilters() {
+    setFetchedData(defaultFetchedData);
+    setCanonicityFilterValue("all");
+    setFinishedFilterValue("all");
+    setFilteredCreatorsName([]);
+    setFilteredEras([]);
+    fetchAllCreators(defaultFetchedData);
+    fetchAllEras(defaultFetchedData);
+  }
 
   return (
     <div className={styles.appcontainer}>
@@ -127,7 +252,7 @@ export default function Home() {
 
       <div className={styles.viewerContainer}>
         <div id={styles.viewer}>
-          {fetchedData.length ? (
+          {currentlyOpenedModule ? (
             <div id={styles.sortContainer}>
               <div style={{ display: "flex", width: "25%" }}>
                 <button onClick={(e) => setFilterboxAnchorEl(e.currentTarget)}>
@@ -143,7 +268,129 @@ export default function Home() {
                     horizontal: "left",
                   }}
                 >
-                  <div id={styles.filterbox}>The content of the Popover.</div>
+                  <div id={styles.filterbox}>
+                    <h3>Filters</h3>
+                    <div
+                      style={{
+                        marginLeft: "15px",
+                        textAlign: "center",
+                      }}
+                    >
+                      <FormControl>
+                        <RadioGroup
+                          row
+                          aria-labelledby="radio-buttons-group-label"
+                          name="row-radio-buttons-group"
+                          value={canonicityFilterValue}
+                          onChange={(e) => {
+                            filterByCanonicity(e.target.value);
+                            filterEntries(e.target.value, "canonicity");
+                          }}
+                        >
+                          <FormControlLabel
+                            value="all"
+                            control={<Radio />}
+                            label="All"
+                          />
+                          <FormControlLabel
+                            value="legends"
+                            control={<Radio />}
+                            label="Legends"
+                          />
+                          <FormControlLabel
+                            value="canon"
+                            control={<Radio />}
+                            label="Canon"
+                          />
+                        </RadioGroup>
+                      </FormControl>
+                    </div>
+                    <div style={{ marginLeft: "15px", textAlign: "center" }}>
+                      <FormControl>
+                        <RadioGroup
+                          row
+                          aria-labelledby="radio-buttons-group-label"
+                          name="row-radio-buttons-group"
+                          value={finishedFilterValue}
+                          onChange={(e) => {
+                            filterByFinished(e.target.value);
+                          }}
+                        >
+                          <FormControlLabel
+                            value="all"
+                            control={<Radio />}
+                            label="All"
+                          />
+                          <FormControlLabel
+                            value="finished"
+                            control={<Radio />}
+                            label="Finished"
+                          />
+                          <FormControlLabel
+                            value="unfinished"
+                            control={<Radio />}
+                            label="Unfinished"
+                          />
+                        </RadioGroup>
+                      </FormControl>
+                    </div>
+                    <div>
+                      <FormControl sx={{ m: 1, width: 300 }}>
+                        <InputLabel>Creators</InputLabel>
+                        <Select
+                          multiple
+                          value={filteredCreatorsName}
+                          onChange={(e) => {
+                            filterEntries(e.target.value, "creators");
+                          }}
+                          input={<OutlinedInput label="Creators" />}
+                          renderValue={(selected) => selected.join(", ")}
+                        >
+                          {creators.map((name) => (
+                            <MenuItem key={name} value={name}>
+                              <Checkbox
+                                checked={
+                                  filteredCreatorsName.indexOf(name) > -1
+                                }
+                              />
+                              <ListItemText primary={name} />
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    </div>
+                    <div>
+                      <FormControl sx={{ m: 1, width: 300 }}>
+                        <InputLabel>Eras</InputLabel>
+                        <Select
+                          multiple
+                          value={filteredEras}
+                          onChange={(e) => {
+                            filterEntries(e.target.value, "eras");
+                          }}
+                          input={<OutlinedInput label="Eras" />}
+                          renderValue={(selected) => selected.join(", ")}
+                        >
+                          {eras.map((name) => (
+                            <MenuItem key={name} value={name}>
+                              <Checkbox
+                                checked={filteredEras.indexOf(name) > -1}
+                              />
+                              <ListItemText primary={name} />
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    </div>
+                    <div
+                      style={{ width: "100%", textAlign: "center" }}
+                      id={styles.filterResetBtnContainer}
+                    >
+                      <Button variant="contained" onClick={resetFilters}>
+                        Reset
+                      </Button>
+                    </div>
+                  </div>
                 </Popover>
               </div>
               <Box
@@ -156,11 +403,18 @@ export default function Home() {
               >
                 <Autocomplete
                   disablePortal
+                  freeSolo
                   id="fullWidth"
                   options={fetchedTitles}
-                  onInputChange={(e, newInputValue) =>
-                    searchEntries(newInputValue)
-                  }
+                  inputValue={searchValue}
+                  onInputChange={(e, newValue) => {
+                    setSearchValue(newValue);
+                    searchEntries(newValue);
+                  }}
+                  onChange={(e, newInputValue) => {
+                    searchEntries(newInputValue);
+                    setSearchValue(newInputValue);
+                  }}
                   renderInput={(params) => (
                     <TextField {...params} label="Search by Title" />
                   )}

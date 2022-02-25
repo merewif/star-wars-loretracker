@@ -21,3 +21,8 @@ a {
   position: absolute !important;
   width: 100%;
 }
+
+.MuiButton-root {
+  font-family: "Montserrat" !important;
+  background-color: black !important;
+}
