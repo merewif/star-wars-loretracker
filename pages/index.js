@@ -132,7 +132,7 @@ export default function Home() {
   }
 
   function toggleEntryAsFinished(event, entry) {
-    const currentTitle = entry.title.replace(/\s+/g, "-").toLowerCase();
+    const currentTitle = entry.title.replace(/\s+/g, "-");
     const isEntryFinished =
       entriesMarkedAsFinished[currentlyOpenedModule].includes(currentTitle);
 
@@ -162,6 +162,7 @@ export default function Home() {
   function filterEntries(value, source) {
     let canonicityParameter = canonicityFilterValue;
     let creatorsParameters = filteredCreatorsName;
+    let finishedParameter = finishedFilterValue;
     let erasParameters = filteredEras;
 
     if (source === "canonicity") {
@@ -178,6 +179,10 @@ export default function Home() {
       setFilteredEras(erasToFilter);
       erasParameters = erasToFilter;
     }
+    if (source === "finished") {
+      setFinishedFilterValue(value);
+      finishedParameter = value;
+    }
 
     let filteredResults = defaultFetchedData;
 
@@ -188,6 +193,26 @@ export default function Home() {
 
     if (canonicityParameter === "canon") {
       filteredResults = _.filter(defaultFetchedData, { canonicity: true });
+    }
+
+    // Filter by Finished
+    let listOfFinishedEntries = entriesMarkedAsFinished[currentlyOpenedModule];
+    let listFilteredByFinished = [];
+
+    if (finishedParameter === "finished") {
+      for (const entry of listOfFinishedEntries) {
+        const title = entry.replace(/-/g, " ");
+        let result = _.filter(defaultFetchedData, { title: title });
+        listFilteredByFinished.push(result);
+      }
+      filteredResults = listFilteredByFinished;
+    }
+
+    if (finishedParameter === "unfinished") {
+      for (const entry of listOfFinishedEntries) {
+        const title = entry.replace(/-/g, " ");
+        filteredResults = _.reject(filteredResults, { title: title });
+      }
     }
 
     // Filter by Creator
@@ -222,10 +247,6 @@ export default function Home() {
     }
 
     setFetchedData(_.flatten(filteredResults));
-  }
-
-  function filterByFinished(parameter) {
-    setFinishedFilterValue(parameter);
   }
 
   function resetFilters() {
@@ -283,7 +304,6 @@ export default function Home() {
                           name="row-radio-buttons-group"
                           value={canonicityFilterValue}
                           onChange={(e) => {
-                            filterByCanonicity(e.target.value);
                             filterEntries(e.target.value, "canonicity");
                           }}
                         >
@@ -313,7 +333,7 @@ export default function Home() {
                           name="row-radio-buttons-group"
                           value={finishedFilterValue}
                           onChange={(e) => {
-                            filterByFinished(e.target.value);
+                            filterEntries(e.target.value, "finished");
                           }}
                         >
                           <FormControlLabel
@@ -450,7 +470,7 @@ export default function Home() {
           ) : null}
           <div id={styles.moduleContainer}>
             {fetchedData.map((e1, i1) => {
-              let currentTitle = e1.title.replace(/\s+/g, "-").toLowerCase();
+              let currentTitle = e1.title.replace(/\s+/g, "-");
               return (
                 <div
                   className={
