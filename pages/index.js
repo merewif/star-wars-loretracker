@@ -133,10 +133,15 @@ export default function Home() {
 
   function toggleEntryAsFinished(event, entry) {
     const currentTitle = entry.title.replace(/\s+/g, "-");
+    let container = document.getElementById(`${currentTitle}-card`);
+
     const isEntryFinished =
       entriesMarkedAsFinished[currentlyOpenedModule].includes(currentTitle);
 
     if (isEntryFinished) {
+      container.classList.remove("cardFinished");
+      container.classList.add("cardUnfinished");
+
       const arrWithoutEntry = _.without(
         entriesMarkedAsFinished[currentlyOpenedModule],
         currentTitle
@@ -149,6 +154,9 @@ export default function Home() {
     }
 
     if (!isEntryFinished) {
+      container.classList.remove("cardUnfinished");
+      container.classList.add("cardFinished");
+
       setEntriesMarkedAsFinished({
         ...entriesMarkedAsFinished,
         [currentlyOpenedModule]: [
@@ -219,14 +227,16 @@ export default function Home() {
     if (creatorsParameters.length) {
       let listFilteredByCreators = [];
       for (const person of creatorsParameters) {
-        let entriesByPerson = _.filter(
-          filteredResults,
-          {
-            author: person,
-          } || { directedBy: person } || {
-              createdBy: person,
-            }
-        );
+        let entriesByPerson = _.filter(filteredResults, function (o) {
+          if (
+            o.author === person ||
+            o.directedBy === person ||
+            o.createdBy === person
+          )
+            return o;
+          return;
+        });
+
         listFilteredByCreators.push(entriesByPerson);
       }
       filteredResults = _.flatten(listFilteredByCreators);
@@ -508,12 +518,13 @@ export default function Home() {
               let currentTitle = e1.title.replace(/\s+/g, "-");
               return (
                 <div
+                  className={"entryCard"}
                   className={
                     entriesMarkedAsFinished[currentlyOpenedModule].includes(
                       currentTitle
                     )
-                      ? styles.cardFinished
-                      : styles.cardUnfinished
+                      ? `${styles.cardFinished} entryCard cardFinished`
+                      : `${styles.cardUnfinished} entryCard cardUnfinished`
                   }
                   id={currentTitle + "-card"}
                   key={"1" + i1}

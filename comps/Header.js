@@ -3,6 +3,7 @@ import styles from "../styles/Header.module.css";
 import logo from "../assets/logo.png";
 import Image from "next/image";
 import Link from "next/link";
+import ThemeSwitcher from "./ThemeSwitcher";
 
 const Header = ({ displayData }) => {
   const listElements = ["Movies", "Games", "Books", "Comics", "Series"];
@@ -26,9 +27,12 @@ const Header = ({ displayData }) => {
           );
         })}
         <li>Login</li>
+        <li></li>
       </ul>
     </nav>
   );
 };
 
 export default Header;
+
+//  <ThemeSwitcher />

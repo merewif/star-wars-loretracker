@@ -3,7 +3,7 @@ import React from "react";
 
 function StarWarsLoretracker({ Component, pageProps }) {
   return (
-    <div>
+    <div id="appContainer">
       <Component {...pageProps} />
     </div>
   );

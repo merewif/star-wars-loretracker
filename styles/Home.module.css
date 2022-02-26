@@ -48,13 +48,29 @@
   background: black;
 }
 
+.cardUnfinished {
+  background: white;
+}
+
 .cardFinished p {
   color: white;
 }
 
+/* .cardFinished h3 {
+  text-shadow: 1px 1px 25px green, 1px 1px 25px green, 1px 1px 25px green,
+    1px 1px 25px green, 1px 1px 25px green, 1px 1px 25px green;
+} */
+
+.cardFinished button {
+}
+
+.entryCard {
+  box-shadow: 1px 1px 5px 1px #fff;
+}
+
 .cardFinished button {
   background: white;
-  color: black;
+  color: rgb(0, 0, 0);
   border: 1px solid white;
 }
 
