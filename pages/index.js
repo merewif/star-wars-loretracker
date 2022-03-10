@@ -21,6 +21,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Checkbox from "@mui/material/Checkbox";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import Button from "@mui/material/Button";
+import HistoryIcon from "@mui/icons-material/History";
 
 export default function Home() {
   const [defaultFetchedData, setDefaultFetchedData] = useState([]);
@@ -54,6 +55,12 @@ export default function Home() {
     if (currentlyOpenedModule)
       document.getElementById(currentlyOpenedModule).style.color = "#ffe81f";
   }, [currentlyOpenedModule]);
+
+  useEffect(() => {
+    fetch("./data/books/Youtini Bookshelf - Legends Books.json")
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+  }, []);
 
   function displayData(e) {
     setCurrentlyOpenedModule(e.target.id);
@@ -168,10 +175,10 @@ export default function Home() {
   }
 
   function filterEntries(value, source) {
-    let canonicityParameter = canonicityFilterValue;
-    let creatorsParameters = filteredCreatorsName;
-    let finishedParameter = finishedFilterValue;
-    let erasParameters = filteredEras;
+    let canonicityParameter = canonicityFilterValue,
+      creatorsParameters = filteredCreatorsName,
+      finishedParameter = finishedFilterValue,
+      erasParameters = filteredEras;
 
     if (source === "canonicity") {
       setCanonicityFilterValue(value);
@@ -452,7 +459,7 @@ export default function Home() {
                       id={styles.filterResetBtnContainer}
                     >
                       <Button variant="contained" onClick={resetFilters}>
-                        Reset
+                        <HistoryIcon /> Reset
                       </Button>
                     </div>
                   </div>
@@ -518,7 +525,6 @@ export default function Home() {
               let currentTitle = e1.title.replace(/\s+/g, "-");
               return (
                 <div
-                  className={"entryCard"}
                   className={
                     entriesMarkedAsFinished[currentlyOpenedModule].includes(
                       currentTitle

@@ -1,5 +1,5 @@
 import "../styles/globals.css";
-import React from "react";
+import React, { useEffect } from "react";
 
 function StarWarsLoretracker({ Component, pageProps }) {
   return (
