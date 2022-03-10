@@ -1,11 +1,16 @@
 import React, { useState } from "react";
+import Head from "next/head";
 import styles from "../styles/Login.module.css";
 import logo from "../assets/logo.png";
 import Image from "next/image";
 import Link from "next/link";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../.firebase/firebase-config";
 
 export default function Login() {
   const [currentModule, setCurrentModule] = useState("login");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   function handleModuleChange(e) {
     setCurrentModule(e.target.innerHTML);
@@ -19,10 +24,37 @@ export default function Login() {
     e.target.style.color = "black";
   }
 
-  function handleSubmit() {}
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (currentModule === "register") register();
+  }
+
+  const register = async () => {
+    try {
+      const user = await createUserWithEmailAndPassword(auth, email, password);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const login = async () => {
+    //
+  };
+
+  const logout = async () => {
+    //
+  };
 
   return (
     <>
+      <Head>
+        <title>Star Wars Loretracker</title>
+        <meta
+          name="description"
+          content="Track which Star Wars content you consooomed."
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className={styles.loginContainer}>
         <div>
           <div className={styles.loginBox}>
@@ -32,8 +64,16 @@ export default function Login() {
               </Link>
             </div>
             <form>
-              <input type="email" placeholder="Email" />
-              <input type="password" placeholder="Password" />
+              <input
+                type="email"
+                placeholder="Email"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
               <button onClick={handleSubmit}>
                 {currentModule === "login" ? "Login" : "Register"}
               </button>
