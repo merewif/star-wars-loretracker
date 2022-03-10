@@ -4,24 +4,9 @@ import styles from "../styles/Home.module.css";
 import Header from "../comps/Header";
 import Footer from "../comps/Footer";
 import _ from "lodash";
-import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormLabel from "@mui/material/FormLabel";
-import Select from "@mui/material/Select";
-import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
-import Popover from "@mui/material/Popover";
-import FilterListIcon from "@mui/icons-material/FilterList";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import ListItemText from "@mui/material/ListItemText";
-import Checkbox from "@mui/material/Checkbox";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import Button from "@mui/material/Button";
-import HistoryIcon from "@mui/icons-material/History";
+import LinksContainer from "../comps/card/LinksContainer";
+import FiltersContainer from "../comps/Filters/FiltersContainer";
+import CardContents from "../comps/card/CardContents";
 
 export default function Home() {
   const [defaultFetchedData, setDefaultFetchedData] = useState([]);
@@ -291,233 +276,25 @@ export default function Home() {
         <div id={styles.viewer}>
           {currentlyOpenedModule ? (
             <div id={styles.sortContainer}>
-              <div style={{ display: "flex", width: "25%" }}>
-                <button onClick={(e) => setFilterboxAnchorEl(e.currentTarget)}>
-                  <FilterListIcon />
-                </button>
-                <Popover
-                  id={open ? "simple-popover" : undefined}
-                  open={Boolean(filterboxAnchorEl)}
-                  anchorEl={filterboxAnchorEl}
-                  onClose={() => setFilterboxAnchorEl(null)}
-                  anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "left",
-                  }}
-                >
-                  <div id={styles.filterbox}>
-                    <h3>Filters</h3>
-                    <div
-                      style={{
-                        marginLeft: "15px",
-                        textAlign: "center",
-                        display: "grid",
-                        gridTemplateColumns: "1fr 1fr",
-                      }}
-                    >
-                      <div
-                        style={{
-                          marginLeft: "15px",
-                          textAlign: "center",
-                        }}
-                      >
-                        <FormControl sx={{ display: "flex" }}>
-                          <FormLabel
-                            sx={{
-                              display: "flex",
-                            }}
-                          >
-                            Filter by Canonicity
-                          </FormLabel>
-                          <RadioGroup
-                            sx={{
-                              display: "grid",
-                              gridTemplateColumns: "1fr",
-                            }}
-                            row
-                            aria-labelledby="radio-buttons-group-label"
-                            name="row-radio-buttons-group"
-                            value={canonicityFilterValue}
-                            onChange={(e) => {
-                              filterEntries(e.target.value, "canonicity");
-                            }}
-                          >
-                            <FormControlLabel
-                              value="all"
-                              control={<Radio />}
-                              label="All"
-                            />
-                            <FormControlLabel
-                              value="legends"
-                              control={<Radio />}
-                              label="Legends"
-                            />
-                            <FormControlLabel
-                              value="canon"
-                              control={<Radio />}
-                              label="Canon"
-                            />
-                          </RadioGroup>
-                        </FormControl>
-                      </div>
-                      <div
-                        style={{
-                          marginLeft: "15px",
-                          textAlign: "center",
-                        }}
-                      >
-                        <FormControl sx={{ display: "flex" }}>
-                          <FormLabel
-                            sx={{
-                              display: "flex",
-                            }}
-                          >
-                            Filter by Finished
-                          </FormLabel>
-                          <RadioGroup
-                            sx={{
-                              display: "grid",
-                              gridTemplateColumns: "1fr",
-                            }}
-                            row
-                            aria-labelledby="radio-buttons-group-label"
-                            name="row-radio-buttons-group"
-                            value={finishedFilterValue}
-                            onChange={(e) => {
-                              filterEntries(e.target.value, "finished");
-                            }}
-                          >
-                            <FormControlLabel
-                              value="all"
-                              control={<Radio />}
-                              label="All"
-                            />
-                            <FormControlLabel
-                              value="finished"
-                              control={<Radio />}
-                              label="Finished"
-                            />
-                            <FormControlLabel
-                              value="unfinished"
-                              control={<Radio />}
-                              label="Unfinished"
-                            />
-                          </RadioGroup>
-                        </FormControl>
-                      </div>
-                    </div>
-                    <div>
-                      <FormControl sx={{ m: 1, width: 500 }}>
-                        <InputLabel>Creators</InputLabel>
-                        <Select
-                          multiple
-                          value={filteredCreatorsName}
-                          onChange={(e) => {
-                            filterEntries(e.target.value, "creators");
-                          }}
-                          input={<OutlinedInput label="Creators" />}
-                          renderValue={(selected) => selected.join(", ")}
-                        >
-                          {creators.map((name) => (
-                            <MenuItem key={name} value={name}>
-                              <Checkbox
-                                checked={
-                                  filteredCreatorsName.indexOf(name) > -1
-                                }
-                              />
-                              <ListItemText primary={name} />
-                            </MenuItem>
-                          ))}
-                        </Select>
-                      </FormControl>
-                    </div>
-                    <div>
-                      <FormControl sx={{ m: 1, width: 500 }}>
-                        <InputLabel>Eras</InputLabel>
-                        <Select
-                          multiple
-                          value={filteredEras}
-                          onChange={(e) => {
-                            filterEntries(e.target.value, "eras");
-                          }}
-                          input={<OutlinedInput label="Eras" />}
-                          renderValue={(selected) => selected.join(", ")}
-                        >
-                          {eras.map((name) => (
-                            <MenuItem key={name} value={name}>
-                              <Checkbox
-                                checked={filteredEras.indexOf(name) > -1}
-                              />
-                              <ListItemText primary={name} />
-                            </MenuItem>
-                          ))}
-                        </Select>
-                      </FormControl>
-                    </div>
-                    <div
-                      style={{ width: "100%", textAlign: "center" }}
-                      id={styles.filterResetBtnContainer}
-                    >
-                      <Button variant="contained" onClick={resetFilters}>
-                        <HistoryIcon /> Reset
-                      </Button>
-                    </div>
-                  </div>
-                </Popover>
-              </div>
-              <Box
-                component="form"
-                sx={{
-                  "& > :not(style)": { m: 1, width: "40vw" },
-                }}
-                noValidate
-                autoComplete="off"
-              >
-                <Autocomplete
-                  disablePortal
-                  freeSolo
-                  id="fullWidth"
-                  options={fetchedTitles}
-                  inputValue={searchValue}
-                  onInputChange={(e, newValue) => {
-                    setSearchValue(newValue);
-                    searchEntries(newValue);
-                  }}
-                  onChange={(e, newInputValue) => {
-                    searchEntries(newInputValue);
-                    setSearchValue(newInputValue);
-                  }}
-                  renderInput={(params) => (
-                    <TextField {...params} label="Search by Title" />
-                  )}
-                />
-              </Box>
-              <Box
-                sx={{
-                  marginLeft: "auto",
-                  marginTop: "auto",
-                  marginBottom: "auto",
-                }}
-              >
-                <FormControl sx={{ width: "200px" }}>
-                  <InputLabel>Sort By</InputLabel>
-                  <Select value={sortBy} label="Sort By" onChange={orderBy}>
-                    {_.without(moduleKeys, "coverImage", "links").map(
-                      (e, i) => {
-                        return (
-                          <MenuItem value={e} key={e}>
-                            {e
-                              .replace(/([A-Z])/g, " $1")
-                              .replace(/^./, function (e) {
-                                return e.toUpperCase();
-                              })}
-                          </MenuItem>
-                        );
-                      }
-                    )}
-                  </Select>
-                </FormControl>
-              </Box>
+              <FiltersContainer
+                filterboxAnchorEl={filterboxAnchorEl}
+                setFilterboxAnchorEl={setFilterboxAnchorEl}
+                canonicityFilterValue={canonicityFilterValue}
+                filterEntries={filterEntries}
+                finishedFilterValue={finishedFilterValue}
+                filteredCreatorsName={filteredCreatorsName}
+                creators={creators}
+                filteredEras={filteredEras}
+                resetFilters={resetFilters}
+                eras={eras}
+                fetchedTitles={fetchedTitles}
+                searchValue={searchValue}
+                setSearchValue={setSearchValue}
+                searchEntries={searchEntries}
+                sortBy={sortBy}
+                orderBy={orderBy}
+                moduleKeys={moduleKeys}
+              />
             </div>
           ) : null}
           <div id={styles.moduleContainer}>
@@ -539,56 +316,11 @@ export default function Home() {
                     let currentKey = moduleKeys[i2];
                     let currentValue = e1[currentKey];
                     return (
-                      <div key={"2" + i2}>
-                        {currentKey === "coverImage" ? (
-                          <div className={styles.coverImageContainer}>
-                            <img
-                              className={styles.coverImage}
-                              src={currentValue}
-                            />
-                          </div>
-                        ) : currentKey === "links" ? (
-                          <div className={styles.linksContainer}>
-                            {Object.keys(currentValue).map((e3, i3) => {
-                              return (
-                                <a
-                                  href={currentValue[e3].link}
-                                  key={"3" + i3}
-                                  rel="nofollow noopener"
-                                >
-                                  <img
-                                    src={currentValue[e3].icon}
-                                    style={{
-                                      width: "35px",
-                                      aspectRatio: "1/1",
-                                      objectFit: "cover",
-                                      margin: "10px",
-                                      padding: "5px",
-                                    }}
-                                  />
-                                </a>
-                              );
-                            })}
-                          </div>
-                        ) : currentKey === "canonicity" ? null : (
-                          <h2>{currentKey.replace(/([A-Z])/g, " $1")}:</h2>
-                        )}
-                        {typeof currentValue === "string" &&
-                        currentKey !== "coverImage" ? (
-                          <p>{currentValue}</p>
-                        ) : null}
-                        {currentKey === "canonicity" ? (
-                          currentValue ? (
-                            <div className={styles.canonDiv}>
-                              <h3 className={styles.canon}>Canon</h3>
-                            </div>
-                          ) : (
-                            <div className={styles.legendsDiv}>
-                              <h3 className={styles.legends}>Legends</h3>
-                            </div>
-                          )
-                        ) : null}
-                      </div>
+                      <CardContents
+                        i2={i2}
+                        currentKey={currentKey}
+                        currentValue={currentValue}
+                      />
                     );
                   })}
                   <button
