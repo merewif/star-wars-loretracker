@@ -102,7 +102,7 @@
 
 .coverImage:hover {
   transition-delay: 0.5s;
-  transform: scale(2.5);
+  transform: scale(4);
 }
 
 .linksContainer {
