@@ -25,9 +25,9 @@ const Header = ({ displayData }) => {
             </li>
           );
         })}
-        <Link href="/login">
+        {/* <Link href="/login">
           <li>Login</li>
-        </Link>
+        </Link> */}
         <li></li>
       </ul>
     </nav>
