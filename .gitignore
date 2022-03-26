@@ -44,3 +44,6 @@ firestore.indexes.json
 firestore.rules
 storage.rules
 database.rules.json
+
+.eslintrc.json
+.babelrc
