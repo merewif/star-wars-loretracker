@@ -168,7 +168,7 @@ export default function Filterbox({
               </Select>
             </FormControl>
           </div>
-          <div>
+          {/* {<div>
             <FormControl sx={{ m: 1, width: 500 }}>
               <InputLabel>Eras</InputLabel>
               <Select
@@ -188,7 +188,7 @@ export default function Filterbox({
                 ))}
               </Select>
             </FormControl>
-          </div>
+          </div>} */}
           <div
             style={{ width: "100%", textAlign: "center" }}
             id={styles.filterResetBtnContainer}

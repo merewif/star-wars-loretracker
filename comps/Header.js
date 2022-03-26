@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Header = ({ displayData }) => {
-  const listElements = ["Movies", "Games", "Books", "Comics", "Series"];
+  const listElements = ["Movies", "Books", "Comics", "Series"];
 
   return (
     <nav id={styles.navbar}>

@@ -17,6 +17,14 @@ export default function CardContents({ i2, currentKey, currentValue }) {
       {typeof currentValue === "string" && currentKey !== "coverImage" ? (
         <p>{currentValue}</p>
       ) : null}
+      {currentKey === "timeline" && currentValue > 0 ? (
+        <p>{Math.abs(currentValue).toLocaleString("en")} ABY</p>
+      ) : null}
+      {currentKey === "timeline" && currentValue <= 0 ? (
+        <p>{Math.abs(currentValue).toLocaleString("en")} BBY</p>
+      ) : null}
+      {currentKey === "timeline" && currentValue === "" ? <p>N/A</p> : null}
+
       {currentKey === "canonicity" ? (
         currentValue ? (
           <div className={styles.canonDiv}>

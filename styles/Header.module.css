@@ -1,9 +1,10 @@
 #navbar {
   display: flex;
   background: black;
-  margin-bottom: 30px;
+  margin-bottom: 0px;
   box-shadow: 0px 5px 15px 5px #000;
   padding: 0px 20px 0px 20px;
+  z-index: 10;
 }
 
 #navbar ul {
@@ -27,7 +28,7 @@
   padding: 20px;
 }
 
-#navbar ul li:nth-child(6) {
+#navbar ul li:nth-child(5) {
   margin-left: auto;
   color: #ffe81f;
 }

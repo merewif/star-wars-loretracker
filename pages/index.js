@@ -4,7 +4,6 @@ import styles from "../styles/Home.module.css";
 import Header from "../comps/Header";
 import Footer from "../comps/Footer";
 import _ from "lodash";
-import LinksContainer from "../comps/card/LinksContainer";
 import FiltersContainer from "../comps/Filters/FiltersContainer";
 import CardContents from "../comps/card/CardContents";
 
@@ -32,6 +31,11 @@ export default function Home() {
   const [searchValue, setSearchValue] = useState();
 
   useEffect(() => {
+    setCurrentlyOpenedModule("movies");
+    fetchData("movies");
+  }, []);
+
+  useEffect(() => {
     let btns = document.getElementsByClassName("navbtn");
     for (const btn of btns) {
       btn.style.color = "white";
@@ -42,13 +46,177 @@ export default function Home() {
   }, [currentlyOpenedModule]);
 
   useEffect(() => {
-    fetch("./data/books/Youtini Bookshelf - Legends Books.json")
+    setCardsHeight();
+  }, [fetchedData, currentlyOpenedModule]);
+
+  async function setCardsHeight() {
+    let cards = document.getElementsByClassName("entryCard");
+    let largestHeight = 0;
+    for await (const card of cards) {
+      if (card.offsetHeight > largestHeight) largestHeight = card.offsetHeight;
+    }
+    for (const card of cards) {
+      card.style.height = `${largestHeight}px`;
+    }
+  }
+
+  async function fetchYoutiniBooks() {
+    let allBooks = [];
+    let books = [];
+
+    await fetch("./data/books/Youtini Bookshelf - Legends Books.json")
       .then((response) => response.json())
-      .then((data) => console.log(data));
-  }, []);
+      .then((data) => {
+        for (const entry of data) {
+          entry.canonicity = false;
+          allBooks.push(entry);
+        }
+      });
+
+    await fetch("./data/books/Youtini Bookshelf - Canon Books.json")
+      .then((response) => response.json())
+      .then((data) => {
+        for (const entry of data) {
+          entry.canonicity = true;
+          allBooks.push(entry);
+        }
+      });
+
+    for await (const book of allBooks) {
+      let currentBook = {};
+      let time = 0;
+
+      currentBook.canonicity = book.canonicity;
+      currentBook.coverImage = book["Cover Image URL"];
+      currentBook.title = book["Name (Title)"];
+      currentBook.author = book["Author / Writer"];
+      currentBook.releaseDate = book["Release Date"].slice(-4);
+      currentBook.category = book["Category"];
+      currentBook.links = {};
+
+      if (book["Timeline"].includes("-")) {
+        const fullDate = book["Timeline"].replace(/\s|,/g, "");
+        let eras = fullDate.match(/([A-Z]{3})/g);
+        let dates = fullDate.match(/[^\d]*(\d+)[^\d]*\-[^\d]*(\d+)[^\d]*/);
+        dates.shift();
+
+        if (eras[0] === "BBY") currentBook.timeline = Number(`-${dates[0]}`);
+        if (eras[0] === "ABY") currentBook.timeline = Number(`${dates[0]}`);
+      }
+
+      if (book["Timeline"].endsWith("BBY") && !book["Timeline"].includes("-")) {
+        currentBook.timeline = Number(
+          `-${book["Timeline"].replace(/[^0-9]/g, "")}`
+        );
+      }
+
+      if (book["Timeline"].endsWith("ABY") && !book["Timeline"].includes("-")) {
+        currentBook.timeline = Number(book["Timeline"].replace(/[^0-9]/g, ""));
+      }
+
+      if (
+        currentBook.category === "Adult Novel" ||
+        currentBook.category === "YA Novel"
+      ) {
+        books.push(currentBook);
+      }
+    }
+
+    setFetchedData(books);
+    setDefaultFetchedData(books);
+    setModuleKeys(Object.keys(books[0]));
+    fetchAllTitles(books);
+    fetchAllCreators(books);
+    fetchAllEras(books);
+  }
+
+  async function fetchYoutiniComics() {
+    let allComics = [];
+    let comics = [];
+
+    await fetch("./data/comics/Youtini Bookshelf - Canon Comics.json")
+      .then((response) => response.json())
+      .then((data) => {
+        for (const entry of data) {
+          entry.canonicity = false;
+          allComics.push(entry);
+        }
+      });
+
+    await fetch("./data/comics/Youtini Bookshelf - Legends Comics (ABY).json")
+      .then((response) => response.json())
+      .then((data) => {
+        for (const entry of data) {
+          entry.canonicity = true;
+          allComics.push(entry);
+        }
+      });
+
+    await fetch("./data/comics/Youtini Bookshelf - Legends Comics (BBY).json")
+      .then((response) => response.json())
+      .then((data) => {
+        for (const entry of data) {
+          entry.canonicity = true;
+          allComics.push(entry);
+        }
+      });
+
+    for await (const comic of allComics) {
+      let currentComic = {};
+      let time = 0;
+
+      currentComic.canonicity = comic.canonicity;
+      currentComic.coverImage = comic["Cover Image URL"];
+      currentComic.title = comic["Name (Title)"];
+      currentComic.author = comic["Author / Writer"];
+      currentComic.releaseDate = comic["Release Date"].slice(-4);
+      currentComic.category = comic["Category"];
+      currentComic.links = {};
+
+      if (comic["Timeline"].includes("-")) {
+        const fullDate = comic["Timeline"].replace(/\s|,/g, "");
+        let eras = fullDate.match(/([A-Z]{3})/g);
+        let dates = fullDate.match(/[^\d]*(\d+)[^\d]*\-[^\d]*(\d+)[^\d]*/);
+        dates.shift();
+
+        if (eras[0] === "BBY") currentComic.timeline = Number(`-${dates[0]}`);
+        if (eras[0] === "ABY") currentComic.timeline = Number(`${dates[0]}`);
+      }
+
+      if (
+        comic["Timeline"].endsWith("BBY") &&
+        !comic["Timeline"].includes("-")
+      ) {
+        currentComic.timeline = Number(
+          `-${comic["Timeline"].replace(/[^0-9]/g, "")}`
+        );
+      }
+
+      if (
+        comic["Timeline"].endsWith("ABY") &&
+        !comic["Timeline"].includes("-")
+      ) {
+        currentComic.timeline = Number(
+          comic["Timeline"].replace(/[^0-9]/g, "")
+        );
+      }
+
+      comics.push(currentComic);
+    }
+
+    console.log(comics);
+    setFetchedData(comics);
+    setDefaultFetchedData(comics);
+    setModuleKeys(Object.keys(comics[0]));
+    fetchAllTitles(comics);
+    fetchAllCreators(comics);
+    fetchAllEras(comics);
+  }
 
   function displayData(e) {
     setCurrentlyOpenedModule(e.target.id);
+    if (e.target.id === "books") return fetchYoutiniBooks();
+    if (e.target.id === "comics") return fetchYoutiniComics();
     fetchData(e.target.id);
   }
 
