@@ -97,6 +97,7 @@
   margin: auto;
   transition: transform 0.5s ease;
   margin-block: 10px;
+  z-index: 1000;
 }
 
 .coverImage:hover {
@@ -120,6 +121,7 @@
   cursor: pointer;
   position: absolute;
   bottom: 0%;
+  z-index: 1;
 }
 
 .legendsDiv,
