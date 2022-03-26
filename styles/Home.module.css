@@ -5,19 +5,23 @@
 
 .viewerContainer {
   min-height: 100vh;
+  z-index: 1;
+  background-color: rgba(255, 255, 255, 0.25);
 }
 
 #moduleContainer {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 1em;
 }
 
 .cardUnfinished,
 .cardFinished {
   margin: auto;
-  flex-basis: 24%;
+  width: 100%;
   border: 1px solid black;
+  position: relative;
+  padding-bottom: 30px;
 }
 
 .cardUnfinished h2,
@@ -25,6 +29,7 @@
 .cardFinished h2,
 .cardFinished p {
   margin-left: 20px;
+  padding-inline: 10px;
 }
 
 .cardUnfinished h2,
@@ -42,6 +47,7 @@
   font-weight: 900;
   text-transform: uppercase;
   margin-top: 0;
+  min-height: 2rem;
 }
 
 .cardFinished {
@@ -90,6 +96,7 @@
   object-fit: cover;
   margin: auto;
   transition: transform 0.5s ease;
+  margin-block: 10px;
 }
 
 .coverImage:hover {
@@ -111,6 +118,8 @@
   text-transform: uppercase;
   font-weight: 900;
   cursor: pointer;
+  position: absolute;
+  bottom: 0%;
 }
 
 .legendsDiv,
@@ -179,4 +188,9 @@
 
 #filterResetBtnContainer {
   margin-top: 10px;
+}
+
+#sortContainer {
+  width: 100%;
+  margin: 0;
 }
