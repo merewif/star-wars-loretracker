@@ -10,7 +10,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { auth } from "../.firebase/firebase-config";
+// import { auth } from "../.firebase/firebase-config";
 
 export default function Login() {
   const [currentModule, setCurrentModule] = useState("login");
