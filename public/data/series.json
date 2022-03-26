@@ -4,9 +4,9 @@
     "coverImage": "https://static.posters.cz/image/750/plakatok/star-wars-the-mandalorian-nightfall-i103406.jpg",
     "title": "The Mandalorian",
     "createdBy": "Jon Favreau",
+    "yearOfRelease": "2019",
     "seasons": "2",
     "episodes": "16",
-    "releaseDate": "2019",
     "links": {}
   },
   {
@@ -14,9 +14,9 @@
     "coverImage": "https://upload.wikimedia.org/wikipedia/en/3/32/Book_of_Boba_Fett_logo.jpeg",
     "title": "The Book of Boba Fett",
     "createdBy": "Jon Favreau",
+    "yearOfRelease": "2021",
     "seasons": "1",
     "episodes": "7",
-    "releaseDate": "2021",
     "links": {}
   },
   {
@@ -24,9 +24,9 @@
     "coverImage": "https://upload.wikimedia.org/wikipedia/en/0/08/Obi-Wan_Kenobi_%28TV_series%29_logo.jpg",
     "title": "Obi-Wan Kenobi",
     "createdBy": "Deborah Chow",
+    "yearOfRelease": "2022",
     "seasons": "1",
     "episodes": "6",
-    "releaseDate": "2022",
     "links": {}
   },
   {
@@ -34,9 +34,9 @@
     "coverImage": "https://upload.wikimedia.org/wikipedia/en/a/af/CloneWarslogo.JPG",
     "title": "Clone Wars",
     "createdBy": "Genndy Tartakovsky",
+    "yearOfRelease": "2003",
     "seasons": "3",
     "episodes": "25",
-    "releaseDate": "2003",
     "links": {}
   },
   {
@@ -44,9 +44,9 @@
     "coverImage": "https://upload.wikimedia.org/wikipedia/en/c/ce/Forces_of_Destiny_Opening_Logo.png",
     "title": "Forces of Destiny",
     "createdBy": "Dave Filoni",
+    "yearOfRelease": "2017",
     "seasons": "2",
     "episodes": "32",
-    "releaseDate": "2017",
     "links": {}
   },
   {
@@ -54,9 +54,9 @@
     "coverImage": "./imgs/blips.bmp",
     "title": "Blips",
     "createdBy": "N/A",
+    "yearOfRelease": "2017",
     "seasons": "1",
     "episodes": "8",
-    "releaseDate": "2017",
     "links": {}
   },
   {
@@ -64,9 +64,9 @@
     "coverImage": "https://lumiere-a.akamaihd.net/v1/images/goa-hero-mobile_dec46dcf.jpeg",
     "title": "Galaxy of Adventures",
     "createdBy": "Josh Rimes",
+    "yearOfRelease": "2018",
     "seasons": "2",
     "episodes": "55",
-    "releaseDate": "2018",
     "links": {}
   },
   {
@@ -74,9 +74,9 @@
     "coverImage": "./imgs/rollout.bmp",
     "title": "Roll Out",
     "createdBy": "Hideo Itoyanagi",
+    "yearOfRelease": "2019",
     "seasons": "1",
     "episodes": "16",
-    "releaseDate": "2019",
     "links": {}
   },
   {
@@ -84,9 +84,9 @@
     "coverImage": "https://m.media-amazon.com/images/M/MV5BYzdiOTk2ZmEtNDU5MS00ZGNjLWFkMGMtYzc2MGQ1NGI3NmJlXkEyXkFqcGdeQXVyNjQzNDI3NzY@._V1_.jpg",
     "title": "Galaxy of Creatures",
     "createdBy": "Matt Martin",
+    "yearOfRelease": "2021",
     "seasons": "1",
     "episodes": "12",
-    "releaseDate": "2021",
     "links": {}
   },
   {
@@ -94,9 +94,9 @@
     "coverImage": "https://upload.wikimedia.org/wikipedia/en/7/75/Star_Wars_Droids.jpg",
     "title": "Droids",
     "createdBy": "Peter Sauder, Ben Burtt",
+    "yearOfRelease": "1985",
     "seasons": "1",
     "episodes": "13 + 1",
-    "releaseDate": "1985",
     "links": {}
   },
   {
@@ -104,9 +104,9 @@
     "coverImage": "https://upload.wikimedia.org/wikipedia/en/7/72/Star_Wars_Ewoks_Title_Card_B.png",
     "title": "Ewoks",
     "createdBy": "Paul Dini, Bob Carrau",
+    "yearOfRelease": "1985",
     "seasons": "2",
     "episodes": "26",
-    "releaseDate": "1985",
     "links": {}
   },
   {
@@ -114,9 +114,9 @@
     "coverImage": "https://upload.wikimedia.org/wikipedia/commons/0/02/Star_Wars_The_Clone_Wars.png",
     "title": "The Clone Wars",
     "createdBy": "George Lucas",
+    "yearOfRelease": "2008",
     "seasons": "7",
     "episodes": "133",
-    "releaseDate": "2008",
     "links": {}
   },
   {
@@ -124,9 +124,9 @@
     "coverImage": "https://upload.wikimedia.org/wikipedia/en/1/16/Star_Wars_Rebels_logo.png",
     "title": "Rebels",
     "createdBy": "Dave Filoni, Simon Kinberg, Carrie Beck",
+    "yearOfRelease": "2014",
     "seasons": "4",
     "episodes": "75",
-    "releaseDate": "2014",
     "links": {}
   },
   {
@@ -134,9 +134,9 @@
     "coverImage": "https://upload.wikimedia.org/wikipedia/en/c/ca/Star_Wars_Resistance_logo.png",
     "title": "Resistance ",
     "createdBy": "Dave Filoni, Kiri Hart, Carrie Beck",
+    "yearOfRelease": "2018",
     "seasons": "2",
     "episodes": "40",
-    "releaseDate": "2018",
     "links": {}
   },
   {
@@ -144,9 +144,9 @@
     "coverImage": "https://upload.wikimedia.org/wikipedia/en/1/11/Star_Wars_The_Bad_Batch_logo-2.png",
     "title": "The Bad Batch",
     "createdBy": "Dave Filoni, Jennifer Corbett",
+    "yearOfRelease": "2021",
     "seasons": "1",
     "episodes": "16",
-    "releaseDate": "2021",
     "links": {}
   },
   {
@@ -154,9 +154,9 @@
     "coverImage": "https://upload.wikimedia.org/wikipedia/en/b/b6/Star_Wars_Visions_Logo.jpg",
     "title": "Visions",
     "createdBy": "Kanako Shirasaki et al.",
+    "yearOfRelease": "2021",
     "seasons": "1",
     "episodes": "9",
-    "releaseDate": "2021",
     "links": {}
   }
 ]
