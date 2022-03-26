@@ -6,6 +6,7 @@ import Footer from "../comps/Footer";
 import _ from "lodash";
 import FiltersContainer from "../comps/Filters/FiltersContainer";
 import CardContents from "../comps/card/CardContents";
+import moment from "moment";
 
 export default function Home() {
   const [defaultFetchedData, setDefaultFetchedData] = useState([]);
@@ -74,7 +75,6 @@ export default function Home() {
 
   async function fetchYoutiniBooks() {
     let allBooks = [];
-    let books = [];
 
     await fetch("./data/books/Youtini Bookshelf - Legends Books.json")
       .then((response) => response.json())
@@ -94,6 +94,45 @@ export default function Home() {
         }
       });
 
+    parseYoutiniData(allBooks);
+  }
+
+  async function fetchYoutiniComics() {
+    let allComics = [];
+
+    await fetch("./data/comics/Youtini Bookshelf - Canon Comics.json")
+      .then((response) => response.json())
+      .then((data) => {
+        for (const entry of data) {
+          entry.canonicity = true;
+          allComics.push(entry);
+        }
+      });
+
+    await fetch("./data/comics/Youtini Bookshelf - Legends Comics (ABY).json")
+      .then((response) => response.json())
+      .then((data) => {
+        for (const entry of data) {
+          entry.canonicity = false;
+          allComics.push(entry);
+        }
+      });
+
+    await fetch("./data/comics/Youtini Bookshelf - Legends Comics (BBY).json")
+      .then((response) => response.json())
+      .then((data) => {
+        for (const entry of data) {
+          entry.canonicity = false;
+          allComics.push(entry);
+        }
+      });
+
+    parseYoutiniData(allComics);
+  }
+
+  async function parseYoutiniData(allBooks) {
+    let books = [];
+
     for await (const book of allBooks) {
       let currentBook = {};
       let time = 0;
@@ -102,7 +141,9 @@ export default function Home() {
       currentBook.coverImage = book["Cover Image URL"];
       currentBook.title = book["Name (Title)"];
       currentBook.author = book["Author / Writer"];
-      currentBook.releaseDate = book["Release Date"].slice(-4);
+      // currentBook.releaseDate = book["Release Date"].slice(-4);
+      currentBook.releaseDate = moment(book["Release Date"]);
+
       currentBook.category = book["Category"];
       currentBook.links = {};
 
@@ -133,96 +174,12 @@ export default function Home() {
         books.push(currentBook);
       }
     }
-
     setFetchedData(books);
     setDefaultFetchedData(books);
     setModuleKeys(Object.keys(books[0]));
     fetchAllTitles(books);
     fetchAllCreators(books);
     fetchAllEras(books);
-  }
-
-  async function fetchYoutiniComics() {
-    let allComics = [];
-    let comics = [];
-
-    await fetch("./data/comics/Youtini Bookshelf - Canon Comics.json")
-      .then((response) => response.json())
-      .then((data) => {
-        for (const entry of data) {
-          entry.canonicity = false;
-          allComics.push(entry);
-        }
-      });
-
-    await fetch("./data/comics/Youtini Bookshelf - Legends Comics (ABY).json")
-      .then((response) => response.json())
-      .then((data) => {
-        for (const entry of data) {
-          entry.canonicity = true;
-          allComics.push(entry);
-        }
-      });
-
-    await fetch("./data/comics/Youtini Bookshelf - Legends Comics (BBY).json")
-      .then((response) => response.json())
-      .then((data) => {
-        for (const entry of data) {
-          entry.canonicity = true;
-          allComics.push(entry);
-        }
-      });
-
-    for await (const comic of allComics) {
-      let currentComic = {};
-      let time = 0;
-
-      currentComic.canonicity = comic.canonicity;
-      currentComic.coverImage = comic["Cover Image URL"];
-      currentComic.title = comic["Name (Title)"];
-      currentComic.author = comic["Author / Writer"];
-      currentComic.releaseDate = comic["Release Date"].slice(-4);
-      currentComic.category = comic["Category"];
-      currentComic.links = {};
-
-      if (comic["Timeline"].includes("-")) {
-        const fullDate = comic["Timeline"].replace(/\s|,/g, "");
-        let eras = fullDate.match(/([A-Z]{3})/g);
-        let dates = fullDate.match(/[^\d]*(\d+)[^\d]*\-[^\d]*(\d+)[^\d]*/);
-        dates.shift();
-
-        if (eras[0] === "BBY") currentComic.timeline = Number(`-${dates[0]}`);
-        if (eras[0] === "ABY") currentComic.timeline = Number(`${dates[0]}`);
-      }
-
-      if (
-        comic["Timeline"].endsWith("BBY") &&
-        !comic["Timeline"].includes("-")
-      ) {
-        currentComic.timeline = Number(
-          `-${comic["Timeline"].replace(/[^0-9]/g, "")}`
-        );
-      }
-
-      if (
-        comic["Timeline"].endsWith("ABY") &&
-        !comic["Timeline"].includes("-")
-      ) {
-        currentComic.timeline = Number(
-          comic["Timeline"].replace(/[^0-9]/g, "")
-        );
-      }
-
-      comics.push(currentComic);
-    }
-
-    console.log(comics);
-    setFetchedData(comics);
-    setDefaultFetchedData(comics);
-    setModuleKeys(Object.keys(comics[0]));
-    fetchAllTitles(comics);
-    fetchAllCreators(comics);
-    fetchAllEras(comics);
   }
 
   function displayData(e) {
