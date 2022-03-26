@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "../../styles/Home.module.css";
 import LinksContainer from "./LinksContainer";
+import moment from "moment";
 
 export default function CardContents({ i2, currentKey, currentValue }) {
   return (
@@ -16,6 +17,11 @@ export default function CardContents({ i2, currentKey, currentValue }) {
       )}
       {typeof currentValue === "string" && currentKey !== "coverImage" ? (
         <p>{currentValue}</p>
+      ) : null}
+      {currentKey === "releaseDate" && moment(currentValue).isValid() ? (
+        <p>
+          {moment(currentValue)._d.toDateString().split(" ").slice(1).join(" ")}
+        </p>
       ) : null}
       {currentKey === "timeline" && currentValue > 0 ? (
         <p>{Math.abs(currentValue).toLocaleString("en")} ABY</p>

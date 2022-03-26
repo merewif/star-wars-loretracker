@@ -12,8 +12,8 @@ body {
   background-image: url("/imgs/bg.jpg");
   background-attachment: fixed;
   background-position: center;
+  background-repeat: no-repeat;
 }
-
 a {
   color: inherit;
   text-decoration: none;
