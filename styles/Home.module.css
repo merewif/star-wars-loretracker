@@ -194,3 +194,15 @@
   width: 100%;
   margin: 0;
 }
+
+@media screen and (max-width: 1500px) {
+  #moduleContainer {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  #moduleContainer {
+    grid-template-columns: 1fr 1fr;
+  }
+}
