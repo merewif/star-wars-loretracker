@@ -33,7 +33,19 @@ export default function Home() {
   useEffect(() => {
     setCurrentlyOpenedModule("movies");
     fetchData("movies");
+
+    if ("loretracker" in localStorage)
+      setEntriesMarkedAsFinished(
+        JSON.parse(localStorage.getItem("loretracker"))
+      );
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem(
+      "loretracker",
+      JSON.stringify(entriesMarkedAsFinished)
+    );
+  }, [entriesMarkedAsFinished]);
 
   useEffect(() => {
     let btns = document.getElementsByClassName("navbtn");
