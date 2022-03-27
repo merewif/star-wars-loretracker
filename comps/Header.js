@@ -16,7 +16,7 @@ const Header = ({ displayData }) => {
         {listElements.map((e, i) => {
           return (
             <li
-              onClick={(e) => displayData(e)}
+              onClick={(e) => displayData(e.target.id)}
               key={i}
               id={listElements[i].toLowerCase()}
               className="navbtn"
