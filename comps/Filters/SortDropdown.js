@@ -1,23 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import _ from "lodash";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
 export default function SortDropdown({ sortBy, orderBy, moduleKeys }) {
+  const [order, setOrder] = useState("asc");
+  const [sortParameter, setSortParameter] = useState("");
+  useEffect(() => {
+    sortWithOrderParameter();
+  }, [order]);
+
+  function sortWithOrderParameter() {
+    orderBy(sortParameter, order);
+  }
+
   return (
     <Box
       sx={{
         marginLeft: "auto",
         marginTop: "auto",
         marginBottom: "auto",
+        display: "flex",
+        alignItems: "center",
       }}
     >
       <FormControl sx={{ width: "200px" }}>
         <InputLabel>Sort By</InputLabel>
-        <Select value={sortBy} label="Sort By" onChange={orderBy}>
+        <Select
+          value={sortBy}
+          label="Sort By"
+          onChange={(e) => {
+            orderBy(e.target.value, order);
+            setSortParameter(e.target.value);
+          }}
+        >
           {_.without(moduleKeys, "coverImage", "links").map((e, i) => {
             return (
               <MenuItem value={e} key={e}>
@@ -29,6 +50,17 @@ export default function SortDropdown({ sortBy, orderBy, moduleKeys }) {
           })}
         </Select>
       </FormControl>
+      {order === "asc" ? (
+        <ArrowUpwardIcon
+          onClick={() => setOrder("desc")}
+          sx={{ fontSize: "2rem", cursor: "pointer" }}
+        />
+      ) : (
+        <ArrowDownwardIcon
+          onClick={() => setOrder("asc")}
+          sx={{ fontSize: "2rem", cursor: "pointer" }}
+        />
+      )}
     </Box>
   );
 }
