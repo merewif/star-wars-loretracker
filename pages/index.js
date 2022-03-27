@@ -7,10 +7,14 @@ import _ from "lodash";
 import FiltersContainer from "../comps/Filters/FiltersContainer";
 import CardContents from "../comps/card/CardContents";
 import moment from "moment";
+import { Waypoint } from "react-waypoint";
 
 export default function Home() {
   const [defaultFetchedData, setDefaultFetchedData] = useState([]);
   const [fetchedData, setFetchedData] = useState([]);
+  const [fetchedGiganticData, setFetchedGiganticData] = useState([]);
+  const [paginationStartElement, setPaginationStartElement] = useState(0);
+  const [paginationEndElement, setPaginationEndElement] = useState(30);
   const [fetchedTitles, setFetchedTitles] = useState([]);
   const [currentlyOpenedModule, setCurrentlyOpenedModule] = useState();
   const [moduleKeys, setModuleKeys] = useState([]);
@@ -42,13 +46,6 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem(
-      "loretracker",
-      JSON.stringify(entriesMarkedAsFinished)
-    );
-  }, [entriesMarkedAsFinished]);
-
-  useEffect(() => {
     let btns = document.getElementsByClassName("navbtn");
     for (const btn of btns) {
       btn.style.color = "white";
@@ -64,10 +61,16 @@ export default function Home() {
 
   async function setCardsHeight() {
     let cards = document.getElementsByClassName("entryCard");
+
+    for await (const card of cards) {
+      card.style.height = "auto";
+    }
+
     let largestHeight = 0;
     for await (const card of cards) {
       if (card.offsetHeight > largestHeight) largestHeight = card.offsetHeight;
     }
+
     for (const card of cards) {
       card.style.height = `${largestHeight}px`;
     }
@@ -126,7 +129,6 @@ export default function Home() {
           allComics.push(entry);
         }
       });
-
     parseYoutiniData(allComics);
   }
 
@@ -135,26 +137,23 @@ export default function Home() {
 
     for await (const book of allBooks) {
       let currentBook = {};
-      let time = 0;
 
       currentBook.canonicity = book.canonicity;
       currentBook.coverImage = book["Cover Image URL"];
       currentBook.title = book["Name (Title)"];
       currentBook.author = book["Author / Writer"];
-      // currentBook.releaseDate = book["Release Date"].slice(-4);
       currentBook.releaseDate = moment(book["Release Date"]);
-
       currentBook.category = book["Category"];
       currentBook.links = {};
-
       if (book["Timeline"].includes("-")) {
         const fullDate = book["Timeline"].replace(/\s|,/g, "");
         let eras = fullDate.match(/([A-Z]{3})/g);
+        if (eras.length === 1) eras[1] = eras[0];
         let dates = fullDate.match(/[^\d]*(\d+)[^\d]*\-[^\d]*(\d+)[^\d]*/);
         dates.shift();
 
-        if (eras[0] === "BBY") currentBook.timeline = Number(`-${dates[0]}`);
-        if (eras[0] === "ABY") currentBook.timeline = Number(`${dates[0]}`);
+        if (eras[1] === "BBY") currentBook.timeline = Number(`-${dates[1]}`);
+        if (eras[1] === "ABY") currentBook.timeline = Number(`${dates[1]}`);
       }
 
       if (book["Timeline"].endsWith("BBY") && !book["Timeline"].includes("-")) {
@@ -169,12 +168,17 @@ export default function Home() {
 
       if (
         currentBook.category === "Adult Novel" ||
-        currentBook.category === "YA Novel"
+        currentBook.category === "YA Novel" ||
+        currentBook.category === "Single Issue Comic" ||
+        currentBook.category === "Graphic Novel" ||
+        currentBook.category === "Omnibus"
       ) {
         books.push(currentBook);
       }
     }
+    // setFetchedData(_.slice(books, 0, 51));
     setFetchedData(books);
+    setFetchedGiganticData(books);
     setDefaultFetchedData(books);
     setModuleKeys(Object.keys(books[0]));
     fetchAllTitles(books);
@@ -182,17 +186,17 @@ export default function Home() {
     fetchAllEras(books);
   }
 
-  function displayData(e) {
-    setCurrentlyOpenedModule(e.target.id);
-    if (e.target.id === "books") return fetchYoutiniBooks();
-    if (e.target.id === "comics") return fetchYoutiniComics();
-    fetchData(e.target.id);
+  function displayData(target) {
+    setCurrentlyOpenedModule(target);
+    if (target === "books") return fetchYoutiniBooks();
+    if (target === "comics") return fetchYoutiniComics();
+    fetchData(target);
   }
 
   function searchEntries(input) {
     setSearchValue(input);
     if (!input) {
-      fetchData(currentlyOpenedModule);
+      displayData(currentlyOpenedModule);
       return;
     }
 
@@ -256,8 +260,8 @@ export default function Home() {
     setEras(fetchedEras);
   }
 
-  function orderBy(event, order = "asc") {
-    setFetchedData(_.orderBy(fetchedData, event.target.value, order));
+  function orderBy(value, order = "asc") {
+    setFetchedData(_.orderBy(fetchedData, value, order));
   }
 
   function toggleEntryAsFinished(event, entry) {
@@ -280,6 +284,14 @@ export default function Home() {
         ...entriesMarkedAsFinished,
         [currentlyOpenedModule]: arrWithoutEntry,
       });
+
+      localStorage.setItem(
+        "loretracker",
+        JSON.stringify({
+          ...entriesMarkedAsFinished,
+          [currentlyOpenedModule]: arrWithoutEntry,
+        })
+      );
     }
 
     if (!isEntryFinished) {
@@ -293,6 +305,17 @@ export default function Home() {
           currentTitle,
         ],
       });
+
+      localStorage.setItem(
+        "loretracker",
+        JSON.stringify({
+          ...entriesMarkedAsFinished,
+          [currentlyOpenedModule]: [
+            ...entriesMarkedAsFinished[currentlyOpenedModule],
+            currentTitle,
+          ],
+        })
+      );
     }
   }
 
@@ -397,6 +420,13 @@ export default function Home() {
     fetchAllEras(defaultFetchedData);
   }
 
+  function infiniteScroll() {
+    if (fetchedData.length < paginationEndElement) return;
+    setPaginationEndElement((currentState) => currentState + 30);
+    setCardsHeight();
+    //
+  }
+
   return (
     <div className={styles.appcontainer}>
       <Head>
@@ -435,7 +465,11 @@ export default function Home() {
             </div>
           ) : null}
           <div id={styles.moduleContainer}>
-            {fetchedData.map((e1, i1) => {
+            {_.slice(
+              fetchedData,
+              paginationStartElement,
+              paginationEndElement
+            ).map((e1, i1) => {
               let currentTitle = e1.title.replace(/\s+/g, "-");
               return (
                 <div
@@ -474,6 +508,7 @@ export default function Home() {
                 </div>
               );
             })}
+            <Waypoint onEnter={infiniteScroll} />
           </div>
         </div>
       </div>
