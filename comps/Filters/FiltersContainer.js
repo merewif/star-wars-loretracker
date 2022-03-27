@@ -2,10 +2,11 @@ import React from "react";
 import Filterbox from "./Filterbox";
 import Searchbar from "./Searchbar";
 import SortDropdown from "./SortDropdown";
+import styles from "../../styles/Home.module.css";
 
 export default function FiltersContainer(props) {
   return (
-    <>
+    <div className={styles.filtersContainer}>
       <Filterbox
         filterboxAnchorEl={props.filterboxAnchorEl}
         setFilterboxAnchorEl={props.setFilterboxAnchorEl}
@@ -31,6 +32,6 @@ export default function FiltersContainer(props) {
         orderBy={props.orderBy}
         moduleKeys={props.moduleKeys}
       />
-    </>
+    </div>
   );
 }
