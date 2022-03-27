@@ -1,36 +1,105 @@
-import React from "react";
+import React, { useState, forwardRef } from "react";
 import styles from "../styles/Header.module.css";
 import logo from "../assets/logo.png";
 import Image from "next/image";
-import Link from "next/link";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Slide from "@mui/material/Slide";
+
+const Transition = forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const Header = ({ displayData }) => {
   const listElements = ["Movies", "Books", "Comics", "Series"];
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
-    <nav id={styles.navbar}>
-      <div id={styles.image}>
-        <Image src={logo} alt="Logo" height={100} width={150} />
-      </div>
-      <ul>
-        {listElements.map((e, i) => {
-          return (
-            <li
-              onClick={(e) => displayData(e.target.id)}
-              key={i}
-              id={listElements[i].toLowerCase()}
-              className="navbtn"
+    <>
+      <nav id={styles.navbar}>
+        <div id={styles.image}>
+          <Image src={logo} alt="Logo" height={100} width={150} />
+        </div>
+        <ul>
+          {listElements.map((e, i) => {
+            return (
+              <li
+                onClick={(e) => displayData(e.target.id)}
+                key={i}
+                id={listElements[i].toLowerCase()}
+                className="navbtn"
+              >
+                {listElements[i]}
+              </li>
+            );
+          })}
+
+          <li onClick={handleClickOpen}>About</li>
+        </ul>
+      </nav>
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+        sx={{ maxHeight: "none", maxWidth: "none" }}
+      >
+        <div className={styles.dialogContent}>
+          <Image src={logo} alt="Logo" height={200} width={300} />
+
+          <p>
+            The site was developed using React and Next.js. The repository is
+            available
+            <a
+              href="https://github.com/merewif/star-wars-loretracker"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              {listElements[i]}
-            </li>
-          );
-        })}
-        <Link href="/about">
-          <li>About</li>
-        </Link>
-        <li></li>
-      </ul>
-    </nav>
+              here.
+            </a>{" "}
+            For feedback and bug reports kindly use the GitHub issues feature.
+            Pull requests are welcome.
+          </p>
+          <p>
+            The databases for the Star Wars books and comics were assembled by{" "}
+            <a
+              href="https://youtini.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              the Youtini team.
+            </a>
+          </p>
+
+          <p>
+            Star Wars Loretracker is not affiliated, associated, authorized,
+            endorsed by, or in any way officially connected with STAR WARS,
+            Lucasfilm Ltd., The Walt Disney Company, Disney Enterprises Inc., or
+            any of its subsidiaries or its affiliates. The official Star Wars
+            website is available at{" "}
+            <a
+              href="http://www.starwars.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              www.starwars.com
+            </a>
+            . All Star Wars artwork, logos & properties belong to ©Lucasfilm LTD
+          </p>
+        </div>
+      </Dialog>
+    </>
   );
 };
 
