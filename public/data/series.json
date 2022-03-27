@@ -6,7 +6,7 @@
     "createdBy": "Jon Favreau",
     "yearOfRelease": "2019",
     "seasons": "2",
-    "episodes": "16",
+    "episodes": 16,
     "links": {}
   },
   {
@@ -16,7 +16,7 @@
     "createdBy": "Jon Favreau",
     "yearOfRelease": "2021",
     "seasons": "1",
-    "episodes": "7",
+    "episodes": 7,
     "links": {}
   },
   {
@@ -26,7 +26,7 @@
     "createdBy": "Deborah Chow",
     "yearOfRelease": "2022",
     "seasons": "1",
-    "episodes": "6",
+    "episodes": 6,
     "links": {}
   },
   {
@@ -36,7 +36,7 @@
     "createdBy": "Genndy Tartakovsky",
     "yearOfRelease": "2003",
     "seasons": "3",
-    "episodes": "25",
+    "episodes": 25,
     "links": {}
   },
   {
@@ -46,7 +46,7 @@
     "createdBy": "Dave Filoni",
     "yearOfRelease": "2017",
     "seasons": "2",
-    "episodes": "32",
+    "episodes": 32,
     "links": {}
   },
   {
@@ -56,7 +56,7 @@
     "createdBy": "N/A",
     "yearOfRelease": "2017",
     "seasons": "1",
-    "episodes": "8",
+    "episodes": 8,
     "links": {}
   },
   {
@@ -66,7 +66,7 @@
     "createdBy": "Josh Rimes",
     "yearOfRelease": "2018",
     "seasons": "2",
-    "episodes": "55",
+    "episodes": 55,
     "links": {}
   },
   {
@@ -76,7 +76,7 @@
     "createdBy": "Hideo Itoyanagi",
     "yearOfRelease": "2019",
     "seasons": "1",
-    "episodes": "16",
+    "episodes": 16,
     "links": {}
   },
   {
@@ -86,7 +86,7 @@
     "createdBy": "Matt Martin",
     "yearOfRelease": "2021",
     "seasons": "1",
-    "episodes": "12",
+    "episodes": 12,
     "links": {}
   },
   {
@@ -96,7 +96,7 @@
     "createdBy": "Peter Sauder, Ben Burtt",
     "yearOfRelease": "1985",
     "seasons": "1",
-    "episodes": "13 + 1",
+    "episodes": 14,
     "links": {}
   },
   {
@@ -106,7 +106,7 @@
     "createdBy": "Paul Dini, Bob Carrau",
     "yearOfRelease": "1985",
     "seasons": "2",
-    "episodes": "26",
+    "episodes": 26,
     "links": {}
   },
   {
@@ -116,7 +116,7 @@
     "createdBy": "George Lucas",
     "yearOfRelease": "2008",
     "seasons": "7",
-    "episodes": "133",
+    "episodes": 133,
     "links": {}
   },
   {
@@ -126,7 +126,7 @@
     "createdBy": "Dave Filoni, Simon Kinberg, Carrie Beck",
     "yearOfRelease": "2014",
     "seasons": "4",
-    "episodes": "75",
+    "episodes": 75,
     "links": {}
   },
   {
@@ -136,7 +136,7 @@
     "createdBy": "Dave Filoni, Kiri Hart, Carrie Beck",
     "yearOfRelease": "2018",
     "seasons": "2",
-    "episodes": "40",
+    "episodes": 40,
     "links": {}
   },
   {
@@ -146,7 +146,7 @@
     "createdBy": "Dave Filoni, Jennifer Corbett",
     "yearOfRelease": "2021",
     "seasons": "1",
-    "episodes": "16",
+    "episodes": 16,
     "links": {}
   },
   {
@@ -156,7 +156,7 @@
     "createdBy": "Kanako Shirasaki et al.",
     "yearOfRelease": "2021",
     "seasons": "1",
-    "episodes": "9",
+    "episodes": 9,
     "links": {}
   }
 ]
