@@ -7,12 +7,15 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
 import { style } from "@mui/system";
+import FileUploadIcon from "@mui/icons-material/FileUpload";
+import DownloadIcon from "@mui/icons-material/Download";
+import Button from "@mui/material/Button";
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const Header = ({ displayData }) => {
+const Header = ({ displayData, handleFileRead }) => {
   const listElements = ["Movies", "Books", "Comics", "Series"];
   const [open, setOpen] = useState(false);
 
@@ -23,6 +26,26 @@ const Header = ({ displayData }) => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  function uploadBackup(event) {
+    console.log(event.target.files[0]);
+    let reader = new FileReader();
+    reader.readAsText(event.target.files[0]);
+    reader.onload = handleFileRead;
+  }
+
+  function downloadBackup() {
+    let collection = JSON.parse(localStorage.getItem("loretracker")) ?? {};
+    let collectionAsText = JSON.stringify(collection);
+
+    let a = document.createElement("a");
+    a.setAttribute(
+      "href",
+      "data:text/plain;charset=utf-8," + encodeURIComponent(collectionAsText)
+    );
+    a.setAttribute("download", "my-star-wars-loretracker-collection.sw");
+    a.click();
+  }
 
   return (
     <>
@@ -44,7 +67,7 @@ const Header = ({ displayData }) => {
             );
           })}
 
-          <li onClick={handleClickOpen}>About</li>
+          <li onClick={handleClickOpen}>About & Backup</li>
         </ul>
       </nav>
       <Dialog
@@ -69,7 +92,6 @@ const Header = ({ displayData }) => {
             <CloseIcon />
           </IconButton>
           <Image src={logo} alt="Logo" height={200} width={300} />
-
           <p>
             The site was developed using React and Next.js. The repository is
             available
@@ -93,7 +115,52 @@ const Header = ({ displayData }) => {
               the Youtini team.
             </a>
           </p>
-
+          <p>
+            The Loretracker is a serverless application; your collection data is
+            stored in your browser. If you want to import or export your
+            collection, use the buttons below:
+          </p>
+          <div style={{ display: "grid", gap: "10px" }}>
+            <input
+              onChange={uploadBackup}
+              type="file"
+              hidden
+              id="upload-backup"
+            />
+            <label htmlFor="upload-backup">
+              <Button
+                component="span"
+                variant="outlined"
+                startIcon={<FileUploadIcon />}
+                sx={{
+                  color: "white",
+                  borderColor: "white",
+                  padding: "10px",
+                  minWidth: "100px",
+                  height: "2.5rem",
+                  marginBlock: "auto",
+                  width: "100%",
+                }}
+              >
+                Upload backup
+              </Button>
+            </label>
+            <Button
+              onClick={downloadBackup}
+              variant="outlined"
+              startIcon={<DownloadIcon />}
+              sx={{
+                color: "white",
+                borderColor: "white",
+                padding: "10px",
+                minWidth: "100px",
+                height: "2.5rem",
+                marginBlock: "auto",
+              }}
+            >
+              Download backup
+            </Button>
+          </div>
           <p>
             Star Wars Loretracker is not affiliated, associated, authorized,
             endorsed by, or in any way officially connected with STAR WARS,
