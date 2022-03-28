@@ -147,32 +147,24 @@ export default function Home() {
       currentBook.releaseDate = moment(book["Release Date"]);
       currentBook.category = book["Category"];
       currentBook.links = {};
-      const timelineDividers = ["-", "/", "—"];
-      const doesTimelineIncludeTwoDates =
-        book["Timeline"].includes("-") ||
-        book["Timeline"].includes("/") ||
-        book["Timeline"].includes("—");
-      if (doesTimelineIncludeTwoDates) {
+      if (book["Timeline"].includes("-")) {
         const fullDate = book["Timeline"].replace(/\s|,/g, "");
         let eras = fullDate.match(/([A-Z]{3})/g);
         if (eras.length === 1) eras[1] = eras[0];
-        let dates = fullDate.match(
-          /[^\d]*(\d+)[^\d]*[\-\/\—][^\d]*(\d+)[^\d]*/
-        );
+        let dates = fullDate.match(/[^\d]*(\d+)[^\d]*\-[^\d]*(\d+)[^\d]*/);
         dates.shift();
-        console.log(book["Timeline"], dates);
 
         if (eras[1] === "BBY") currentBook.timeline = Number(`-${dates[1]}`);
         if (eras[1] === "ABY") currentBook.timeline = Number(`${dates[1]}`);
       }
 
-      if (book["Timeline"].endsWith("BBY") && !doesTimelineIncludeTwoDates) {
+      if (book["Timeline"].endsWith("BBY") && !book["Timeline"].includes("-")) {
         currentBook.timeline = Number(
           `-${book["Timeline"].replace(/[^0-9]/g, "")}`
         );
       }
 
-      if (book["Timeline"].endsWith("ABY") && !doesTimelineIncludeTwoDates) {
+      if (book["Timeline"].endsWith("ABY") && !book["Timeline"].includes("-")) {
         currentBook.timeline = Number(book["Timeline"].replace(/[^0-9]/g, ""));
       }
 
