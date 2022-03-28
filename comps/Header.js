@@ -67,7 +67,7 @@ const Header = ({ displayData, handleFileRead }) => {
             );
           })}
 
-          <li onClick={handleClickOpen}>About</li>
+          <li onClick={handleClickOpen}>About & Backup</li>
         </ul>
       </nav>
       <Dialog
