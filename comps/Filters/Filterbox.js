@@ -30,8 +30,11 @@ export default function Filterbox({
   setFilterboxAnchorEl,
 }) {
   return (
-    <div style={{ display: "flex", width: "25%" }}>
-      <button onClick={(e) => setFilterboxAnchorEl(e.currentTarget)}>
+    <div style={{ display: "flex", width: "25%" }} className={styles.filterDiv}>
+      <button
+        onClick={(e) => setFilterboxAnchorEl(e.currentTarget)}
+        className={styles.filterboxButton}
+      >
         <FilterListIcon />
       </button>
       <Popover
