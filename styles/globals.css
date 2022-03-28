@@ -43,5 +43,5 @@ a {
   max-height: none !important;
   max-width: none !important;
   box-shadow: 0px 0px 15px 5px #fff !important;
-  border-radius: 25px;
+  border-radius: 25px !important;
 }
