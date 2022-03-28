@@ -115,6 +115,11 @@ const Header = ({ displayData, handleFileRead }) => {
               the Youtini team.
             </a>
           </p>
+          <p>
+            The Loretracker is a serverless application; your collection data is
+            stored in your browser. If you want to import or export your
+            collection, use the buttons below:
+          </p>
           <div style={{ display: "grid", gap: "10px" }}>
             <input
               onChange={uploadBackup}
