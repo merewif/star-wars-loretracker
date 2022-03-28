@@ -193,7 +193,9 @@ export default function Filterbox({
           </div>
           {categories.length ? (
             <div>
-              <FormControl sx={{ m: 1, width: 500 }}>
+              <FormControl
+                sx={{ m: 1, width: 500, maxWidth: "80vw", minWidth: "none" }}
+              >
                 <InputLabel>Categories</InputLabel>
                 <Select
                   multiple
@@ -205,11 +207,11 @@ export default function Filterbox({
                   renderValue={(selected) => selected.join(", ")}
                 >
                   {categories.map((name) => (
-                    <MenuItem key={name} value={name}>
+                    <MenuItem key={name} value={name} sx={{ maxWidth: "80vw" }}>
                       <Checkbox
                         checked={filteredCategories.indexOf(name) > -1}
                       />
-                      <ListItemText primary={name} />
+                      <ListItemText primary={name} sx={{ maxWidth: "80vw" }} />
                     </MenuItem>
                   ))}
                 </Select>
