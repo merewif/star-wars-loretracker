@@ -14,7 +14,6 @@ import Button from "@mui/material/Button";
 import HistoryIcon from "@mui/icons-material/History";
 import Popover from "@mui/material/Popover";
 import FilterListIcon from "@mui/icons-material/FilterList";
-
 import styles from "../../styles/Home.module.css";
 
 export default function Filterbox({
@@ -30,13 +29,23 @@ export default function Filterbox({
   setFilterboxAnchorEl,
 }) {
   return (
-    <div style={{ display: "flex", width: "25%" }} className={styles.filterDiv}>
-      <button
+    <div
+      style={{
+        display: "flex",
+        width: "25%",
+      }}
+      className={styles.filterDiv}
+    >
+      <Button
         onClick={(e) => setFilterboxAnchorEl(e.currentTarget)}
         className={styles.filterboxButton}
+        variant="outlined"
+        startIcon={<FilterListIcon />}
+        sx={{ color: "white", padding: "10px", minWidth: "100px" }}
       >
-        <FilterListIcon />
-      </button>
+        FILTER
+      </Button>
+
       <Popover
         id={open ? "simple-popover" : undefined}
         open={Boolean(filterboxAnchorEl)}
