@@ -152,50 +152,53 @@ export default function Home() {
         book["Timeline"].includes("/") ||
         book["Timeline"].includes("—");
 
-      // if (doesTimelineIncludeTwoDates) {
+      if (doesTimelineIncludeTwoDates) {
+        const fullDate = book["Timeline"].replace(/\s|,/g, "");
+        let eras = fullDate.match(/([A-Z]{3})/g);
+        if (eras.length === 1) eras[1] = eras[0];
+        let dates = fullDate.match(
+          /[^\d]*(\d+)[^\d]*[\-\/\—][^\d]*(\d+)[^\d]*/
+        );
+        dates.shift();
+
+        if (eras[1] === "BBY") currentBook.timeline = Number(`-${dates[1]}`);
+        if (eras[1] === "ABY") currentBook.timeline = Number(`${dates[1]}`);
+        console.log(
+          `Name: ${book["Name (Title"]}, Original timeline: ${book["Timeline"]}, Parsed timeline: ${dates}, Object timeline: ${currentBook.timeline}`
+        );
+      }
+
+      if (book["Timeline"].endsWith("BBY") && !doesTimelineIncludeTwoDates) {
+        currentBook.timeline = Number(
+          `-${book["Timeline"].replace(/[^0-9]/g, "")}`
+        );
+      }
+
+      if (book["Timeline"].endsWith("ABY") && !doesTimelineIncludeTwoDates) {
+        currentBook.timeline = Number(book["Timeline"].replace(/[^0-9]/g, ""));
+      }
+
+      // Last working version (safekeeping)
+      // if (book["Timeline"].includes("-")) {
       //   const fullDate = book["Timeline"].replace(/\s|,/g, "");
       //   let eras = fullDate.match(/([A-Z]{3})/g);
       //   if (eras.length === 1) eras[1] = eras[0];
-      //   let dates = fullDate.match(
-      //     /[^\d]*(\d+)[^\d]*[\-\/\—][^\d]*(\d+)[^\d]*/
-      //   );
+      //   let dates = fullDate.match(/[^\d]*(\d+)[^\d]*\-[^\d]*(\d+)[^\d]*/);
       //   dates.shift();
 
       //   if (eras[1] === "BBY") currentBook.timeline = Number(`-${dates[1]}`);
       //   if (eras[1] === "ABY") currentBook.timeline = Number(`${dates[1]}`);
       // }
 
-      // if (book["Timeline"].endsWith("BBY") && !doesTimelineIncludeTwoDates) {
+      // if (book["Timeline"].endsWith("BBY") && !book["Timeline"].includes("-")) {
       //   currentBook.timeline = Number(
       //     `-${book["Timeline"].replace(/[^0-9]/g, "")}`
       //   );
       // }
 
-      // if (book["Timeline"].endsWith("ABY") && !doesTimelineIncludeTwoDates) {
+      // if (book["Timeline"].endsWith("ABY") && !book["Timeline"].includes("-")) {
       //   currentBook.timeline = Number(book["Timeline"].replace(/[^0-9]/g, ""));
       // }
-
-      // Last working version (safekeeping)
-      if (book["Timeline"].includes("-")) {
-        const fullDate = book["Timeline"].replace(/\s|,/g, "");
-        let eras = fullDate.match(/([A-Z]{3})/g);
-        if (eras.length === 1) eras[1] = eras[0];
-        let dates = fullDate.match(/[^\d]*(\d+)[^\d]*\-[^\d]*(\d+)[^\d]*/);
-        dates.shift();
-
-        if (eras[1] === "BBY") currentBook.timeline = Number(`-${dates[1]}`);
-        if (eras[1] === "ABY") currentBook.timeline = Number(`${dates[1]}`);
-      }
-
-      if (book["Timeline"].endsWith("BBY") && !book["Timeline"].includes("-")) {
-        currentBook.timeline = Number(
-          `-${book["Timeline"].replace(/[^0-9]/g, "")}`
-        );
-      }
-
-      if (book["Timeline"].endsWith("ABY") && !book["Timeline"].includes("-")) {
-        currentBook.timeline = Number(book["Timeline"].replace(/[^0-9]/g, ""));
-      }
 
       if (
         currentBook.category === "Adult Novel" ||
