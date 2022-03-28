@@ -161,7 +161,7 @@ export default function Home() {
         );
         dates.shift();
         if (book["Name (Title)"] === "Dawn of the Jedi: Into the Void")
-          console.log(fulldate, dates);
+          console.log(fullDate, dates);
 
         if (eras[1] === "BBY") currentBook.timeline = Number(`-${dates[1]}`);
         if (eras[1] === "ABY") currentBook.timeline = Number(`${dates[1]}`);
