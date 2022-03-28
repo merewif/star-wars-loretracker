@@ -441,7 +441,6 @@ export default function Home() {
         listFilteredByCategories.push(entriesByCategory);
       }
       filteredResults = _.flatten(listFilteredByCategories);
-      console.log(filteredResults);
     }
 
     setFetchedData(_.flatten(filteredResults));
