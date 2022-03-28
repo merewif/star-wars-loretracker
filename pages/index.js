@@ -157,8 +157,6 @@ export default function Home() {
           .replace(/\s|,/g, "")
           .replace(/\/|—/, "-");
 
-        if (book["Timeline"].includes("/"))
-          console.log(book["Timeline"], fullDate);
         let eras = fullDate.match(/([A-Z]{3})/g);
         if (eras.length === 1) eras[1] = eras[0];
         let dates = fullDate.match(/[^\d]*(\d+)[^\d]*\-[^\d]*(\d+)[^\d]*/);
@@ -166,11 +164,14 @@ export default function Home() {
         //   /[^\d]*(\d+)[^\d]*[\-\/\—][^\d]*(\d+)[^\d]*/
         // );
         dates.shift();
-        if (book["Name (Title)"] === "Dawn of the Jedi: Into the Void")
-          console.log(fullDate, dates);
 
         if (eras[1] === "BBY") currentBook.timeline = Number(`-${dates[1]}`);
         if (eras[1] === "ABY") currentBook.timeline = Number(`${dates[1]}`);
+
+        if (book["Timeline"].includes("/"))
+          console.log(book["Timeline"], fullDate, currentBook.timeline);
+        if (book["Name (Title)"] === "Dawn of the Jedi: Into the Void")
+          console.log(fullDate, dates);
       }
 
       if (book["Timeline"].endsWith("BBY") && !doesTimelineIncludeTwoDates) {
