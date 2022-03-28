@@ -61,6 +61,12 @@ export default function Home() {
     setCardsHeight();
   }, [fetchedData, currentlyOpenedModule]);
 
+  function handleFileRead(event) {
+    let collection = JSON.parse(event.target.result);
+    window.localStorage.setItem("loretracker", JSON.stringify(collection));
+    setEntriesMarkedAsFinished(collection);
+  }
+
   async function setCardsHeight() {
     let cards = document.getElementsByClassName("entryCard");
 
@@ -485,7 +491,7 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header displayData={displayData} />
+      <Header displayData={displayData} handleFileRead={handleFileRead} />
 
       <div className={styles.viewerContainer}>
         <div id={styles.viewer}>
