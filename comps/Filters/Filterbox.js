@@ -41,7 +41,13 @@ export default function Filterbox({
         className={styles.filterboxButton}
         variant="outlined"
         startIcon={<FilterListIcon />}
-        sx={{ color: "white", padding: "10px", minWidth: "100px" }}
+        sx={{
+          color: "white",
+          padding: "10px",
+          minWidth: "100px",
+          height: "2.5rem",
+          marginBlock: "auto",
+        }}
       >
         FILTER
       </Button>
