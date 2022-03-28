@@ -168,10 +168,8 @@ export default function Home() {
         if (eras[1] === "BBY") currentBook.timeline = Number(`-${dates[1]}`);
         if (eras[1] === "ABY") currentBook.timeline = Number(`${dates[1]}`);
 
-        if (book["Timeline"].includes("/"))
+        if (book["Timeline"].includes("—"))
           console.log(book["Timeline"], fullDate, currentBook.timeline);
-        if (book["Name (Title)"] === "Dawn of the Jedi: Into the Void")
-          console.log(fullDate, dates);
       }
 
       if (book["Timeline"].endsWith("BBY") && !doesTimelineIncludeTwoDates) {
