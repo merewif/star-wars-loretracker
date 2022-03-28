@@ -153,12 +153,15 @@ export default function Home() {
         book["Timeline"].includes("—");
 
       if (doesTimelineIncludeTwoDates) {
-        const fullDate = book["Timeline"].replace(/\s|,/g, "");
+        const fullDate = book["Timeline"]
+          .replace(/\s|,/g, "")
+          .replace(/\/|—/, "-");
         let eras = fullDate.match(/([A-Z]{3})/g);
         if (eras.length === 1) eras[1] = eras[0];
-        let dates = fullDate.match(
-          /[^\d]*(\d+)[^\d]*[\-\/\—][^\d]*(\d+)[^\d]*/
-        );
+        let dates = fullDate.match(/[^\d]*(\d+)[^\d]*\-[^\d]*(\d+)[^\d]*/);
+        // let dates = fullDate.match(
+        //   /[^\d]*(\d+)[^\d]*[\-\/\—][^\d]*(\d+)[^\d]*/
+        // );
         dates.shift();
         if (book["Name (Title)"] === "Dawn of the Jedi: Into the Void")
           console.log(fullDate, dates);
