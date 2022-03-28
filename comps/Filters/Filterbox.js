@@ -24,6 +24,8 @@ export default function Filterbox({
   creators,
   filteredEras,
   eras,
+  filteredCategories,
+  categories,
   resetFilters,
   filterboxAnchorEl,
   setFilterboxAnchorEl,
@@ -186,27 +188,31 @@ export default function Filterbox({
               </Select>
             </FormControl>
           </div>
-          {/* {<div>
-            <FormControl sx={{ m: 1, width: 500 }}>
-              <InputLabel>Eras</InputLabel>
-              <Select
-                multiple
-                value={filteredEras}
-                onChange={(e) => {
-                  filterEntries(e.target.value, "eras");
-                }}
-                input={<OutlinedInput label="Eras" />}
-                renderValue={(selected) => selected.join(", ")}
-              >
-                {eras.map((name) => (
-                  <MenuItem key={name} value={name}>
-                    <Checkbox checked={filteredEras.indexOf(name) > -1} />
-                    <ListItemText primary={name} />
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </div>} */}
+          {categories.length ? (
+            <div>
+              <FormControl sx={{ m: 1, width: 500 }}>
+                <InputLabel>Categories</InputLabel>
+                <Select
+                  multiple
+                  value={filteredCategories}
+                  onChange={(e) => {
+                    filterEntries(e.target.value, "categories");
+                  }}
+                  input={<OutlinedInput label="Categories" />}
+                  renderValue={(selected) => selected.join(", ")}
+                >
+                  {categories.map((name) => (
+                    <MenuItem key={name} value={name}>
+                      <Checkbox
+                        checked={filteredCategories.indexOf(name) > -1}
+                      />
+                      <ListItemText primary={name} />
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </div>
+          ) : null}
           <div
             style={{ width: "100%", textAlign: "center" }}
             id={styles.filterResetBtnContainer}

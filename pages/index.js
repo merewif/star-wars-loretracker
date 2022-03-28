@@ -29,6 +29,8 @@ export default function Home() {
   const [filterboxAnchorEl, setFilterboxAnchorEl] = useState(null);
   const [creators, setCreators] = useState([]);
   const [eras, setEras] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [filteredCategories, setFilteredCategories] = useState([]);
   const [filteredCreatorsName, setFilteredCreatorsName] = useState([]);
   const [filteredEras, setFilteredEras] = useState([]);
   const [canonicityFilterValue, setCanonicityFilterValue] = useState("all");
@@ -185,6 +187,7 @@ export default function Home() {
     fetchAllTitles(books);
     fetchAllCreators(books);
     fetchAllEras(books);
+    fetchAllCategories(books);
   }
 
   function displayData(target) {
@@ -226,6 +229,7 @@ export default function Home() {
         fetchAllTitles(data);
         fetchAllCreators(data);
         fetchAllEras(data);
+        fetchAllCategories(data);
       });
   }
 
@@ -259,6 +263,15 @@ export default function Home() {
         fetchedEras.push(entry.era);
     }
     setEras(fetchedEras);
+  }
+
+  function fetchAllCategories(data) {
+    let fetchedCategories = [];
+    for (const entry of data) {
+      if (entry.category && !fetchedCategories.includes(entry.category))
+        fetchedCategories.push(entry.category);
+    }
+    setCategories(fetchedCategories);
   }
 
   function orderBy(value, order = "asc") {
@@ -324,7 +337,8 @@ export default function Home() {
     let canonicityParameter = canonicityFilterValue,
       creatorsParameters = filteredCreatorsName,
       finishedParameter = finishedFilterValue,
-      erasParameters = filteredEras;
+      erasParameters = filteredEras,
+      categoryParameters = filteredCategories;
 
     if (source === "canonicity") {
       setCanonicityFilterValue(value);
@@ -340,6 +354,14 @@ export default function Home() {
       setFilteredEras(erasToFilter);
       erasParameters = erasToFilter;
     }
+
+    if (source === "categories") {
+      let categoriesToFilter =
+        typeof value === "string" ? value.split(",") : value;
+      setFilteredCategories(categoriesToFilter);
+      categoryParameters = categoriesToFilter;
+    }
+
     if (source === "finished") {
       setFinishedFilterValue(value);
       finishedParameter = value;
@@ -408,6 +430,20 @@ export default function Home() {
       filteredResults = _.flatten(listFilteredByEras);
     }
 
+    // Filter by Category
+    if (categoryParameters.length) {
+      let listFilteredByCategories = [];
+      for (const category of categoryParameters) {
+        let entriesByCategory = _.filter(filteredResults, {
+          category: category,
+        });
+
+        listFilteredByCategories.push(entriesByCategory);
+      }
+      filteredResults = _.flatten(listFilteredByCategories);
+      console.log(filteredResults);
+    }
+
     setFetchedData(_.flatten(filteredResults));
   }
 
@@ -417,6 +453,7 @@ export default function Home() {
     setFinishedFilterValue("all");
     setFilteredCreatorsName([]);
     setFilteredEras([]);
+    setFilteredCategories([]);
     fetchAllCreators(defaultFetchedData);
     fetchAllEras(defaultFetchedData);
   }
@@ -455,6 +492,7 @@ export default function Home() {
                 filteredEras={filteredEras}
                 resetFilters={resetFilters}
                 eras={eras}
+                categories={categories}
                 fetchedTitles={fetchedTitles}
                 searchValue={searchValue}
                 setSearchValue={setSearchValue}
@@ -462,6 +500,7 @@ export default function Home() {
                 sortBy={sortBy}
                 orderBy={orderBy}
                 moduleKeys={moduleKeys}
+                filteredCategories={filteredCategories}
               />
             </div>
           ) : null}
