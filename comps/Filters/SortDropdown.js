@@ -7,6 +7,7 @@ import Select from "@mui/material/Select";
 import _ from "lodash";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import styles from "../../styles/Home.module.css";
 
 export default function SortDropdown({ sortBy, orderBy, moduleKeys }) {
   const [order, setOrder] = useState("asc");
@@ -28,6 +29,7 @@ export default function SortDropdown({ sortBy, orderBy, moduleKeys }) {
         display: "flex",
         alignItems: "center",
       }}
+      className={styles.sortByDropdown}
     >
       <FormControl sx={{ width: "200px" }}>
         <InputLabel>Sort By</InputLabel>

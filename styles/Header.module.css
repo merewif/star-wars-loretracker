@@ -64,3 +64,42 @@
   padding-bottom: 0;
   font-size: 0.7rem;
 }
+
+@media screen and (max-width: 1600px) {
+  .dialogContent {
+    width: 70vw;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  #navbar ul li {
+    padding-inline: 1px;
+  }
+
+  #navbar ul {
+    gap: 5px;
+  }
+
+  #navbar div:nth-child(1) {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .dialogContent {
+    padding-block: 50px;
+    padding-inline: 30px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #navbar ul li {
+    font-size: 0.75rem !important;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .dialogContent p {
+    font-size: 0.5rem !important;
+  }
+}

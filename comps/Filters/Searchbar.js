@@ -2,6 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import styles from "../../styles/Home.module.css";
 
 export default function Searchbar({
   fetchedTitles,
@@ -10,7 +11,7 @@ export default function Searchbar({
   searchEntries,
 }) {
   return (
-    <div>
+    <>
       <Box
         component="form"
         sx={{
@@ -18,6 +19,7 @@ export default function Searchbar({
         }}
         noValidate
         autoComplete="off"
+        className={styles.searchbar}
       >
         <Autocomplete
           disablePortal
@@ -36,8 +38,9 @@ export default function Searchbar({
           renderInput={(params) => (
             <TextField {...params} label="Search by Title" />
           )}
+          className={styles.autocomplete}
         />
       </Box>
-    </div>
+    </>
   );
 }
