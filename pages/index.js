@@ -160,12 +160,11 @@ export default function Home() {
           /[^\d]*(\d+)[^\d]*[\-\/\—][^\d]*(\d+)[^\d]*/
         );
         dates.shift();
+        if (book["Name (Title)"] === "Dawn of the Jedi: Into the Void")
+          console.log(dates);
 
         if (eras[1] === "BBY") currentBook.timeline = Number(`-${dates[1]}`);
         if (eras[1] === "ABY") currentBook.timeline = Number(`${dates[1]}`);
-        console.log(
-          `Name: ${book["Name (Title)"]}, Original timeline: ${book["Timeline"]}, Parsed timeline: ${dates}, Object timeline: ${currentBook.timeline}`
-        );
       }
 
       if (book["Timeline"].endsWith("BBY") && !doesTimelineIncludeTwoDates) {
