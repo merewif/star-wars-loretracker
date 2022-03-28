@@ -169,6 +169,7 @@ export default function Home() {
       if (
         currentBook.category === "Adult Novel" ||
         currentBook.category === "YA Novel" ||
+        currentBook.category === "Junior Reader" ||
         currentBook.category === "Single Issue Comic" ||
         currentBook.category === "Graphic Novel" ||
         currentBook.category === "Omnibus"
