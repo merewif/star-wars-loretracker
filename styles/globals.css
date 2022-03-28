@@ -34,6 +34,11 @@ a {
   background-color: black !important;
 }
 
+.MuiButton-root:hover {
+  border-color: #ffe81f !important;
+  color: #ffe81f !important;
+}
+
 .MuiRadio-root,
 .MuiCheckbox-root {
   color: black !important;
