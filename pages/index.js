@@ -156,6 +156,9 @@ export default function Home() {
         const fullDate = book["Timeline"]
           .replace(/\s|,/g, "")
           .replace(/\/|—/, "-");
+
+        if (book["Timeline"].includes("/"))
+          console.log(book["Timeline"], fullDate);
         let eras = fullDate.match(/([A-Z]{3})/g);
         if (eras.length === 1) eras[1] = eras[0];
         let dates = fullDate.match(/[^\d]*(\d+)[^\d]*\-[^\d]*(\d+)[^\d]*/);
