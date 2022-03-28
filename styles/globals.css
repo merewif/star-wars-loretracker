@@ -45,3 +45,11 @@ a {
   box-shadow: 0px 0px 15px 5px #fff !important;
   border-radius: 25px !important;
 }
+
+.MuiPopover-paper {
+  min-width: none !important;
+}
+
+.MuiMenu-list {
+  max-width: 80vw !important;
+}

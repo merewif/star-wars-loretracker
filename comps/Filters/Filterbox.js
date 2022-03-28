@@ -166,7 +166,10 @@ export default function Filterbox({
             </div>
           </div>
           <div>
-            <FormControl sx={{ m: 1, width: 500 }}>
+            <FormControl
+              sx={{ m: 1, width: 500, maxWidth: "80vw", minWidth: "none" }}
+              className={styles.filterchecklist}
+            >
               <InputLabel>Creators</InputLabel>
               <Select
                 multiple
@@ -178,11 +181,11 @@ export default function Filterbox({
                 renderValue={(selected) => selected.join(", ")}
               >
                 {creators.map((name) => (
-                  <MenuItem key={name} value={name}>
+                  <MenuItem key={name} value={name} sx={{ maxWidth: "80vw" }}>
                     <Checkbox
                       checked={filteredCreatorsName.indexOf(name) > -1}
                     />
-                    <ListItemText primary={name} />
+                    <ListItemText primary={name} sx={{ maxWidth: "80vw" }} />
                   </MenuItem>
                 ))}
               </Select>
