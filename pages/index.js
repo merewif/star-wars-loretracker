@@ -518,6 +518,18 @@ export default function Home() {
           content="https://star-wars-loretracker.vercel.app/"
         />
         <meta property="og:type" content="website" />
+        <meta name="image" property="og:image" content="/imgs/featured.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          property="twitter:url"
+          content="https://star-wars-loretracker.vercel.app"
+        />
+        <meta name="twitter:title" content="Star Wars Loretracker" />
+        <meta
+          name="twitter:description"
+          content="Track which Star Wars content you consooomed"
+        />
+        <meta name="twitter:image" content="/imgs/featured.png" />
 
         <link rel="icon" href="/favicon.ico" />
       </Head>
