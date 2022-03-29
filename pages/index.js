@@ -68,10 +68,6 @@ export default function Home() {
     let finished = 0;
     let total = 0;
 
-    // if (currentlyOpenedModule)
-    //   finished = entriesMarkedAsFinished[currentlyOpenedModule].length;
-    // if (defaultFetchedData) total = defaultFetchedData.length;
-
     if (fetchedData) total = fetchedData.length;
     if (entriesMarkedAsFinished[currentlyOpenedModule]) {
       for (const entry of entriesMarkedAsFinished[currentlyOpenedModule]) {
@@ -512,6 +508,16 @@ export default function Home() {
           name="description"
           content="Track which Star Wars content you consooomed."
         />
+        <meta property="og:title" content="Star Wars Loretracker" />
+        <meta
+          property="og:description"
+          content="Track which Star Wars content you consooomed."
+        />
+        <meta
+          property="og:url"
+          content="https://star-wars-loretracker.vercel.app/"
+        />
+        <meta property="og:type" content="website" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header displayData={displayData} handleFileRead={handleFileRead} />
