@@ -64,20 +64,26 @@ export default function Home() {
     calculateProgress();
   }, [defaultFetchedData, entriesMarkedAsFinished]);
 
-  function calculateProgress() {
+function calculateProgress() {
     let finished = 0;
     let total = 0;
 
-    if (currentlyOpenedModule)
-      finished = entriesMarkedAsFinished[currentlyOpenedModule].length;
-    if (defaultFetchedData) total = defaultFetchedData.length;
+    // if (currentlyOpenedModule)
+    //   finished = entriesMarkedAsFinished[currentlyOpenedModule].length;
+    // if (defaultFetchedData) total = defaultFetchedData.length;
 
+    if (fetchedData) total = fetchedData.length;
+    if (entriesMarkedAsFinished[currentlyOpenedModule]) {
+      for (const entry of entriesMarkedAsFinished[currentlyOpenedModule]) {
+        for (const data of fetchedData) {
+          if (_.includes(data, entry.replace(/-+/g, " "))) finished++;
+        }
+      }
+    }
     const result = (finished / total) * 100;
-    console.log("finished: ", finished);
-    console.log("total: ", total);
-    console.log("result: ", result);
-    if (isNaN(result)) setProgressBarValue(0);
+    if (isNaN(result)) return setProgressBarValue(0);
     setProgressBarValue(result);
+    //  console.log("finished: ", finished, " total: ", total, " result: ", result);
   }
 
   function handleFileRead(event) {
