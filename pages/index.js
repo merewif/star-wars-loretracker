@@ -62,9 +62,9 @@ export default function Home() {
 
   useEffect(() => {
     calculateProgress();
-  }, [defaultFetchedData, entriesMarkedAsFinished]);
+  }, [defaultFetchedData, fetchedData, entriesMarkedAsFinished]);
 
-function calculateProgress() {
+  function calculateProgress() {
     let finished = 0;
     let total = 0;
 
@@ -80,10 +80,10 @@ function calculateProgress() {
         }
       }
     }
+
     const result = (finished / total) * 100;
     if (isNaN(result)) return setProgressBarValue(0);
     setProgressBarValue(result);
-    //  console.log("finished: ", finished, " total: ", total, " result: ", result);
   }
 
   function handleFileRead(event) {
