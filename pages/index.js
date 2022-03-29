@@ -24,6 +24,13 @@ export default function Home() {
     comics: [],
     series: [],
   });
+  const [entriesMakedAsExcluded, setEntriesMarkedAsExcluded] = useState({
+    movies: [],
+    games: [],
+    books: [],
+    comics: [],
+    series: [],
+  });
   const [filterboxAnchorEl, setFilterboxAnchorEl] = useState(null);
   const [creators, setCreators] = useState([]);
   const [eras, setEras] = useState([]);
@@ -62,22 +69,27 @@ export default function Home() {
 
   useEffect(() => {
     calculateProgress();
-  }, [defaultFetchedData, entriesMarkedAsFinished]);
+  }, [defaultFetchedData, fetchedData, entriesMarkedAsFinished]);
 
   function calculateProgress() {
     let finished = 0;
     let total = 0;
 
-    if (currentlyOpenedModule)
-      finished = entriesMarkedAsFinished[currentlyOpenedModule].length;
-    if (defaultFetchedData) total = defaultFetchedData.length;
+    // if (currentlyOpenedModule)
+    //   finished = entriesMarkedAsFinished[currentlyOpenedModule].length;
+    // if (defaultFetchedData) total = defaultFetchedData.length;
+
+    if (fetchedData) total = fetchedData.length;
+    for (const entry of entriesMarkedAsFinished[currentlyOpenedModule]) {
+      for (const data of fetchedData) {
+        if (_.includes(data, entry.replace(/-+/g, " "))) finished++;
+      }
+    }
 
     const result = (finished / total) * 100;
-    console.log("finished: ", finished);
-    console.log("total: ", total);
-    console.log("result: ", result);
-    if (isNaN(result)) setProgressBarValue(0);
+    if (isNaN(result)) return setProgressBarValue(0);
     setProgressBarValue(result);
+    //  console.log("finished: ", finished, " total: ", total, " result: ", result);
   }
 
   function handleFileRead(event) {
