@@ -2,7 +2,7 @@ import Head from "next/head";
 import React, { useState, useEffect } from "react";
 import styles from "../styles/Home.module.css";
 import Header from "../comps/Header";
-import Footer from "../comps/Footer";
+import ProgressBar from "../comps/ProgressBar";
 import _ from "lodash";
 import FiltersContainer from "../comps/Filters/FiltersContainer";
 import CardContents from "../comps/card/CardContents";
@@ -12,8 +12,6 @@ import { Waypoint } from "react-waypoint";
 export default function Home() {
   const [defaultFetchedData, setDefaultFetchedData] = useState([]);
   const [fetchedData, setFetchedData] = useState([]);
-  const [fetchedGiganticData, setFetchedGiganticData] = useState([]);
-  const [paginationStartElement, setPaginationStartElement] = useState(0);
   const [paginationEndElement, setPaginationEndElement] = useState(30);
   const [fetchedTitles, setFetchedTitles] = useState([]);
   const [currentlyOpenedModule, setCurrentlyOpenedModule] = useState();
@@ -36,6 +34,7 @@ export default function Home() {
   const [canonicityFilterValue, setCanonicityFilterValue] = useState("all");
   const [finishedFilterValue, setFinishedFilterValue] = useState("all");
   const [searchValue, setSearchValue] = useState();
+  const [progressBarValue, setProgressBarValue] = useState(0);
 
   useEffect(() => {
     setCurrentlyOpenedModule("movies");
@@ -60,6 +59,25 @@ export default function Home() {
   useEffect(() => {
     setCardsHeight();
   }, [fetchedData, currentlyOpenedModule]);
+
+  useEffect(() => {
+    calculateProgress();
+  }, [defaultFetchedData, entriesMarkedAsFinished]);
+
+  function calculateProgress() {
+    let finished = 0;
+    let total = 0;
+
+    if (currentlyOpenedModule)
+      finished = entriesMarkedAsFinished[currentlyOpenedModule].length;
+    if (defaultFetchedData) total = defaultFetchedData.length;
+
+    const result = (finished / total) * 100;
+    console.log("finished: ", finished);
+    console.log("total: ", total);
+    console.log("result: ", result);
+    setProgressBarValue(result);
+  }
 
   function handleFileRead(event) {
     let collection = JSON.parse(event.target.result);
@@ -198,7 +216,6 @@ export default function Home() {
       }
     }
     setFetchedData(books);
-    setFetchedGiganticData(books);
     setDefaultFetchedData(books);
     setModuleKeys(Object.keys(books[0]));
     fetchAllTitles(books);
@@ -478,7 +495,6 @@ export default function Home() {
     if (fetchedData.length < paginationEndElement) return;
     setPaginationEndElement((currentState) => currentState + 30);
     setCardsHeight();
-    //
   }
 
   return (
@@ -492,40 +508,38 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header displayData={displayData} handleFileRead={handleFileRead} />
-
       <div className={styles.viewerContainer}>
         <div id={styles.viewer}>
           {currentlyOpenedModule ? (
-            <div id={styles.sortContainer}>
-              <FiltersContainer
-                filterboxAnchorEl={filterboxAnchorEl}
-                setFilterboxAnchorEl={setFilterboxAnchorEl}
-                canonicityFilterValue={canonicityFilterValue}
-                filterEntries={filterEntries}
-                finishedFilterValue={finishedFilterValue}
-                filteredCreatorsName={filteredCreatorsName}
-                creators={creators}
-                filteredEras={filteredEras}
-                resetFilters={resetFilters}
-                eras={eras}
-                categories={categories}
-                fetchedTitles={fetchedTitles}
-                searchValue={searchValue}
-                setSearchValue={setSearchValue}
-                searchEntries={searchEntries}
-                sortBy={sortBy}
-                orderBy={orderBy}
-                moduleKeys={moduleKeys}
-                filteredCategories={filteredCategories}
-              />
-            </div>
+            <>
+              <div id={styles.sortContainer}>
+                <FiltersContainer
+                  filterboxAnchorEl={filterboxAnchorEl}
+                  setFilterboxAnchorEl={setFilterboxAnchorEl}
+                  canonicityFilterValue={canonicityFilterValue}
+                  filterEntries={filterEntries}
+                  finishedFilterValue={finishedFilterValue}
+                  filteredCreatorsName={filteredCreatorsName}
+                  creators={creators}
+                  filteredEras={filteredEras}
+                  resetFilters={resetFilters}
+                  eras={eras}
+                  categories={categories}
+                  fetchedTitles={fetchedTitles}
+                  searchValue={searchValue}
+                  setSearchValue={setSearchValue}
+                  searchEntries={searchEntries}
+                  sortBy={sortBy}
+                  orderBy={orderBy}
+                  moduleKeys={moduleKeys}
+                  filteredCategories={filteredCategories}
+                />
+              </div>
+              <ProgressBar progressBarValue={progressBarValue} />
+            </>
           ) : null}
           <div id={styles.moduleContainer}>
-            {_.slice(
-              fetchedData,
-              paginationStartElement,
-              paginationEndElement
-            ).map((e1, i1) => {
+            {_.slice(fetchedData, 0, paginationEndElement).map((e1, i1) => {
               let currentTitle = e1.title.replace(/\s+/g, "-");
               return (
                 <div
