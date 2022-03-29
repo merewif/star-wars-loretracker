@@ -20,7 +20,8 @@
   font-family: "Montserrat";
   font-weight: 900;
   color: white;
-  text-shadow: 2px 2px 0px black, -1px -0px 0px black;
+  text-shadow: 2px 2px 0px black, -1px -0px 0px black, 0px -1px 0px black,
+    0px 1px 0px black;
 }
 
 @media screen and (max-width: 1100px) {
