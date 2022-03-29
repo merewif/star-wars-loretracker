@@ -76,6 +76,7 @@ export default function Home() {
     console.log("finished: ", finished);
     console.log("total: ", total);
     console.log("result: ", result);
+    if (isNaN(result)) setProgressBarValue(0);
     setProgressBarValue(result);
   }
 
