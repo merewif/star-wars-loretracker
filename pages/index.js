@@ -24,13 +24,6 @@ export default function Home() {
     comics: [],
     series: [],
   });
-  const [entriesMakedAsExcluded, setEntriesMarkedAsExcluded] = useState({
-    movies: [],
-    games: [],
-    books: [],
-    comics: [],
-    series: [],
-  });
   const [filterboxAnchorEl, setFilterboxAnchorEl] = useState(null);
   const [creators, setCreators] = useState([]);
   const [eras, setEras] = useState([]);
@@ -69,9 +62,9 @@ export default function Home() {
 
   useEffect(() => {
     calculateProgress();
-  }, [defaultFetchedData, fetchedData, entriesMarkedAsFinished]);
+  }, [defaultFetchedData, entriesMarkedAsFinished]);
 
-  function calculateProgress() {
+function calculateProgress() {
     let finished = 0;
     let total = 0;
 
