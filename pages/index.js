@@ -587,6 +587,7 @@ export default function Home() {
                         i2={i2}
                         currentKey={currentKey}
                         currentValue={currentValue}
+                        key={i2}
                       />
                     );
                   })}
