@@ -518,10 +518,7 @@ export default function Home() {
           content="https://star-wars-loretracker.vercel.app/"
         />
         <meta property="og:type" content="website" />
-        <meta
-          name="google-site-verification"
-          content="tZqleW79XQD85cZ3EJlF7LDp4K2kDQGBjOZU7sotCnw"
-        />
+
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header displayData={displayData} handleFileRead={handleFileRead} />
