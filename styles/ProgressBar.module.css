@@ -1,0 +1,39 @@
+.progressBarContainer {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: left;
+  width: 80vw;
+  margin-inline: auto;
+  position: relative;
+}
+
+.progressBarContainer img {
+  width: 20vw;
+  margin: 0;
+}
+
+.progressBarContainer p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 100%);
+  font-family: "Montserrat";
+  font-weight: 900;
+  color: white;
+  text-shadow: 2px 2px 0px black, -1px -0px 0px black, 0px -1px 0px black,
+    0px 1px 0px black;
+}
+
+@media screen and (max-width: 1100px) {
+  .progressBarContainer img {
+    width: 25vw;
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .progressBarContainer p {
+    margin-top: 0;
+    font-size: 0.75rem;
+  }
+}
