@@ -62,15 +62,11 @@ export default function Home() {
 
   useEffect(() => {
     calculateProgress();
-  }, [defaultFetchedData, entriesMarkedAsFinished]);
+  }, [defaultFetchedData, , fetchedData, entriesMarkedAsFinished]);
 
-function calculateProgress() {
+  function calculateProgress() {
     let finished = 0;
     let total = 0;
-
-    // if (currentlyOpenedModule)
-    //   finished = entriesMarkedAsFinished[currentlyOpenedModule].length;
-    // if (defaultFetchedData) total = defaultFetchedData.length;
 
     if (fetchedData) total = fetchedData.length;
     if (entriesMarkedAsFinished[currentlyOpenedModule]) {
@@ -83,7 +79,6 @@ function calculateProgress() {
     const result = (finished / total) * 100;
     if (isNaN(result)) return setProgressBarValue(0);
     setProgressBarValue(result);
-    //  console.log("finished: ", finished, " total: ", total, " result: ", result);
   }
 
   function handleFileRead(event) {
@@ -512,6 +507,16 @@ function calculateProgress() {
           name="description"
           content="Track which Star Wars content you consooomed."
         />
+        <meta property="og:title" content="Star Wars Loretracker" />
+        <meta
+          property="og:description"
+          content="Track which Star Wars content you consooomed."
+        />
+        <meta
+          property="og:url"
+          content="https://star-wars-loretracker.vercel.app/"
+        />
+        <meta property="og:type" content="website" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header displayData={displayData} handleFileRead={handleFileRead} />
