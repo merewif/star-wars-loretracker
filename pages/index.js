@@ -62,7 +62,7 @@ export default function Home() {
 
   useEffect(() => {
     calculateProgress();
-  }, [defaultFetchedData, , fetchedData, entriesMarkedAsFinished]);
+  }, [defaultFetchedData, fetchedData, entriesMarkedAsFinished]);
 
   function calculateProgress() {
     let finished = 0;
@@ -76,6 +76,7 @@ export default function Home() {
         }
       }
     }
+
     const result = (finished / total) * 100;
     if (isNaN(result)) return setProgressBarValue(0);
     setProgressBarValue(result);
