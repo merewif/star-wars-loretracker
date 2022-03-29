@@ -80,12 +80,13 @@ export default function Home() {
     // if (defaultFetchedData) total = defaultFetchedData.length;
 
     if (fetchedData) total = fetchedData.length;
-    for (const entry of entriesMarkedAsFinished[currentlyOpenedModule]) {
-      for (const data of fetchedData) {
-        if (_.includes(data, entry.replace(/-+/g, " "))) finished++;
+    if (entriesMarkedAsFinished[currentlyOpenedModule]) {
+      for (const entry of entriesMarkedAsFinished[currentlyOpenedModule]) {
+        for (const data of fetchedData) {
+          if (_.includes(data, entry.replace(/-+/g, " "))) finished++;
+        }
       }
     }
-
     const result = (finished / total) * 100;
     if (isNaN(result)) return setProgressBarValue(0);
     setProgressBarValue(result);
