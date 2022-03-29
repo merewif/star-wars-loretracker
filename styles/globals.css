@@ -58,3 +58,20 @@ a {
 .MuiMenu-list {
   max-width: 80vw !important;
 }
+
+@media screen and (max-width: 1500px) {
+}
+
+@media screen and (max-width: 1200px) {
+}
+
+@media screen and (max-width: 1000px) {
+}
+
+@media screen and (max-width: 900px) {
+  .MuiLinearProgress-root {
+    height: 10px !important;
+    width: 70vw !important;
+    margin-inline: 0;
+  }
+}
