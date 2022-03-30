@@ -24,6 +24,20 @@ a {
   box-sizing: border-box;
 }
 
+* {
+  scrollbar-color: #ffe81f #000 !important;
+  scrollbar-width: thin;
+}
+
+*::-webkit-scrollbar {
+  background-color: #000 !important;
+  width: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #ffe81f !important;
+}
+
 .js-image-zoom__zoomed-image {
   position: absolute !important;
   width: 100%;
