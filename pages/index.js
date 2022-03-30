@@ -61,10 +61,6 @@ export default function Home() {
     console.log("Hello there.");
   }, []);
 
-  useLayoutEffect(() => {
-    setHideExcludedEntries(false);
-  }, [currentlyOpenedModule]);
-
   useEffect(() => {
     let btns = document.getElementsByClassName("navbtn");
     for (const btn of btns) {
@@ -252,6 +248,7 @@ export default function Home() {
 
   function displayData(target) {
     setCurrentlyOpenedModule(target);
+    setHideExcludedEntries(false);
     if (target === "books") return fetchYoutiniBooks();
     if (target === "comics") return fetchYoutiniComics();
     fetchData(target);
