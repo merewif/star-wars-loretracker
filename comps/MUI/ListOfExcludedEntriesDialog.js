@@ -56,7 +56,7 @@ export default function ListOfExcludedEntriesDialog({
               fontWeight: 900,
               paddingTop: "40px",
               textAlign: "center",
-              color: "white",
+              color: "#ffe81f",
             }}
           >
             {"Excluded content"}
@@ -70,7 +70,7 @@ export default function ListOfExcludedEntriesDialog({
                       style={{
                         textTransform: "uppercase",
                         fontFamily: "Montserrat",
-                        color: "white",
+                        color: "#ffe81f",
                       }}
                     >
                       {e1}
