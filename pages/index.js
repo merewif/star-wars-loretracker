@@ -48,16 +48,12 @@ export default function Home() {
     setCurrentlyOpenedModule("movies");
     fetchData("movies");
 
-    if ("loretracker" in localStorage)
-      setEntriesMarkedAsFinished(
-        JSON.parse(localStorage.getItem("loretracker"))
-      );
-
-    if ("loretrackerExcluded" in localStorage) {
-      setEntriesMarkedAsExcluded(
-        JSON.parse(localStorage.getItem("loretracker"))
-      );
+    if ("loretracker" in localStorage) {
+      let storedData = JSON.parse(localStorage.getItem("loretracker"));
+      if (!storedData.excluded) storedData.excluded = entriesMarkedAsExcluded;
+      setEntriesMarkedAsFinished(storedData);
     }
+
     console.log("Hello there.");
   }, []);
 
@@ -78,6 +74,13 @@ export default function Home() {
   useEffect(() => {
     filterEntries(hideExcludedEntries, "hideExcluded");
   }, [entriesMarkedAsExcluded]);
+
+  useEffect(() => {
+    localStorage.setItem(
+      "loretracker",
+      JSON.stringify(entriesMarkedAsFinished)
+    );
+  }, [entriesMarkedAsFinished]);
 
   useEffect(() => {
     calculateProgress();
@@ -103,6 +106,7 @@ export default function Home() {
 
   function handleFileRead(event) {
     let collection = JSON.parse(event.target.result);
+    if (!collection.excluded) collection.excluded = entriesMarkedAsExcluded;
     window.localStorage.setItem("loretracker", JSON.stringify(collection));
     setEntriesMarkedAsFinished(collection);
   }
@@ -346,8 +350,37 @@ export default function Home() {
           entry,
         ],
       });
+
+      setEntriesMarkedAsFinished({
+        ...entriesMarkedAsFinished,
+        excluded: {
+          ...entriesMarkedAsFinished.excluded,
+          [currentlyOpenedModule]: [
+            ...entriesMarkedAsFinished.excluded[currentlyOpenedModule],
+            entry,
+          ],
+        },
+      });
     }
     setSearchValue("");
+  }
+
+  function removeFromExcluded(category, entry) {
+    setEntriesMarkedAsFinished({
+      ...entriesMarkedAsFinished,
+      excluded: {
+        ...entriesMarkedAsFinished.excluded,
+        [category]: _.without(
+          entriesMarkedAsFinished.excluded[category],
+          entry
+        ),
+      },
+    });
+
+    setEntriesMarkedAsExcluded({
+      ...entriesMarkedAsExcluded,
+      [category]: _.without(entriesMarkedAsExcluded[category], entry),
+    });
   }
 
   function toggleEntryAsFinished(event, entry) {
@@ -610,6 +643,8 @@ export default function Home() {
                   moduleKeys={moduleKeys}
                   filteredCategories={filteredCategories}
                   hideExcludedEntries={hideExcludedEntries}
+                  removeFromExcluded={removeFromExcluded}
+                  entriesMarkedAsExcluded={entriesMarkedAsExcluded}
                 />
               </div>
               <ProgressBar progressBarValue={progressBarValue} />
