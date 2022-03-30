@@ -17,19 +17,20 @@ export default function Home() {
   const [currentlyOpenedModule, setCurrentlyOpenedModule] = useState();
   const [moduleKeys, setModuleKeys] = useState([]);
   const [sortBy, setSortBy] = useState();
-  const [entriesMarkedAsFinished, setEntriesMarkedAsFinished] = useState({
-    movies: [],
-    games: [],
-    books: [],
-    comics: [],
-    series: [],
-  });
   const [entriesMarkedAsExcluded, setEntriesMarkedAsExcluded] = useState({
     movies: [],
     games: [],
     books: [],
     comics: [],
     series: [],
+  });
+  const [entriesMarkedAsFinished, setEntriesMarkedAsFinished] = useState({
+    movies: [],
+    games: [],
+    books: [],
+    comics: [],
+    series: [],
+    excluded: entriesMarkedAsExcluded,
   });
   const [filterboxAnchorEl, setFilterboxAnchorEl] = useState(null);
   const [creators, setCreators] = useState([]);
@@ -51,6 +52,7 @@ export default function Home() {
     if ("loretracker" in localStorage) {
       let storedData = JSON.parse(localStorage.getItem("loretracker"));
       if (!storedData.excluded) storedData.excluded = entriesMarkedAsExcluded;
+      if (storedData.excluded) setEntriesMarkedAsExcluded(storedData.excluded);
       setEntriesMarkedAsFinished(storedData);
     }
 
@@ -80,7 +82,7 @@ export default function Home() {
       "loretracker",
       JSON.stringify(entriesMarkedAsFinished)
     );
-  }, [entriesMarkedAsFinished, entriesMarkedAsExcluded]);
+  }, [entriesMarkedAsFinished]);
 
   useEffect(() => {
     calculateProgress();
