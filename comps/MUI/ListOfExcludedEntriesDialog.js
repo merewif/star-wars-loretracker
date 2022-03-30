@@ -41,7 +41,13 @@ export default function ListOfExcludedEntriesDialog({
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <div style={{ backgroundColor: "black" }}>
+        <div
+          style={{
+            backgroundColor: "black",
+            maxHeight: "90vh",
+            overflow: "auto",
+          }}
+        >
           <DialogTitle
             sx={{
               textTransform: "uppercase",
@@ -95,6 +101,7 @@ export default function ListOfExcludedEntriesDialog({
                               style={{
                                 color: "white",
                                 fontFamily: "Montserrat",
+                                marginBlock: "0",
                               }}
                             >
                               {e2.replace(/-+/g, " ").replace(/—/g, "-")}
