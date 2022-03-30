@@ -111,6 +111,7 @@ export default function Home() {
     if (!collection.excluded) collection.excluded = entriesMarkedAsExcluded;
     window.localStorage.setItem("loretracker", JSON.stringify(collection));
     setEntriesMarkedAsFinished(collection);
+    setEntriesMarkedAsExcluded(collection.excluded);
   }
 
   async function setCardsHeight() {
