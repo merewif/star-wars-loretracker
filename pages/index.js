@@ -80,7 +80,7 @@ export default function Home() {
       "loretracker",
       JSON.stringify(entriesMarkedAsFinished)
     );
-  }, [entriesMarkedAsFinished]);
+  }, [entriesMarkedAsFinished, entriesMarkedAsExcluded]);
 
   useEffect(() => {
     calculateProgress();
