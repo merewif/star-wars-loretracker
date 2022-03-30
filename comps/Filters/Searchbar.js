@@ -35,6 +35,11 @@ export default function Searchbar({
             searchEntries(newInputValue);
             setSearchValue(newInputValue);
           }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+            }
+          }}
           renderInput={(params) => (
             <TextField {...params} label="Search by Title" />
           )}

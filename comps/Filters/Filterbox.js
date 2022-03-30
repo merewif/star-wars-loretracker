@@ -29,6 +29,7 @@ export default function Filterbox({
   resetFilters,
   filterboxAnchorEl,
   setFilterboxAnchorEl,
+  hideExcludedEntries,
 }) {
   return (
     <div
@@ -66,6 +67,19 @@ export default function Filterbox({
       >
         <div id={styles.filterbox}>
           <h3>Filters</h3>
+          <div
+            style={{
+              display: "flex",
+              width: "100%",
+            }}
+          >
+            <FormControlLabel
+              control={<Checkbox checked={hideExcludedEntries} />}
+              label="Hide excluded entries"
+              sx={{ marginLeft: "15px" }}
+              onChange={(e) => filterEntries(e.target.checked, "hideExcluded")}
+            />
+          </div>
           <div
             style={{
               marginLeft: "15px",

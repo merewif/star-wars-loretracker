@@ -20,6 +20,7 @@ export default function FiltersContainer(props) {
         eras={props.eras}
         filteredCategories={props.filteredCategories}
         categories={props.categories}
+        hideExcludedEntries={props.hideExcludedEntries}
       />
 
       <Searchbar
