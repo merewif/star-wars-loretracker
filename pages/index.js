@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import styles from "../styles/Home.module.css";
 import Header from "../comps/Header";
 import ProgressBar from "../comps/ProgressBar";
@@ -17,12 +17,20 @@ export default function Home() {
   const [currentlyOpenedModule, setCurrentlyOpenedModule] = useState();
   const [moduleKeys, setModuleKeys] = useState([]);
   const [sortBy, setSortBy] = useState();
+  const [entriesMarkedAsExcluded, setEntriesMarkedAsExcluded] = useState({
+    movies: [],
+    games: [],
+    books: [],
+    comics: [],
+    series: [],
+  });
   const [entriesMarkedAsFinished, setEntriesMarkedAsFinished] = useState({
     movies: [],
     games: [],
     books: [],
     comics: [],
     series: [],
+    excluded: entriesMarkedAsExcluded,
   });
   const [filterboxAnchorEl, setFilterboxAnchorEl] = useState(null);
   const [creators, setCreators] = useState([]);
@@ -33,17 +41,22 @@ export default function Home() {
   const [filteredEras, setFilteredEras] = useState([]);
   const [canonicityFilterValue, setCanonicityFilterValue] = useState("all");
   const [finishedFilterValue, setFinishedFilterValue] = useState("all");
-  const [searchValue, setSearchValue] = useState();
+  const [hideExcludedEntries, setHideExcludedEntries] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
   const [progressBarValue, setProgressBarValue] = useState(0);
 
   useEffect(() => {
     setCurrentlyOpenedModule("movies");
     fetchData("movies");
 
-    if ("loretracker" in localStorage)
-      setEntriesMarkedAsFinished(
-        JSON.parse(localStorage.getItem("loretracker"))
-      );
+    if ("loretracker" in localStorage) {
+      let storedData = JSON.parse(localStorage.getItem("loretracker"));
+      if (!storedData.excluded) storedData.excluded = entriesMarkedAsExcluded;
+      if (storedData.excluded) setEntriesMarkedAsExcluded(storedData.excluded);
+      setEntriesMarkedAsFinished(storedData);
+    }
+
+    console.log("Hello there.");
   }, []);
 
   useEffect(() => {
@@ -59,6 +72,17 @@ export default function Home() {
   useEffect(() => {
     setCardsHeight();
   }, [fetchedData, currentlyOpenedModule]);
+
+  useEffect(() => {
+    filterEntries(hideExcludedEntries, "hideExcluded");
+  }, [entriesMarkedAsExcluded]);
+
+  useEffect(() => {
+    localStorage.setItem(
+      "loretracker",
+      JSON.stringify(entriesMarkedAsFinished)
+    );
+  }, [entriesMarkedAsFinished]);
 
   useEffect(() => {
     calculateProgress();
@@ -84,8 +108,10 @@ export default function Home() {
 
   function handleFileRead(event) {
     let collection = JSON.parse(event.target.result);
+    if (!collection.excluded) collection.excluded = entriesMarkedAsExcluded;
     window.localStorage.setItem("loretracker", JSON.stringify(collection));
     setEntriesMarkedAsFinished(collection);
+    setEntriesMarkedAsExcluded(collection.excluded);
   }
 
   async function setCardsHeight() {
@@ -169,7 +195,10 @@ export default function Home() {
 
       currentBook.canonicity = book.canonicity;
       currentBook.coverImage = book["Cover Image URL"];
-      currentBook.title = book["Name (Title)"];
+      if (book["Name (Title)"].includes("-"))
+        currentBook.title = book["Name (Title)"].replace(/-/, "—");
+      if (!book["Name (Title)"].includes("-"))
+        currentBook.title = book["Name (Title)"];
       currentBook.author = book["Author / Writer"];
       currentBook.releaseDate = moment(book["Release Date"]);
       currentBook.category = book["Category"];
@@ -192,9 +221,6 @@ export default function Home() {
 
         if (eras[1] === "BBY") currentBook.timeline = Number(`-${dates[1]}`);
         if (eras[1] === "ABY") currentBook.timeline = Number(`${dates[1]}`);
-
-        if (book["Timeline"].includes("—"))
-          console.log(book["Timeline"], fullDate, currentBook.timeline);
       }
 
       if (book["Timeline"].endsWith("BBY") && !timelineIncludesTwoDates) {
@@ -229,15 +255,18 @@ export default function Home() {
 
   function displayData(target) {
     setCurrentlyOpenedModule(target);
+    setHideExcludedEntries(false);
     if (target === "books") return fetchYoutiniBooks();
     if (target === "comics") return fetchYoutiniComics();
     fetchData(target);
   }
 
   function searchEntries(input) {
-    setSearchValue(input);
+    if (input.length) setSearchValue(input);
+
     if (!input) {
       displayData(currentlyOpenedModule);
+      setSearchValue("");
       return;
     }
 
@@ -315,6 +344,48 @@ export default function Home() {
     setFetchedData(_.orderBy(fetchedData, value, order));
   }
 
+  function excludeEntry(entry) {
+    if (!_.includes(entriesMarkedAsExcluded[currentlyOpenedModule], entry)) {
+      setEntriesMarkedAsExcluded({
+        ...entriesMarkedAsExcluded,
+        [currentlyOpenedModule]: [
+          ...entriesMarkedAsExcluded[currentlyOpenedModule],
+          entry,
+        ],
+      });
+
+      setEntriesMarkedAsFinished({
+        ...entriesMarkedAsFinished,
+        excluded: {
+          ...entriesMarkedAsFinished.excluded,
+          [currentlyOpenedModule]: [
+            ...entriesMarkedAsFinished.excluded[currentlyOpenedModule],
+            entry,
+          ],
+        },
+      });
+    }
+    setSearchValue("");
+  }
+
+  function removeFromExcluded(category, entry) {
+    setEntriesMarkedAsFinished({
+      ...entriesMarkedAsFinished,
+      excluded: {
+        ...entriesMarkedAsFinished.excluded,
+        [category]: _.without(
+          entriesMarkedAsFinished.excluded[category],
+          entry
+        ),
+      },
+    });
+
+    setEntriesMarkedAsExcluded({
+      ...entriesMarkedAsExcluded,
+      [category]: _.without(entriesMarkedAsExcluded[category], entry),
+    });
+  }
+
   function toggleEntryAsFinished(event, entry) {
     const currentTitle = entry.title.replace(/\s+/g, "-");
     let container = document.getElementById(`${currentTitle}-card`);
@@ -375,7 +446,8 @@ export default function Home() {
       creatorsParameters = filteredCreatorsName,
       finishedParameter = finishedFilterValue,
       erasParameters = filteredEras,
-      categoryParameters = filteredCategories;
+      categoryParameters = filteredCategories,
+      hideExcluded = hideExcludedEntries;
 
     if (source === "canonicity") {
       setCanonicityFilterValue(value);
@@ -402,6 +474,11 @@ export default function Home() {
     if (source === "finished") {
       setFinishedFilterValue(value);
       finishedParameter = value;
+    }
+
+    if (source === "hideExcluded") {
+      if (hideExcluded !== value) setHideExcludedEntries(value);
+      hideExcluded = value;
     }
 
     let filteredResults = defaultFetchedData;
@@ -478,6 +555,15 @@ export default function Home() {
         listFilteredByCategories.push(entriesByCategory);
       }
       filteredResults = _.flatten(listFilteredByCategories);
+    }
+
+    // Filter excluded entries
+    if (hideExcluded && entriesMarkedAsExcluded[currentlyOpenedModule]) {
+      const excludedEntries = entriesMarkedAsExcluded[currentlyOpenedModule];
+      for (const entry of excludedEntries) {
+        const title = entry.replace(/-/g, " ");
+        filteredResults = _.reject(filteredResults, { title: title });
+      }
     }
 
     setFetchedData(_.flatten(filteredResults));
@@ -559,6 +645,9 @@ export default function Home() {
                   orderBy={orderBy}
                   moduleKeys={moduleKeys}
                   filteredCategories={filteredCategories}
+                  hideExcludedEntries={hideExcludedEntries}
+                  removeFromExcluded={removeFromExcluded}
+                  entriesMarkedAsExcluded={entriesMarkedAsExcluded}
                 />
               </div>
               <ProgressBar progressBarValue={progressBarValue} />
@@ -588,6 +677,8 @@ export default function Home() {
                         currentKey={currentKey}
                         currentValue={currentValue}
                         key={i2}
+                        excludeEntry={excludeEntry}
+                        currentTitle={currentTitle}
                       />
                     );
                   })}

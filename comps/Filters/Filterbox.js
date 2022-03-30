@@ -15,6 +15,7 @@ import HistoryIcon from "@mui/icons-material/History";
 import Popover from "@mui/material/Popover";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import styles from "../../styles/Home.module.css";
+import ListOfExcludedEntriesDialog from "../MUI/ListOfExcludedEntriesDialog";
 
 export default function Filterbox({
   canonicityFilterValue,
@@ -29,6 +30,9 @@ export default function Filterbox({
   resetFilters,
   filterboxAnchorEl,
   setFilterboxAnchorEl,
+  hideExcludedEntries,
+  removeFromExcluded,
+  entriesMarkedAsExcluded,
 }) {
   return (
     <div
@@ -66,6 +70,24 @@ export default function Filterbox({
       >
         <div id={styles.filterbox}>
           <h3>Filters</h3>
+          <div
+            style={{
+              display: "flex",
+              width: "100%",
+            }}
+          >
+            <FormControlLabel
+              control={<Checkbox checked={hideExcludedEntries} />}
+              label="Hide excluded entries"
+              sx={{ marginLeft: "15px" }}
+              onChange={(e) => filterEntries(e.target.checked, "hideExcluded")}
+            />
+          </div>
+          <ListOfExcludedEntriesDialog
+            removeFromExcluded={removeFromExcluded}
+            entriesMarkedAsExcluded={entriesMarkedAsExcluded}
+          />
+
           <div
             style={{
               marginLeft: "15px",
