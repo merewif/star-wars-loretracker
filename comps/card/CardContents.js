@@ -3,8 +3,15 @@ import styles from "../../styles/Home.module.css";
 import LinksContainer from "./LinksContainer";
 import moment from "moment";
 import Image from "next/image";
-
-export default function CardContents({ i2, currentKey, currentValue }) {
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import Tooltip from "@mui/material/Tooltip";
+export default function CardContents({
+  i2,
+  currentKey,
+  currentValue,
+  excludeEntry,
+  currentTitle,
+}) {
   return (
     <div key={"2" + i2}>
       {currentKey === "coverImage" ? (
@@ -47,10 +54,40 @@ export default function CardContents({ i2, currentKey, currentValue }) {
         currentValue ? (
           <div className={styles.canonDiv}>
             <h3 className={styles.canon}>Canon</h3>
+            <Tooltip title="Exclude">
+              <HighlightOffIcon
+                sx={{
+                  position: "absolute",
+                  top: "0%",
+                  left: "100%",
+                  transform: "translate(-50%, -50%)",
+                  color: "white",
+                  backgroundColor: "black",
+                  borderRadius: "50%",
+                  cursor: "pointer",
+                }}
+                onClick={() => excludeEntry(currentTitle)}
+              />
+            </Tooltip>
           </div>
         ) : (
           <div className={styles.legendsDiv}>
             <h3 className={styles.legends}>Legends</h3>
+            <Tooltip title="Exclude">
+              <HighlightOffIcon
+                sx={{
+                  position: "absolute",
+                  top: "0%",
+                  left: "100%",
+                  transform: "translate(-50%, -50%)",
+                  color: "#ffe81f",
+                  backgroundColor: "black",
+                  borderRadius: "50%",
+                  cursor: "pointer",
+                }}
+                onClick={() => excludeEntry(currentTitle)}
+              />
+            </Tooltip>
           </div>
         )
       ) : null}
