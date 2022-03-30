@@ -21,6 +21,8 @@ export default function FiltersContainer(props) {
         filteredCategories={props.filteredCategories}
         categories={props.categories}
         hideExcludedEntries={props.hideExcludedEntries}
+        entriesMarkedAsExcluded={props.entriesMarkedAsExcluded}
+        removeFromExcluded={props.removeFromExcluded}
       />
 
       <Searchbar
