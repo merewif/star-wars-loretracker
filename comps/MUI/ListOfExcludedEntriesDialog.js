@@ -117,7 +117,13 @@ export default function ListOfExcludedEntriesDialog({
                           minWidth: "50vw",
                         }}
                       >
-                        <p style={{ color: "white", fontFamily: "Montserrat" }}>
+                        <p
+                          style={{
+                            color: "white",
+                            fontFamily: "Montserrat",
+                            marginBlock: "0",
+                          }}
+                        >
                           Nothing excluded yet.
                         </p>
                       </div>
