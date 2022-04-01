@@ -67,6 +67,8 @@ export default function Home() {
 
     if (currentlyOpenedModule)
       document.getElementById(currentlyOpenedModule).style.color = "#ffe81f";
+
+    resetFilters();
   }, [currentlyOpenedModule]);
 
   useEffect(() => {
