@@ -10,8 +10,8 @@ interface CardContentsProps {
   i2: number;
   currentKey: string;
   currentValue: string | number;
-  excludeEntry: boolean;
-  currentTitle: Function;
+  excludeEntry: Function;
+  currentTitle: string;
 }
 
 export default function CardContents({
