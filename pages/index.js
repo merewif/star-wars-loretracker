@@ -246,13 +246,17 @@ export default function Home() {
         books.push(currentBook);
       }
     }
-    setFetchedData(books);
-    setDefaultFetchedData(books);
-    setModuleKeys(Object.keys(books[0]));
-    fetchAllTitles(books);
-    fetchAllCreators(books);
-    fetchAllEras(books);
-    fetchAllCategories(books);
+    setDataIntoStates(books);
+  }
+
+  function setDataIntoStates(data) {
+    setFetchedData(data);
+    setDefaultFetchedData(data);
+    setModuleKeys(Object.keys(data[0]));
+    fetchAllTitles(data);
+    fetchAllCreators(data);
+    fetchAllEras(data);
+    fetchAllCategories(data);
   }
 
   function displayData(target) {
@@ -291,13 +295,7 @@ export default function Home() {
     fetch("./data/" + target + ".json")
       .then((response) => response.json())
       .then((data) => {
-        setFetchedData(data);
-        setDefaultFetchedData(data);
-        setModuleKeys(Object.keys(data[0]));
-        fetchAllTitles(data);
-        fetchAllCreators(data);
-        fetchAllEras(data);
-        fetchAllCategories(data);
+        setDataIntoStates(data);
       });
   }
 
@@ -588,6 +586,31 @@ export default function Home() {
     setCardsHeight();
   }
 
+  const filterprops = {
+    filterboxAnchorEl,
+    setFilterboxAnchorEl,
+    canonicityFilterValue,
+    filterEntries,
+    finishedFilterValue,
+    filteredCreatorsName,
+    creators,
+    filteredEras,
+    resetFilters,
+    eras,
+    categories,
+    fetchedTitles,
+    searchValue,
+    setSearchValue,
+    searchEntries,
+    sortBy,
+    orderBy,
+    moduleKeys,
+    filteredCategories,
+    hideExcludedEntries,
+    removeFromExcluded,
+    entriesMarkedAsExcluded,
+  };
+
   return (
     <div className={styles.appcontainer}>
       <Head>
@@ -627,30 +650,7 @@ export default function Home() {
           {currentlyOpenedModule ? (
             <>
               <div id={styles.sortContainer}>
-                <FiltersContainer
-                  filterboxAnchorEl={filterboxAnchorEl}
-                  setFilterboxAnchorEl={setFilterboxAnchorEl}
-                  canonicityFilterValue={canonicityFilterValue}
-                  filterEntries={filterEntries}
-                  finishedFilterValue={finishedFilterValue}
-                  filteredCreatorsName={filteredCreatorsName}
-                  creators={creators}
-                  filteredEras={filteredEras}
-                  resetFilters={resetFilters}
-                  eras={eras}
-                  categories={categories}
-                  fetchedTitles={fetchedTitles}
-                  searchValue={searchValue}
-                  setSearchValue={setSearchValue}
-                  searchEntries={searchEntries}
-                  sortBy={sortBy}
-                  orderBy={orderBy}
-                  moduleKeys={moduleKeys}
-                  filteredCategories={filteredCategories}
-                  hideExcludedEntries={hideExcludedEntries}
-                  removeFromExcluded={removeFromExcluded}
-                  entriesMarkedAsExcluded={entriesMarkedAsExcluded}
-                />
+                <FiltersContainer {...filterprops} />
               </div>
               <ProgressBar progressBarValue={progressBarValue} />
             </>
