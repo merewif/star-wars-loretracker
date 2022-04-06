@@ -4,9 +4,9 @@ import LinearProgress, {
   linearProgressClasses,
 } from '@mui/material/LinearProgress';
 import styles from '../styles/ProgressBar.module.css';
-import { ProgressBar } from '../types';
+import { ProgressBarProps } from '../types';
 
-export default function ProgressBar({ progressBarValue }: ProgressBar) {
+export default function ProgressBar({ progressBarValue }: ProgressBarProps) {
   const [saberColor, setSaberColor] = useState('#69D8F0');
 
   function toggleSaberColor() {
