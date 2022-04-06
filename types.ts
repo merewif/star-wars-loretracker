@@ -49,3 +49,7 @@ export interface SortDropdownProps {
   orderBy: Function;
   moduleKeys: string[];
 }
+
+export interface ProgressBar {
+  progressBarValue: number;
+}
