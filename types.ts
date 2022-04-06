@@ -50,6 +50,6 @@ export interface SortDropdownProps {
   moduleKeys: string[];
 }
 
-export interface ProgressBar {
+export interface ProgressBarProps {
   progressBarValue: number;
 }
