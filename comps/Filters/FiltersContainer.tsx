@@ -1,10 +1,11 @@
-import React from "react";
-import Filterbox from "./Filterbox";
-import Searchbar from "./Searchbar";
-import SortDropdown from "./SortDropdown";
-import styles from "../../styles/Home.module.css";
+import React from 'react';
+import Filterbox from './Filterbox';
+import Searchbar from './Searchbar';
+import SortDropdown from './SortDropdown';
+import styles from '../../styles/Home.module.css';
+import { Keyable } from '../../types';
 
-export default function FiltersContainer(props) {
+export default function FiltersContainer(props: Keyable) {
   return (
     <div className={styles.filtersContainer}>
       <Filterbox
@@ -15,9 +16,7 @@ export default function FiltersContainer(props) {
         finishedFilterValue={props.finishedFilterValue}
         filteredCreatorsName={props.filteredCreatorsName}
         creators={props.creators}
-        filteredEras={props.filteredEras}
         resetFilters={props.resetFilters}
-        eras={props.eras}
         filteredCategories={props.filteredCategories}
         categories={props.categories}
         hideExcludedEntries={props.hideExcludedEntries}
