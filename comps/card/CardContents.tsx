@@ -1,18 +1,11 @@
 import React, { useState } from 'react';
 import styles from '../../styles/Home.module.css';
-import LinksContainer from './LinksContainer';
-import moment from 'moment';
+import { Moment } from 'moment';
+const moment = require('moment');
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import Tooltip from '@mui/material/Tooltip';
 import EntryExcludedSnackbar from '../MUI/EntryExcludedSnackbar';
-
-interface CardContentsProps {
-  i2: number;
-  currentKey: string;
-  currentValue: string | number;
-  excludeEntry: Function;
-  currentTitle: string;
-}
+import { CardContentsProps } from '../../types';
 
 export default function CardContents({
   i2,
@@ -27,7 +20,7 @@ export default function CardContents({
     setOpenSnackbar(true);
   };
 
-  const closeSnackbar = (event, reason) => {
+  const closeSnackbar = (event: Event, reason: string) => {
     if (reason === 'clickaway') {
       return;
     }
@@ -40,13 +33,11 @@ export default function CardContents({
         <div className={styles.coverImageContainer}>
           <img
             className={styles.coverImage}
-            src={currentValue}
+            src={currentValue.toString()}
             alt='Cover Image'
           />
         </div>
-      ) : currentKey === 'links' ? (
-        <LinksContainer currentValue={currentValue} />
-      ) : currentKey === 'canonicity' ? null : (
+      ) : currentKey === 'links' ? null : currentKey === 'canonicity' ? null : (
         <h2>{currentKey.replace(/([A-Z])/g, ' $1')}:</h2>
       )}
 
@@ -65,13 +56,16 @@ export default function CardContents({
           {moment(currentValue)._d.toDateString().split(' ').slice(1).join(' ')}
         </p>
       ) : null}
+
       {currentKey === 'timeline' && currentValue > 0 ? (
-        <p>{Math.abs(currentValue).toLocaleString('en')} ABY</p>
+        <p>{Math.abs(Number(currentValue)).toLocaleString('en')} ABY</p>
       ) : null}
+
       {currentKey === 'timeline' && currentValue <= 0 ? (
-        <p>{Math.abs(currentValue).toLocaleString('en')} BBY</p>
+        <p>{Math.abs(Number(currentValue)).toLocaleString('en')} BBY</p>
       ) : null}
       {currentKey === 'timeline' && currentValue === '' ? <p>N/A</p> : null}
+
       {currentKey === 'canonicity' ? (
         currentValue ? (
           <div className={styles.canonDiv}>
