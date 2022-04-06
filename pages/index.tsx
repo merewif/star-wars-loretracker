@@ -1,72 +1,79 @@
-import Head from "next/head";
-import React, { useState, useEffect, useLayoutEffect } from "react";
-import styles from "../styles/Home.module.css";
-import Header from "../comps/Header";
-import ProgressBar from "../comps/ProgressBar";
-import _ from "lodash";
-import FiltersContainer from "../comps/Filters/FiltersContainer";
-import CardContents from "../comps/card/CardContents";
-import moment from "moment";
-import { Waypoint } from "react-waypoint";
+import Head from 'next/head';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
+import styles from '../styles/Home.module.css';
+import Header from '../comps/Header';
+import ProgressBar from '../comps/ProgressBar';
+import _ from 'lodash';
+import FiltersContainer from '../comps/Filters/FiltersContainer';
+import CardContents from '../comps/card/CardContents';
+import moment from 'moment';
+import { Waypoint } from 'react-waypoint';
+import { EntryData, MarkedEntries } from '../types';
 
 export default function Home() {
-  const [defaultFetchedData, setDefaultFetchedData] = useState([]);
-  const [fetchedData, setFetchedData] = useState([]);
+  const [defaultFetchedData, setDefaultFetchedData] = useState<EntryData[]>([]);
+  const [fetchedData, setFetchedData] = useState<EntryData[]>([]);
   const [paginationEndElement, setPaginationEndElement] = useState(30);
-  const [fetchedTitles, setFetchedTitles] = useState([]);
-  const [currentlyOpenedModule, setCurrentlyOpenedModule] = useState();
-  const [moduleKeys, setModuleKeys] = useState([]);
+  const [fetchedTitles, setFetchedTitles] = useState<string[]>([]);
+  const [currentlyOpenedModule, setCurrentlyOpenedModule] = useState('movies');
+  const [moduleKeys, setModuleKeys] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState();
-  const [entriesMarkedAsExcluded, setEntriesMarkedAsExcluded] = useState({
-    movies: [],
-    games: [],
-    books: [],
-    comics: [],
-    series: [],
-  });
-  const [entriesMarkedAsFinished, setEntriesMarkedAsFinished] = useState({
-    movies: [],
-    games: [],
-    books: [],
-    comics: [],
-    series: [],
-    excluded: entriesMarkedAsExcluded,
-  });
+  const [entriesMarkedAsExcluded, setEntriesMarkedAsExcluded] =
+    useState<MarkedEntries>({
+      movies: [],
+      games: [],
+      books: [],
+      comics: [],
+      series: [],
+    });
+  const [entriesMarkedAsFinished, setEntriesMarkedAsFinished] =
+    useState<MarkedEntries>({
+      movies: [],
+      games: [],
+      books: [],
+      comics: [],
+      series: [],
+      excluded: entriesMarkedAsExcluded,
+    });
   const [filterboxAnchorEl, setFilterboxAnchorEl] = useState(null);
-  const [creators, setCreators] = useState([]);
-  const [eras, setEras] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [filteredCategories, setFilteredCategories] = useState([]);
-  const [filteredCreatorsName, setFilteredCreatorsName] = useState([]);
-  const [filteredEras, setFilteredEras] = useState([]);
-  const [canonicityFilterValue, setCanonicityFilterValue] = useState("all");
-  const [finishedFilterValue, setFinishedFilterValue] = useState("all");
+  const [creators, setCreators] = useState<string[]>([]);
+  const [eras, setEras] = useState<string[]>([]);
+  const [categories, setCategories] = useState<string[]>([]);
+  const [filteredCategories, setFilteredCategories] = useState<string[]>([]);
+  const [filteredCreatorsName, setFilteredCreatorsName] = useState<string[]>(
+    []
+  );
+  const [filteredEras, setFilteredEras] = useState<string[]>([]);
+  const [canonicityFilterValue, setCanonicityFilterValue] = useState('all');
+  const [finishedFilterValue, setFinishedFilterValue] = useState('all');
   const [hideExcludedEntries, setHideExcludedEntries] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState('');
   const [progressBarValue, setProgressBarValue] = useState(0);
 
   useEffect(() => {
-    setCurrentlyOpenedModule("movies");
-    fetchData("movies");
+    setCurrentlyOpenedModule('movies');
+    fetchData('movies');
 
-    if ("loretracker" in localStorage) {
-      let storedData = JSON.parse(localStorage.getItem("loretracker"));
+    if ('loretracker' in localStorage) {
+      let storedData = JSON.parse(localStorage.getItem('loretracker') ?? '');
       if (!storedData.excluded) storedData.excluded = entriesMarkedAsExcluded;
       if (storedData.excluded) setEntriesMarkedAsExcluded(storedData.excluded);
       setEntriesMarkedAsFinished(storedData);
     }
 
-    console.log("Hello there.");
+    console.log('Hello there.');
   }, []);
 
   useEffect(() => {
-    let btns = document.getElementsByClassName("navbtn");
+    let btns = Array.from(
+      document.getElementsByClassName('navbtn') as HTMLCollectionOf<HTMLElement>
+    );
     for (const btn of btns) {
-      btn.style.color = "white";
+      btn.style.color = 'white';
     }
 
     if (currentlyOpenedModule)
-      document.getElementById(currentlyOpenedModule).style.color = "#ffe81f";
+      document.getElementById(currentlyOpenedModule)!.style.color = '#ffe81f';
 
     resetFilters();
   }, [currentlyOpenedModule]);
@@ -76,12 +83,12 @@ export default function Home() {
   }, [fetchedData, currentlyOpenedModule]);
 
   useEffect(() => {
-    filterEntries(hideExcludedEntries, "hideExcluded");
+    filterEntries(hideExcludedEntries, 'hideExcluded');
   }, [entriesMarkedAsExcluded]);
 
   useEffect(() => {
     localStorage.setItem(
-      "loretracker",
+      'loretracker',
       JSON.stringify(entriesMarkedAsFinished)
     );
   }, [entriesMarkedAsFinished]);
@@ -98,7 +105,7 @@ export default function Home() {
     if (entriesMarkedAsFinished[currentlyOpenedModule]) {
       for (const entry of entriesMarkedAsFinished[currentlyOpenedModule]) {
         for (const data of fetchedData) {
-          if (_.includes(data, entry.replace(/-+/g, " "))) finished++;
+          if (_.includes(data, entry.replace(/-+/g, ' '))) finished++;
         }
       }
     }
@@ -108,19 +115,23 @@ export default function Home() {
     setProgressBarValue(result);
   }
 
-  function handleFileRead(event) {
+  function handleFileRead(event: any) {
+    console.log(event.type);
     let collection = JSON.parse(event.target.result);
     if (!collection.excluded) collection.excluded = entriesMarkedAsExcluded;
-    window.localStorage.setItem("loretracker", JSON.stringify(collection));
+    window.localStorage.setItem('loretracker', JSON.stringify(collection));
     setEntriesMarkedAsFinished(collection);
     setEntriesMarkedAsExcluded(collection.excluded);
   }
 
   async function setCardsHeight() {
-    let cards = document.getElementsByClassName("entryCard");
-
+    let cards = Array.from(
+      document.getElementsByClassName(
+        'entryCard'
+      ) as HTMLCollectionOf<HTMLElement>
+    );
     for await (const card of cards) {
-      card.style.height = "auto";
+      card.style.height = 'auto';
     }
 
     let largestHeight = 0;
@@ -134,9 +145,9 @@ export default function Home() {
   }
 
   async function fetchYoutiniBooks() {
-    let allBooks = [];
+    let allBooks: EntryData[] = [];
 
-    await fetch("./data/books/Youtini Bookshelf - Legends Books.json")
+    await fetch('./data/books/Youtini Bookshelf - Legends Books.json')
       .then((response) => response.json())
       .then((data) => {
         for (const entry of data) {
@@ -145,7 +156,7 @@ export default function Home() {
         }
       });
 
-    await fetch("./data/books/Youtini Bookshelf - Canon Books.json")
+    await fetch('./data/books/Youtini Bookshelf - Canon Books.json')
       .then((response) => response.json())
       .then((data) => {
         for (const entry of data) {
@@ -158,9 +169,9 @@ export default function Home() {
   }
 
   async function fetchYoutiniComics() {
-    let allComics = [];
+    let allComics: EntryData[] = [];
 
-    await fetch("./data/comics/Youtini Bookshelf - Canon Comics.json")
+    await fetch('./data/comics/Youtini Bookshelf - Canon Comics.json')
       .then((response) => response.json())
       .then((data) => {
         for (const entry of data) {
@@ -169,7 +180,7 @@ export default function Home() {
         }
       });
 
-    await fetch("./data/comics/Youtini Bookshelf - Legends Comics (ABY).json")
+    await fetch('./data/comics/Youtini Bookshelf - Legends Comics (ABY).json')
       .then((response) => response.json())
       .then((data) => {
         for (const entry of data) {
@@ -178,7 +189,7 @@ export default function Home() {
         }
       });
 
-    await fetch("./data/comics/Youtini Bookshelf - Legends Comics (BBY).json")
+    await fetch('./data/comics/Youtini Bookshelf - Legends Comics (BBY).json')
       .then((response) => response.json())
       .then((data) => {
         for (const entry of data) {
@@ -189,59 +200,58 @@ export default function Home() {
     parseYoutiniData(allComics);
   }
 
-  async function parseYoutiniData(allBooks) {
-    let books = [];
+  async function parseYoutiniData(allBooks: EntryData[]) {
+    let books: EntryData[] = [];
 
     for await (const book of allBooks) {
-      let currentBook = {};
+      let currentBook: EntryData = {
+        canonicity: book.canonicity,
+        coverImage: book['Cover Image URL'],
+        title: book['Name (Title)']!.replace(/-/, '—'),
+      };
 
-      currentBook.canonicity = book.canonicity;
-      currentBook.coverImage = book["Cover Image URL"];
-      if (book["Name (Title)"].includes("-"))
-        currentBook.title = book["Name (Title)"].replace(/-/, "—");
-      if (!book["Name (Title)"].includes("-"))
-        currentBook.title = book["Name (Title)"];
-      currentBook.author = book["Author / Writer"];
-      currentBook.releaseDate = moment(book["Release Date"]);
-      currentBook.category = book["Category"];
+      currentBook.author = book['Author / Writer'];
+      currentBook.releaseDate = moment(book['Release Date']);
+      currentBook.category = book['Category'];
       currentBook.links = {};
 
       const timelineIncludesTwoDates =
-        book["Timeline"].includes("-") ||
-        book["Timeline"].includes("/") ||
-        book["Timeline"].includes("—");
+        book['Timeline']!.includes('-') ||
+        book['Timeline']!.includes('/') ||
+        book['Timeline']!.includes('—');
 
       if (timelineIncludesTwoDates) {
-        const fullDate = book["Timeline"]
-          .replace(/\s|,/g, "")
-          .replace(/\/|—/, "-");
+        const fullDate = book['Timeline']!.replace(/\s|,/g, '').replace(
+          /\/|—/,
+          '-'
+        );
 
         let eras = fullDate.match(/([A-Z]{3})/g);
-        if (eras.length === 1) eras[1] = eras[0];
+        if (eras!.length === 1) eras![1] = eras![0];
         let dates = fullDate.match(/[^\d]*(\d+)[^\d]*\-[^\d]*(\d+)[^\d]*/);
-        dates.shift();
+        dates!.shift();
 
-        if (eras[1] === "BBY") currentBook.timeline = Number(`-${dates[1]}`);
-        if (eras[1] === "ABY") currentBook.timeline = Number(`${dates[1]}`);
+        if (eras![1] === 'BBY') currentBook.timeline = Number(`-${dates![1]}`);
+        if (eras![1] === 'ABY') currentBook.timeline = Number(`${dates![1]}`);
       }
 
-      if (book["Timeline"].endsWith("BBY") && !timelineIncludesTwoDates) {
+      if (book['Timeline']?.endsWith('BBY') && !timelineIncludesTwoDates) {
         currentBook.timeline = Number(
-          `-${book["Timeline"].replace(/[^0-9]/g, "")}`
+          `-${book['Timeline'].replace(/[^0-9]/g, '')}`
         );
       }
 
-      if (book["Timeline"].endsWith("ABY") && !timelineIncludesTwoDates) {
-        currentBook.timeline = Number(book["Timeline"].replace(/[^0-9]/g, ""));
+      if (book['Timeline']?.endsWith('ABY') && !timelineIncludesTwoDates) {
+        currentBook.timeline = Number(book['Timeline'].replace(/[^0-9]/g, ''));
       }
 
       if (
-        currentBook.category === "Adult Novel" ||
-        currentBook.category === "YA Novel" ||
-        currentBook.category === "Junior Reader" ||
-        currentBook.category === "Single Issue Comic" ||
-        currentBook.category === "Graphic Novel" ||
-        currentBook.category === "Omnibus"
+        currentBook.category === 'Adult Novel' ||
+        currentBook.category === 'YA Novel' ||
+        currentBook.category === 'Junior Reader' ||
+        currentBook.category === 'Single Issue Comic' ||
+        currentBook.category === 'Graphic Novel' ||
+        currentBook.category === 'Omnibus'
       ) {
         books.push(currentBook);
       }
@@ -249,7 +259,7 @@ export default function Home() {
     setDataIntoStates(books);
   }
 
-  function setDataIntoStates(data) {
+  function setDataIntoStates(data: EntryData[]) {
     setFetchedData(data);
     setDefaultFetchedData(data);
     setModuleKeys(Object.keys(data[0]));
@@ -259,20 +269,20 @@ export default function Home() {
     fetchAllCategories(data);
   }
 
-  function displayData(target) {
+  function displayData(target: string) {
     setCurrentlyOpenedModule(target);
     setHideExcludedEntries(false);
-    if (target === "books") return fetchYoutiniBooks();
-    if (target === "comics") return fetchYoutiniComics();
+    if (target === 'books') return fetchYoutiniBooks();
+    if (target === 'comics') return fetchYoutiniComics();
     fetchData(target);
   }
 
-  function searchEntries(input) {
-    if (input.length) setSearchValue(input);
+  function searchEntries(input: string | undefined | null) {
+    if (input?.length) setSearchValue(input);
 
     if (!input) {
       displayData(currentlyOpenedModule);
-      setSearchValue("");
+      setSearchValue('');
       return;
     }
 
@@ -288,18 +298,18 @@ export default function Home() {
     }
   }
 
-  function fetchData(target) {
-    setCanonicityFilterValue("all");
+  function fetchData(target: string) {
+    setCanonicityFilterValue('all');
     setFilteredCreatorsName([]);
     setFilteredEras([]);
-    fetch("./data/" + target + ".json")
+    fetch('./data/' + target + '.json')
       .then((response) => response.json())
       .then((data) => {
         setDataIntoStates(data);
       });
   }
 
-  function fetchAllTitles(data) {
+  function fetchAllTitles(data: EntryData[]) {
     let titles = [];
     for (const entry of data) {
       titles.push(entry.title);
@@ -308,8 +318,8 @@ export default function Home() {
     setFetchedTitles(titles);
   }
 
-  function fetchAllCreators(data) {
-    let creators = [];
+  function fetchAllCreators(data: EntryData[]) {
+    let creators: string[] = [];
 
     for (const entry of data) {
       if (entry.author && !creators.includes(entry.author))
@@ -322,8 +332,8 @@ export default function Home() {
     setCreators(creators);
   }
 
-  function fetchAllEras(data) {
-    let fetchedEras = [];
+  function fetchAllEras(data: EntryData[]) {
+    let fetchedEras: string[] = [];
     for (const entry of data) {
       if (entry.era && !fetchedEras.includes(entry.era))
         fetchedEras.push(entry.era);
@@ -331,8 +341,8 @@ export default function Home() {
     setEras(fetchedEras);
   }
 
-  function fetchAllCategories(data) {
-    let fetchedCategories = [];
+  function fetchAllCategories(data: EntryData[]) {
+    let fetchedCategories: string[] = [];
     for (const entry of data) {
       if (entry.category && !fetchedCategories.includes(entry.category))
         fetchedCategories.push(entry.category);
@@ -340,11 +350,14 @@ export default function Home() {
     setCategories(fetchedCategories);
   }
 
-  function orderBy(value, order = "asc") {
+  function orderBy(
+    value: string,
+    order: boolean | 'asc' | 'desc' | undefined = 'asc'
+  ) {
     setFetchedData(_.orderBy(fetchedData, value, order));
   }
 
-  function excludeEntry(entry) {
+  function excludeEntry(entry: string) {
     if (!_.includes(entriesMarkedAsExcluded[currentlyOpenedModule], entry)) {
       setEntriesMarkedAsExcluded({
         ...entriesMarkedAsExcluded,
@@ -365,10 +378,10 @@ export default function Home() {
         },
       });
     }
-    setSearchValue("");
+    setSearchValue('');
   }
 
-  function removeFromExcluded(category, entry) {
+  function removeFromExcluded(category: string, entry: EntryData) {
     setEntriesMarkedAsFinished({
       ...entriesMarkedAsFinished,
       excluded: {
@@ -386,16 +399,16 @@ export default function Home() {
     });
   }
 
-  function toggleEntryAsFinished(event, entry) {
-    const currentTitle = entry.title.replace(/\s+/g, "-");
+  function toggleEntryAsFinished(event: any, entry: EntryData) {
+    const currentTitle = entry.title.replace(/\s+/g, '-');
     let container = document.getElementById(`${currentTitle}-card`);
 
     const isEntryFinished =
       entriesMarkedAsFinished[currentlyOpenedModule].includes(currentTitle);
 
     if (isEntryFinished) {
-      container.classList.remove("cardFinished");
-      container.classList.add("cardUnfinished");
+      container?.classList.remove('cardFinished');
+      container?.classList.add('cardUnfinished');
 
       const arrWithoutEntry = _.without(
         entriesMarkedAsFinished[currentlyOpenedModule],
@@ -408,7 +421,7 @@ export default function Home() {
       });
 
       localStorage.setItem(
-        "loretracker",
+        'loretracker',
         JSON.stringify({
           ...entriesMarkedAsFinished,
           [currentlyOpenedModule]: arrWithoutEntry,
@@ -417,8 +430,8 @@ export default function Home() {
     }
 
     if (!isEntryFinished) {
-      container.classList.remove("cardUnfinished");
-      container.classList.add("cardFinished");
+      container?.classList.remove('cardUnfinished');
+      container?.classList.add('cardFinished');
 
       setEntriesMarkedAsFinished({
         ...entriesMarkedAsFinished,
@@ -429,7 +442,7 @@ export default function Home() {
       });
 
       localStorage.setItem(
-        "loretracker",
+        'loretracker',
         JSON.stringify({
           ...entriesMarkedAsFinished,
           [currentlyOpenedModule]: [
@@ -441,7 +454,7 @@ export default function Home() {
     }
   }
 
-  function filterEntries(value, source) {
+  function filterEntries(value: any, source: string) {
     let canonicityParameter = canonicityFilterValue,
       creatorsParameters = filteredCreatorsName,
       finishedParameter = finishedFilterValue,
@@ -449,46 +462,46 @@ export default function Home() {
       categoryParameters = filteredCategories,
       hideExcluded = hideExcludedEntries;
 
-    if (source === "canonicity") {
+    if (source === 'canonicity') {
       setCanonicityFilterValue(value);
       canonicityParameter = value;
     }
-    if (source === "creators") {
-      let persons = typeof value === "string" ? value.split(",") : value;
+    if (source === 'creators') {
+      let persons = typeof value === 'string' ? value.split(',') : value;
       setFilteredCreatorsName(persons);
       creatorsParameters = persons;
     }
-    if (source === "eras") {
-      let erasToFilter = typeof value === "string" ? value.split(",") : value;
+    if (source === 'eras') {
+      let erasToFilter = typeof value === 'string' ? value.split(',') : value;
       setFilteredEras(erasToFilter);
       erasParameters = erasToFilter;
     }
 
-    if (source === "categories") {
+    if (source === 'categories') {
       let categoriesToFilter =
-        typeof value === "string" ? value.split(",") : value;
+        typeof value === 'string' ? value.split(',') : value;
       setFilteredCategories(categoriesToFilter);
       categoryParameters = categoriesToFilter;
     }
 
-    if (source === "finished") {
+    if (source === 'finished') {
       setFinishedFilterValue(value);
       finishedParameter = value;
     }
 
-    if (source === "hideExcluded") {
+    if (source === 'hideExcluded') {
       if (hideExcluded !== value) setHideExcludedEntries(value);
       hideExcluded = value;
     }
 
-    let filteredResults = defaultFetchedData;
+    let filteredResults: any = defaultFetchedData;
 
     // Filter by Canon
-    if (canonicityParameter === "legends") {
+    if (canonicityParameter === 'legends') {
       filteredResults = _.filter(defaultFetchedData, { canonicity: false });
     }
 
-    if (canonicityParameter === "canon") {
+    if (canonicityParameter === 'canon') {
       filteredResults = _.filter(defaultFetchedData, { canonicity: true });
     }
 
@@ -496,18 +509,18 @@ export default function Home() {
     let listOfFinishedEntries = entriesMarkedAsFinished[currentlyOpenedModule];
     let listFilteredByFinished = [];
 
-    if (finishedParameter === "finished") {
+    if (finishedParameter === 'finished') {
       for (const entry of listOfFinishedEntries) {
-        const title = entry.replace(/-/g, " ");
+        const title = entry.replace(/-/g, ' ');
         let result = _.filter(filteredResults, { title: title });
         listFilteredByFinished.push(result);
       }
       filteredResults = _.flatten(listFilteredByFinished);
     }
 
-    if (finishedParameter === "unfinished") {
+    if (finishedParameter === 'unfinished') {
       for (const entry of listOfFinishedEntries) {
-        const title = entry.replace(/-/g, " ");
+        const title = entry.replace(/-/g, ' ');
         filteredResults = _.reject(filteredResults, { title: title });
       }
     }
@@ -561,7 +574,7 @@ export default function Home() {
     if (hideExcluded && entriesMarkedAsExcluded[currentlyOpenedModule]) {
       const excludedEntries = entriesMarkedAsExcluded[currentlyOpenedModule];
       for (const entry of excludedEntries) {
-        const title = entry.replace(/-/g, " ");
+        const title = entry.replace(/-/g, ' ');
         filteredResults = _.reject(filteredResults, { title: title });
       }
     }
@@ -571,8 +584,8 @@ export default function Home() {
 
   function resetFilters() {
     setFetchedData(defaultFetchedData);
-    setCanonicityFilterValue("all");
-    setFinishedFilterValue("all");
+    setCanonicityFilterValue('all');
+    setFinishedFilterValue('all');
     setFilteredCreatorsName([]);
     setFilteredEras([]);
     setFilteredCategories([]);
@@ -616,33 +629,33 @@ export default function Home() {
       <Head>
         <title>Star Wars Loretracker</title>
         <meta
-          name="description"
-          content="Track which Star Wars content you consooomed."
+          name='description'
+          content='Track which Star Wars content you consooomed.'
         />
-        <meta property="og:title" content="Star Wars Loretracker" />
+        <meta property='og:title' content='Star Wars Loretracker' />
         <meta
-          property="og:description"
-          content="Track which Star Wars content you consooomed."
+          property='og:description'
+          content='Track which Star Wars content you consooomed.'
         />
         <meta
-          property="og:url"
-          content="https://star-wars-loretracker.vercel.app/"
+          property='og:url'
+          content='https://star-wars-loretracker.vercel.app/'
         />
-        <meta property="og:type" content="website" />
-        <meta name="image" property="og:image" content="/imgs/featured.png" />
-        <meta name="twitter:card" content="summary_large_image" />
+        <meta property='og:type' content='website' />
+        <meta name='image' property='og:image' content='/imgs/featured.png' />
+        <meta name='twitter:card' content='summary_large_image' />
         <meta
-          property="twitter:url"
-          content="https://star-wars-loretracker.vercel.app"
+          property='twitter:url'
+          content='https://star-wars-loretracker.vercel.app'
         />
-        <meta name="twitter:title" content="Star Wars Loretracker" />
+        <meta name='twitter:title' content='Star Wars Loretracker' />
         <meta
-          name="twitter:description"
-          content="Track which Star Wars content you consooomed"
+          name='twitter:description'
+          content='Track which Star Wars content you consooomed'
         />
-        <meta name="twitter:image" content="/imgs/featured.png" />
+        <meta name='twitter:image' content='/imgs/featured.png' />
 
-        <link rel="icon" href="/favicon.ico" />
+        <link rel='icon' href='/favicon.ico' />
       </Head>
       <Header displayData={displayData} handleFileRead={handleFileRead} />
       <div className={styles.viewerContainer}>
@@ -657,7 +670,7 @@ export default function Home() {
           ) : null}
           <div id={styles.moduleContainer}>
             {_.slice(fetchedData, 0, paginationEndElement).map((e1, i1) => {
-              let currentTitle = e1.title.replace(/\s+/g, "-");
+              let currentTitle = e1.title.replace(/\s+/g, '-');
               return (
                 <div
                   className={
@@ -667,12 +680,12 @@ export default function Home() {
                       ? `${styles.cardFinished} entryCard cardFinished`
                       : `${styles.cardUnfinished} entryCard cardUnfinished`
                   }
-                  id={currentTitle + "-card"}
-                  key={"1" + i1}
+                  id={currentTitle + '-card'}
+                  key={'1' + i1}
                 >
                   {moduleKeys.map((e2, i2) => {
                     let currentKey = moduleKeys[i2];
-                    let currentValue = e1[currentKey];
+                    let currentValue = e1[currentKey as keyof EntryData];
                     return (
                       <CardContents
                         i2={i2}
@@ -687,13 +700,13 @@ export default function Home() {
                   <button
                     onClick={(e) => toggleEntryAsFinished(e, e1)}
                     className={styles.finishedBtn}
-                    id={e1.title.replace(/\s+/g, "-").toLowerCase() + "btn"}
+                    id={e1.title.replace(/\s+/g, '-').toLowerCase() + 'btn'}
                   >
-                    {entriesMarkedAsFinished[currentlyOpenedModule].includes(
-                      currentTitle
-                    )
-                      ? "Mark as Unfinished"
-                      : "Mark as Finished"}
+                    {entriesMarkedAsFinished[
+                      currentlyOpenedModule as keyof MarkedEntries
+                    ]?.includes(currentTitle)
+                      ? 'Mark as Unfinished'
+                      : 'Mark as Finished'}
                   </button>
                 </div>
               );
