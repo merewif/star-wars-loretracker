@@ -59,8 +59,14 @@ export default async function handler(req, res) {
       name: data['Name (Title)'],
       image: data['Cover Image URL'],
     });
-    downloadFile(data['Name (Title)'], data['Cover Image URL']);
   }
+
+  let count = 0;
+  setInterval(() => {
+    if (count > images.length) return;
+    downloadFile(images[count].name, images[count].image);
+    count++;
+  }, 250);
 
   res.json(images);
 }
