@@ -1,0 +1,57 @@
+const https = require('https');
+const fs = require('fs');
+const _ = require('lodash');
+
+const downloadFile = (name, url) => {
+  // Commented out for unnecessary download requests.
+  // const file = fs.createWriteStream(
+  //   `./public/imgs/fetchedimgs/bookimages/${name
+  //     .replace(/[^a-z0-9]/gi, '_')
+  //     .toLowerCase()}.jpg`,
+  //   { flags: 'wx' }
+  // );
+  // const request = https.get(url, (response) => {
+  //   response.pipe(file);
+  //   file.on('finish', () => {
+  //     file.close();
+  //   });
+  // });
+};
+
+export default async function handler(req, res) {
+  let fetchedData;
+  let images = [];
+
+  const canonBooks = await fetch(
+    'https://star-wars-loretracker.vercel.app/data/books/Youtini%20Bookshelf%20-%20Canon%20Books.json'
+  );
+  const legendBooks = await fetch(
+    'https://star-wars-loretracker.vercel.app/data/books/Youtini%20Bookshelf%20-%20Legends%20Books.json'
+  );
+
+  await Promise.all([canonBooks, legendBooks])
+    .then((responses) => {
+      return Promise.all(
+        responses.map((response) => {
+          return response.json();
+        })
+      );
+    })
+    .then((datas) => {
+      fetchedData = datas;
+    })
+    .catch((error) => {
+      throw error;
+    });
+
+  for await (const data of _.flatten(fetchedData)) {
+    images.push({
+      name: data['Name (Title)'],
+      image: data['Cover Image URL'],
+    });
+    downloadFile(data['Name (Title)'], data['Cover Image URL']);
+  }
+
+  console.log(images.length);
+  res.json(images);
+}
