@@ -3,7 +3,8 @@ const fs = require('fs');
 const _ = require('lodash');
 
 const downloadFile = (name, url) => {
-  // Commented out for unnecessary download requests.
+  // Commented out to avoid unnecessary download requests.
+  //
   // const file = fs.createWriteStream(
   //   `./public/imgs/fetchedimgs/bookimages/${name
   //     .replace(/[^a-z0-9]/gi, '_')
