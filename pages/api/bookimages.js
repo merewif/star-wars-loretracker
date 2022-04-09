@@ -8,12 +8,13 @@ const downloadFile = (name, url) => {
   // const file = fs.createWriteStream(
   //   `./public/imgs/fetchedimgs/bookimages/${name
   //     .replace(/[^a-z0-9]/gi, '_')
-  //     .toLowerCase()}.jpg`,
+  //     .toLowerCase()}`,
   //   { flags: 'wx' }
   // );
   // const request = https.get(url, (response) => {
   //   response.pipe(file);
   //   file.on('finish', () => {
+  //     console.log(`${name} downloaded.`);
   //     file.close();
   //   });
   // });
@@ -50,8 +51,14 @@ export default async function handler(req, res) {
       name: data['Name (Title)'],
       image: data['Cover Image URL'],
     });
-    downloadFile(data['Name (Title)'], data['Cover Image URL']);
   }
+
+  let count = 0;
+  setInterval(() => {
+    if (count > images.length) return;
+    downloadFile(images[count].name, images[count].image);
+    count++;
+  }, 250);
 
   console.log(images.length);
   res.json(images);
