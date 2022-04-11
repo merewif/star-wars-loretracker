@@ -8,6 +8,12 @@ Fortunately the amazing [Youtini Team](https://youtini.com) has already assemble
 
 **Be warned**: In its current iteration, the Star Wars Loretracker stores your collection in the web storage of your browser. If you delete your cookies, you lose your settings. You can download your collection by navigating to the 'About & Backup' menu item and clicking on the 'Download backup' button. You can upload your collection again by using the 'Upload backup' button.
 
+---
+
+### Technical details
+
+The Loretracker was developed using React with Next.js and TypeScript. The frontend is hosted on Vercel. The UI uses MUI Components and the Lodash library helps in filtering and sorting the data.
+
 ### ToDo:
 
 1. Refactor the FiltersContainer component into smaller modules.
