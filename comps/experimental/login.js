@@ -56,12 +56,10 @@ export default function Login() {
             <>
               <div className={styles.loginBox}>
                 <div className={styles.logoContainer}>
-                  <Link href='/'>
-                    <Image src={logo} alt='Logo' height={200} width={300} />
-                  </Link>
+                  <Image src={logo} alt='Logo' height={200} width={300} />
                 </div>
                 <form className={styles.form}>
-                  <input
+                  {/* <input
                     type='email'
                     placeholder='Email'
                     onChange={(e) => setEmail(e.target.value)}
@@ -70,7 +68,7 @@ export default function Login() {
                     type='password'
                     placeholder='Password'
                     onChange={(e) => setPassword(e.target.value)}
-                  />
+                  /> */}
                   <div className={styles.loginOptions}>
                     <GoogleIcon
                       sx={{ color: 'white' }}
@@ -93,12 +91,12 @@ export default function Login() {
                       onClick={() => signIn('reddit')}
                     />
                   </div>
-                  <button onClick={handleSubmit}>
+                  {/* <button onClick={handleSubmit}>
                     {currentModule === 'login' ? 'Login' : 'Register'}
-                  </button>
+                  </button> */}
                 </form>
               </div>
-              <div className={styles.toggleModule}>
+              {/* <div className={styles.toggleModule}>
                 <button
                   className='module-toggle-btn'
                   onClick={handleModuleChange}
@@ -111,7 +109,7 @@ export default function Login() {
                 >
                   register
                 </button>
-              </div>
+              </div> */}
             </>
           )}
         </div>
