@@ -13,4 +13,5 @@ Fortunately the amazing [Youtini Team](https://youtini.com) has already assemble
 1. Refactor the FiltersContainer component into smaller modules.
 2. Write unit tests.
 3. Add authentication.
-4. Add an option to write and read reviews.
+4. Store user data in Firebase.
+5. Add an option to write and read reviews.
