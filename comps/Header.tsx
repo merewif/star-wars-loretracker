@@ -14,6 +14,7 @@ import { TransitionProps } from '@mui/material/transitions';
 import { HeaderProps } from '../types';
 import Login from './experimental/login';
 import About from './About';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -79,7 +80,12 @@ const Header = ({ displayData, handleFileRead }: HeaderProps) => {
           })}
 
           <li onClick={() => handleClickOpen('about')}>About & Backup</li>
-          <li onClick={() => handleClickOpen('login')}>Login</li>
+          <li
+            onClick={() => handleClickOpen('login')}
+            style={{ paddingLeft: '0px' }}
+          >
+            <AccountCircleIcon sx={{ color: '#ffe81f ' }} />
+          </li>
         </ul>
       </nav>
       <Dialog
