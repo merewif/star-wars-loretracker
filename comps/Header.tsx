@@ -12,6 +12,8 @@ import DownloadIcon from '@mui/icons-material/Download';
 import Button from '@mui/material/Button';
 import { TransitionProps } from '@mui/material/transitions';
 import { HeaderProps } from '../types';
+import Login from './experimental/login';
+import About from './About';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -25,8 +27,10 @@ const Transition = React.forwardRef(function Transition(
 const Header = ({ displayData, handleFileRead }: HeaderProps) => {
   const listElements = ['Movies', 'Books', 'Comics', 'Series'];
   const [open, setOpen] = useState(false);
+  const [dialogContent, setDialogContent] = useState<string>('');
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (dialogTarget: string) => {
+    setDialogContent(dialogTarget);
     setOpen(true);
   };
 
@@ -74,7 +78,8 @@ const Header = ({ displayData, handleFileRead }: HeaderProps) => {
             );
           })}
 
-          <li onClick={handleClickOpen}>About & Backup</li>
+          <li onClick={() => handleClickOpen('about')}>About & Backup</li>
+          <li onClick={() => handleClickOpen('login')}>Login</li>
         </ul>
       </nav>
       <Dialog
@@ -83,107 +88,20 @@ const Header = ({ displayData, handleFileRead }: HeaderProps) => {
         keepMounted
         onClose={handleClose}
         aria-describedby='alert-dialog-slide-description'
-        sx={{ maxHeight: 'none', maxWidth: 'none' }}
+        sx={{
+          maxHeight: 'none',
+          maxWidth: 'none',
+        }}
       >
-        <div className={styles.dialogContent}>
-          <IconButton
-            aria-label='close'
-            onClick={handleClose}
-            sx={{
-              position: 'absolute',
-              right: 8,
-              top: 8,
-              color: (theme) => theme.palette.grey[500],
-            }}
-          >
-            <CloseIcon />
-          </IconButton>
-          <Image src={logo} alt='Logo' height={200} width={300} />
-          <p>
-            The site was developed using React and Next.js. The repository is
-            available
-            <a
-              href='https://github.com/merewif/star-wars-loretracker'
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              here.
-            </a>{' '}
-            For feedback and bug reports kindly use the GitHub issues feature.
-            Pull requests are welcome.
-          </p>
-          <p>
-            The databases for the Star Wars books and comics were assembled by{' '}
-            <a
-              href='https://youtini.com'
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              the Youtini team.
-            </a>
-          </p>
-          <p>
-            The Loretracker is a serverless application; your collection data is
-            stored in your browser. If you want to import or export your
-            collection, use the buttons below:
-          </p>
-          <div style={{ display: 'grid', gap: '10px' }}>
-            <input
-              onChange={uploadBackup}
-              type='file'
-              hidden
-              id='upload-backup'
-            />
-            <label htmlFor='upload-backup'>
-              <Button
-                component='span'
-                variant='outlined'
-                startIcon={<FileUploadIcon />}
-                sx={{
-                  color: 'white',
-                  borderColor: 'white',
-                  padding: '10px',
-                  minWidth: '100px',
-                  height: '2.5rem',
-                  marginBlock: 'auto',
-                  width: '100%',
-                }}
-              >
-                Upload backup
-              </Button>
-            </label>
-            <Button
-              onClick={downloadBackup}
-              variant='outlined'
-              startIcon={<DownloadIcon />}
-              sx={{
-                color: 'white',
-                borderColor: 'white',
-                padding: '10px',
-                minWidth: '100px',
-                height: '2.5rem',
-                marginBlock: 'auto',
-              }}
-            >
-              Download backup
-            </Button>
-          </div>
-          <p>
-            Star Wars Loretracker is not affiliated, associated, authorized,
-            endorsed by, or in any way officially connected with STAR WARS,
-            Lucasfilm Ltd., The Walt Disney Company, Disney Enterprises Inc., or
-            any of its subsidiaries or its affiliates. The official Star Wars
-            website is available at{' '}
-            <a
-              href='http://www.starwars.com'
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              www.starwars.com
-            </a>
-            . All Star Wars artwork, logos & properties belong to ©Lucasfilm LTD
-          </p>
-        </div>
+        {dialogContent === 'about' ? (
+          <About
+            handleClose={handleClose}
+            uploadBackup={uploadBackup}
+            downloadBackup={downloadBackup}
+          />
+        ) : (
+          <Login />
+        )}
       </Dialog>
     </>
   );
