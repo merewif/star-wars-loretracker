@@ -4,13 +4,12 @@ import styles from '../../styles/Login.module.css';
 import logo from '../../assets/logo.png';
 import Image from 'next/image';
 import Link from 'next/link';
-// import {
-//   createUserWithEmailAndPassword,
-//   onAuthStateChanged,
-//   signInWithEmailAndPassword,
-//   signOut,
-// } from 'firebase/auth';
-// import { auth } from "../.firebase/firebase-config";
+import GoogleIcon from '@mui/icons-material/Google';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import RedditIcon from '@mui/icons-material/Reddit';
+import { signIn } from 'next-auth/react';
 
 export default function Login() {
   const [currentModule, setCurrentModule] = useState('login');
@@ -22,12 +21,12 @@ export default function Login() {
     setCurrentModule(e.target.innerHTML);
     const btns = document.getElementsByClassName('module-toggle-btn');
     for (const btn of btns) {
-      btn.style.background = 'white';
-      btn.style.color = 'black';
+      btn.style.background = 'black';
+      btn.style.color = 'white';
     }
 
-    e.target.style.background = 'black';
-    e.target.style.color = 'white';
+    e.target.style.background = 'white';
+    e.target.style.color = 'black';
   }
 
   function handleSubmit(e) {
@@ -36,39 +35,6 @@ export default function Login() {
     if (currentModule === 'login') login();
   }
 
-  //   const register = async () => {
-  //     try {
-  //       const user = await createUserWithEmailAndPassword(auth, email, password);
-  //     } catch (error) {
-  //       console.log(error.message);
-  //     }
-
-  //     onAuthStateChanged(auth, (currentUser) => {
-  //       if (currentUser) setUser(currentUser);
-  //       if (!currentUser) setUser({});
-  //     });
-  //   };
-  //   const login = async () => {
-  //     try {
-  //       const user = await signInWithEmailAndPassword(auth, email, password);
-  //     } catch (error) {
-  //       console.log(error.message);
-  //     }
-
-  //     onAuthStateChanged(auth, (currentUser) => {
-  //       if (currentUser) setUser(currentUser);
-  //       if (!currentUser) setUser({});
-  //     });
-  //   };
-
-  //   const logout = async () => {
-  //     await signOut(auth);
-
-  //     onAuthStateChanged(auth, (currentUser) => {
-  //       if (currentUser) setUser(currentUser);
-  //       if (!currentUser) setUser({});
-  //     });
-  //   };
   return (
     <>
       <Head>
@@ -94,7 +60,7 @@ export default function Login() {
                     <Image src={logo} alt='Logo' height={200} width={300} />
                   </Link>
                 </div>
-                <form>
+                <form className={styles.form}>
                   <input
                     type='email'
                     placeholder='Email'
@@ -105,6 +71,16 @@ export default function Login() {
                     placeholder='Password'
                     onChange={(e) => setPassword(e.target.value)}
                   />
+                  <div className={styles.loginOptions}>
+                    <GoogleIcon sx={{ color: 'white' }} />
+                    <FacebookIcon sx={{ color: 'white' }} />
+                    <TwitterIcon sx={{ color: 'white' }} />
+                    <InstagramIcon
+                      sx={{ color: 'white' }}
+                      onClick={() => signIn('instagram')}
+                    />
+                    <RedditIcon sx={{ color: 'white' }} />
+                  </div>
                   <button onClick={handleSubmit}>
                     {currentModule === 'login' ? 'Login' : 'Register'}
                   </button>
