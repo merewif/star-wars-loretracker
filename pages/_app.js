@@ -1,8 +1,9 @@
 import '../styles/globals.css';
-import React, { useEffect } from 'react';
+import React from 'react';
 import ReactGA from 'react-ga';
+import { SessionProvider } from 'next-auth/react';
 
-function StarWarsLoretracker({ Component, pageProps }) {
+function StarWarsLoretracker({ Component, session, pageProps }) {
   ReactGA.initialize('G-WEW3SZLHC9');
   if (typeof window !== 'undefined') {
     ReactGA.pageview(window.location.pathname + window.location.search);
@@ -10,7 +11,9 @@ function StarWarsLoretracker({ Component, pageProps }) {
 
   return (
     <div id='appContainer'>
-      <Component {...pageProps} />
+      <SessionProvider session={session}>
+        <Component {...pageProps} />
+      </SessionProvider>
     </div>
   );
 }
