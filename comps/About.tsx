@@ -94,6 +94,7 @@ export default function About({
           Download backup
         </Button>
       </div>
+
       <p>
         Star Wars Loretracker is not affiliated, associated, authorized,
         endorsed by, or in any way officially connected with STAR WARS,
@@ -109,6 +110,14 @@ export default function About({
         </a>
         . All Star Wars artwork, logos & properties belong to ©Lucasfilm LTD
       </p>
+      <a
+        style={{ fontSize: '8px', textTransform: 'uppercase', margin: '0' }}
+        href='https://star-wars-loretracker.vercel.app/privacypolicy'
+        target='_blank'
+        rel='noopener noreferrer'
+      >
+        Privacy policy
+      </a>
     </div>
   );
 }
