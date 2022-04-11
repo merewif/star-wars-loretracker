@@ -72,14 +72,26 @@ export default function Login() {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                   <div className={styles.loginOptions}>
-                    <GoogleIcon sx={{ color: 'white' }} />
-                    <FacebookIcon sx={{ color: 'white' }} />
-                    <TwitterIcon sx={{ color: 'white' }} />
+                    <GoogleIcon
+                      sx={{ color: 'white' }}
+                      onClick={() => signIn('google')}
+                    />
+                    <FacebookIcon
+                      sx={{ color: 'white' }}
+                      onClick={() => signIn('facebook')}
+                    />
+                    <TwitterIcon
+                      sx={{ color: 'white' }}
+                      onClick={() => signIn('twitter')}
+                    />
                     <InstagramIcon
                       sx={{ color: 'white' }}
                       onClick={() => signIn('instagram')}
                     />
-                    <RedditIcon sx={{ color: 'white' }} />
+                    <RedditIcon
+                      sx={{ color: 'white' }}
+                      onClick={() => signIn('reddit')}
+                    />
                   </div>
                   <button onClick={handleSubmit}>
                     {currentModule === 'login' ? 'Login' : 'Register'}
