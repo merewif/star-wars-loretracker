@@ -9,13 +9,15 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import RedditIcon from '@mui/icons-material/Reddit';
-import { signIn } from 'next-auth/react';
+import { useSession, signIn, signOut } from 'next-auth/react';
 
 export default function Login() {
   const [currentModule, setCurrentModule] = useState('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [user, setUser] = useState({});
+
+  const { data: session } = useSession();
 
   function handleModuleChange(e) {
     setCurrentModule(e.target.innerHTML);
@@ -69,28 +71,35 @@ export default function Login() {
                     placeholder='Password'
                     onChange={(e) => setPassword(e.target.value)}
                   /> */}
-                  <div className={styles.loginOptions}>
-                    <GoogleIcon
-                      sx={{ color: 'white' }}
-                      onClick={() => signIn('google')}
-                    />
-                    <FacebookIcon
-                      sx={{ color: 'white' }}
-                      onClick={() => signIn('facebook')}
-                    />
-                    <TwitterIcon
-                      sx={{ color: 'white' }}
-                      onClick={() => signIn('twitter')}
-                    />
-                    <InstagramIcon
-                      sx={{ color: 'white' }}
-                      onClick={() => signIn('instagram')}
-                    />
-                    <RedditIcon
-                      sx={{ color: 'white' }}
-                      onClick={() => signIn('reddit')}
-                    />
-                  </div>
+                  {session ? (
+                    <>
+                      Signed in as {session.user.email} <br />
+                      <button onClick={() => signOut()}>Sign out</button>
+                    </>
+                  ) : (
+                    <div className={styles.loginOptions}>
+                      <GoogleIcon
+                        sx={{ color: 'white' }}
+                        onClick={() => signIn('google')}
+                      />
+                      <FacebookIcon
+                        sx={{ color: 'white' }}
+                        onClick={() => signIn('facebook')}
+                      />
+                      <TwitterIcon
+                        sx={{ color: 'white' }}
+                        onClick={() => signIn('twitter')}
+                      />
+                      <InstagramIcon
+                        sx={{ color: 'white' }}
+                        onClick={() => signIn('instagram')}
+                      />
+                      <RedditIcon
+                        sx={{ color: 'white' }}
+                        onClick={() => signIn('reddit')}
+                      />
+                    </div>
+                  )}
                   {/* <button onClick={handleSubmit}>
                     {currentModule === 'login' ? 'Login' : 'Register'}
                   </button> */}
