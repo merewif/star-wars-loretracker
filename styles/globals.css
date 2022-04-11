@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&family=Montserrat:wght@200;300;400;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&family=Montserrat:wght@200;300;400;900&display=swap');
 
 html,
 body {
@@ -9,7 +9,7 @@ body {
 }
 
 #__next {
-  background-image: url("/imgs/bg.jpg");
+  background-image: url('/imgs/bg.jpg');
   background-attachment: fixed;
   background-size: cover;
   background-position: center;
@@ -44,7 +44,7 @@ a {
 }
 
 .MuiButton-root {
-  font-family: "Montserrat" !important;
+  font-family: 'Montserrat' !important;
   background-color: black !important;
 }
 
