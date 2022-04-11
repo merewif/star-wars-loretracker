@@ -19,5 +19,5 @@ The Loretracker was developed using React with Next.js and TypeScript. The front
 1. Refactor the FiltersContainer component into smaller modules.
 2. Write unit tests.
 3. Add authentication.
-4. Store user data in Firebase.
+4. Store user data on Firebase.
 5. Add an option to write and read reviews.
