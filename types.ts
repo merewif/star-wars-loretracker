@@ -53,3 +53,9 @@ export interface SortDropdownProps {
 export interface ProgressBarProps {
   progressBarValue: number;
 }
+
+export interface AboutProps {
+  handleClose: () => void;
+  uploadBackup: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  downloadBackup: () => void;
+}

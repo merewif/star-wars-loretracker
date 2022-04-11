@@ -19,6 +19,7 @@
     "lodash": "4.17.21",
     "moment-duration-format": "^2.3.2",
     "next": "12.1.0",
+    "next-auth": "^4.3.1",
     "passport-google-oauth": "2.0.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",

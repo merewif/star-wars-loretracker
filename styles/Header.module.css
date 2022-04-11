@@ -19,7 +19,7 @@
 #navbar ul li {
   margin-top: auto;
   margin-bottom: auto;
-  font-family: "Josefin Sans";
+  font-family: 'Josefin Sans';
   font-weight: 700;
   text-transform: uppercase;
   cursor: pointer;
@@ -38,7 +38,7 @@
   padding-block: 50px;
   padding-inline: 100px;
   font-size: 1rem;
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   font-weight: 400;
   color: white;
   background-color: black;
