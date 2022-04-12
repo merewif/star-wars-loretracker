@@ -47,21 +47,19 @@ export default function Login() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <div className={styles.loginContainer}>
-        <div>
+        <div className={styles.loginBox}>
+          <div className={styles.logoContainer}>
+            <Image src={logo} alt='Logo' height={200} width={300} />
+          </div>
           {session ? (
             <>
               Signed in as {session.user.email} <br />
-              {console.log(session)}
               <button onClick={() => signOut()}>Sign out</button>
             </>
           ) : (
             <>
-              <div className={styles.loginBox}>
-                <div className={styles.logoContainer}>
-                  <Image src={logo} alt='Logo' height={200} width={300} />
-                </div>
-                <form className={styles.form}>
-                  {/* <input
+              <form className={styles.form}>
+                {/* <input
                     type='email'
                     placeholder='Email'
                     onChange={(e) => setEmail(e.target.value)}
@@ -71,39 +69,38 @@ export default function Login() {
                     placeholder='Password'
                     onChange={(e) => setPassword(e.target.value)}
                   /> */}
-                  <h3
-                    style={{
-                      color: 'white',
-                      textTransform: 'uppercase',
-                      fontFamily: 'Montserrat',
-                    }}
-                  >
-                    Login
-                  </h3>
-                  <div className={styles.loginOptions}>
-                    <GoogleIcon
-                      sx={{ color: 'white' }}
-                      onClick={() => signIn('google')}
-                    />
-                    <FacebookIcon
-                      sx={{ color: 'white' }}
-                      onClick={() => signIn('facebook')}
-                    />
-                    <TwitterIcon
-                      sx={{ color: 'white' }}
-                      onClick={() => signIn('twitter')}
-                    />
-                    <RedditIcon
-                      sx={{ color: 'white' }}
-                      onClick={() => signIn('reddit')}
-                    />
-                  </div>
+                <h3
+                  style={{
+                    color: 'white',
+                    textTransform: 'uppercase',
+                    fontFamily: 'Montserrat',
+                  }}
+                >
+                  Login
+                </h3>
+                <div className={styles.loginOptions}>
+                  <GoogleIcon
+                    sx={{ color: 'white' }}
+                    onClick={() => signIn('google')}
+                  />
+                  <FacebookIcon
+                    sx={{ color: 'white' }}
+                    onClick={() => signIn('facebook')}
+                  />
+                  <TwitterIcon
+                    sx={{ color: 'white' }}
+                    onClick={() => signIn('twitter')}
+                  />
+                  <RedditIcon
+                    sx={{ color: 'white' }}
+                    onClick={() => signIn('reddit')}
+                  />
+                </div>
 
-                  {/* <button onClick={handleSubmit}>
+                {/* <button onClick={handleSubmit}>
                     {currentModule === 'login' ? 'Login' : 'Register'}
                   </button> */}
-                </form>
-              </div>
+              </form>
               {/* <div className={styles.toggleModule}>
                 <button
                   className='module-toggle-btn'
