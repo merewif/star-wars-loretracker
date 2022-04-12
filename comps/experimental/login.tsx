@@ -17,9 +17,6 @@ export default function Login() {
   const session = supabase.auth.session();
   const user = supabase.auth.user();
 
-  console.log(session);
-  console.log(user);
-
   async function signInWithSupabase(provider: string) {
     if (provider === 'facebook') {
       const { user, session, error } = await supabase.auth.signIn({
@@ -75,9 +72,9 @@ export default function Login() {
           <div className={styles.logoContainer}>
             <Image src={logo} alt='Logo' height={200} width={300} />
           </div>
-          {session ? (
+          {user ? (
             <div className={styles.loggedIn}>
-              {/* Signed in as {session.user.email ?? session.user.name} <br /> */}
+              Signed in as {user.email} <br />
               <button onClick={() => signout()}>Sign out</button>
             </div>
           ) : (
