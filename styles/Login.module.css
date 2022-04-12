@@ -50,6 +50,11 @@
   color: white;
 }
 
+.loggedIn {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
 .logoContainer {
   width: 100%;
   text-align: center;
