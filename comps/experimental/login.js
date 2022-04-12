@@ -52,10 +52,10 @@ export default function Login() {
             <Image src={logo} alt='Logo' height={200} width={300} />
           </div>
           {session ? (
-            <>
+            <div className={styles.loggedIn}>
               Signed in as {session.user.email} <br />
               <button onClick={() => signOut()}>Sign out</button>
-            </>
+            </div>
           ) : (
             <>
               <form className={styles.form}>
