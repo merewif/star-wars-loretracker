@@ -52,6 +52,8 @@ export default function Home() {
   const [progressBarValue, setProgressBarValue] = useState(0);
 
   // Supabase
+  const user = supabase.auth.user();
+
   async function fetchUserDataFromDatabase(
     username: string
   ): Promise<any[] | null> {
