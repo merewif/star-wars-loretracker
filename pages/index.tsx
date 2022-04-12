@@ -56,9 +56,54 @@ export default function Home() {
   const { data: session } = useSession();
 
   // Supabase
+  async function fetchUserDataFromDatabase(
+    username: string
+  ): Promise<any[] | null> {
+    try {
+      const { data, error } = await supabase
+        .from('userdata')
+        .select()
+        .eq('id', username);
 
-  useEffect(() => {
-    if (session) console.log(session);
+      console.log(data);
+      return data;
+
+      if (error) {
+        console.log(error);
+      }
+    } catch (error: any) {
+      console.log(error.message);
+    }
+
+    return null;
+  }
+
+  async function upsertUserDataIntoDatabase(username: string) {
+    try {
+      const { data, error } = await supabase
+        .from('userdata')
+        .upsert([{ id: username, data: entriesMarkedAsFinished }]);
+
+      if (error) {
+        console.log(error);
+      }
+    } catch (error: any) {
+      console.log(error.message);
+    }
+  }
+
+  useEffect((): void => {
+    // if (session?.user?.email) {
+    //   fetchUserDataFromDatabase(session.user.email);
+    //   return;
+    // }
+    // if (session?.user?.name) {
+    //   fetchUserDataFromDatabase(session.user.name);
+    //   return;
+    // }
+
+    fetchUserDataFromDatabase('taborszkib@gmail.com');
+    upsertUserDataIntoDatabase('taborszki529@gmail.com');
   }, []);
 
   useEffect(() => {
