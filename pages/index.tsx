@@ -63,7 +63,7 @@ export default function Home() {
 
       if (data) {
         setEntriesMarkedAsFinished(data[0].data);
-        console.log(data[0].data);
+        setEntriesMarkedAsExcluded(data[0].data.excluded);
       }
       return;
 
@@ -104,10 +104,7 @@ export default function Home() {
       setEntriesMarkedAsFinished(storedData);
     }
 
-    supabase.auth.onAuthStateChange((event, session) => {
-      console.log(event, session);
-      if (user?.email) fetchUserDataFromDatabase();
-    });
+    if (user?.email) fetchUserDataFromDatabase();
   }, []);
 
   useEffect(() => {
