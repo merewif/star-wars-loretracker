@@ -54,6 +54,7 @@ export default function Login() {
           {session ? (
             <div className={styles.loggedIn}>
               Signed in as {session.user.email} <br />
+              {console.log(session.user)}
               <button onClick={() => signOut()}>Sign out</button>
             </div>
           ) : (
