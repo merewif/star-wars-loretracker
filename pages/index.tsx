@@ -104,7 +104,10 @@ export default function Home() {
       setEntriesMarkedAsFinished(storedData);
     }
 
-    if (user?.email) fetchUserDataFromDatabase();
+    supabase.auth.onAuthStateChange((event, session) => {
+      console.log(event, session);
+      if (user?.email) fetchUserDataFromDatabase();
+    });
   }, []);
 
   useEffect(() => {
