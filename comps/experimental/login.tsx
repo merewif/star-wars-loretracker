@@ -86,29 +86,11 @@ export default function Login({ handleClose }: LoginProps) {
                   placeholder='Email'
                   onChange={(e) => setEmail(e.target.value)}
                 />
-                {/* <input
-                    type='password'
-                    placeholder='Password'
-                    onChange={(e) => setPassword(e.target.value)}
-                  /> */}
+
                 <Button startIcon={<EmailIcon />} onClick={signInWithEmail}>
                   Login with email
                 </Button>
               </form>
-              {/* <div className={styles.toggleModule}>
-                <button
-                  className='module-toggle-btn'
-                  onClick={handleModuleChange}
-                >
-                  login
-                </button>
-                <button
-                  className='module-toggle-btn'
-                  onClick={handleModuleChange}
-                >
-                  register
-                </button>
-              </div> */}
             </>
           )}
         </div>
