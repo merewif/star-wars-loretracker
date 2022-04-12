@@ -80,12 +80,12 @@ const Header = ({ displayData, handleFileRead }: HeaderProps) => {
           })}
 
           <li onClick={() => handleClickOpen('about')}>About & Backup</li>
-          {/* <li
+          <li
             onClick={() => handleClickOpen('login')}
             style={{ paddingLeft: '0px' }}
           >
             <AccountCircleIcon sx={{ color: '#ffe81f ' }} />
-          </li> */}
+          </li>
         </ul>
       </nav>
       <Dialog
