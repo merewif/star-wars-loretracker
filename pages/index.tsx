@@ -52,9 +52,6 @@ export default function Home() {
   const [searchValue, setSearchValue] = useState('');
   const [progressBarValue, setProgressBarValue] = useState(0);
 
-  // Next-auth authentication.
-  const { data: session } = useSession();
-
   // Supabase
   async function fetchUserDataFromDatabase(
     username: string
