@@ -94,7 +94,6 @@ export default function About({
           Download backup
         </Button>
       </div>
-
       <p>
         Star Wars Loretracker is not affiliated, associated, authorized,
         endorsed by, or in any way officially connected with STAR WARS,
@@ -117,6 +116,15 @@ export default function About({
         rel='noopener noreferrer'
       >
         Privacy policy
+      </a>{' '}
+      -{' '}
+      <a
+        style={{ fontSize: '8px', textTransform: 'uppercase', margin: '0' }}
+        href='https://star-wars-loretracker.vercel.app/termsofservice'
+        target='_blank'
+        rel='noopener noreferrer'
+      >
+        Terms of Service
       </a>
     </div>
   );
