@@ -1,40 +1,65 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
 import styles from '../../styles/Login.module.css';
 import logo from '../../assets/logo.png';
 import Image from 'next/image';
 import Link from 'next/link';
-import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import RedditIcon from '@mui/icons-material/Reddit';
-import { useSession, signIn, signOut } from 'next-auth/react';
+import GoogleIcon from '@mui/icons-material/Google';
+import { supabase } from '../../utils/supabaseClient';
 
 export default function Login() {
   const [currentModule, setCurrentModule] = useState('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [user, setUser] = useState({});
-  const { data: session } = useSession();
 
-  function handleModuleChange(e) {
-    setCurrentModule(e.target.innerHTML);
-    const btns = document.getElementsByClassName('module-toggle-btn');
-    for (const btn of btns) {
-      btn.style.background = 'black';
-      btn.style.color = 'white';
+  const session = supabase.auth.session();
+  const user = supabase.auth.user();
+
+  console.log(session);
+  console.log(user);
+
+  async function signInWithSupabase(provider: string) {
+    switch (provider) {
+      case 'facebook':
+        const { user, session, error } = await supabase.auth.signIn({
+          provider: 'facebook',
+        });
+      case 'twitter': {
+        const { user, session, error } = await supabase.auth.signIn({
+          provider: 'twitter',
+        });
+      }
+      case 'google': {
+        const { user, session, error } = await supabase.auth.signIn({
+          provider: 'google',
+        });
+      }
     }
-
-    e.target.style.background = 'white';
-    e.target.style.color = 'black';
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    if (currentModule === 'register') register();
-    if (currentModule === 'login') login();
+  async function signout() {
+    const { error } = await supabase.auth.signOut();
   }
+
+  // function handleModuleChange(e:React.MouseEvent<HTMLElement>):void {
+  //   setCurrentModule(e.target.innerHTML);
+  //   const btns = Array.from(
+  //     document.getElementsByClassName('module-toggle-btn') as HTMLCollectionOf<HTMLElement>    );
+
+  //   for (const btn of btns) {
+  //     btn.style.background = 'black';
+  //     btn.style.color = 'white';
+  //   }
+
+  //   e.target.style.background = 'white';
+  //   e.target.style.color = 'black';
+  // }
+
+  // function handleSubmit(e) {
+  //   e.preventDefault();
+  // }
 
   return (
     <>
@@ -53,8 +78,8 @@ export default function Login() {
           </div>
           {session ? (
             <div className={styles.loggedIn}>
-              Signed in as {session.user.email ?? session.user.name} <br />
-              <button onClick={() => signOut()}>Sign out</button>
+              {/* Signed in as {session.user.email ?? session.user.name} <br /> */}
+              <button onClick={() => signout()}>Sign out</button>
             </div>
           ) : (
             <>
@@ -81,19 +106,15 @@ export default function Login() {
                 <div className={styles.loginOptions}>
                   <GoogleIcon
                     sx={{ color: 'white' }}
-                    onClick={() => signIn('google')}
+                    onClick={() => signInWithSupabase('google')}
                   />
                   <FacebookIcon
                     sx={{ color: 'white' }}
-                    onClick={() => signIn('facebook')}
+                    onClick={() => signInWithSupabase('facebook')}
                   />
                   <TwitterIcon
                     sx={{ color: 'white' }}
-                    onClick={() => signIn('twitter')}
-                  />
-                  <RedditIcon
-                    sx={{ color: 'white' }}
-                    onClick={() => signIn('reddit')}
+                    onClick={() => signInWithSupabase('twitter')}
                   />
                 </div>
 
