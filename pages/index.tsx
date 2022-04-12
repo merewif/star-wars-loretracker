@@ -54,7 +54,7 @@ export default function Home() {
   const { data: session } = useSession();
 
   useEffect(() => {
-    console.log(session);
+    if (session) console.log(session);
   }, []);
 
   useEffect(() => {
