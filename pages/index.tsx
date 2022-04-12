@@ -62,8 +62,8 @@ export default function Home() {
         .eq('email', user?.email);
 
       if (data) {
-        setEntriesMarkedAsFinished(data[0]);
-        console.log(data[0]);
+        setEntriesMarkedAsFinished(data[0].data);
+        console.log(data[0].data);
       }
       return;
 
