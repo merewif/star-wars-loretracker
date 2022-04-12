@@ -7,6 +7,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import GoogleIcon from '@mui/icons-material/Google';
 import EmailIcon from '@mui/icons-material/Email';
+import LogoutIcon from '@mui/icons-material/Logout';
 import { supabase } from '../../utils/supabaseClient';
 import { LoginProps } from '../../types';
 
@@ -55,7 +56,10 @@ export default function Login({ handleClose }: LoginProps) {
           {user ? (
             <div className={styles.loggedIn}>
               Signed in as {user.email} <br />
-              <button onClick={() => signout()}>Sign out</button>
+              <Button startIcon={<LogoutIcon />} onClick={() => signout()}>
+                Sign out
+              </Button>
+              startIcon={<LogoutIcon />}
             </div>
           ) : (
             <>
