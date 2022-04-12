@@ -51,7 +51,6 @@ export default function Home() {
   const [searchValue, setSearchValue] = useState('');
   const [progressBarValue, setProgressBarValue] = useState(0);
 
-  // Supabase
   const user = supabase.auth.user();
 
   async function fetchUserDataFromDatabase(): Promise<void> {
