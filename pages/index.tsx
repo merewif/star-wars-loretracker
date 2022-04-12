@@ -99,8 +99,6 @@ export default function Home() {
       if (storedData.excluded) setEntriesMarkedAsExcluded(storedData.excluded);
       setEntriesMarkedAsFinished(storedData);
     }
-
-    fetchUserData();
   }, []);
 
   const fetchUserData = async (): Promise<null> => {
@@ -137,6 +135,8 @@ export default function Home() {
       'loretracker',
       JSON.stringify(entriesMarkedAsFinished)
     );
+
+    // if (user?.email) upsertUserDataIntoDatabase();
   }, [entriesMarkedAsFinished]);
 
   useEffect(() => {
