@@ -85,7 +85,10 @@ export default function Login({ handleClose }: LoginProps) {
             </div>
           ) : (
             <>
-              <form className={styles.form}>
+              <form
+                className={styles.form}
+                onSubmit={(e) => signInWithEmail(e)}
+              >
                 <Button
                   variant='outlined'
                   startIcon={<GoogleIcon />}
@@ -111,7 +114,7 @@ export default function Login({ handleClose }: LoginProps) {
                   type='email'
                   placeholder='Email'
                   onChange={(e) => setEmail(e.target.value)}
-                  onSubmit={signInWithEmail}
+                  onSubmit={(e) => signInWithEmail(e)}
                 />
 
                 <Button startIcon={<EmailIcon />} onClick={sendLoginMail}>
