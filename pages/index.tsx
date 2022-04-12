@@ -59,9 +59,8 @@ export default function Home() {
       const { data, error } = await supabase
         .from('userdata')
         .select()
-        .eq('id', username);
+        .eq('email', username);
 
-      console.log(data);
       return data;
 
       if (error) {
@@ -78,7 +77,7 @@ export default function Home() {
     try {
       const { data, error } = await supabase
         .from('userdata')
-        .upsert([{ id: username, data: entriesMarkedAsFinished }]);
+        .upsert([{ email: username, data: entriesMarkedAsFinished }]);
 
       if (error) {
         console.log(error);
@@ -88,7 +87,7 @@ export default function Home() {
     }
   }
 
-  useEffect((): void => {
+  useEffect(() => {
     // fetchUserDataFromDatabase('taborszkib@gmail.com');
     // upsertUserDataIntoDatabase('taborszki529@gmail.com');
   }, []);
