@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
-import Head from 'next/head';
 import styles from '../../styles/Login.module.css';
 import logo from '../../assets/logo.png';
 import Image from 'next/image';
-import Link from 'next/link';
+import Button from '@mui/material/Button';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import GoogleIcon from '@mui/icons-material/Google';
+import EmailIcon from '@mui/icons-material/Email';
 import { supabase } from '../../utils/supabaseClient';
 import { LoginProps } from '../../types';
 
 export default function Login({ handleClose }: LoginProps) {
-  const [currentModule, setCurrentModule] = useState('login');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
   const session = supabase.auth.session();
   const user = supabase.auth.user();
@@ -36,28 +34,16 @@ export default function Login({ handleClose }: LoginProps) {
     }
   }
 
+  async function signInWithEmail() {
+    const { user, error } = await supabase.auth.signIn({
+      email: email,
+    });
+  }
+
   async function signout() {
     const { error } = await supabase.auth.signOut();
     handleClose();
   }
-
-  // function handleModuleChange(e:React.MouseEvent<HTMLElement>):void {
-  //   setCurrentModule(e.target.innerHTML);
-  //   const btns = Array.from(
-  //     document.getElementsByClassName('module-toggle-btn') as HTMLCollectionOf<HTMLElement>    );
-
-  //   for (const btn of btns) {
-  //     btn.style.background = 'black';
-  //     btn.style.color = 'white';
-  //   }
-
-  //   e.target.style.background = 'white';
-  //   e.target.style.color = 'black';
-  // }
-
-  // function handleSubmit(e) {
-  //   e.preventDefault();
-  // }
 
   return (
     <>
@@ -74,43 +60,40 @@ export default function Login({ handleClose }: LoginProps) {
           ) : (
             <>
               <form className={styles.form}>
+                <Button
+                  variant='outlined'
+                  startIcon={<FacebookIcon />}
+                  onClick={() => signInWithSupabase('facebook')}
+                >
+                  Login with Facebook
+                </Button>
+                <Button
+                  variant='outlined'
+                  startIcon={<GoogleIcon />}
+                  onClick={() => signInWithSupabase('google')}
+                >
+                  Login with Google
+                </Button>
+                <Button
+                  variant='outlined'
+                  startIcon={<TwitterIcon />}
+                  onClick={() => signInWithSupabase('twitter')}
+                >
+                  Login with Twitter
+                </Button>
+                <input
+                  type='email'
+                  placeholder='Email'
+                  onChange={(e) => setEmail(e.target.value)}
+                />
                 {/* <input
-                    type='email'
-                    placeholder='Email'
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                  <input
                     type='password'
                     placeholder='Password'
                     onChange={(e) => setPassword(e.target.value)}
                   /> */}
-                <h3
-                  style={{
-                    color: 'white',
-                    textTransform: 'uppercase',
-                    fontFamily: 'Montserrat',
-                  }}
-                >
-                  Login
-                </h3>
-                <div className={styles.loginOptions}>
-                  <GoogleIcon
-                    sx={{ color: 'white' }}
-                    onClick={() => signInWithSupabase('google')}
-                  />
-                  <FacebookIcon
-                    sx={{ color: 'white' }}
-                    onClick={() => signInWithSupabase('facebook')}
-                  />
-                  <TwitterIcon
-                    sx={{ color: 'white' }}
-                    onClick={() => signInWithSupabase('twitter')}
-                  />
-                </div>
-
-                {/* <button onClick={handleSubmit}>
-                    {currentModule === 'login' ? 'Login' : 'Register'}
-                  </button> */}
+                <Button startIcon={<EmailIcon />} onClick={signInWithEmail}>
+                  Login with email
+                </Button>
               </form>
               {/* <div className={styles.toggleModule}>
                 <button
