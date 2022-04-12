@@ -10,6 +10,7 @@ import moment from 'moment';
 import { Waypoint } from 'react-waypoint';
 import { EntryData, MarkedEntries } from '../types';
 import { useSession } from 'next-auth/react';
+import { supabase } from '../utils/supabaseClient';
 
 export default function Home() {
   const [defaultFetchedData, setDefaultFetchedData] = useState<EntryData[]>([]);
@@ -51,7 +52,10 @@ export default function Home() {
   const [searchValue, setSearchValue] = useState('');
   const [progressBarValue, setProgressBarValue] = useState(0);
 
+  // Next-auth authentication.
   const { data: session } = useSession();
+
+  // Supabase
 
   useEffect(() => {
     if (session) console.log(session);
