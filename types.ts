@@ -54,6 +54,10 @@ export interface ProgressBarProps {
   progressBarValue: number;
 }
 
+export interface LoginProps {
+  handleClose: () => void;
+}
+
 export interface AboutProps {
   handleClose: () => void;
   uploadBackup: (event: React.ChangeEvent<HTMLInputElement>) => void;

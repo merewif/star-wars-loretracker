@@ -106,7 +106,7 @@ const Header = ({ displayData, handleFileRead }: HeaderProps) => {
             downloadBackup={downloadBackup}
           />
         ) : (
-          <Login />
+          <Login handleClose={handleClose} />
         )}
       </Dialog>
     </>
