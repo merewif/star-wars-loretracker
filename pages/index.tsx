@@ -9,7 +9,6 @@ import CardContents from '../comps/card/CardContents';
 import moment from 'moment';
 import { Waypoint } from 'react-waypoint';
 import { EntryData, MarkedEntries } from '../types';
-import { useSession } from 'next-auth/react';
 import { supabase } from '../utils/supabaseClient';
 
 export default function Home() {
