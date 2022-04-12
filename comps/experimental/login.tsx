@@ -81,7 +81,11 @@ export default function Login({ handleClose }: LoginProps) {
           {user ? (
             <div className={styles.loggedIn}>
               Signed in as {user.email} <br />
-              <Button startIcon={<LogoutIcon />} onClick={() => signout()}>
+              <Button
+                startIcon={<LogoutIcon />}
+                onClick={() => signout()}
+                sx={{ marginTop: '25px' }}
+              >
                 Sign out
               </Button>
             </div>
