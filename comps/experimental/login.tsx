@@ -129,7 +129,7 @@ export default function Login({ handleClose }: LoginProps) {
                   open={openSnackbar}
                   autoHideDuration={6000}
                   onClose={handleCloseSnackbar}
-                  message='We sent you an email with your login credentials.'
+                  message='We sent you an email with your login link.'
                   action={action}
                 />
               </form>
