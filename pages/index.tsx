@@ -54,14 +54,15 @@ export default function Home() {
   // Supabase
   const user = supabase.auth.user();
 
-  async function fetchUserDataFromDatabase(): Promise<any[] | null> {
+  async function fetchUserDataFromDatabase(): Promise<MarkedEntries | null> {
     try {
       const { data, error } = await supabase
         .from('userdata')
         .select()
         .eq('email', user?.email);
 
-      return data;
+      if (data) setEntriesMarkedAsFinished(data);
+      return null;
 
       if (error) {
         console.log(error);
@@ -99,14 +100,9 @@ export default function Home() {
       if (storedData.excluded) setEntriesMarkedAsExcluded(storedData.excluded);
       setEntriesMarkedAsFinished(storedData);
     }
-  }, []);
 
-  const fetchUserData = async (): Promise<null> => {
-    const storedUserData = await fetchUserDataFromDatabase();
-    if (!storedUserData?.length) return null;
-    setEntriesMarkedAsFinished(storedUserData);
-    return null;
-  };
+    fetchUserDataFromDatabase();
+  }, []);
 
   useEffect(() => {
     let btns = Array.from(
