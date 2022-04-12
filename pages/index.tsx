@@ -54,15 +54,17 @@ export default function Home() {
   // Supabase
   const user = supabase.auth.user();
 
-  async function fetchUserDataFromDatabase(): Promise<MarkedEntries | null> {
+  async function fetchUserDataFromDatabase(): Promise<void> {
     try {
+      console.log('Fetching from database...');
       const { data, error } = await supabase
         .from('userdata')
         .select()
         .eq('email', user?.email);
 
       if (data) setEntriesMarkedAsFinished(data);
-      return null;
+      console.log(data);
+      return;
 
       if (error) {
         console.log(error);
@@ -71,7 +73,7 @@ export default function Home() {
       console.log(error.message);
     }
 
-    return null;
+    return;
   }
 
   async function upsertUserDataIntoDatabase() {
