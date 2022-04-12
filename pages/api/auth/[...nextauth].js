@@ -24,10 +24,6 @@ export default NextAuth({
       clientId: process.env.REDDIT_CLIENT_ID,
       clientSecret: process.env.REDDIT_CLIENT_SECRET,
     }),
-    InstagramProvider({
-      clientId: process.env.FACEBOOK_CLIENT_ID,
-      clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-    }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
 });
