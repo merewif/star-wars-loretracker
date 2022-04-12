@@ -52,7 +52,12 @@ export default function Login({ handleClose }: LoginProps) {
     });
   }
 
-  async function signInWithEmail() {
+  function signInWithEmail(event: React.FormEvent<HTMLInputElement>) {
+    event.preventDefault();
+    sendLoginMail();
+  }
+
+  async function sendLoginMail() {
     const { user, error } = await supabase.auth.signIn({
       email: email,
     });
@@ -106,9 +111,10 @@ export default function Login({ handleClose }: LoginProps) {
                   type='email'
                   placeholder='Email'
                   onChange={(e) => setEmail(e.target.value)}
+                  onSubmit={signInWithEmail}
                 />
 
-                <Button startIcon={<EmailIcon />} onClick={signInWithEmail}>
+                <Button startIcon={<EmailIcon />} onClick={sendLoginMail}>
                   Login with email
                 </Button>
                 <Snackbar
