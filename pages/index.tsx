@@ -101,9 +101,8 @@ export default function Home() {
     //   fetchUserDataFromDatabase(session.user.name);
     //   return;
     // }
-
-    fetchUserDataFromDatabase('taborszkib@gmail.com');
-    upsertUserDataIntoDatabase('taborszki529@gmail.com');
+    // fetchUserDataFromDatabase('taborszkib@gmail.com');
+    // upsertUserDataIntoDatabase('taborszki529@gmail.com');
   }, []);
 
   useEffect(() => {
