@@ -45,6 +45,7 @@ export default function Login({ handleClose }: LoginProps) {
 
   const session = supabase.auth.session();
   const user = supabase.auth.user();
+  console.log(user?.email);
 
   async function signInWithSupabase(provider: Provider) {
     const { user, session, error } = await supabase.auth.signIn({
