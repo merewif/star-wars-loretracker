@@ -77,28 +77,35 @@ export default function Login() {
                       <button onClick={() => signOut()}>Sign out</button>
                     </>
                   ) : (
-                    <div className={styles.loginOptions}>
-                      <GoogleIcon
-                        sx={{ color: 'white' }}
-                        onClick={() => signIn('google')}
-                      />
-                      <FacebookIcon
-                        sx={{ color: 'white' }}
-                        onClick={() => signIn('facebook')}
-                      />
-                      <TwitterIcon
-                        sx={{ color: 'white' }}
-                        onClick={() => signIn('twitter')}
-                      />
-                      <InstagramIcon
-                        sx={{ color: 'white' }}
-                        onClick={() => signIn('instagram')}
-                      />
-                      <RedditIcon
-                        sx={{ color: 'white' }}
-                        onClick={() => signIn('reddit')}
-                      />
-                    </div>
+                    <>
+                      <h3
+                        style={{
+                          color: 'white',
+                          textTransform: 'uppercase',
+                          fontFamily: 'Montserrat',
+                        }}
+                      >
+                        Login
+                      </h3>
+                      <div className={styles.loginOptions}>
+                        <GoogleIcon
+                          sx={{ color: 'white' }}
+                          onClick={() => signIn('google')}
+                        />
+                        <FacebookIcon
+                          sx={{ color: 'white' }}
+                          onClick={() => signIn('facebook')}
+                        />
+                        <TwitterIcon
+                          sx={{ color: 'white' }}
+                          onClick={() => signIn('twitter')}
+                        />
+                        <RedditIcon
+                          sx={{ color: 'white' }}
+                          onClick={() => signIn('reddit')}
+                        />
+                      </div>
+                    </>
                   )}
                   {/* <button onClick={handleSubmit}>
                     {currentModule === 'login' ? 'Login' : 'Register'}
