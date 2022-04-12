@@ -18,6 +18,7 @@ export default NextAuth({
     TwitterProvider({
       clientId: process.env.TWITTER_CLIENT_ID,
       clientSecret: process.env.TWITTER_CLIENT_SECRET,
+      version: '1.1',
     }),
     RedditProvider({
       clientId: process.env.REDDIT_CLIENT_ID,
