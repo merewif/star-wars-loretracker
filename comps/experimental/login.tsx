@@ -21,21 +21,20 @@ export default function Login() {
   console.log(user);
 
   async function signInWithSupabase(provider: string) {
-    switch (provider) {
-      case 'facebook':
-        const { user, session, error } = await supabase.auth.signIn({
-          provider: 'facebook',
-        });
-      case 'twitter': {
-        const { user, session, error } = await supabase.auth.signIn({
-          provider: 'twitter',
-        });
-      }
-      case 'google': {
-        const { user, session, error } = await supabase.auth.signIn({
-          provider: 'google',
-        });
-      }
+    if (provider === 'facebook') {
+      const { user, session, error } = await supabase.auth.signIn({
+        provider: 'facebook',
+      });
+    }
+    if (provider === 'twitter') {
+      const { user, session, error } = await supabase.auth.signIn({
+        provider: 'twitter',
+      });
+    }
+    if (provider === 'google') {
+      const { user, session, error } = await supabase.auth.signIn({
+        provider: 'google',
+      });
     }
   }
 
