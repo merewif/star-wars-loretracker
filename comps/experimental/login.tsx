@@ -8,12 +8,40 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import GoogleIcon from '@mui/icons-material/Google';
 import EmailIcon from '@mui/icons-material/Email';
 import LogoutIcon from '@mui/icons-material/Logout';
+import Snackbar from '@mui/material/Snackbar';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 import { supabase } from '../../utils/supabaseClient';
 import { LoginProps } from '../../types';
 import { Provider } from '@supabase/supabase-js';
 
 export default function Login({ handleClose }: LoginProps) {
   const [email, setEmail] = useState('');
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+
+  const handleCloseSnackbar = (
+    event: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpenSnackbar(false);
+  };
+
+  const action = (
+    <React.Fragment>
+      <IconButton
+        size='small'
+        aria-label='close'
+        color='inherit'
+        onClick={handleCloseSnackbar}
+      >
+        <CloseIcon fontSize='small' />
+      </IconButton>
+    </React.Fragment>
+  );
 
   const session = supabase.auth.session();
   const user = supabase.auth.user();
@@ -28,6 +56,7 @@ export default function Login({ handleClose }: LoginProps) {
     const { user, error } = await supabase.auth.signIn({
       email: email,
     });
+    setOpenSnackbar(true);
   }
 
   async function signout() {
@@ -82,6 +111,13 @@ export default function Login({ handleClose }: LoginProps) {
                 <Button startIcon={<EmailIcon />} onClick={signInWithEmail}>
                   Login with email
                 </Button>
+                <Snackbar
+                  open={openSnackbar}
+                  autoHideDuration={6000}
+                  onClose={handleCloseSnackbar}
+                  message='We sent you an email with your login credentials.'
+                  action={action}
+                />
               </form>
             </>
           )}
