@@ -10,6 +10,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { supabase } from '../../utils/supabaseClient';
 import { LoginProps } from '../../types';
+import { Provider } from '@supabase/supabase-js';
 
 export default function Login({ handleClose }: LoginProps) {
   const [email, setEmail] = useState('');
@@ -17,22 +18,10 @@ export default function Login({ handleClose }: LoginProps) {
   const session = supabase.auth.session();
   const user = supabase.auth.user();
 
-  async function signInWithSupabase(provider: string) {
-    if (provider === 'facebook') {
-      const { user, session, error } = await supabase.auth.signIn({
-        provider: 'facebook',
-      });
-    }
-    if (provider === 'twitter') {
-      const { user, session, error } = await supabase.auth.signIn({
-        provider: 'twitter',
-      });
-    }
-    if (provider === 'google') {
-      const { user, session, error } = await supabase.auth.signIn({
-        provider: 'google',
-      });
-    }
+  async function signInWithSupabase(provider: Provider) {
+    const { user, session, error } = await supabase.auth.signIn({
+      provider: provider,
+    });
   }
 
   async function signInWithEmail() {
