@@ -702,7 +702,11 @@ export default function Home() {
 
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Header displayData={displayData} handleFileRead={handleFileRead} />
+      <Header
+        displayData={displayData}
+        handleFileRead={handleFileRead}
+        fetchUserDataFromDatabase={fetchUserDataFromDatabase}
+      />
       <div className={styles.viewerContainer}>
         <div id={styles.viewer}>
           {currentlyOpenedModule ? (
