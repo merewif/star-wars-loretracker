@@ -54,14 +54,12 @@ export default function Home() {
   // Supabase
   const user = supabase.auth.user();
 
-  async function fetchUserDataFromDatabase(
-    username: string
-  ): Promise<any[] | null> {
+  async function fetchUserDataFromDatabase(): Promise<any[] | null> {
     try {
       const { data, error } = await supabase
         .from('userdata')
         .select()
-        .eq('email', username);
+        .eq('email', user?.email);
 
       return data;
 
@@ -75,11 +73,11 @@ export default function Home() {
     return null;
   }
 
-  async function upsertUserDataIntoDatabase(username: string) {
+  async function upsertUserDataIntoDatabase() {
     try {
       const { data, error } = await supabase
         .from('userdata')
-        .upsert([{ email: username, data: entriesMarkedAsFinished }]);
+        .upsert([{ email: user?.email, data: entriesMarkedAsFinished }]);
 
       if (error) {
         console.log(error);
@@ -90,11 +88,8 @@ export default function Home() {
   }
 
   useEffect(() => {
-    // fetchUserDataFromDatabase('taborszkib@gmail.com');
-    // upsertUserDataIntoDatabase('taborszki529@gmail.com');
-  }, []);
+    console.log('Hello there.');
 
-  useEffect(() => {
     setCurrentlyOpenedModule('movies');
     fetchData('movies');
 
@@ -105,8 +100,15 @@ export default function Home() {
       setEntriesMarkedAsFinished(storedData);
     }
 
-    console.log('Hello there.');
+    fetchUserData();
   }, []);
+
+  const fetchUserData = async (): Promise<null> => {
+    const storedUserData = await fetchUserDataFromDatabase();
+    if (!storedUserData?.length) return null;
+    setEntriesMarkedAsFinished(storedUserData);
+    return null;
+  };
 
   useEffect(() => {
     let btns = Array.from(
