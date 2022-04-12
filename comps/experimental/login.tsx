@@ -59,14 +59,6 @@ export default function Login() {
 
   return (
     <>
-      <Head>
-        <title>Star Wars Loretracker</title>
-        <meta
-          name='description'
-          content='Track which Star Wars content you consooomed.'
-        />
-        <link rel='icon' href='/favicon.ico' />
-      </Head>
       <div className={styles.loginContainer}>
         <div className={styles.loginBox}>
           <div className={styles.logoContainer}>
