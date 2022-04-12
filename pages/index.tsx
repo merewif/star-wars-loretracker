@@ -9,6 +9,7 @@ import CardContents from '../comps/card/CardContents';
 import moment from 'moment';
 import { Waypoint } from 'react-waypoint';
 import { EntryData, MarkedEntries } from '../types';
+import { useSession } from 'next-auth/react';
 
 export default function Home() {
   const [defaultFetchedData, setDefaultFetchedData] = useState<EntryData[]>([]);
@@ -49,6 +50,12 @@ export default function Home() {
   const [hideExcludedEntries, setHideExcludedEntries] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const [progressBarValue, setProgressBarValue] = useState(0);
+
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    console.log(session);
+  }, []);
 
   useEffect(() => {
     setCurrentlyOpenedModule('movies');
