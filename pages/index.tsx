@@ -56,10 +56,9 @@ export default function Home() {
 
   async function fetchUserDataFromDatabase(): Promise<void> {
     try {
-      console.log('Fetching from database...');
       const { data, error } = await supabase
         .from('userdata')
-        .select()
+        .select('data')
         .eq('email', user?.email);
 
       if (data) setEntriesMarkedAsFinished(data);
