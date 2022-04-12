@@ -66,13 +66,6 @@ export default function Login({ handleClose }: LoginProps) {
               <form className={styles.form}>
                 <Button
                   variant='outlined'
-                  startIcon={<FacebookIcon />}
-                  onClick={() => signInWithSupabase('facebook')}
-                >
-                  Login with Facebook
-                </Button>
-                <Button
-                  variant='outlined'
                   startIcon={<GoogleIcon />}
                   onClick={() => signInWithSupabase('google')}
                 >
@@ -84,6 +77,13 @@ export default function Login({ handleClose }: LoginProps) {
                   onClick={() => signInWithSupabase('twitter')}
                 >
                   Login with Twitter
+                </Button>
+                <Button
+                  variant='outlined'
+                  startIcon={<FacebookIcon />}
+                  onClick={() => signInWithSupabase('facebook')}
+                >
+                  Login with Facebook
                 </Button>
                 <input
                   type='email'
