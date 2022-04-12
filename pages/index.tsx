@@ -93,14 +93,6 @@ export default function Home() {
   }
 
   useEffect((): void => {
-    // if (session?.user?.email) {
-    //   fetchUserDataFromDatabase(session.user.email);
-    //   return;
-    // }
-    // if (session?.user?.name) {
-    //   fetchUserDataFromDatabase(session.user.name);
-    //   return;
-    // }
     // fetchUserDataFromDatabase('taborszkib@gmail.com');
     // upsertUserDataIntoDatabase('taborszki529@gmail.com');
   }, []);
