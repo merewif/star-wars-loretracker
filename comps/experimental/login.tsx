@@ -15,7 +15,10 @@ import { supabase } from '../../utils/supabaseClient';
 import { LoginProps } from '../../types';
 import { Provider } from '@supabase/supabase-js';
 
-export default function Login({ handleClose }: LoginProps) {
+export default function Login({
+  handleClose,
+  fetchUserDataFromDatabase,
+}: LoginProps) {
   const [email, setEmail] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
@@ -49,6 +52,7 @@ export default function Login({ handleClose }: LoginProps) {
     const { user, session, error } = await supabase.auth.signIn({
       provider: provider,
     });
+    fetchUserDataFromDatabase();
   }
 
   function signInWithEmail(

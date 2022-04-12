@@ -25,7 +25,11 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction='up' ref={ref} {...props} />;
 });
 
-const Header = ({ displayData, handleFileRead }: HeaderProps) => {
+const Header = ({
+  displayData,
+  handleFileRead,
+  fetchUserDataFromDatabase,
+}: HeaderProps) => {
   const listElements = ['Movies', 'Books', 'Comics', 'Series'];
   const [open, setOpen] = useState(false);
   const [dialogContent, setDialogContent] = useState<string>('');
@@ -106,7 +110,10 @@ const Header = ({ displayData, handleFileRead }: HeaderProps) => {
             downloadBackup={downloadBackup}
           />
         ) : (
-          <Login handleClose={handleClose} />
+          <Login
+            handleClose={handleClose}
+            fetchUserDataFromDatabase={fetchUserDataFromDatabase}
+          />
         )}
       </Dialog>
     </>

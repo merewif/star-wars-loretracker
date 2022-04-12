@@ -9,6 +9,7 @@ export interface CardContentsProps {
 export interface HeaderProps {
   displayData: Function;
   handleFileRead: any;
+  fetchUserDataFromDatabase: () => void;
 }
 
 export interface EntryData {
@@ -56,6 +57,7 @@ export interface ProgressBarProps {
 
 export interface LoginProps {
   handleClose: () => void;
+  fetchUserDataFromDatabase: () => void;
 }
 
 export interface AboutProps {
