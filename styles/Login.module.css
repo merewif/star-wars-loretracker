@@ -51,8 +51,13 @@
 }
 
 .loggedIn {
+  width: 50%;
   display: grid;
   grid-template-columns: 1fr;
+}
+
+.loggedIn button {
+  width: 100%;
 }
 
 .logoContainer {
@@ -83,7 +88,7 @@
 }
 
 .loginBox button {
-  width: 50%;
+  width: 100%;
   margin-block: 20px 50px;
   padding: 10px;
   border: 1px solid white;
