@@ -59,7 +59,6 @@ export default function Login({ handleClose }: LoginProps) {
               <Button startIcon={<LogoutIcon />} onClick={() => signout()}>
                 Sign out
               </Button>
-              startIcon={<LogoutIcon />}
             </div>
           ) : (
             <>
