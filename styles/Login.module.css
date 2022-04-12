@@ -1,5 +1,5 @@
 .loginContainer {
-  width: auto;
+  width: 30vw;
   height: auto;
   background: transparent;
   display: grid;
@@ -48,6 +48,7 @@
   border-bottom-right-radius: 0;
   box-shadow: 0px 0px 15px 5px black;
   color: white;
+  padding-bottom: 35px;
 }
 
 .loggedIn {
@@ -63,6 +64,7 @@
 
 .logoContainer {
   width: 100%;
+  margin-inline: auto;
   text-align: center;
   margin-top: 25px;
   margin-bottom: 25px;
@@ -82,6 +84,7 @@
   padding-inline: 10px;
   padding-block: 15px;
   margin-block: 5px;
+  margin-top: 30px;
 }
 
 .loginBox input:focus {
@@ -90,7 +93,7 @@
 
 .loginBox button {
   width: 100%;
-  margin-block: 20px 50px;
+  margin-block: 5px 5px;
   padding: 10px;
   border: 1px solid white;
   outline: none;
@@ -103,15 +106,31 @@
   border-radius: 10px;
 }
 
-.loginOptions {
-  margin-block: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  width: 100%;
+@media screen and (max-width: 1600px) {
+  .loginContainer {
+    width: 70vw;
+  }
 }
 
-.loginOptions * {
-  cursor: pointer;
+@media screen and (max-width: 1000px) {
+  .loginContainer p {
+    font-size: 0.7rem;
+  }
+
+  .loginContainer {
+    max-height: 90vh;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .loginContainer {
+    padding-block: 50px;
+    padding-inline: 30px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .loginContainer p {
+    font-size: 0.5rem !important;
+  }
 }
