@@ -52,7 +52,9 @@ export default function Login({ handleClose }: LoginProps) {
     });
   }
 
-  function signInWithEmail(event: React.FormEvent<HTMLInputElement>) {
+  function signInWithEmail(
+    event: React.FormEvent<HTMLInputElement> | React.FormEvent<HTMLFormElement>
+  ) {
     event.preventDefault();
     sendLoginMail();
   }
@@ -110,13 +112,13 @@ export default function Login({ handleClose }: LoginProps) {
                 >
                   Login with Facebook
                 </Button>
+
                 <input
                   type='email'
                   placeholder='Email'
                   onChange={(e) => setEmail(e.target.value)}
                   onSubmit={(e) => signInWithEmail(e)}
                 />
-
                 <Button startIcon={<EmailIcon />} onClick={sendLoginMail}>
                   Login with email
                 </Button>
