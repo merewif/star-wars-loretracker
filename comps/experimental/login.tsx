@@ -8,8 +8,9 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import GoogleIcon from '@mui/icons-material/Google';
 import { supabase } from '../../utils/supabaseClient';
+import { LoginProps } from '../../types';
 
-export default function Login() {
+export default function Login({ handleClose }: LoginProps) {
   const [currentModule, setCurrentModule] = useState('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -37,6 +38,7 @@ export default function Login() {
 
   async function signout() {
     const { error } = await supabase.auth.signOut();
+    handleClose();
   }
 
   // function handleModuleChange(e:React.MouseEvent<HTMLElement>):void {
