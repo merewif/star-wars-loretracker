@@ -31,6 +31,7 @@
 #navbar ul li:nth-child(5) {
   margin-left: auto;
   color: #ffe81f;
+  text-align: right;
 }
 
 .dialogContent {
