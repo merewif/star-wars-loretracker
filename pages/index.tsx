@@ -55,6 +55,7 @@ export default function Home() {
 
   async function fetchUserDataFromDatabase(): Promise<void> {
     try {
+      console.log('Fetching...');
       const { data, error } = await supabase
         .from('userdata')
         .select('data')
