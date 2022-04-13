@@ -6,8 +6,6 @@ I began my journey into the Star Wars expanded universe in the beginning of 2022
 
 Fortunately the amazing [Youtini Team](https://youtini.com) has already assembled a gigantic database of all the Star Wars books and comics ever published, so all I had to do was to develop an interface to browse and filter the gargantuan collection.
 
-**Be warned**: In its current iteration, the Star Wars Loretracker stores your collection in the web storage of your browser. If you delete your cookies, you lose your settings. You can download your collection by navigating to the 'About & Backup' menu item and clicking on the 'Download backup' button. You can upload your collection again by using the 'Upload backup' button.
-
 ---
 
 ### Technical details
