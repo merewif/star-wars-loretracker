@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '../styles/Home.module.css';
 import Header from '../comps/Header';
 import ProgressBar from '../comps/ProgressBar';
@@ -11,7 +11,6 @@ import { Waypoint } from 'react-waypoint';
 import { EntryData, MarkedEntries } from '../types';
 import { supabase } from '../utils/supabaseClient';
 import { User } from '@supabase/supabase-js';
-import { useUser, Auth } from '@supabase/supabase-auth-helpers/react';
 
 export default function Home() {
   const [defaultFetchedData, setDefaultFetchedData] = useState<EntryData[]>([]);
@@ -53,12 +52,9 @@ export default function Home() {
   const [searchValue, setSearchValue] = useState('');
   const [progressBarValue, setProgressBarValue] = useState(0);
   const [user, setUser] = useState<User | null>();
-  // const { user, error } = useUser();
 
   async function fetchUserDataFromDatabase(): Promise<void> {
     try {
-      console.log('Fetching...');
-
       const { data, error } = await supabase
         .from('userdata')
         .select('data')
@@ -111,7 +107,6 @@ export default function Home() {
 
     const { data: authListener } = supabase.auth.onAuthStateChange(
       (event, session) => {
-        console.log(`Supbase auth event: ${event}`);
         if (event == 'SIGNED_IN') {
           setUser(session?.user ?? null);
         }
