@@ -52,7 +52,7 @@
 }
 
 .loggedIn {
-  width: 100%;
+  width: 80%;
   font-family: 'Montserrat';
   display: grid;
   grid-template-columns: 1fr;
