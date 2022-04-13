@@ -49,9 +49,8 @@ export default function About({
         </a>
       </p>
       <p>
-        The Loretracker is a serverless application; your collection data is
-        stored in your browser. If you want to import or export your collection,
-        use the buttons below:
+        If you want to use the Lortracker without logging in, you can import or
+        export your collection, use the buttons below:
       </p>
       <div style={{ display: 'grid', gap: '10px' }}>
         <input
