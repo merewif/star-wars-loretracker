@@ -10,6 +10,8 @@ import moment from 'moment';
 import { Waypoint } from 'react-waypoint';
 import { EntryData, MarkedEntries } from '../types';
 import { supabase } from '../utils/supabaseClient';
+import { User } from '@supabase/supabase-js';
+import { useUser, Auth } from '@supabase/supabase-auth-helpers/react';
 
 export default function Home() {
   const [defaultFetchedData, setDefaultFetchedData] = useState<EntryData[]>([]);
@@ -50,12 +52,13 @@ export default function Home() {
   const [hideExcludedEntries, setHideExcludedEntries] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const [progressBarValue, setProgressBarValue] = useState(0);
-
-  const user = supabase.auth.user();
+  //const [user, setUser] = useState<User | null>();
+  const { user, error } = useUser();
 
   async function fetchUserDataFromDatabase(): Promise<void> {
     try {
       console.log('Fetching...');
+
       const { data, error } = await supabase
         .from('userdata')
         .select('data')
@@ -104,13 +107,24 @@ export default function Home() {
       setEntriesMarkedAsFinished(storedData);
     }
 
-    supabase.auth.onAuthStateChange((event, session) => {
-      if (event == 'SIGNED_IN') {
-        console.log(event);
-        fetchUserDataFromDatabase();
-      }
-    });
+    // setUser(supabase.auth.user());
+
+    // const { data: authListener } = supabase.auth.onAuthStateChange(
+    //   (event, session) => {
+    //     console.log(`Supbase auth event: ${event}`);
+    //     if (event == 'SIGNED_IN') {
+    //       setUser(session?.user ?? null);
+    //     }
+    //   }
+    // );
+    // return () => {
+    //   if (authListener) authListener.unsubscribe();
+    // };
   }, []);
+
+  useEffect(() => {
+    if (user) fetchUserDataFromDatabase();
+  }, [user]);
 
   useEffect(() => {
     let btns = Array.from(
@@ -139,8 +153,6 @@ export default function Home() {
       'loretracker',
       JSON.stringify(entriesMarkedAsFinished)
     );
-
-    // if (user?.email) upsertUserDataIntoDatabase();
   }, [entriesMarkedAsFinished]);
 
   useEffect(() => {
@@ -707,11 +719,7 @@ export default function Home() {
 
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Header
-        displayData={displayData}
-        handleFileRead={handleFileRead}
-        fetchUserDataFromDatabase={fetchUserDataFromDatabase}
-      />
+      <Header displayData={displayData} handleFileRead={handleFileRead} />
       <div className={styles.viewerContainer}>
         <div id={styles.viewer}>
           {currentlyOpenedModule ? (
