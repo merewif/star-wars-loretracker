@@ -66,13 +66,13 @@ export default function Home() {
         setEntriesMarkedAsExcluded(data[0].data.excluded);
       }
 
-      if (!data) {
-        upsertUserDataIntoDatabase();
-      }
       return;
 
       if (error) {
         console.log(error);
+        if (user) {
+          upsertUserDataIntoDatabase();
+        }
       }
     } catch (error: any) {
       console.log(error.message);
