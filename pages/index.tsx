@@ -104,7 +104,7 @@ export default function Home() {
       setEntriesMarkedAsFinished(storedData);
     }
 
-    if (user?.email) fetchUserDataFromDatabase();
+    fetchUserDataFromDatabase();
   }, []);
 
   useEffect(() => {
