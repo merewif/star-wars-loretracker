@@ -52,15 +52,17 @@
 }
 
 .loggedIn {
-  width: 50%;
+  width: 100%;
   font-family: 'Montserrat';
   display: grid;
   grid-template-columns: 1fr;
+  text-align: center;
 }
 
 .loggedIn button {
-  width: 100%;
-  margin-top: 25px;
+  width: 50%;
+  margin: auto;
+  margin-top: 35px;
 }
 
 .logoContainer {
