@@ -148,6 +148,8 @@ export default function Home() {
       'loretracker',
       JSON.stringify(entriesMarkedAsFinished)
     );
+
+    if (user) upsertUserDataIntoDatabase();
   }, [entriesMarkedAsFinished]);
 
   useEffect(() => {
