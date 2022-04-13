@@ -74,6 +74,18 @@ export default function Login({ handleClose }: LoginProps) {
   return (
     <>
       <div className={styles.loginContainer}>
+        <IconButton
+          aria-label='close'
+          onClick={handleClose}
+          sx={{
+            position: 'absolute',
+            right: 8,
+            top: 8,
+            color: '#808080',
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
         <div className={styles.loginBox}>
           <div className={styles.logoContainer}>
             <Image src={logo} alt='Logo' height={200} width={300} />

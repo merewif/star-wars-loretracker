@@ -109,29 +109,22 @@
 
 @media screen and (max-width: 1600px) {
   .loginContainer {
-    width: 70vw;
+    width: 50vw;
   }
 }
 
 @media screen and (max-width: 1000px) {
-  .loginContainer p {
-    font-size: 0.7rem;
+  .form {
+    width: 80% !important;
   }
 
-  .loginContainer {
-    max-height: 90vh;
+  .loginContainer p {
+    font-size: 0.7rem;
   }
 }
 
 @media screen and (max-width: 700px) {
   .loginContainer {
-    padding-block: 50px;
-    padding-inline: 30px;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .loginContainer p {
-    font-size: 0.5rem !important;
+    width: auto;
   }
 }
