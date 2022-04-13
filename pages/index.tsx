@@ -15,9 +15,10 @@ import { User } from '@supabase/supabase-js';
 export default function Home() {
   const [defaultFetchedData, setDefaultFetchedData] = useState<EntryData[]>([]);
   const [fetchedData, setFetchedData] = useState<EntryData[]>([]);
-  const [paginationEndElement, setPaginationEndElement] = useState(30);
+  const [paginationEndElement, setPaginationEndElement] = useState<number>(30);
   const [fetchedTitles, setFetchedTitles] = useState<string[]>([]);
-  const [currentlyOpenedModule, setCurrentlyOpenedModule] = useState('movies');
+  const [currentlyOpenedModule, setCurrentlyOpenedModule] =
+    useState<string>('movies');
   const [moduleKeys, setModuleKeys] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState();
   const [entriesMarkedAsExcluded, setEntriesMarkedAsExcluded] =
@@ -50,7 +51,7 @@ export default function Home() {
   const [finishedFilterValue, setFinishedFilterValue] = useState('all');
   const [hideExcludedEntries, setHideExcludedEntries] = useState(false);
   const [searchValue, setSearchValue] = useState('');
-  const [progressBarValue, setProgressBarValue] = useState(0);
+  const [progressBarValue, setProgressBarValue] = useState<number>(0);
   const [user, setUser] = useState<User | null>();
 
   async function fetchUserDataFromDatabase(): Promise<void> {
@@ -76,7 +77,7 @@ export default function Home() {
     return;
   }
 
-  async function upsertUserDataIntoDatabase() {
+  async function upsertUserDataIntoDatabase(): Promise<void> {
     try {
       const { data, error } = await supabase
         .from('userdata')
