@@ -105,7 +105,10 @@ export default function Home() {
     }
 
     supabase.auth.onAuthStateChange((event, session) => {
-      if (event == 'SIGNED_IN') fetchUserDataFromDatabase();
+      if (event == 'SIGNED_IN') {
+        console.log(event);
+        fetchUserDataFromDatabase();
+      }
     });
   }, []);
 
