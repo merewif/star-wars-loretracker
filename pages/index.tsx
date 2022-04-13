@@ -52,8 +52,8 @@ export default function Home() {
   const [hideExcludedEntries, setHideExcludedEntries] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const [progressBarValue, setProgressBarValue] = useState(0);
-  //const [user, setUser] = useState<User | null>();
-  const { user, error } = useUser();
+  const [user, setUser] = useState<User | null>();
+  // const { user, error } = useUser();
 
   async function fetchUserDataFromDatabase(): Promise<void> {
     try {
@@ -107,19 +107,19 @@ export default function Home() {
       setEntriesMarkedAsFinished(storedData);
     }
 
-    // setUser(supabase.auth.user());
+    setUser(supabase.auth.user());
 
-    // const { data: authListener } = supabase.auth.onAuthStateChange(
-    //   (event, session) => {
-    //     console.log(`Supbase auth event: ${event}`);
-    //     if (event == 'SIGNED_IN') {
-    //       setUser(session?.user ?? null);
-    //     }
-    //   }
-    // );
-    // return () => {
-    //   if (authListener) authListener.unsubscribe();
-    // };
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        console.log(`Supbase auth event: ${event}`);
+        if (event == 'SIGNED_IN') {
+          setUser(session?.user ?? null);
+        }
+      }
+    );
+    return () => {
+      if (authListener) authListener.unsubscribe();
+    };
   }, []);
 
   useEffect(() => {
