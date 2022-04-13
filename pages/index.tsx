@@ -120,6 +120,7 @@ export default function Home() {
 
   useEffect(() => {
     if (user) fetchUserDataFromDatabase();
+    if (!user) console.log('Logged out.');
   }, [user]);
 
   useEffect(() => {
