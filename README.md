@@ -12,12 +12,9 @@ Fortunately the amazing [Youtini Team](https://youtini.com) has already assemble
 
 ### Technical details
 
-The Loretracker was developed using React with Next.js and TypeScript. The frontend is hosted on Vercel. The UI uses MUI Components and the Lodash library helps in filtering and sorting the data.
+The Loretracker was developed using React with Next.js and TypeScript. The frontend is hosted on Vercel. The UI uses MUI Components and the Lodash library helps in filtering and sorting the data. The authentication and database is provided by Supabase.
 
 ### ToDo:
 
 1. Refactor the FiltersContainer component into smaller modules.
 2. Write unit tests.
-3. Add authentication.
-4. Store user data on Firestore.
-5. Add an option to write and read reviews.
