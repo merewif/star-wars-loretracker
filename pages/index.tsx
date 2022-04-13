@@ -70,12 +70,12 @@ export default function Home() {
 
       if (error) {
         console.log(error);
-        if (user) {
-          upsertUserDataIntoDatabase();
-        }
       }
     } catch (error: any) {
       console.log(error.message);
+      if (user) {
+        upsertUserDataIntoDatabase();
+      }
     }
 
     return;
