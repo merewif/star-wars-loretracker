@@ -104,9 +104,9 @@ export default function Home() {
       setEntriesMarkedAsFinished(storedData);
     }
 
-    setTimeout(() => {
-      fetchUserDataFromDatabase();
-    }, 2500);
+    supabase.auth.onAuthStateChange((event, session) => {
+      if (event == 'SIGNED_IN') fetchUserDataFromDatabase();
+    });
   }, []);
 
   useEffect(() => {
