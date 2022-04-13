@@ -67,7 +67,7 @@ export default function Login({ handleClose }: LoginProps) {
 
   async function signout() {
     const { error } = await supabase.auth.signOut();
-    window.localStorage.removeItem('loretracker');
+    localStorage.removeItem('loretracker');
     handleClose();
   }
 
