@@ -49,7 +49,7 @@ export default function Home() {
   const [filteredEras, setFilteredEras] = useState<string[]>([]);
   const [canonicityFilterValue, setCanonicityFilterValue] = useState('all');
   const [finishedFilterValue, setFinishedFilterValue] = useState('all');
-  const [hideExcludedEntries, setHideExcludedEntries] = useState(false);
+  const [hideExcludedEntries, setHideExcludedEntries] = useState<boolean>(true);
   const [searchValue, setSearchValue] = useState('');
   const [progressBarValue, setProgressBarValue] = useState<number>(0);
   const [user, setUser] = useState<User | null>();
@@ -139,10 +139,6 @@ export default function Home() {
   useEffect(() => {
     setCardsHeight();
   }, [fetchedData, currentlyOpenedModule]);
-
-  useEffect(() => {
-    filterEntries(hideExcludedEntries, 'hideExcluded');
-  }, [entriesMarkedAsExcluded]);
 
   useEffect(() => {
     localStorage.setItem(
@@ -331,7 +327,7 @@ export default function Home() {
 
   function displayData(target: string) {
     setCurrentlyOpenedModule(target);
-    setHideExcludedEntries(false);
+    setHideExcludedEntries(true);
     if (target === 'books') return fetchYoutiniBooks();
     if (target === 'comics') return fetchYoutiniComics();
     fetchData(target);
@@ -731,6 +727,13 @@ export default function Home() {
           <div id={styles.moduleContainer}>
             {_.slice(fetchedData, 0, paginationEndElement).map((e1, i1) => {
               let currentTitle = e1.title.replace(/\s+/g, '-');
+              if (
+                hideExcludedEntries &&
+                entriesMarkedAsExcluded[currentlyOpenedModule].includes(
+                  currentTitle
+                )
+              )
+                return;
               return (
                 <div
                   className={
