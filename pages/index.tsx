@@ -65,6 +65,10 @@ export default function Home() {
         setEntriesMarkedAsFinished(data[0].data);
         setEntriesMarkedAsExcluded(data[0].data.excluded);
       }
+
+      if (!data) {
+        upsertUserDataIntoDatabase();
+      }
       return;
 
       if (error) {
