@@ -111,6 +111,23 @@ export default function Home() {
         if (event == 'SIGNED_IN') {
           setUser(session?.user ?? null);
         }
+        if (event == 'SIGNED_OUT') {
+          setEntriesMarkedAsExcluded({
+            movies: [],
+            games: [],
+            books: [],
+            comics: [],
+            series: [],
+          });
+          setEntriesMarkedAsFinished({
+            movies: [],
+            games: [],
+            books: [],
+            comics: [],
+            series: [],
+            excluded: entriesMarkedAsExcluded,
+          });
+        }
       }
     );
     return () => {
@@ -120,7 +137,6 @@ export default function Home() {
 
   useEffect(() => {
     if (user) fetchUserDataFromDatabase();
-    if (!user) console.log('Logged out.');
   }, [user]);
 
   useEffect(() => {
