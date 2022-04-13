@@ -11,7 +11,7 @@ Fortunately the amazing [Youtini Team](https://youtini.com) has already assemble
 ### Technical details
 
 - Language:
-  - TypeScript
+  - JavaScript / TypeScript
 - Framework:
   - React (Next.js)
 - Database:
