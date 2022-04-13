@@ -104,7 +104,9 @@ export default function Home() {
       setEntriesMarkedAsFinished(storedData);
     }
 
-    fetchUserDataFromDatabase();
+    setTimeout(() => {
+      fetchUserDataFromDatabase();
+    }, 2500);
   }, []);
 
   useEffect(() => {
