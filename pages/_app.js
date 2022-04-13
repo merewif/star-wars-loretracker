@@ -1,7 +1,6 @@
 import '../styles/globals.css';
 import React from 'react';
 import ReactGA from 'react-ga';
-import { SessionProvider } from 'next-auth/react';
 
 function StarWarsLoretracker({ Component, session, pageProps }) {
   ReactGA.initialize('G-WEW3SZLHC9');
@@ -11,9 +10,7 @@ function StarWarsLoretracker({ Component, session, pageProps }) {
 
   return (
     <div id='appContainer'>
-      <SessionProvider session={session}>
-        <Component {...pageProps} />
-      </SessionProvider>
+      <Component {...pageProps} />
     </div>
   );
 }
