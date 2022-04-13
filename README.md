@@ -10,7 +10,17 @@ Fortunately the amazing [Youtini Team](https://youtini.com) has already assemble
 
 ### Technical details
 
-The Loretracker was developed using React with Next.js and TypeScript. The frontend is hosted on Vercel. The UI uses MUI Components and the Lodash library helps in filtering and sorting the data. The authentication and database is provided by Supabase.
+- Language:
+  - TypeScript
+- Framework:
+  - React (Next.js)
+- Database:
+  - Supabase (PostgreSQL)
+- UI Libraries:
+  - Material UI
+  - Lodash
+  - Waypoint
+  - Moment
 
 ### ToDo:
 
