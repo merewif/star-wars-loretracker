@@ -15,7 +15,7 @@ Fortunately the amazing [Youtini Team](https://youtini.com) has already assemble
 - Framework:
   - React (Next.js)
 - Database:
-  - Supabase (PostgreSQL)
+  - Supabase (Postgres)
 - UI Libraries:
   - Material UI
   - Lodash
