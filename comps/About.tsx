@@ -50,7 +50,7 @@ export default function About({
       </p>
       <p>
         If you want to use the Lortracker without logging in, you can import or
-        export your collection, use the buttons below:
+        export your collection using the buttons below:
       </p>
       <div style={{ display: 'grid', gap: '10px' }}>
         <input
