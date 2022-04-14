@@ -12,16 +12,13 @@ import { useFilterContext } from '../../utils/useFilterContext';
 
 export default function SortDropdown() {
   const [order, setOrder] = useState('asc');
-  const [sortParameter, setSortParameter] = useState('');
+  const [sortParameter, setSortParameter] = useState('title');
+
   useEffect(() => {
-    sortWithOrderParameter();
-  }, [order]);
+    setSortBy([sortParameter, order]);
+  }, [order, sortParameter]);
 
-  function sortWithOrderParameter() {
-    orderBy(sortParameter, order);
-  }
-
-  const { sortBy, orderBy, moduleKeys } = useFilterContext();
+  const { sortBy, setSortBy, moduleKeys } = useFilterContext();
 
   return (
     <Box
@@ -37,10 +34,9 @@ export default function SortDropdown() {
       <FormControl sx={{ width: '200px' }}>
         <InputLabel>Sort By</InputLabel>
         <Select
-          value={sortBy}
+          value={sortBy[0]}
           label='Sort By'
           onChange={(e) => {
-            orderBy(e.target.value, order);
             setSortParameter(e.target.value);
           }}
         >
