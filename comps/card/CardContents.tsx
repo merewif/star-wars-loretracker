@@ -27,6 +27,7 @@ export default function CardContents({
 
     setOpenSnackbar(false);
   };
+
   return (
     <div key={'2' + i2}>
       {currentKey === 'coverImage' ? (
