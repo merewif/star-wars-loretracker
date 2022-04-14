@@ -23,7 +23,7 @@ export default function Home() {
   const [currentlyOpenedModule, setCurrentlyOpenedModule] =
     useState<string>('movies');
   const [moduleKeys, setModuleKeys] = useState<string[]>([]);
-  const [sortBy, setSortBy] = useState();
+  const [sortBy, setSortBy] = useState<any[]>(['title', 'asc']);
   const [entriesMarkedAsExcluded, setEntriesMarkedAsExcluded] =
     useState<MarkedEntries>({
       movies: [],
@@ -177,6 +177,10 @@ export default function Home() {
     calculateProgress();
   }, [defaultFetchedData, fetchedData, entriesMarkedAsFinished]);
 
+  useEffect(() => {
+    setFetchedData(_.orderBy(fetchedData, sortBy[0], sortBy[1]));
+  }, [sortBy]);
+
   function calculateProgress() {
     if (finishedFilterValue === 'finished') return setProgressBarValue(100);
     let finished = 0;
@@ -200,7 +204,6 @@ export default function Home() {
   }
 
   function handleFileRead(event: any) {
-    console.log(event.type);
     let collection = JSON.parse(event.target.result);
     if (!collection.excluded) collection.excluded = entriesMarkedAsExcluded;
     window.localStorage.setItem('loretracker', JSON.stringify(collection));
@@ -229,22 +232,14 @@ export default function Home() {
   }
 
   async function fetchYoutiniBooks() {
+    const books = await useYoutiniFetch('books');
     if (books) parseYoutiniData(books);
   }
 
   async function fetchYoutiniComics() {
+    const comics = await useYoutiniFetch('comics');
     if (comics) parseYoutiniData(comics);
-        }
-      });
-
-    await fetch('./data/comics/Youtini Bookshelf - Legends Comics (ABY).json')
-      .then((response) => response.json())
-      .then((data) => {
-        for (const entry of data) {
-          entry.canonicity = false;
-          allComics.push(entry);
-        }
-      });
+  }
 
   async function parseYoutiniData(allBooks: any[]): Promise<null> {
     await useYoutiniParser(allBooks).then((books: EntryData[]) =>
@@ -343,13 +338,6 @@ export default function Home() {
         fetchedCategories.push(entry.category);
     }
     setCategories(fetchedCategories);
-  }
-
-  function orderBy(
-    value: string,
-    order: boolean | 'asc' | 'desc' | undefined = 'asc'
-  ) {
-    setFetchedData(_.orderBy(fetchedData, value, order));
   }
 
   function excludeEntry(entry: string) {
@@ -574,7 +562,8 @@ export default function Home() {
       }
     }
 
-    setFetchedData(_.flatten(filteredResults));
+    const filteredData = _.flatten(filteredResults);
+    setFetchedData(_.orderBy(filteredResults, sortBy[0], sortBy[1]));
   }
 
   function resetFilters() {
@@ -611,12 +600,12 @@ export default function Home() {
     setSearchValue,
     searchEntries,
     sortBy,
-    orderBy,
     moduleKeys,
     filteredCategories,
     hideExcludedEntries,
     removeFromExcluded,
     entriesMarkedAsExcluded,
+    setSortBy,
   };
 
   return (
