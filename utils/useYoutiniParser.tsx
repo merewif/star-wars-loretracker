@@ -1,8 +1,11 @@
-import { EntryData } from '../types';
+import { EntryData, YoutiniData } from '../types';
 import moment from 'moment';
 
-export async function useYoutiniParser(allBooks: any[]): Promise<EntryData[]> {
+export async function useYoutiniParser(
+  allBooks: YoutiniData[]
+): Promise<EntryData[]> {
   let books: EntryData[] = [];
+
   for await (const book of allBooks) {
     let currentBook: EntryData = {
       canonicity: book.canonicity,

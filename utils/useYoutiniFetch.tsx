@@ -1,9 +1,9 @@
-import { EntryData } from '../types';
+import { EntryData, YoutiniData } from '../types';
 
 export async function useYoutiniFetch(
   parameter: string
-): Promise<any[] | null> {
-  let fetchedData: EntryData[] = [];
+): Promise<YoutiniData[]> {
+  let fetchedData: YoutiniData[] = [];
 
   if (parameter === 'books') {
     await fetch('./data/books/Youtini Bookshelf - Legends Books.json')
@@ -54,6 +54,5 @@ export async function useYoutiniFetch(
       });
   }
 
-  if (fetchedData == null) return null;
   return Promise.resolve(fetchedData);
 }
