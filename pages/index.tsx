@@ -178,7 +178,10 @@ export default function Home() {
     let finished = 0;
     let total = 0;
 
-    if (fetchedData) total = fetchedData.length;
+    if (fetchedData)
+      total =
+        fetchedData.length -
+        entriesMarkedAsExcluded[currentlyOpenedModule].length;
     if (entriesMarkedAsFinished[currentlyOpenedModule]) {
       for (const entry of entriesMarkedAsFinished[currentlyOpenedModule]) {
         for (const data of fetchedData) {
