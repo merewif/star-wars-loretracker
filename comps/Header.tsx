@@ -12,7 +12,7 @@ import DownloadIcon from '@mui/icons-material/Download';
 import Button from '@mui/material/Button';
 import { TransitionProps } from '@mui/material/transitions';
 import { HeaderProps } from '../types';
-import Login from './experimental/login';
+import Login from './Login';
 import About from './About';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
