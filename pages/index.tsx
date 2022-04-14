@@ -175,6 +175,7 @@ export default function Home() {
   }, [defaultFetchedData, fetchedData, entriesMarkedAsFinished]);
 
   function calculateProgress() {
+    if (finishedFilterValue === 'finished') return setProgressBarValue(100);
     let finished = 0;
     let total = 0;
 
