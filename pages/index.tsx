@@ -8,7 +8,7 @@ import FiltersContainer from '../comps/Filters/FiltersContainer';
 import CardContents from '../comps/card/CardContents';
 import moment from 'moment';
 import { Waypoint } from 'react-waypoint';
-import { EntryData, MarkedEntries } from '../types';
+import { EntryData, MarkedEntries, YoutiniData } from '../types';
 import { supabase } from '../utils/supabaseClient';
 import { User } from '@supabase/supabase-js';
 import { FilterContext } from '../utils/useFilterContext';
@@ -231,24 +231,6 @@ export default function Home() {
     }
   }
 
-  async function fetchYoutiniBooks() {
-    const books = await useYoutiniFetch('books');
-    if (books) parseYoutiniData(books);
-  }
-
-  async function fetchYoutiniComics() {
-    const comics = await useYoutiniFetch('comics');
-    if (comics) parseYoutiniData(comics);
-  }
-
-  async function parseYoutiniData(allBooks: any[]): Promise<null> {
-    await useYoutiniParser(allBooks).then((books: EntryData[]) =>
-      setDataIntoStates(books)
-    );
-
-    return null;
-  }
-
   function setDataIntoStates(data: EntryData[]) {
     setFetchedData(data);
     setDefaultFetchedData(data);
@@ -262,8 +244,12 @@ export default function Home() {
   function displayData(target: string) {
     setCurrentlyOpenedModule(target);
     setHideExcludedEntries(true);
-    if (target === 'books') return fetchYoutiniBooks();
-    if (target === 'comics') return fetchYoutiniComics();
+
+    if (target === 'books' || target === 'comics')
+      return useYoutiniFetch(target)
+        .then((books: YoutiniData[]) => useYoutiniParser(books))
+        .then((books: EntryData[]) => setDataIntoStates(books));
+
     fetchData(target);
   }
 
