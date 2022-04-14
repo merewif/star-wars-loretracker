@@ -1,5 +1,9 @@
 export type PossibleModules = 'movies' | 'books' | 'comics' | 'series';
 
+export interface HeadProps {
+  module: PossibleModules;
+}
+
 export interface CardContentsProps {
   i2: number;
   currentKey: string;

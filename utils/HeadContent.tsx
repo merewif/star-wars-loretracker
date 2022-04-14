@@ -1,10 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import { PossibleModules } from '../types';
-
-interface HeadProps {
-  module: PossibleModules;
-}
+import { HeadProps } from '../types';
 
 export default function HeadContent({ module }: HeadProps) {
   return (
