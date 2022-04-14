@@ -4,6 +4,14 @@ export interface HeadProps {
   module: PossibleModules;
 }
 
+export interface SnackbarProps {
+  openSnackbar: boolean;
+  closeSnackbar: (
+    event: React.MouseEventHandler<HTMLAnchorElement>,
+    reason: string
+  ) => void;
+}
+
 export interface CardContentsProps {
   i2: number;
   currentKey: string;

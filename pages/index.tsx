@@ -238,7 +238,7 @@ export default function Home() {
   }
 
   function setDataIntoStates(data: EntryData[]) {
-    setFetchedData(data);
+    setFetchedData(_.orderBy(data, sortBy[0], sortBy[1]));
     setDefaultFetchedData(data);
     setModuleKeys(Object.keys(data[0]));
     fetchAllTitles(data);
@@ -576,28 +576,26 @@ export default function Home() {
   }
 
   const filterprops = {
-    filterboxAnchorEl,
-    setFilterboxAnchorEl,
-    canonicityFilterValue,
-    filterEntries,
-    finishedFilterValue,
-    filteredCreatorsName,
-    creators,
-    filteredEras,
-    resetFilters,
-    eras,
-    categories,
-    fetchedTitles,
-    searchValue,
-    setSearchValue,
-    searchEntries,
     sortBy,
+    creators,
+    setSortBy,
+    categories,
     moduleKeys,
+    searchValue,
+    resetFilters,
+    searchEntries,
+    fetchedTitles,
+    filterEntries,
+    setSearchValue,
+    filterboxAnchorEl,
+    removeFromExcluded,
     filteredCategories,
     hideExcludedEntries,
-    removeFromExcluded,
+    finishedFilterValue,
+    setFilterboxAnchorEl,
+    filteredCreatorsName,
+    canonicityFilterValue,
     entriesMarkedAsExcluded,
-    setSortBy,
   };
 
   return (
