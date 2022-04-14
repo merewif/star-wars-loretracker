@@ -20,8 +20,9 @@ export default function Home() {
   const [fetchedData, setFetchedData] = useState<EntryData[]>([]);
   const [paginationEndElement, setPaginationEndElement] = useState<number>(30);
   const [fetchedTitles, setFetchedTitles] = useState<string[]>([]);
-  const [currentlyOpenedModule, setCurrentlyOpenedModule] =
-    useState<string>('movies');
+  const [currentlyOpenedModule, setCurrentlyOpenedModule] = useState<
+    'movies' | 'books' | 'comics' | 'series'
+  >('movies');
   const [moduleKeys, setModuleKeys] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState<any[]>(['title', 'asc']);
   const [entriesMarkedAsExcluded, setEntriesMarkedAsExcluded] =
@@ -241,7 +242,7 @@ export default function Home() {
     fetchAllCategories(data);
   }
 
-  function displayData(target: string) {
+  function displayData(target: 'movies' | 'books' | 'comics' | 'series') {
     setCurrentlyOpenedModule(target);
     setHideExcludedEntries(true);
 
