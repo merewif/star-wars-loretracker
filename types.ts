@@ -4,6 +4,11 @@ export interface HeadProps {
   module: PossibleModules;
 }
 
+export interface SnackbarProps {
+  openSnackbar: boolean;
+  closeSnackbar: () => void;
+}
+
 export interface CardContentsProps {
   i2: number;
   currentKey: string;
