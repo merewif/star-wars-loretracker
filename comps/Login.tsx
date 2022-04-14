@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import styles from '../../styles/Login.module.css';
-import logo from '../../assets/logo.png';
+import styles from '../styles/Login.module.css';
+import logo from '../assets/logo.png';
 import Image from 'next/image';
 import Button from '@mui/material/Button';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -11,8 +11,8 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import { supabase } from '../../utils/supabaseClient';
-import { LoginProps } from '../../types';
+import { supabase } from '../utils/supabaseClient';
+import { LoginProps } from '../types';
 import { Provider } from '@supabase/supabase-js';
 
 export default function Login({ handleClose }: LoginProps) {
