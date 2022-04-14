@@ -238,7 +238,7 @@ export default function Home() {
   }
 
   function setDataIntoStates(data: EntryData[]) {
-    setFetchedData(data);
+    setFetchedData(_.orderBy(data, sortBy[0], sortBy[1]));
     setDefaultFetchedData(data);
     setModuleKeys(Object.keys(data[0]));
     fetchAllTitles(data);
