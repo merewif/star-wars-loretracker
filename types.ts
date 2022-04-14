@@ -1,3 +1,5 @@
+export type PossibleModules = 'movies' | 'books' | 'comics' | 'series';
+
 export interface CardContentsProps {
   i2: number;
   currentKey: string;

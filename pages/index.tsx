@@ -8,7 +8,12 @@ import FiltersContainer from '../comps/Filters/FiltersContainer';
 import CardContents from '../comps/card/CardContents';
 import moment from 'moment';
 import { Waypoint } from 'react-waypoint';
-import { EntryData, MarkedEntries, YoutiniData } from '../types';
+import {
+  EntryData,
+  MarkedEntries,
+  PossibleModules,
+  YoutiniData,
+} from '../types';
 import { supabase } from '../utils/supabaseClient';
 import { User } from '@supabase/supabase-js';
 import { FilterContext } from '../utils/useFilterContext';
@@ -20,9 +25,8 @@ export default function Home() {
   const [fetchedData, setFetchedData] = useState<EntryData[]>([]);
   const [paginationEndElement, setPaginationEndElement] = useState<number>(30);
   const [fetchedTitles, setFetchedTitles] = useState<string[]>([]);
-  const [currentlyOpenedModule, setCurrentlyOpenedModule] = useState<
-    'movies' | 'books' | 'comics' | 'series'
-  >('movies');
+  const [currentlyOpenedModule, setCurrentlyOpenedModule] =
+    useState<PossibleModules>('movies');
   const [moduleKeys, setModuleKeys] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState<any[]>(['title', 'asc']);
   const [entriesMarkedAsExcluded, setEntriesMarkedAsExcluded] =
@@ -242,7 +246,7 @@ export default function Home() {
     fetchAllCategories(data);
   }
 
-  function displayData(target: 'movies' | 'books' | 'comics' | 'series') {
+  function displayData(target: PossibleModules) {
     setCurrentlyOpenedModule(target);
     setHideExcludedEntries(true);
 
