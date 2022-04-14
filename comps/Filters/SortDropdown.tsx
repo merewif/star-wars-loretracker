@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -8,13 +8,9 @@ import _ from 'lodash';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import styles from '../../styles/Home.module.css';
-import { SortDropdownProps } from '../../types';
+import { useFilterContext } from '../../utils/useFilterContext';
 
-export default function SortDropdown({
-  sortBy,
-  orderBy,
-  moduleKeys,
-}: SortDropdownProps) {
+export default function SortDropdown() {
   const [order, setOrder] = useState('asc');
   const [sortParameter, setSortParameter] = useState('');
   useEffect(() => {
@@ -24,6 +20,8 @@ export default function SortDropdown({
   function sortWithOrderParameter() {
     orderBy(sortParameter, order);
   }
+
+  const { sortBy, orderBy, moduleKeys } = useFilterContext();
 
   return (
     <Box

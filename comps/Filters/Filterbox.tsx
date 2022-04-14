@@ -16,22 +16,25 @@ import Popover from '@mui/material/Popover';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import styles from '../../styles/Home.module.css';
 import ListOfExcludedEntriesDialog from '../MUI/ListOfExcludedEntriesDialog';
+import { useFilterContext } from '../../utils/useFilterContext';
 
-export default function Filterbox({
-  canonicityFilterValue,
-  filterEntries,
-  finishedFilterValue,
-  filteredCreatorsName,
-  creators,
-  filteredCategories,
-  categories,
-  resetFilters,
-  filterboxAnchorEl,
-  setFilterboxAnchorEl,
-  hideExcludedEntries,
-  removeFromExcluded,
-  entriesMarkedAsExcluded,
-}) {
+export default function Filterbox() {
+  const {
+    canonicityFilterValue,
+    filterEntries,
+    finishedFilterValue,
+    filteredCreatorsName,
+    creators,
+    filteredCategories,
+    categories,
+    resetFilters,
+    filterboxAnchorEl,
+    setFilterboxAnchorEl,
+    hideExcludedEntries,
+    removeFromExcluded,
+    entriesMarkedAsExcluded,
+  } = useFilterContext();
+
   return (
     <div
       style={{
@@ -78,7 +81,9 @@ export default function Filterbox({
               control={<Checkbox checked={hideExcludedEntries} />}
               label='Hide excluded entries'
               sx={{ marginLeft: '15px' }}
-              onChange={(e) => filterEntries(e.target.checked, 'hideExcluded')}
+              onChange={(e: React.SyntheticEvent, checked: boolean) =>
+                filterEntries(checked, 'hideExcluded')
+              }
             />
           </div>
           <ListOfExcludedEntriesDialog
@@ -200,7 +205,7 @@ export default function Filterbox({
                 input={<OutlinedInput label='Creators' />}
                 renderValue={(selected) => selected.join(', ')}
               >
-                {creators.map((name) => (
+                {creators.map((name: string) => (
                   <MenuItem key={name} value={name} sx={{ maxWidth: '80vw' }}>
                     <Checkbox
                       checked={filteredCreatorsName.indexOf(name) > -1}
@@ -226,7 +231,7 @@ export default function Filterbox({
                   input={<OutlinedInput label='Categories' />}
                   renderValue={(selected) => selected.join(', ')}
                 >
-                  {categories.map((name) => (
+                  {categories.map((name: string) => (
                     <MenuItem key={name} value={name} sx={{ maxWidth: '80vw' }}>
                       <Checkbox
                         checked={filteredCategories.indexOf(name) > -1}

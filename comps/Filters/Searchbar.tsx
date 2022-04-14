@@ -4,13 +4,12 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import styles from '../../styles/Home.module.css';
 import { Keyable } from '../../types';
+import { useFilterContext } from '../../utils/useFilterContext';
 
-export default function Searchbar({
-  fetchedTitles,
-  searchValue,
-  setSearchValue,
-  searchEntries,
-}: Keyable) {
+export default function Searchbar() {
+  const { fetchedTitles, searchValue, setSearchValue, searchEntries } =
+    useFilterContext();
+
   return (
     <>
       <Box
