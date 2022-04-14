@@ -1,4 +1,5 @@
 import { EntryData, YoutiniData } from '../types';
+import _ from 'lodash';
 import moment from 'moment';
 
 export async function useYoutiniParser(
@@ -59,5 +60,5 @@ export async function useYoutiniParser(
       books.push(currentBook);
     }
   }
-  return books;
+  return _.orderBy(books, 'title', 'asc');
 }
