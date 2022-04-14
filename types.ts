@@ -6,7 +6,7 @@ export interface HeadProps {
 
 export interface SnackbarProps {
   openSnackbar: boolean;
-  closeSnackbar: () => void;
+  closeSnackbar: (event: Event, reason: string) => void;
 }
 
 export interface CardContentsProps {
