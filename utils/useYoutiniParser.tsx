@@ -1,10 +1,9 @@
 import { EntryData } from '../types';
 import moment from 'moment';
 
-export function useYoutiniParser(allBooks: EntryData[]) {
+export async function useYoutiniParser(allBooks: any[]): Promise<EntryData[]> {
   let books: EntryData[] = [];
-
-  for (const book of allBooks) {
+  for await (const book of allBooks) {
     let currentBook: EntryData = {
       canonicity: book.canonicity,
       coverImage: book['Cover Image URL'],
