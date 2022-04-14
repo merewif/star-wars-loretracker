@@ -2,6 +2,11 @@
 
 functions
 
+.eslintrc.json
+.babelrc
+tsconfig.json
+next-env.d.ts
+
 # dependencies
 /node_modules
 /.pnp
@@ -45,5 +50,4 @@ firestore.rules
 storage.rules
 database.rules.json
 
-.eslintrc.json
-.babelrc
+
