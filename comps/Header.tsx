@@ -1,15 +1,9 @@
-import React, { useState, forwardRef } from 'react';
+import React, { useState } from 'react';
 import styles from '../styles/Header.module.css';
 import logo from '../assets/logo.png';
 import Image from 'next/image';
 import Dialog from '@mui/material/Dialog';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
-import { style } from '@mui/system';
-import FileUploadIcon from '@mui/icons-material/FileUpload';
-import DownloadIcon from '@mui/icons-material/Download';
-import Button from '@mui/material/Button';
 import { TransitionProps } from '@mui/material/transitions';
 import { HeaderProps } from '../types';
 import Login from './Login';
