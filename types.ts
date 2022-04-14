@@ -1,3 +1,9 @@
+export type PossibleModules = 'movies' | 'books' | 'comics' | 'series';
+
+export interface HeadProps {
+  module: PossibleModules;
+}
+
 export interface CardContentsProps {
   i2: number;
   currentKey: string;
@@ -9,6 +15,18 @@ export interface CardContentsProps {
 export interface HeaderProps {
   displayData: Function;
   handleFileRead: any;
+}
+
+export interface YoutiniData {
+  '(All Books) Title + Format': string;
+  'Database ID': number;
+  'Name (Title)': string;
+  'Author / Writer': string;
+  'Release Date': string;
+  Timeline: string;
+  'Cover Image URL': string | number;
+  Category: string;
+  canonicity: boolean;
 }
 
 export interface EntryData {

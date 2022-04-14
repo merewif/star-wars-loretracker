@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import styles from '../styles/Home.module.css';
 import Header from '../comps/Header';
 import ProgressBar from '../comps/ProgressBar';
@@ -8,9 +8,18 @@ import FiltersContainer from '../comps/Filters/FiltersContainer';
 import CardContents from '../comps/card/CardContents';
 import moment from 'moment';
 import { Waypoint } from 'react-waypoint';
-import { EntryData, MarkedEntries } from '../types';
+import {
+  EntryData,
+  MarkedEntries,
+  PossibleModules,
+  YoutiniData,
+} from '../types';
 import { supabase } from '../utils/supabaseClient';
 import { User } from '@supabase/supabase-js';
+import { FilterContext } from '../utils/useFilterContext';
+import { useYoutiniParser } from '../utils/useYoutiniParser';
+import { useYoutiniFetch } from '../utils/useYoutiniFetch';
+import HeadContent from '../utils/HeadContent';
 
 export default function Home() {
   const [defaultFetchedData, setDefaultFetchedData] = useState<EntryData[]>([]);
@@ -18,9 +27,9 @@ export default function Home() {
   const [paginationEndElement, setPaginationEndElement] = useState<number>(30);
   const [fetchedTitles, setFetchedTitles] = useState<string[]>([]);
   const [currentlyOpenedModule, setCurrentlyOpenedModule] =
-    useState<string>('movies');
+    useState<PossibleModules>('movies');
   const [moduleKeys, setModuleKeys] = useState<string[]>([]);
-  const [sortBy, setSortBy] = useState();
+  const [sortBy, setSortBy] = useState<any[]>(['title', 'asc']);
   const [entriesMarkedAsExcluded, setEntriesMarkedAsExcluded] =
     useState<MarkedEntries>({
       movies: [],
@@ -174,7 +183,12 @@ export default function Home() {
     calculateProgress();
   }, [defaultFetchedData, fetchedData, entriesMarkedAsFinished]);
 
+  useEffect(() => {
+    setFetchedData(_.orderBy(fetchedData, sortBy[0], sortBy[1]));
+  }, [sortBy]);
+
   function calculateProgress() {
+    if (finishedFilterValue === 'finished') return setProgressBarValue(100);
     let finished = 0;
     let total = 0;
 
@@ -196,7 +210,6 @@ export default function Home() {
   }
 
   function handleFileRead(event: any) {
-    console.log(event.type);
     let collection = JSON.parse(event.target.result);
     if (!collection.excluded) collection.excluded = entriesMarkedAsExcluded;
     window.localStorage.setItem('loretracker', JSON.stringify(collection));
@@ -224,121 +237,6 @@ export default function Home() {
     }
   }
 
-  async function fetchYoutiniBooks() {
-    let allBooks: EntryData[] = [];
-
-    await fetch('./data/books/Youtini Bookshelf - Legends Books.json')
-      .then((response) => response.json())
-      .then((data) => {
-        for (const entry of data) {
-          entry.canonicity = false;
-          allBooks.push(entry);
-        }
-      });
-
-    await fetch('./data/books/Youtini Bookshelf - Canon Books.json')
-      .then((response) => response.json())
-      .then((data) => {
-        for (const entry of data) {
-          entry.canonicity = true;
-          allBooks.push(entry);
-        }
-      });
-
-    parseYoutiniData(allBooks);
-  }
-
-  async function fetchYoutiniComics() {
-    let allComics: EntryData[] = [];
-
-    await fetch('./data/comics/Youtini Bookshelf - Canon Comics.json')
-      .then((response) => response.json())
-      .then((data) => {
-        for (const entry of data) {
-          entry.canonicity = true;
-          allComics.push(entry);
-        }
-      });
-
-    await fetch('./data/comics/Youtini Bookshelf - Legends Comics (ABY).json')
-      .then((response) => response.json())
-      .then((data) => {
-        for (const entry of data) {
-          entry.canonicity = false;
-          allComics.push(entry);
-        }
-      });
-
-    await fetch('./data/comics/Youtini Bookshelf - Legends Comics (BBY).json')
-      .then((response) => response.json())
-      .then((data) => {
-        for (const entry of data) {
-          entry.canonicity = false;
-          allComics.push(entry);
-        }
-      });
-    parseYoutiniData(allComics);
-  }
-
-  async function parseYoutiniData(allBooks: EntryData[]) {
-    let books: EntryData[] = [];
-
-    for await (const book of allBooks) {
-      let currentBook: EntryData = {
-        canonicity: book.canonicity,
-        coverImage: book['Cover Image URL'],
-        title: book['Name (Title)']!.replace(/-/, '—'),
-      };
-
-      currentBook.author = book['Author / Writer'];
-      currentBook.releaseDate = moment(book['Release Date']);
-      currentBook.category = book['Category'];
-      currentBook.links = {};
-
-      const timelineIncludesTwoDates =
-        book['Timeline']!.includes('-') ||
-        book['Timeline']!.includes('/') ||
-        book['Timeline']!.includes('—');
-
-      if (timelineIncludesTwoDates) {
-        const fullDate = book['Timeline']!.replace(/\s|,/g, '').replace(
-          /\/|—/,
-          '-'
-        );
-
-        let eras = fullDate.match(/([A-Z]{3})/g);
-        if (eras!.length === 1) eras![1] = eras![0];
-        let dates = fullDate.match(/[^\d]*(\d+)[^\d]*\-[^\d]*(\d+)[^\d]*/);
-        dates!.shift();
-
-        if (eras![1] === 'BBY') currentBook.timeline = Number(`-${dates![1]}`);
-        if (eras![1] === 'ABY') currentBook.timeline = Number(`${dates![1]}`);
-      }
-
-      if (book['Timeline']?.endsWith('BBY') && !timelineIncludesTwoDates) {
-        currentBook.timeline = Number(
-          `-${book['Timeline'].replace(/[^0-9]/g, '')}`
-        );
-      }
-
-      if (book['Timeline']?.endsWith('ABY') && !timelineIncludesTwoDates) {
-        currentBook.timeline = Number(book['Timeline'].replace(/[^0-9]/g, ''));
-      }
-
-      if (
-        currentBook.category === 'Adult Novel' ||
-        currentBook.category === 'YA Novel' ||
-        currentBook.category === 'Junior Reader' ||
-        currentBook.category === 'Single Issue Comic' ||
-        currentBook.category === 'Graphic Novel' ||
-        currentBook.category === 'Omnibus'
-      ) {
-        books.push(currentBook);
-      }
-    }
-    setDataIntoStates(books);
-  }
-
   function setDataIntoStates(data: EntryData[]) {
     setFetchedData(data);
     setDefaultFetchedData(data);
@@ -349,11 +247,15 @@ export default function Home() {
     fetchAllCategories(data);
   }
 
-  function displayData(target: string) {
+  function displayData(target: PossibleModules) {
     setCurrentlyOpenedModule(target);
     setHideExcludedEntries(true);
-    if (target === 'books') return fetchYoutiniBooks();
-    if (target === 'comics') return fetchYoutiniComics();
+
+    if (target === 'books' || target === 'comics')
+      return useYoutiniFetch(target)
+        .then((books: YoutiniData[]) => useYoutiniParser(books))
+        .then((books: EntryData[]) => setDataIntoStates(books));
+
     fetchData(target);
   }
 
@@ -430,13 +332,6 @@ export default function Home() {
     setCategories(fetchedCategories);
   }
 
-  function orderBy(
-    value: string,
-    order: boolean | 'asc' | 'desc' | undefined = 'asc'
-  ) {
-    setFetchedData(_.orderBy(fetchedData, value, order));
-  }
-
   function excludeEntry(entry: string) {
     if (!_.includes(entriesMarkedAsExcluded[currentlyOpenedModule], entry)) {
       setEntriesMarkedAsExcluded({
@@ -479,7 +374,7 @@ export default function Home() {
     });
   }
 
-  function toggleEntryAsFinished(event: any, entry: EntryData) {
+  function toggleEntryAsFinished(entry: EntryData) {
     const currentTitle = entry.title.replace(/\s+/g, '-');
     let container = document.getElementById(`${currentTitle}-card`);
 
@@ -659,7 +554,8 @@ export default function Home() {
       }
     }
 
-    setFetchedData(_.flatten(filteredResults));
+    const filteredData = _.flatten(filteredResults);
+    setFetchedData(_.orderBy(filteredResults, sortBy[0], sortBy[1]));
   }
 
   function resetFilters() {
@@ -696,54 +592,26 @@ export default function Home() {
     setSearchValue,
     searchEntries,
     sortBy,
-    orderBy,
     moduleKeys,
     filteredCategories,
     hideExcludedEntries,
     removeFromExcluded,
     entriesMarkedAsExcluded,
+    setSortBy,
   };
 
   return (
     <div className={styles.appcontainer}>
-      <Head>
-        <title>Star Wars Loretracker</title>
-        <meta
-          name='description'
-          content='Track which Star Wars content you consooomed.'
-        />
-        <meta property='og:title' content='Star Wars Loretracker' />
-        <meta
-          property='og:description'
-          content='Track which Star Wars content you consooomed.'
-        />
-        <meta
-          property='og:url'
-          content='https://star-wars-loretracker.vercel.app/'
-        />
-        <meta property='og:type' content='website' />
-        <meta name='image' property='og:image' content='/imgs/featured.png' />
-        <meta name='twitter:card' content='summary_large_image' />
-        <meta
-          property='twitter:url'
-          content='https://star-wars-loretracker.vercel.app'
-        />
-        <meta name='twitter:title' content='Star Wars Loretracker' />
-        <meta
-          name='twitter:description'
-          content='Track which Star Wars content you consooomed'
-        />
-        <meta name='twitter:image' content='/imgs/featured.png' />
-
-        <link rel='icon' href='/favicon.ico' />
-      </Head>
+      <HeadContent module={currentlyOpenedModule} />
       <Header displayData={displayData} handleFileRead={handleFileRead} />
       <div className={styles.viewerContainer}>
         <div id={styles.viewer}>
           {currentlyOpenedModule ? (
             <>
               <div id={styles.sortContainer}>
-                <FiltersContainer {...filterprops} />
+                <FilterContext.Provider value={filterprops}>
+                  <FiltersContainer />
+                </FilterContext.Provider>
               </div>
               <ProgressBar progressBarValue={progressBarValue} />
             </>
@@ -785,7 +653,7 @@ export default function Home() {
                     );
                   })}
                   <button
-                    onClick={(e) => toggleEntryAsFinished(e, e1)}
+                    onClick={(e) => toggleEntryAsFinished(e1)}
                     className={styles.finishedBtn}
                     id={e1.title.replace(/\s+/g, '-').toLowerCase() + 'btn'}
                   >

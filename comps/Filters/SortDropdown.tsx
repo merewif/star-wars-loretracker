@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -8,22 +8,17 @@ import _ from 'lodash';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import styles from '../../styles/Home.module.css';
-import { SortDropdownProps } from '../../types';
+import { useFilterContext } from '../../utils/useFilterContext';
 
-export default function SortDropdown({
-  sortBy,
-  orderBy,
-  moduleKeys,
-}: SortDropdownProps) {
+export default function SortDropdown() {
   const [order, setOrder] = useState('asc');
-  const [sortParameter, setSortParameter] = useState('');
-  useEffect(() => {
-    sortWithOrderParameter();
-  }, [order]);
+  const [sortParameter, setSortParameter] = useState('title');
 
-  function sortWithOrderParameter() {
-    orderBy(sortParameter, order);
-  }
+  useEffect(() => {
+    setSortBy([sortParameter, order]);
+  }, [order, sortParameter]);
+
+  const { sortBy, setSortBy, moduleKeys } = useFilterContext();
 
   return (
     <Box
@@ -39,10 +34,9 @@ export default function SortDropdown({
       <FormControl sx={{ width: '200px' }}>
         <InputLabel>Sort By</InputLabel>
         <Select
-          value={sortBy}
+          value={sortBy[0]}
           label='Sort By'
           onChange={(e) => {
-            orderBy(e.target.value, order);
             setSortParameter(e.target.value);
           }}
         >
