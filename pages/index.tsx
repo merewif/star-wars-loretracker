@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import styles from '../styles/Home.module.css';
 import Header from '../comps/Header';
 import ProgressBar from '../comps/ProgressBar';
@@ -11,6 +11,7 @@ import { Waypoint } from 'react-waypoint';
 import { EntryData, MarkedEntries } from '../types';
 import { supabase } from '../utils/supabaseClient';
 import { User } from '@supabase/supabase-js';
+import { FilterContext } from '../utils/useFilterContext';
 
 export default function Home() {
   const [defaultFetchedData, setDefaultFetchedData] = useState<EntryData[]>([]);
@@ -744,7 +745,9 @@ export default function Home() {
           {currentlyOpenedModule ? (
             <>
               <div id={styles.sortContainer}>
-                <FiltersContainer {...filterprops} />
+                <FilterContext.Provider value={filterprops}>
+                  <FiltersContainer />
+                </FilterContext.Provider>
               </div>
               <ProgressBar progressBarValue={progressBarValue} />
             </>
