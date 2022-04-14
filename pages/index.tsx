@@ -13,6 +13,7 @@ import { supabase } from '../utils/supabaseClient';
 import { User } from '@supabase/supabase-js';
 import { FilterContext } from '../utils/useFilterContext';
 import { useYoutiniParser } from '../utils/useYoutiniParser';
+import { useYoutiniFetch } from '../utils/useYoutiniFetch';
 
 export default function Home() {
   const [defaultFetchedData, setDefaultFetchedData] = useState<EntryData[]>([]);
@@ -228,38 +229,11 @@ export default function Home() {
   }
 
   async function fetchYoutiniBooks() {
-    let allBooks: EntryData[] = [];
-
-    await fetch('./data/books/Youtini Bookshelf - Legends Books.json')
-      .then((response) => response.json())
-      .then((data) => {
-        for (const entry of data) {
-          entry.canonicity = false;
-          allBooks.push(entry);
-        }
-      });
-
-    await fetch('./data/books/Youtini Bookshelf - Canon Books.json')
-      .then((response) => response.json())
-      .then((data) => {
-        for (const entry of data) {
-          entry.canonicity = true;
-          allBooks.push(entry);
-        }
-      });
-
-    parseYoutiniData(allBooks);
+    if (books) parseYoutiniData(books);
   }
 
   async function fetchYoutiniComics() {
-    let allComics: EntryData[] = [];
-
-    await fetch('./data/comics/Youtini Bookshelf - Canon Comics.json')
-      .then((response) => response.json())
-      .then((data) => {
-        for (const entry of data) {
-          entry.canonicity = true;
-          allComics.push(entry);
+    if (comics) parseYoutiniData(comics);
         }
       });
 
@@ -272,20 +246,12 @@ export default function Home() {
         }
       });
 
-    await fetch('./data/comics/Youtini Bookshelf - Legends Comics (BBY).json')
-      .then((response) => response.json())
-      .then((data) => {
-        for (const entry of data) {
-          entry.canonicity = false;
-          allComics.push(entry);
-        }
-      });
-    parseYoutiniData(allComics);
-  }
+  async function parseYoutiniData(allBooks: any[]): Promise<null> {
+    await useYoutiniParser(allBooks).then((books: EntryData[]) =>
+      setDataIntoStates(books)
+    );
 
-  async function parseYoutiniData(allBooks: EntryData[]) {
-    const books = useYoutiniParser(allBooks);
-    setDataIntoStates(books);
+    return null;
   }
 
   function setDataIntoStates(data: EntryData[]) {
