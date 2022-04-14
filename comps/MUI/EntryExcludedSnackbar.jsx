@@ -5,10 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { SnackbarProps } from '../../types';
 
-export default function EntryExcludedSnackbar({
-  openSnackbar,
-  closeSnackbar,
-}: SnackbarProps) {
+export default function EntryExcludedSnackbar({ openSnackbar, closeSnackbar }) {
   const action = (
     <React.Fragment>
       <IconButton

@@ -6,7 +6,10 @@ export interface HeadProps {
 
 export interface SnackbarProps {
   openSnackbar: boolean;
-  closeSnackbar: (event: Event, reason: string) => void;
+  closeSnackbar: (
+    event: React.MouseEventHandler<HTMLAnchorElement>,
+    reason: string
+  ) => void;
 }
 
 export interface CardContentsProps {
