@@ -373,7 +373,7 @@ export default function Home() {
     });
   }
 
-  function toggleEntryAsFinished(event: any, entry: EntryData) {
+  function toggleEntryAsFinished(entry: EntryData) {
     const currentTitle = entry.title.replace(/\s+/g, '-');
     let container = document.getElementById(`${currentTitle}-card`);
 
@@ -682,7 +682,7 @@ export default function Home() {
                     );
                   })}
                   <button
-                    onClick={(e) => toggleEntryAsFinished(e, e1)}
+                    onClick={(e) => toggleEntryAsFinished(e1)}
                     className={styles.finishedBtn}
                     id={e1.title.replace(/\s+/g, '-').toLowerCase() + 'btn'}
                   >
