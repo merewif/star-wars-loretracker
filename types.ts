@@ -11,6 +11,18 @@ export interface HeaderProps {
   handleFileRead: any;
 }
 
+export interface YoutiniData {
+  '(All Books) Title + Format': string;
+  'Database ID': number;
+  'Name (Title)': string;
+  'Author / Writer': string;
+  'Release Date': string;
+  Timeline: string;
+  'Cover Image URL': string | number;
+  Category: string;
+  canonicity: boolean;
+}
+
 export interface EntryData {
   canonicity: boolean;
   coverImage: string | number | undefined;
