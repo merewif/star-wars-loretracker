@@ -6,8 +6,7 @@ import styles from '../../styles/Home.module.css';
 import { useFilterContext } from '../../utils/useFilterContext';
 
 export default function Searchbar() {
-  const { fetchedTitles, searchValue, setSearchValue, searchEntries } =
-    useFilterContext();
+  const { fetchedTitles, searchValue, searchEntries } = useFilterContext();
 
   return (
     <Box
