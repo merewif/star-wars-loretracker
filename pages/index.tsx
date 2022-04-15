@@ -259,13 +259,13 @@ export default function Home() {
   }
 
   function searchEntries(input: string | undefined | null) {
-    if (input?.length) setSearchValue(input);
-
     if (!input) {
       displayData(currentlyOpenedModule);
       setSearchValue('');
       return;
     }
+
+    if (input.length) setSearchValue(input);
 
     let results = [];
     for (const entry of fetchedData) {

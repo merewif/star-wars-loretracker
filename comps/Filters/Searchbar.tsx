@@ -10,45 +10,40 @@ export default function Searchbar() {
     useFilterContext();
 
   return (
-    <>
-      <Box
-        component='form'
-        sx={{
-          '& > :not(style)': { m: 1, width: '40vw' },
+    <Box
+      component='form'
+      sx={{
+        '& > :not(style)': { m: 1, width: '40vw' },
+      }}
+      noValidate
+      className={styles.searchbar}
+    >
+      <Autocomplete
+        disablePortal
+        freeSolo
+        id='fullWidth'
+        options={fetchedTitles}
+        inputValue={searchValue}
+        onInputChange={(e, newValue) => {
+          searchEntries(newValue);
         }}
-        noValidate
-        autoComplete='off'
-        className={styles.searchbar}
-      >
-        <Autocomplete
-          disablePortal
-          freeSolo
-          id='fullWidth'
-          options={fetchedTitles}
-          inputValue={searchValue}
-          onInputChange={(e, newValue) => {
-            setSearchValue(newValue);
-            searchEntries(newValue);
-          }}
-          onChange={(e, newInputValue) => {
-            searchEntries(newInputValue);
-            setSearchValue(newInputValue);
-          }}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              e.preventDefault();
-            }
-          }}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label='Search by Title'
-              sx={{ fontFamily: 'Montserrat' }}
-            />
-          )}
-          className={styles.autocomplete}
-        />
-      </Box>
-    </>
+        onChange={(e, newInputValue) => {
+          searchEntries(newInputValue);
+        }}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+          }
+        }}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label='Search by Title'
+            sx={{ fontFamily: 'Montserrat', color: 'white' }}
+          />
+        )}
+        className={styles.autocomplete}
+      />
+    </Box>
   );
 }
