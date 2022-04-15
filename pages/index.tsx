@@ -1,5 +1,4 @@
-import Head from 'next/head';
-import React, { useState, useEffect, createContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '../styles/Home.module.css';
 import Header from '../comps/Header';
 import ProgressBar from '../comps/ProgressBar';

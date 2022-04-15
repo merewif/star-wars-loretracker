@@ -3,7 +3,6 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import styles from '../../styles/Home.module.css';
-import { Keyable } from '../../types';
 import { useFilterContext } from '../../utils/useFilterContext';
 
 export default function Searchbar() {
@@ -41,7 +40,11 @@ export default function Searchbar() {
             }
           }}
           renderInput={(params) => (
-            <TextField {...params} label='Search by Title' />
+            <TextField
+              {...params}
+              label='Search by Title'
+              sx={{ fontFamily: 'Montserrat' }}
+            />
           )}
           className={styles.autocomplete}
         />
