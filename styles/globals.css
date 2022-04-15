@@ -73,6 +73,20 @@ a {
   max-width: 80vw !important;
 }
 
+.Mui-focused fieldset {
+  border-color: black !important;
+  color: black !important;
+}
+
+.Mui-focused label,
+.MuiInputLabel-root,
+.Mui-focused,
+.MuiOutlinedInput-root fieldset {
+  color: white !important;
+  border-color: white !important;
+  font-family: 'Montserrat';
+}
+
 @media screen and (max-width: 1500px) {
 }
 

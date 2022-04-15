@@ -28,6 +28,7 @@ export default function Filterbox() {
           minWidth: '100px',
           height: '2.5rem',
           marginBlock: 'auto',
+          fontWeight: 900,
         }}
       >
         FILTER
