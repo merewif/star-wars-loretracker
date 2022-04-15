@@ -24,5 +24,4 @@ Fortunately the amazing [Youtini Team](https://youtini.com) has already assemble
 
 ### ToDo:
 
-1. Refactor the FiltersContainer component into smaller modules.
 2. Write unit tests.
