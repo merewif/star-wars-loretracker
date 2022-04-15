@@ -25,6 +25,8 @@ export default function Home() {
   const [fetchedData, setFetchedData] = useState<EntryData[]>([]);
   const [paginationEndElement, setPaginationEndElement] = useState<number>(30);
   const [fetchedTitles, setFetchedTitles] = useState<string[]>([]);
+  const [fetchedBooks, setFetchedBooks] = useState<EntryData[]>([]);
+  const [fetchedComics, setFetchedComics] = useState<EntryData[]>([]);
   const [currentlyOpenedModule, setCurrentlyOpenedModule] =
     useState<PossibleModules>('movies');
   const [moduleKeys, setModuleKeys] = useState<string[]>([]);
@@ -250,10 +252,23 @@ export default function Home() {
     setCurrentlyOpenedModule(target);
     setHideExcludedEntries(true);
 
-    if (target === 'books' || target === 'comics')
+    if (target === 'books' || target === 'comics') {
+      if (target === 'books' && fetchedBooks.length)
+        return setDataIntoStates(fetchedBooks);
+
+      if (target === 'comics' && fetchedComics.length)
+        return setDataIntoStates(fetchedComics);
+
       return useYoutiniFetch(target)
-        .then((books: YoutiniData[]) => useYoutiniParser(books))
-        .then((books: EntryData[]) => setDataIntoStates(books));
+        .then((unformattedBooks: YoutiniData[]) =>
+          useYoutiniParser(unformattedBooks)
+        )
+        .then((parsedBooks: EntryData[]) => {
+          setDataIntoStates(parsedBooks);
+          if (target === 'books') setFetchedBooks(parsedBooks);
+          if (target === 'comics') setFetchedComics(parsedBooks);
+        });
+    }
 
     fetchData(target);
   }
