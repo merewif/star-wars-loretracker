@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '@mui/material/Button';
-import HistoryIcon from '@mui/icons-material/History';
+import RotateLeftIcon from '@mui/icons-material/RotateLeft';
 import styles from '../../styles/Home.module.css';
 import { useFilterContext } from '../../utils/useFilterContext';
 import Box from '@mui/material/Box';
@@ -13,7 +13,7 @@ export default function ResetFilters() {
       id={styles.filterResetBtnContainer}
     >
       <Button variant='contained' onClick={resetFilters}>
-        <HistoryIcon /> Reset
+        <RotateLeftIcon /> Reset
       </Button>
     </Box>
   );
