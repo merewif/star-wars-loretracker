@@ -63,78 +63,76 @@ export default function ListOfExcludedEntriesDialog() {
             {'Excluded content'}
           </DialogTitle>
           <DialogContent>
-            <DialogContentText id='alert-dialog-slide-description'>
-              {Object.keys(entriesMarkedAsExcluded).map((e1, i1) => {
-                return (
-                  <Box key={i1}>
-                    <Typography
-                      variant='p'
-                      sx={{
-                        textTransform: 'uppercase',
-                        fontFamily: 'Montserrat',
-                        color: '#ffe81f',
-                        fontWeight: 900,
-                      }}
-                    >
-                      {e1}
-                    </Typography>
-                    {entriesMarkedAsExcluded[e1].length ? (
-                      entriesMarkedAsExcluded[e1].map((e2, i2) => {
-                        return (
-                          <Box
-                            key={i2}
-                            sx={{
-                              display: 'flex',
-                              alignItems: 'center',
-                              minWidth: '50vw',
-                            }}
-                          >
-                            <Tooltip title='Remove from excluded entries'>
-                              <DoDisturbOnIcon
-                                sx={{
-                                  color: 'red',
-                                  fontSize: '1rem',
-                                  marginRight: '10px',
-                                  cursor: 'pointer',
-                                }}
-                                onClick={() => removeFromExcluded(e1, e2)}
-                              />
-                            </Tooltip>
-                            <Typography
-                              sx={{
-                                color: 'white',
-                                fontFamily: 'Montserrat',
-                                marginBlock: '0',
-                              }}
-                            >
-                              {e2.replace(/-+/g, ' ').replace(/—/g, '-')}
-                            </Typography>
-                          </Box>
-                        );
-                      })
-                    ) : (
-                      <Box
-                        sx={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          minWidth: '50vw',
-                        }}
-                      >
-                        <Typography
+            {Object.keys(entriesMarkedAsExcluded).map((e1, i1) => {
+              return (
+                <Box key={i1}>
+                  <Typography
+                    variant='p'
+                    sx={{
+                      textTransform: 'uppercase',
+                      fontFamily: 'Montserrat',
+                      color: '#ffe81f',
+                      fontWeight: 900,
+                    }}
+                  >
+                    {e1}
+                  </Typography>
+                  {entriesMarkedAsExcluded[e1].length ? (
+                    entriesMarkedAsExcluded[e1].map((e2, i2) => {
+                      return (
+                        <Box
+                          key={i2}
                           sx={{
-                            color: 'white',
-                            fontFamily: 'Montserrat',
-                            marginBlock: '0',
+                            display: 'flex',
+                            alignItems: 'center',
+                            minWidth: '30vw',
                           }}
                         >
-                          Nothing excluded yet.
-                        </Typography>
-                      </Box>
-                    )}
-                  </Box>
-                );
-              })}
-            </DialogContentText>
+                          <Tooltip title='Remove' placement='left'>
+                            <DoDisturbOnIcon
+                              sx={{
+                                color: 'red',
+                                fontSize: '1rem',
+                                marginRight: '10px',
+                                cursor: 'pointer',
+                              }}
+                              onClick={() => removeFromExcluded(e1, e2)}
+                            />
+                          </Tooltip>
+                          <Typography
+                            sx={{
+                              color: 'white',
+                              fontFamily: 'Montserrat',
+                              marginBlock: '0',
+                            }}
+                          >
+                            {e2.replace(/-+/g, ' ').replace(/—/g, '-')}
+                          </Typography>
+                        </Box>
+                      );
+                    })
+                  ) : (
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        minWidth: '50vw',
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          color: 'white',
+                          fontFamily: 'Montserrat',
+                          marginBlock: '0',
+                        }}
+                      >
+                        Nothing excluded yet.
+                      </Typography>
+                    </Box>
+                  )}
+                </Box>
+              );
+            })}
           </DialogContent>
         </Box>
       </Dialog>
