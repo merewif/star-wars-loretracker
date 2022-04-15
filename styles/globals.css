@@ -81,10 +81,11 @@ a {
 .Mui-focused label,
 .MuiInputLabel-root,
 .Mui-focused,
-.MuiOutlinedInput-root fieldset {
+.MuiOutlinedInput-root fieldset,
+.MuiSelect-select {
   color: white !important;
   border-color: white !important;
-  font-family: 'Montserrat';
+  font-family: 'Montserrat' !important;
 }
 
 @media screen and (max-width: 1500px) {
