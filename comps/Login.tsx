@@ -134,6 +134,12 @@ export default function Login({ handleClose }: LoginProps) {
                   placeholder='Email'
                   onChange={(e) => setEmail(e.target.value)}
                   onSubmit={(e) => signInWithEmail(e)}
+                  style={{
+                    backgroundColor: 'black',
+                    color: 'white',
+                    outline: 'none',
+                    border: '1px dotted white',
+                  }}
                 />
                 <Button startIcon={<EmailIcon />} onClick={sendLoginMail}>
                   Login with email
