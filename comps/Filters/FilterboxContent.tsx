@@ -11,6 +11,8 @@ import ResetFilters from './ResetFilters';
 import styles from '../../styles/Home.module.css';
 import { useFilterContext } from '../../utils/useFilterContext';
 import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 export default function FilterboxContent() {
   const { categories, filterboxAnchorEl, setFilterboxAnchorEl } =
@@ -27,6 +29,18 @@ export default function FilterboxContent() {
         horizontal: 'left',
       }}
     >
+      <IconButton
+        aria-label='close'
+        onClick={() => setFilterboxAnchorEl(null)}
+        sx={{
+          position: 'absolute',
+          right: 8,
+          top: 8,
+          color: '#808080',
+        }}
+      >
+        <CloseIcon />
+      </IconButton>
       <Box id={styles.filterbox}>
         <Typography
           variant='h5'
