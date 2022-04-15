@@ -54,12 +54,12 @@ export default function SortDropdown() {
       {order === 'asc' ? (
         <ArrowUpwardIcon
           onClick={() => setOrder('desc')}
-          sx={{ fontSize: '2rem', cursor: 'pointer' }}
+          sx={{ fontSize: '2rem', cursor: 'pointer', color: 'white' }}
         />
       ) : (
         <ArrowDownwardIcon
           onClick={() => setOrder('asc')}
-          sx={{ fontSize: '2rem', cursor: 'pointer' }}
+          sx={{ fontSize: '2rem', cursor: 'pointer', color: 'white' }}
         />
       )}
     </Box>
