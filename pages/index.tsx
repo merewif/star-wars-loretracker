@@ -184,6 +184,15 @@ export default function Home() {
   }, [defaultFetchedData, fetchedData, entriesMarkedAsFinished]);
 
   useEffect(() => {
+    if (sortBy[0] === 'timeline') {
+      const orderedByTimelineAndReleaseDate = _.orderBy(
+        fetchedData,
+        ['timeline', 'releaseDate'],
+        sortBy[1]
+      );
+      setFetchedData(orderedByTimelineAndReleaseDate);
+      return;
+    }
     setFetchedData(_.orderBy(fetchedData, sortBy[0], sortBy[1]));
   }, [sortBy]);
 
@@ -561,7 +570,7 @@ export default function Home() {
     setFetchedData(_.orderBy(filteredData, sortBy[0], sortBy[1]));
   }
 
-  function resetFilters(): void {
+  function resetFilters() {
     setFetchedData(defaultFetchedData);
     setCanonicityFilterValue('all');
     setFinishedFilterValue('all');
@@ -571,7 +580,7 @@ export default function Home() {
     fetchAllCreators(defaultFetchedData);
   }
 
-  function infiniteScroll(): void {
+  function infiniteScroll() {
     if (fetchedData.length < paginationEndElement) return;
     setPaginationEndElement((currentState) => currentState + 30);
     setCardsHeight();
