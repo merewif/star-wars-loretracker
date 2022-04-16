@@ -50,7 +50,6 @@ export default function Home() {
     });
   const [filterboxAnchorEl, setFilterboxAnchorEl] = useState(null);
   const [creators, setCreators] = useState<string[]>([]);
-  const [eras, setEras] = useState<string[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [filteredCategories, setFilteredCategories] = useState<string[]>([]);
   const [filteredCreatorsName, setFilteredCreatorsName] = useState<string[]>(
@@ -244,7 +243,6 @@ export default function Home() {
     setModuleKeys(Object.keys(data[0]));
     fetchAllTitles(data);
     fetchAllCreators(data);
-    fetchAllEras(data);
     fetchAllCategories(data);
   }
 
@@ -326,15 +324,6 @@ export default function Home() {
         creators.push(entry.directedBy);
     }
     setCreators(creators);
-  }
-
-  function fetchAllEras(data: EntryData[]) {
-    let fetchedEras: string[] = [];
-    for (const entry of data) {
-      if (entry.era && !fetchedEras.includes(entry.era))
-        fetchedEras.push(entry.era);
-    }
-    setEras(fetchedEras);
   }
 
   function fetchAllCategories(data: EntryData[]) {
@@ -568,11 +557,11 @@ export default function Home() {
       }
     }
 
-    const filteredData = _.flatten(filteredResults);
-    setFetchedData(_.orderBy(filteredResults, sortBy[0], sortBy[1]));
+    const filteredData: EntryData[] = _.flatten(filteredResults);
+    setFetchedData(_.orderBy(filteredData, sortBy[0], sortBy[1]));
   }
 
-  function resetFilters() {
+  function resetFilters(): void {
     setFetchedData(defaultFetchedData);
     setCanonicityFilterValue('all');
     setFinishedFilterValue('all');
@@ -580,10 +569,9 @@ export default function Home() {
     setFilteredEras([]);
     setFilteredCategories([]);
     fetchAllCreators(defaultFetchedData);
-    fetchAllEras(defaultFetchedData);
   }
 
-  function infiniteScroll() {
+  function infiniteScroll(): void {
     if (fetchedData.length < paginationEndElement) return;
     setPaginationEndElement((currentState) => currentState + 30);
     setCardsHeight();
