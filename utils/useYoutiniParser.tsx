@@ -61,5 +61,6 @@ export async function useYoutiniParser(
       books.push(currentBook);
     }
   }
-  return _.orderBy(books, 'title', 'asc');
+  const resultsUniqeByTitle = _.uniqBy(books, 'title');
+  return _.orderBy(resultsUniqeByTitle, 'title', 'asc');
 }
