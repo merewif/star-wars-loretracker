@@ -650,7 +650,7 @@ export default function Home() {
                   {...cardprops}
                   e1={e1}
                   currentTitle={currentTitle}
-                  i1={i1}
+                  key={'1' + i1}
                 />
               );
             })}

@@ -6,7 +6,6 @@ import styles from '../../styles/Home.module.css';
 export default function Card({
   moduleKeys,
   e1,
-  i1,
   excludeEntry,
   entriesMarkedAsFinished,
   toggleEntryAsFinished,
@@ -21,7 +20,6 @@ export default function Card({
           : `${styles.cardUnfinished} entryCard cardUnfinished`
       }
       id={currentTitle + '-card'}
-      key={'1' + i1}
     >
       {moduleKeys.map((e2: string, i2: number) => {
         let currentKey = moduleKeys[i2];

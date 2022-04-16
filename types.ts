@@ -3,7 +3,6 @@ export type PossibleModules = 'movies' | 'books' | 'comics' | 'series';
 export interface CardProps {
   moduleKeys: string[];
   e1: EntryData;
-  i1: number;
   excludeEntry: (entry: string) => void;
   entriesMarkedAsFinished: MarkedEntries;
   toggleEntryAsFinished: (entry: EntryData) => void;
