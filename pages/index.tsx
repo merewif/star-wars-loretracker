@@ -19,6 +19,7 @@ import { FilterContext } from '../utils/useFilterContext';
 import { useYoutiniParser } from '../utils/useYoutiniParser';
 import { useYoutiniFetch } from '../utils/useYoutiniFetch';
 import HeadContent from '../utils/HeadContent';
+import Card from '../comps/card/Card';
 
 export default function Home() {
   const [defaultFetchedData, setDefaultFetchedData] = useState<EntryData[]>([]);
@@ -609,6 +610,14 @@ export default function Home() {
     entriesMarkedAsExcluded,
   };
 
+  const cardprops = {
+    moduleKeys,
+    excludeEntry,
+    entriesMarkedAsFinished,
+    toggleEntryAsFinished,
+    currentlyOpenedModule,
+  };
+
   return (
     <div className={styles.appcontainer}>
       <HeadContent module={currentlyOpenedModule} />
@@ -636,43 +645,12 @@ export default function Home() {
               )
                 return;
               return (
-                <div
-                  className={
-                    entriesMarkedAsFinished[currentlyOpenedModule].includes(
-                      currentTitle
-                    )
-                      ? `${styles.cardFinished} entryCard cardFinished`
-                      : `${styles.cardUnfinished} entryCard cardUnfinished`
-                  }
-                  id={currentTitle + '-card'}
-                  key={'1' + i1}
-                >
-                  {moduleKeys.map((e2, i2) => {
-                    let currentKey = moduleKeys[i2];
-                    let currentValue = e1[currentKey as keyof EntryData];
-                    return (
-                      <CardContents
-                        i2={i2}
-                        currentKey={currentKey}
-                        currentValue={currentValue}
-                        key={i2}
-                        excludeEntry={excludeEntry}
-                        currentTitle={currentTitle}
-                      />
-                    );
-                  })}
-                  <button
-                    onClick={(e) => toggleEntryAsFinished(e1)}
-                    className={styles.finishedBtn}
-                    id={e1.title.replace(/\s+/g, '-').toLowerCase() + 'btn'}
-                  >
-                    {entriesMarkedAsFinished[
-                      currentlyOpenedModule as keyof MarkedEntries
-                    ]?.includes(currentTitle)
-                      ? 'Mark as Unfinished'
-                      : 'Mark as Finished'}
-                  </button>
-                </div>
+                <Card
+                  {...cardprops}
+                  e1={e1}
+                  currentTitle={currentTitle}
+                  i1={i1}
+                />
               );
             })}
             <Waypoint onEnter={infiniteScroll} />
