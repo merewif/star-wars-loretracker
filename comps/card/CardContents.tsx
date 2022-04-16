@@ -34,7 +34,11 @@ export default function CardContents({
         <div className={styles.coverImageContainer}>
           <img
             className={styles.coverImage}
-            src={currentValue.toString()}
+            src={
+              typeof currentValue === 'string'
+                ? currentValue
+                : './imgs/missing-cover-image.jpg'
+            }
             alt='Cover Image'
           />
         </div>
