@@ -69,7 +69,7 @@ export default function CardContents({
       {currentKey === 'timeline' && currentValue <= 0 ? (
         <p>{Math.abs(Number(currentValue)).toLocaleString('en')} BBY</p>
       ) : null}
-      {currentKey === 'timeline' && currentValue === '' ? <p>N/A</p> : null}
+      {currentKey === 'timeline' && !currentValue ? <p>N/A</p> : null}
 
       {currentKey === 'canonicity' ? (
         currentValue ? (
