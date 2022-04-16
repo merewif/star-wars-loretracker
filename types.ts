@@ -52,14 +52,6 @@ export interface EntryData {
   seasons?: string | number;
   episodes?: string | number;
   links?: any;
-  '(All Books) Title + Format'?: string;
-  'Database ID'?: number;
-  'Name (Title)'?: string;
-  'Author / Writer'?: string;
-  'Release Date'?: string;
-  Timeline?: string;
-  'Cover Image URL'?: string;
-  Category?: string;
 }
 
 export interface MarkedEntries {
