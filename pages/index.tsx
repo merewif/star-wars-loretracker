@@ -172,6 +172,7 @@ export default function Home() {
   }, [fetchedData, currentlyOpenedModule]);
 
   useEffect(() => {
+    filterEntries(hideExcludedEntries, 'hideExcluded');
     localStorage.setItem(
       'loretracker',
       JSON.stringify(entriesMarkedAsFinished)
