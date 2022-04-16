@@ -21,12 +21,13 @@ export async function useYoutiniParser(
 
     const timelineIncludesTwoDates =
       book['Timeline']!.includes('-') ||
+      book['Timeline']!.includes('–') ||
       book['Timeline']!.includes('/') ||
       book['Timeline']!.includes('—');
 
     if (timelineIncludesTwoDates) {
       const fullDate = book['Timeline']!.replace(/\s|,/g, '').replace(
-        /\/|—/,
+        /\/|—|–/,
         '-'
       );
 
