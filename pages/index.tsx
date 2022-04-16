@@ -184,17 +184,16 @@ export default function Home() {
   }, [defaultFetchedData, fetchedData, entriesMarkedAsFinished]);
 
   useEffect(() => {
-    if (sortBy[0] === 'timeline') {
-      const orderedByTimelineAndReleaseDate = _.orderBy(
-        fetchedData,
-        ['timeline', 'releaseDate'],
-        sortBy[1]
-      );
-      setFetchedData(orderedByTimelineAndReleaseDate);
-      return;
-    }
-    setFetchedData(_.orderBy(fetchedData, sortBy[0], sortBy[1]));
+    const sortedBooks = sortBooks(fetchedData);
+    setFetchedData(sortedBooks);
   }, [sortBy]);
+
+  function sortBooks(data: EntryData[]) {
+    if (sortBy[0] === 'timeline') {
+      return _.orderBy(data, ['timeline', 'releaseDate'], sortBy[1]);
+    }
+    return _.orderBy(data, sortBy[0], sortBy[1]);
+  }
 
   function calculateProgress() {
     if (finishedFilterValue === 'finished') return setProgressBarValue(100);
@@ -247,7 +246,8 @@ export default function Home() {
   }
 
   function setDataIntoStates(data: EntryData[]) {
-    setFetchedData(_.orderBy(data, sortBy[0], sortBy[1]));
+    const sortedBooks = sortBooks(data);
+    setFetchedData(sortedBooks);
     setDefaultFetchedData(data);
     setModuleKeys(Object.keys(data[0]));
     fetchAllTitles(data);
@@ -567,7 +567,8 @@ export default function Home() {
     }
 
     const filteredData: EntryData[] = _.flatten(filteredResults);
-    setFetchedData(_.orderBy(filteredData, sortBy[0], sortBy[1]));
+    const sortedData = sortBooks(filteredData);
+    setFetchedData(sortedData);
   }
 
   function resetFilters() {
