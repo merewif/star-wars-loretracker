@@ -47,7 +47,8 @@
 
 .cardUnfinished p,
 .cardFinished p {
-  font-weight: 900;
+  font-family: 'Montserrat';
+  font-weight: 900 !important;
   text-transform: uppercase;
   margin-top: 0;
   min-height: 2rem;
