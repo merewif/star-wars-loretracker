@@ -19,12 +19,7 @@ export async function useYoutiniParser(
     currentBook.category = book['Category'];
     currentBook.links = {};
 
-    const timelineIncludesTwoDates =
-      book['Timeline']!.includes('-') ||
-      book['Timeline']!.includes('–') ||
-      book['Timeline']!.includes('−') ||
-      book['Timeline']!.includes('/') ||
-      book['Timeline']!.includes('—');
+    const timelineIncludesTwoDates = /\/|—|–|−|-/.test(book['Timeline']);
 
     if (timelineIncludesTwoDates) {
       const fullDate = book['Timeline']!.replace(/\s|,/g, '').replace(
