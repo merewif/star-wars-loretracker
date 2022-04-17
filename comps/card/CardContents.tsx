@@ -42,7 +42,9 @@ export default function CardContents({
             alt='Cover Image'
           />
         </div>
-      ) : currentKey === 'links' ? null : currentKey === 'canonicity' ? null : (
+      ) : null}
+
+      {['links', 'canonicity', 'coverImage'].includes(currentKey) ? null : (
         <h2>{currentKey.replace(/([A-Z])/g, ' $1')}:</h2>
       )}
 
