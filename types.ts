@@ -53,7 +53,7 @@ export interface EntryData {
   title: string;
   author?: string;
   releaseDate?: any;
-  timeline?: number | '';
+  timeline?: number | string;
   category?: string;
   directedBy?: string;
   createdBy?: string;
