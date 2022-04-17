@@ -53,8 +53,7 @@ export default function CardContents({
       ) : null}
 
       {typeof currentValue === 'number' &&
-      currentKey !== 'timeline' &&
-      currentKey !== 'coverImage' ? (
+      !['timeline', 'coverImage'].includes(currentKey) ? (
         <p>{currentValue}</p>
       ) : null}
 
