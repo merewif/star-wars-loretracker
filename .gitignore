@@ -6,6 +6,7 @@ functions
 .babelrc
 tsconfig.json
 next-env.d.ts
+next.config.js
 
 # dependencies
 /node_modules
