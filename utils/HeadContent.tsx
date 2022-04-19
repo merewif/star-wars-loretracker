@@ -42,6 +42,7 @@ export default function HeadContent({ module }: HeadProps) {
       <link rel='icon' href='/favicon.ico' />
 
       <meta name='application-name' content='Star Wars Loretracker' />
+      <link rel='apple-touch-icon' href='/icons/android-chrome-192x192.png' />
       <meta name='apple-mobile-web-app-capable' content='yes' />
       <meta name='apple-mobile-web-app-status-bar-style' content='default' />
       <meta name='apple-mobile-web-app-title' content='Star Wars Loretracker' />
