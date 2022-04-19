@@ -23,6 +23,11 @@ export default function HeadContent({ module }: HeadProps) {
       />
       <meta property='og:type' content='website' />
       <meta name='image' property='og:image' content='/imgs/featured.png' />
+      <meta property='og:site_name' content='Star Wars Loretracker' />
+      <meta
+        property='og:url'
+        content='https://star-wars-loretracker.vercel.app/'
+      />
       <meta name='twitter:card' content='summary_large_image' />
       <meta
         property='twitter:url'
@@ -34,7 +39,20 @@ export default function HeadContent({ module }: HeadProps) {
         content='Track which Star Wars content you consooomed'
       />
       <meta name='twitter:image' content='/imgs/featured.png' />
-      <link rel='icon' href='/favicon.ico' />{' '}
+      <link rel='icon' href='/favicon.ico' />
+
+      <meta name='application-name' content='Star Wars Loretracker' />
+      <meta name='apple-mobile-web-app-capable' content='yes' />
+      <meta name='apple-mobile-web-app-status-bar-style' content='default' />
+      <meta name='apple-mobile-web-app-title' content='Star Wars Loretracker' />
+      <meta name='format-detection' content='telephone=no' />
+      <meta name='mobile-web-app-capable' content='yes' />
+      <meta name='msapplication-config' content='/icons/browserconfig.xml' />
+      <meta name='msapplication-TileColor' content='#2B5797' />
+      <meta name='msapplication-tap-highlight' content='no' />
+      <meta name='theme-color' content='#000000' />
+
+      <link rel='manifest' href='/manifest.json' />
     </Head>
   );
 }
