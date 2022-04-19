@@ -219,6 +219,7 @@ export default function Home() {
 
     const result = (finished / total) * 100;
     if (isNaN(result)) return setProgressBarValue(0);
+    if (result > 100) return setProgressBarValue(100);
     setProgressBarValue(result);
   }
 
