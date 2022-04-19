@@ -200,12 +200,15 @@ export default function Home() {
   function calculateProgress() {
     if (finishedFilterValue === 'finished') return setProgressBarValue(100);
     let finished = 0;
-    let total = 0;
+    let total = fetchedData.length;
 
-    if (fetchedData)
+    const dataIsUnfiltered = fetchedData.length === defaultFetchedData.length;
+    if (dataIsUnfiltered && hideExcludedEntries) {
       total =
         fetchedData.length -
         entriesMarkedAsExcluded[currentlyOpenedModule].length;
+    }
+
     if (entriesMarkedAsFinished[currentlyOpenedModule]) {
       for (const entry of entriesMarkedAsFinished[currentlyOpenedModule]) {
         for (const data of fetchedData) {
