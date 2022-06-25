@@ -266,9 +266,7 @@ export default function Home() {
   }
 
   function displayData(target: PossibleModules) {
-    setShowBackdrop(true);
     setCurrentlyOpenedModule(target);
-    setHideExcludedEntries(true);
 
     if (target === 'books' || target === 'comics') {
       if (target === 'books' && fetchedBooks.length)
@@ -276,7 +274,8 @@ export default function Home() {
 
       if (target === 'comics' && fetchedComics.length)
         return setDataIntoStates(fetchedComics);
-
+      
+      setShowBackdrop(true);
       return useYoutiniFetch(target)
         .then((unformattedBooks: YoutiniData[]) =>
           useYoutiniParser(unformattedBooks)
