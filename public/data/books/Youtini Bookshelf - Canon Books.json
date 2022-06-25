@@ -5254,7 +5254,7 @@
     "Database ID": 4252,
     "Name (Title)": "The Mini Book of Lightsabers",
     "Author / Writer": "Insight Editions",
-    "Release Date": "5/3/2022",
+    "Release Date": "5/24/2022",
     "Timeline": "",
     "Cover Image URL": "https://dl.airtable.com/.attachments/f572a5b35abf777b16fe48776512577a/1c2e4682/Star_Wars_The_Mini_Book_of_Lightsabers_cover.jpg",
     "Category": "Reference Book"
@@ -5284,7 +5284,7 @@
     "Database ID": 4255,
     "Name (Title)": "I Am Your Father",
     "Author / Writer": "Dan Zehr & Amy Richau",
-    "Release Date": "5/10/2022",
+    "Release Date": "5/31/2022",
     "Timeline": "",
     "Cover Image URL": "https://dl.airtable.com/.attachments/a0a71b8aec2be42ff5d9ebe03b1ea333/281f3c05/Star_Wars_I_Am_Your_Father_cover.jpg",
     "Category": "Reference Book"
@@ -5384,7 +5384,7 @@
     "Database ID": 4283,
     "Name (Title)": "Galaxy's Edge: Treasures from Batuu",
     "Author / Writer": "Insight Editions",
-    "Release Date": "6/7/2022",
+    "Release Date": "7/19/2022",
     "Timeline": "",
     "Cover Image URL": "https://dl.airtable.com/.attachments/46ebc94187c3938a5a9a79bb70a468bb/3b3efbb3/Star_Wars_Galaxys_Edge_Treasures_from_Batuu_cover.jpg",
     "Category": "Reference Book"
@@ -5414,7 +5414,7 @@
     "Database ID": 4291,
     "Name (Title)": "The Mandalorian: Grogu's Journey",
     "Author / Writer": "Grace Baranowski",
-    "Release Date": "5/3/2022",
+    "Release Date": "6/21/2022",
     "Timeline": "9 ABY",
     "Cover Image URL": "https://dl.airtable.com/.attachments/1e3d24b82c6d464819d6e0f79c113208/cdb859cc/The_Mandalorian_Grogus_Journey_cover.jpg",
     "Category": "Children's Book"
@@ -5424,7 +5424,7 @@
     "Database ID": 4295,
     "Name (Title)": "Star Wars Jedi Pocket Expert",
     "Author / Writer": "Dorling Kindersley",
-    "Release Date": "5/3/2022",
+    "Release Date": "5/24/2022",
     "Timeline": "",
     "Cover Image URL": "https://dl.airtable.com/.attachments/1198b8d85690da499b338b5ad337fea8/ad5d1c0a/Star_Wars_Jedi_Pocket_Expert_solicitation_cover.jpg",
     "Category": "Reference Book"
@@ -5500,24 +5500,24 @@
     "Category": "Short Story"
   },
   {
-    "(All Books) Title + Format": "Life Day Treasury - A Coruscant Solstice - YA Novel",
+    "(All Books) Title + Format": "A Coruscant Solstice  - Short Story",
     "Database ID": 4330,
-    "Name (Title)": "Life Day Treasury - A Coruscant Solstice",
+    "Name (Title)": "A Coruscant Solstice",
     "Author / Writer": "George Mann & Cavan Scott",
     "Release Date": "9/7/2021",
     "Timeline": "232 BBY",
-    "Cover Image URL": "https://dl.airtable.com/.attachments/b702513f91e96ba10c67b1ffd218c73f/4c53c0b4/LifeDayTreasury-cover.jpg",
-    "Category": "YA Novel"
+    "Cover Image URL": "https://dl.airtable.com/.attachments/50692f170268655d23d4c89feb1b9b32/0c44b616/THR-ACoruscantSolstace.jpg",
+    "Category": "Short Story"
   },
   {
-    "(All Books) Title + Format": "Dark Legends - A Bitter Harvest - YA Novel",
+    "(All Books) Title + Format": "A Bitter Harvest - Short Story",
     "Database ID": 4331,
-    "Name (Title)": "Dark Legends - A Bitter Harvest",
+    "Name (Title)": "A Bitter Harvest",
     "Author / Writer": "George Mann",
     "Release Date": "7/28/2020",
     "Timeline": "231 BBY",
-    "Cover Image URL": "https://dl.airtable.com/.attachments/98ce6986ea75cbca8eeb20266beb663a/7cbb0fac/k3865uv352ywfz97qrbqj9mcfuaex2rc",
-    "Category": "YA Novel"
+    "Cover Image URL": "https://dl.airtable.com/.attachments/ab88b135a91ec400623f53ce0369674c/1f7c79ff/THR-ABitterHarvest.jpg",
+    "Category": "Short Story"
   },
   {
     "(All Books) Title + Format": "Starlight: Past Mistakes - Part One - Short Story",
@@ -5556,7 +5556,7 @@
     "Author / Writer": "Titan Magazines",
     "Release Date": "6/21/2022",
     "Timeline": "9 ABY",
-    "Cover Image URL": "https://uploads-ssl.webflow.com/5c4117329fc3235735cd430f/60e6945eba448dc38f06b899_Temp%20Cover.jpg",
+    "Cover Image URL": "https://dl.airtable.com/.attachments/1249379ed34827d7374701fe45f29fe4/5c1e2ad5/Star_Wars_Insider_Presents_MandoS2_Collectors_Vol_2.jpg",
     "Category": "Reference Book"
   },
   {
@@ -5600,9 +5600,9 @@
     "Category": "Short Story"
   },
   {
-    "(All Books) Title + Format": "The High Republic Adventures Annual 2021 - No Stone Unturned - Short Story",
+    "(All Books) Title + Format": "No Stone Unturned - Short Story",
     "Database ID": 4353,
-    "Name (Title)": "The High Republic Adventures Annual 2021 - No Stone Unturned",
+    "Name (Title)": "No Stone Unturned",
     "Author / Writer": "Claudia Gray, Justina Ireland, Daniel José Older, Cavan Scott & Charles Soule",
     "Release Date": "12/15/2021",
     "Timeline": "231 BBY",
@@ -5610,9 +5610,9 @@
     "Category": "Short Story"
   },
   {
-    "(All Books) Title + Format": "The High Republic Adventures Annual 2021 - First Mission - Short Story",
+    "(All Books) Title + Format": "First Mission - Short Story",
     "Database ID": 4354,
-    "Name (Title)": "The High Republic Adventures Annual 2021 - First Mission",
+    "Name (Title)": "First Mission",
     "Author / Writer": "Claudia Gray, Justina Ireland, Daniel José Older, Cavan Scott & Charles Soule",
     "Release Date": "12/15/2021",
     "Timeline": "233 BBY",
@@ -5620,9 +5620,9 @@
     "Category": "Short Story"
   },
   {
-    "(All Books) Title + Format": "The High Republic Adventures Annual 2021 - Set For Life - Short Story",
+    "(All Books) Title + Format": "Set For Life - Short Story",
     "Database ID": 4355,
-    "Name (Title)": "The High Republic Adventures Annual 2021 - Set For Life",
+    "Name (Title)": "Set For Life",
     "Author / Writer": "Claudia Gray, Justina Ireland, Daniel José Older, Cavan Scott & Charles Soule",
     "Release Date": "12/15/2021",
     "Timeline": "232 BBY",
@@ -5650,13 +5650,13 @@
     "Category": "Short Story"
   },
   {
-    "(All Books) Title + Format": "Star Wars Insider: The Fiction Collection: The High Republic Volume 1 - Adult Novel",
+    "(All Books) Title + Format": "Star Wars Insider: The High Republic: Starlight Stories - Adult Novel",
     "Database ID": 4358,
-    "Name (Title)": "Star Wars Insider: The Fiction Collection: The High Republic Volume 1",
+    "Name (Title)": "Star Wars Insider: The High Republic: Starlight Stories",
     "Author / Writer": "Charles Soule, Justina Ireland, Cavan Scott",
     "Release Date": "9/27/2022",
     "Timeline": "232 - 231 BBY",
-    "Cover Image URL": "https://dl.airtable.com/.attachments/8890456de2da79c2f90c296da6468168/24ca6b53/download.jpg",
+    "Cover Image URL": "https://dl.airtable.com/.attachments/90c6663177c4af9d554b1ad3dfcac926/0f6adf02/StarlightStories.jpg",
     "Category": "Adult Novel"
   },
   {
@@ -5680,13 +5680,13 @@
     "Category": "Children's Book"
   },
   {
-    "(All Books) Title + Format": "The High Republic: An Illustrated Archive - Reference Book",
+    "(All Books) Title + Format": "The High Republic: Chronicles of the Jedi: An Illustrated Guide to the Galaxy's Golden Age  - Reference Book",
     "Database ID": 4370,
-    "Name (Title)": "The High Republic: An Illustrated Archive",
+    "Name (Title)": "The High Republic: Chronicles of the Jedi: An Illustrated Guide to the Galaxy's Golden Age",
     "Author / Writer": "Cole Horton",
-    "Release Date": "10/18/2022",
+    "Release Date": "2/28/2023",
     "Timeline": "232 BBY",
-    "Cover Image URL": "https://dl.airtable.com/.attachments/ac53105311536eb8945526d1afd3635d/4f41e075/THR-IllustratedArchive.jpg",
+    "Cover Image URL": "https://dl.airtable.com/.attachments/3847dd8196bd89b95229bbbd40332b65/fb94c10f/ChroniclesOfTheJedi.jpg",
     "Category": "Reference Book"
   },
   {
@@ -5694,9 +5694,9 @@
     "Database ID": 4371,
     "Name (Title)": "The Art of Star Wars: The High Republic",
     "Author / Writer": "Kristin Baver",
-    "Release Date": "10/18/2022",
+    "Release Date": "11/8/2022",
     "Timeline": "",
-    "Cover Image URL": "https://dl.airtable.com/.attachments/4a736dca15d0564bcf2b8dbc643053fa/b3347865/art-of-the-high-republic-cover-not-final.jpg",
+    "Cover Image URL": "https://dl.airtable.com/.attachments/3dc9a5ebe8a2809a2d529dae4c8fb18f/0a0255e9/ArtOfTHR.jpg",
     "Category": "Reference Book"
   },
   {
@@ -5714,9 +5714,9 @@
     "Database ID": 4373,
     "Name (Title)": "The High Republic: Quest for the Hidden City",
     "Author / Writer": "George Mann",
-    "Release Date": "10/4/2022",
+    "Release Date": "11/1/2022",
     "Timeline": "382 BBY",
-    "Cover Image URL": "https://dl.airtable.com/.attachments/b65ea3913824a05fa2c37fd1ad1e7f62/519ed895/star-wars-the-high-republic-quest-for-the-hidden-city-2487.jpg",
+    "Cover Image URL": "https://dl.airtable.com/.attachments/ed6ec2d70dcb7c0fec0b3f1618c882ae/7403b42e/star-wars-celebration-anaheim-swthr-quest-for-the-hidden-city-cover.jpg",
     "Category": "Junior Reader"
   },
   {
@@ -5724,9 +5724,9 @@
     "Database ID": 4374,
     "Name (Title)": "The High Republic: Convergence",
     "Author / Writer": "Zoraida Córdova",
-    "Release Date": "10/4/2022",
+    "Release Date": "11/15/2022",
     "Timeline": "382 BBY",
-    "Cover Image URL": "https://dl.airtable.com/.attachments/9f4cc137b6d1010df3e2ea1b55801a3f/f819fc90/star-wars-the-high-republic-convergence-87524.jpg",
+    "Cover Image URL": 1,
     "Category": "Adult Novel"
   },
   {
@@ -5736,7 +5736,7 @@
     "Author / Writer": "Ashley Eckstein, Kelly Knox and Elena Craig",
     "Release Date": "10/25/2022",
     "Timeline": "",
-    "Cover Image URL": "https://uploads-ssl.webflow.com/5c4117329fc3235735cd430f/60e6945eba448dc38f06b899_Temp%20Cover.jpg",
+    "Cover Image URL": "https://dl.airtable.com/.attachments/91640b132fcbcda789d148893d78d999/6171fab7/star-wars-celebration-anaheim-star-wars-everyday-cover.jpg",
     "Category": "Reference Book"
   },
   {
@@ -5756,7 +5756,7 @@
     "Author / Writer": "Riley Silverman",
     "Release Date": "9/13/2022",
     "Timeline": "",
-    "Cover Image URL": "https://uploads-ssl.webflow.com/5c4117329fc3235735cd430f/60e6945eba448dc38f06b899_Temp%20Cover.jpg",
+    "Cover Image URL": "https://dl.airtable.com/.attachments/bd351f21f90d775892df70002cd1ddeb/3154e112/Star_Wars_The_Life_Day_Pop-Up_Book_cover.jpg",
     "Category": "Reference Book"
   },
   {
@@ -5766,7 +5766,7 @@
     "Author / Writer": "Dreamtivity",
     "Release Date": "9/6/2022",
     "Timeline": "",
-    "Cover Image URL": "https://uploads-ssl.webflow.com/5c4117329fc3235735cd430f/60e6945eba448dc38f06b899_Temp%20Cover.jpg",
+    "Cover Image URL": "https://dl.airtable.com/.attachments/fe0a71379ca8fd0efb6a9964d0f7e572/ad3aeb0f/Star_Wars_The_Mandalorian_Grogu_and_Mando_cover.jpg",
     "Category": "Children's Book"
   },
   {
@@ -5776,7 +5776,7 @@
     "Author / Writer": "Beth Revis",
     "Release Date": "8/16/2022",
     "Timeline": "4 ABY",
-    "Cover Image URL": "https://dl.airtable.com/.attachments/571297585b2a580d2c93538e3a113de7/d90dff34/The_Princess_and_the_Scoundrel_placeholder_cover.jpg",
+    "Cover Image URL": "https://dl.airtable.com/.attachments/9c164026d5b3730e2188c036776a6030/6df9fd67/star-wars-the-princess-and-the-scoundrel-cover.jpg",
     "Category": "Adult Novel"
   },
   {
@@ -5784,7 +5784,7 @@
     "Database ID": 4381,
     "Name (Title)": "Star Wars Timelines",
     "Author / Writer": "Kristin Baver, Jason Fry, Cole Horton, Amy Richau, Clayton Sandell",
-    "Release Date": "11/3/2022",
+    "Release Date": "11/29/2022",
     "Timeline": "",
     "Cover Image URL": 1,
     "Category": "Reference Book"
@@ -5818,5 +5818,85 @@
     "Timeline": "",
     "Cover Image URL": "https://dl.airtable.com/.attachments/2d53de9a0b9519d4334cdaf4ed16bf3b/dd2e3b77/StarWarsInsider211_PX.jpg",
     "Category": "Reference Book"
+  },
+  {
+    "(All Books) Title + Format": "Star Wars 100 Objects: Illuminating finds from a galaxy far, far away.... - Reference Book",
+    "Database ID": 4432,
+    "Name (Title)": "Star Wars 100 Objects: Illuminating finds from a galaxy far, far away....",
+    "Author / Writer": "DK",
+    "Release Date": "2/7/2023",
+    "Timeline": "",
+    "Cover Image URL": "https://dl.airtable.com/.attachments/becc015e1bc0307f7be07445cd89ee81/d1e81de4/41OjaIM1qnL._SX393_BO1204203200_.jpg",
+    "Category": "Reference Book"
+  },
+  {
+    "(All Books) Title + Format": "Star Wars Flip Pop: Darth Vader - Children's Book",
+    "Database ID": 4440,
+    "Name (Title)": "Star Wars Flip Pop: Darth Vader",
+    "Author / Writer": "Insight Editions",
+    "Release Date": "9/6/2022",
+    "Timeline": "",
+    "Cover Image URL": "https://uploads-ssl.webflow.com/5c4117329fc3235735cd430f/60e6945eba448dc38f06b899_Temp%20Cover.jpg",
+    "Category": "Children's Book"
+  },
+  {
+    "(All Books) Title + Format": "Star Wars Flip Pop: Boba Fett - Children's Book",
+    "Database ID": 4441,
+    "Name (Title)": "Star Wars Flip Pop: Boba Fett",
+    "Author / Writer": "Insight Editions",
+    "Release Date": "9/6/2022",
+    "Timeline": "",
+    "Cover Image URL": "https://uploads-ssl.webflow.com/5c4117329fc3235735cd430f/60e6945eba448dc38f06b899_Temp%20Cover.jpg",
+    "Category": "Children's Book"
+  },
+  {
+    "(All Books) Title + Format": "The High Republic: Cataclysm - Adult Novel",
+    "Database ID": 4452,
+    "Name (Title)": "The High Republic: Cataclysm",
+    "Author / Writer": "Lydia Kang",
+    "Release Date": "4/4/2023",
+    "Timeline": "382 BBY",
+    "Cover Image URL": "https://dl.airtable.com/.attachments/0784be5f69a3a6e29a71f565badd9936/c40bc53f/star-wars-celebration-anaheim-swthr-cataclysm-temp-cover.jpg",
+    "Category": "Adult Novel"
+  },
+  {
+    "(All Books) Title + Format": "The High Republic: Path of Vengeance - YA Novel",
+    "Database ID": 4454,
+    "Name (Title)": "The High Republic: Path of Vengeance",
+    "Author / Writer": "Cavan Scott",
+    "Release Date": "5/2/2023",
+    "Timeline": "382 BBY",
+    "Cover Image URL": "https://dl.airtable.com/.attachments/adae690b0a8e4bec60dbca8fec9b9a2f/7b65b669/star-wars-celebration-anaheim-swthr-path-of-vengeance-temp-cover.jpg",
+    "Category": "YA Novel"
+  },
+  {
+    "(All Books) Title + Format": "The High Republic: Quest for Planet X - Junior Reader",
+    "Database ID": 4455,
+    "Name (Title)": "The High Republic: Quest for Planet X",
+    "Author / Writer": "Tessa Gratton",
+    "Release Date": "4/4/2023",
+    "Timeline": "382 BBY",
+    "Cover Image URL": "https://dl.airtable.com/.attachments/8c49c98e79e355ee964d7e110d488bcd/b0b9c74b/star-wars-celebration-anaheim-swthr-quest-for-planet-x-temp-cover.jpg",
+    "Category": "Junior Reader"
+  },
+  {
+    "(All Books) Title + Format": "The High Republic: The Battle of Jedha - Audio Drama",
+    "Database ID": 4456,
+    "Name (Title)": "The High Republic: The Battle of Jedha",
+    "Author / Writer": "George Mann",
+    "Release Date": "1/3/2023",
+    "Timeline": "382 BBY",
+    "Cover Image URL": "https://dl.airtable.com/.attachments/d245b8389def0873f7daae7b11808f5e/51857e51/star-wars-celebration-anaheim-swthr-the-battle-of-jedha-cover.jpg",
+    "Category": "Audio Drama"
+  },
+  {
+    "(All Books) Title + Format": "The High Republic: The Battle of Jedha (script) - Adult Novel",
+    "Database ID": 4460,
+    "Name (Title)": "The High Republic: The Battle of Jedha (script)",
+    "Author / Writer": "George Mann",
+    "Release Date": "2/14/2023",
+    "Timeline": "382 BBY",
+    "Cover Image URL": "https://uploads-ssl.webflow.com/5c4117329fc3235735cd430f/60e6945eba448dc38f06b899_Temp%20Cover.jpg",
+    "Category": "Adult Novel"
   }
 ]

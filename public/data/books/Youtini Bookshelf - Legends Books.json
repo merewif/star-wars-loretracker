@@ -10226,7 +10226,7 @@
     "Author / Writer": "Michael A. Stackpole",
     "Release Date": "8/2/2022",
     "Timeline": "7 ABY",
-    "Cover Image URL": "https://uploads-ssl.webflow.com/5c4117329fc3235735cd430f/60e6945eba448dc38f06b899_Temp%20Cover.jpg",
+    "Cover Image URL": "https://dl.airtable.com/.attachments/a1ba242d8e65ade3a86d5d5069023c56/c9c1d61d/9780593497340.jpg",
     "Category": "Adult Novel"
   },
   {
@@ -10236,7 +10236,7 @@
     "Author / Writer": "Joe Schreiber",
     "Release Date": "8/2/2022",
     "Timeline": "1 BBY",
-    "Cover Image URL": "https://uploads-ssl.webflow.com/5c4117329fc3235735cd430f/60e6945eba448dc38f06b899_Temp%20Cover.jpg",
+    "Cover Image URL": "https://dl.airtable.com/.attachments/c191544c138ee25f11679674a69e5b59/c613593d/9780593497067.jpg",
     "Category": "Adult Novel"
   },
   {
@@ -10246,7 +10246,7 @@
     "Author / Writer": "Michael Reaves",
     "Release Date": "8/2/2022",
     "Timeline": "32 BBY",
-    "Cover Image URL": "https://uploads-ssl.webflow.com/5c4117329fc3235735cd430f/60e6945eba448dc38f06b899_Temp%20Cover.jpg",
+    "Cover Image URL": "https://dl.airtable.com/.attachments/cc82b01c4c1c6bda7fde83dfd23c8a19/fa9cd441/9780593497050.jpg",
     "Category": "Adult Novel"
   },
   {
@@ -10258,5 +10258,35 @@
     "Timeline": "",
     "Cover Image URL": "https://dl.airtable.com/.attachments/8a34f3fe59dc77e9453527a0fab142ed/04bcc96e/JediAcademyTrilogyCover.jpg",
     "Category": "Children's Book"
+  },
+  {
+    "(All Books) Title + Format": "The Old Republic: Deceived (The Essential Legends Collection) - Adult Novel",
+    "Database ID": 4466,
+    "Name (Title)": "The Old Republic: Deceived (The Essential Legends Collection)",
+    "Author / Writer": "Paul S. Kemp",
+    "Release Date": "11/1/2022",
+    "Timeline": "3653 BBY",
+    "Cover Image URL": 2,
+    "Category": "Adult Novel"
+  },
+  {
+    "(All Books) Title + Format": "The Old Republic: Revan (The Essential Legends Collection) - Adult Novel",
+    "Database ID": 4467,
+    "Name (Title)": "The Old Republic: Revan (The Essential Legends Collection)",
+    "Author / Writer": "Drew Karpyshyn",
+    "Release Date": "11/1/2022",
+    "Timeline": "3950 BBY",
+    "Cover Image URL": 1,
+    "Category": "Adult Novel"
+  },
+  {
+    "(All Books) Title + Format": "The Bacta War (The Essential Legends Collection) - Adult Novel",
+    "Database ID": 4468,
+    "Name (Title)": "The Bacta War (The Essential Legends Collection)",
+    "Author / Writer": "Michael A. Stackpole",
+    "Release Date": "11/1/2022",
+    "Timeline": "7 ABY",
+    "Cover Image URL": "https://dl.airtable.com/.attachments/78e7a045cfb5b62e2b7f1ea189087449/9a08c9cc/ImagefromiOS.jpg",
+    "Category": "Adult Novel"
   }
 ]
