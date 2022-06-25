@@ -173,6 +173,7 @@ export default function Home() {
 
   useEffect(() => {
     filterEntries(hideExcludedEntries, 'hideExcluded');
+    searchEntries(searchValue);
     localStorage.setItem(
       'loretracker',
       JSON.stringify(entriesMarkedAsFinished)
