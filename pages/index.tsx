@@ -20,6 +20,7 @@ import { useYoutiniParser } from '../utils/useYoutiniParser';
 import { useYoutiniFetch } from '../utils/useYoutiniFetch';
 import HeadContent from '../utils/HeadContent';
 import Card from '../comps/card/Card';
+import LoadingBackdrop from "../comps/MUI/LoadingBackdrop"
 
 export default function Home() {
   const [defaultFetchedData, setDefaultFetchedData] = useState<EntryData[]>([]);
@@ -63,6 +64,7 @@ export default function Home() {
   const [searchValue, setSearchValue] = useState('');
   const [progressBarValue, setProgressBarValue] = useState<number>(0);
   const [user, setUser] = useState<User | null>();
+  const [showBackdrop, setShowBackdrop] = useState<boolean>(false);
 
   async function fetchUserDataFromDatabase(): Promise<void> {
     try {
@@ -260,9 +262,11 @@ export default function Home() {
     fetchAllTitles(data);
     fetchAllCreators(data);
     fetchAllCategories(data);
+    setShowBackdrop(false);
   }
 
   function displayData(target: PossibleModules) {
+    setShowBackdrop(true);
     setCurrentlyOpenedModule(target);
     setHideExcludedEntries(true);
 
@@ -626,6 +630,7 @@ export default function Home() {
 
   return (
     <div className={styles.appcontainer}>
+      <LoadingBackdrop open={showBackdrop}/>
       <HeadContent module={currentlyOpenedModule} />
       <Header displayData={displayData} handleFileRead={handleFileRead} />
       <div className={styles.viewerContainer}>
