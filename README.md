@@ -21,7 +21,3 @@ Fortunately the amazing [Youtini Team](https://youtini.com) has already assemble
   - Lodash
   - Waypoint
   - Moment
-
-### ToDo:
-
-2. Write unit tests.
