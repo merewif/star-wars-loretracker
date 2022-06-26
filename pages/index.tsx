@@ -193,6 +193,10 @@ export default function Home() {
     setFetchedData(sortedBooks);
   }, [sortBy]);
 
+  useEffect(() => {
+    filterEntries(filteredCategories, 'categories');
+  }, [entriesMarkedAsExcluded])
+
   function sortBooks(data: EntryData[]) {
     if (sortBy[0] === 'timeline') {
       return _.orderBy(data, ['timeline', 'releaseDate'], sortBy[1]);
