@@ -33,7 +33,7 @@ export default function ProgressBar({ progressBarValue }: ProgressBarProps) {
   }));
   return (
     <div className={styles.progressBarContainer}>
-      <img src='./imgs/hilt.png' onClick={toggleSaberColor} />
+      <img src='./imgs/hilt.png' onClick={toggleSaberColor} className={styles.lightsaberHilt}/>
       <BorderLinearProgress variant='determinate' value={progressBarValue} />
       <p>{Math.round(progressBarValue)}% FINISHED</p>
     </div>

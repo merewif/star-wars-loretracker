@@ -24,6 +24,10 @@
     0px 1px 0px black;
 }
 
+.lightsaberHilt {
+  cursor:pointer;
+}
+
 @media screen and (max-width: 1100px) {
   .progressBarContainer img {
     width: 25vw;
