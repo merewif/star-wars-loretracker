@@ -510,7 +510,7 @@ export default function Home() {
       filteredByExcludedEntries,
       filteredBySearchResults
     );
-    
+
     const filteredData: EntryData[] = _.flatten(filteredEntries);
     const sortedData = sortBooks(filteredData);
     setFetchedData(sortedData);
@@ -559,7 +559,6 @@ export default function Home() {
       }
     }
 
-    console.log(listFilteredByFinished)
     return listFilteredByFinished;
   }
 
