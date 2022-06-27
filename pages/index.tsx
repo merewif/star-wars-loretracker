@@ -346,7 +346,7 @@ export default function Home() {
       if (entry.directedBy && !creators.includes(entry.directedBy))
         creators.push(entry.directedBy);
     }
-    setCreators(creators);
+    setCreators(creators.sort());
   }
 
   function fetchAllCategories(data: EntryData[]) {
