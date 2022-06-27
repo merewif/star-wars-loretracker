@@ -166,6 +166,7 @@ export default function Home() {
     if (currentlyOpenedModule)
       document.getElementById(currentlyOpenedModule)!.style.color = '#ffe81f';
 
+    setSearchValue('');
     resetFilters();
   }, [currentlyOpenedModule]);
 
@@ -191,11 +192,14 @@ export default function Home() {
   useEffect(() => {
     const sortedBooks = sortBooks(fetchedData);
     setFetchedData(sortedBooks);
-  }, [sortBy]);
+  }, [currentlyOpenedModule, sortBy]);
 
   useEffect(() => {
-    filterEntries(filteredCategories, 'categories');
-  }, [entriesMarkedAsExcluded])
+    filterEntries();
+    if (searchValue) {
+      searchEntries(searchValue);
+    }
+  }, [entriesMarkedAsFinished, entriesMarkedAsExcluded])
 
   function sortBooks(data: EntryData[]) {
     if (sortBy[0] === 'timeline') {
@@ -295,7 +299,7 @@ export default function Home() {
   }
 
   function searchEntries(input: string | undefined | null) {
-    if (!input) {
+    if (!input) {      
       displayData(currentlyOpenedModule);
       setSearchValue('');
       return;
@@ -304,7 +308,7 @@ export default function Home() {
     if (input.length) setSearchValue(input);
 
     let results = [];
-    for (const entry of fetchedData) {
+    for (const entry of defaultFetchedData) {
       if (entry.title.toLowerCase().includes(input.toLowerCase())) {
         results.push(entry);
       }
@@ -455,7 +459,7 @@ export default function Home() {
     }
   }
 
-  function filterEntries(value: any, source: string) {
+  function filterEntries(value?: any, source?: string) {
     let canonicityParameter = canonicityFilterValue,
       creatorsParameters = filteredCreatorsName,
       finishedParameter = finishedFilterValue,
