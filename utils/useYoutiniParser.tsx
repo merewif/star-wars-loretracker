@@ -11,7 +11,7 @@ export async function useYoutiniParser(
     let currentBook: EntryData = {
       canonicity: book.canonicity,
       coverImage: book['Cover Image URL'],
-      title: book['Name (Title)']!.replace(/-/, '—'),
+      title: book['Name (Title)']!.replace(/—|–|−|-/, '-'),
     };
 
     currentBook.author = book['Author / Writer'];
