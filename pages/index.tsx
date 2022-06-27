@@ -1,26 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import styles from '../styles/Home.module.css';
-import Header from '../comps/Header';
-import ProgressBar from '../comps/ProgressBar';
-import _ from 'lodash';
-import FiltersContainer from '../comps/Filters/FiltersContainer';
-import CardContents from '../comps/card/CardContents';
-import moment from 'moment';
-import { Waypoint } from 'react-waypoint';
+import React, { useState, useEffect } from "react";
+import styles from "../styles/Home.module.css";
+import Header from "../comps/Header";
+import ProgressBar from "../comps/ProgressBar";
+import _ from "lodash";
+import FiltersContainer from "../comps/Filters/FiltersContainer";
+import CardContents from "../comps/card/CardContents";
+import moment from "moment";
+import { Waypoint } from "react-waypoint";
 import {
   EntryData,
   MarkedEntries,
   PossibleModules,
   YoutiniData,
-} from '../types';
-import { supabase } from '../utils/supabaseClient';
-import { User } from '@supabase/supabase-js';
-import { FilterContext } from '../utils/useFilterContext';
-import { useYoutiniParser } from '../utils/useYoutiniParser';
-import { useYoutiniFetch } from '../utils/useYoutiniFetch';
-import HeadContent from '../utils/HeadContent';
-import Card from '../comps/card/Card';
-import LoadingBackdrop from "../comps/MUI/LoadingBackdrop"
+} from "../types";
+import { supabase } from "../utils/supabaseClient";
+import { User } from "@supabase/supabase-js";
+import { FilterContext } from "../utils/useFilterContext";
+import { useYoutiniParser } from "../utils/useYoutiniParser";
+import { useYoutiniFetch } from "../utils/useYoutiniFetch";
+import HeadContent from "../utils/HeadContent";
+import Card from "../comps/card/Card";
+import LoadingBackdrop from "../comps/MUI/LoadingBackdrop";
 
 export default function Home() {
   const [defaultFetchedData, setDefaultFetchedData] = useState<EntryData[]>([]);
@@ -30,9 +30,9 @@ export default function Home() {
   const [fetchedBooks, setFetchedBooks] = useState<EntryData[]>([]);
   const [fetchedComics, setFetchedComics] = useState<EntryData[]>([]);
   const [currentlyOpenedModule, setCurrentlyOpenedModule] =
-    useState<PossibleModules>('movies');
+    useState<PossibleModules>("movies");
   const [moduleKeys, setModuleKeys] = useState<string[]>([]);
-  const [sortBy, setSortBy] = useState<any[]>(['title', 'asc']);
+  const [sortBy, setSortBy] = useState<any[]>(["title", "asc"]);
   const [entriesMarkedAsExcluded, setEntriesMarkedAsExcluded] =
     useState<MarkedEntries>({
       movies: [],
@@ -58,10 +58,12 @@ export default function Home() {
     []
   );
   const [filteredEras, setFilteredEras] = useState<string[]>([]);
-  const [canonicityFilterValue, setCanonicityFilterValue] = useState('all');
-  const [finishedFilterValue, setFinishedFilterValue] = useState('all');
+  const [canonicityFilterValue, setCanonicityFilterValue] = useState<
+    "all" | "legends" | "canon"
+  >("all");
+  const [finishedFilterValue, setFinishedFilterValue] = useState("all");
   const [hideExcludedEntries, setHideExcludedEntries] = useState<boolean>(true);
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState("");
   const [progressBarValue, setProgressBarValue] = useState<number>(0);
   const [user, setUser] = useState<User | null>();
   const [showBackdrop, setShowBackdrop] = useState<boolean>(false);
@@ -69,9 +71,9 @@ export default function Home() {
   async function fetchUserDataFromDatabase(): Promise<void> {
     try {
       const { data, error } = await supabase
-        .from('userdata')
-        .select('data')
-        .eq('email', user?.email);
+        .from("userdata")
+        .select("data")
+        .eq("email", user?.email);
 
       if (data) {
         setEntriesMarkedAsFinished(data[0].data);
@@ -96,7 +98,7 @@ export default function Home() {
   async function upsertUserDataIntoDatabase(): Promise<void> {
     try {
       const { data, error } = await supabase
-        .from('userdata')
+        .from("userdata")
         .upsert([{ email: user?.email, data: entriesMarkedAsFinished }]);
 
       if (error) {
@@ -108,13 +110,13 @@ export default function Home() {
   }
 
   useEffect(() => {
-    console.log('Hello there.');
+    console.log("Hello there.");
 
-    setCurrentlyOpenedModule('movies');
-    fetchData('movies');
+    setCurrentlyOpenedModule("movies");
+    fetchData("movies");
 
-    if ('loretracker' in localStorage) {
-      let storedData = JSON.parse(localStorage.getItem('loretracker') ?? '');
+    if ("loretracker" in localStorage) {
+      let storedData = JSON.parse(localStorage.getItem("loretracker") ?? "");
       if (!storedData.excluded) storedData.excluded = entriesMarkedAsExcluded;
       if (storedData.excluded) setEntriesMarkedAsExcluded(storedData.excluded);
       setEntriesMarkedAsFinished(storedData);
@@ -124,10 +126,10 @@ export default function Home() {
 
     const { data: authListener } = supabase.auth.onAuthStateChange(
       (event, session) => {
-        if (event == 'SIGNED_IN') {
+        if (event == "SIGNED_IN") {
           setUser(session?.user ?? null);
         }
-        if (event == 'SIGNED_OUT') {
+        if (event == "SIGNED_OUT") {
           setEntriesMarkedAsExcluded({
             movies: [],
             games: [],
@@ -157,16 +159,16 @@ export default function Home() {
 
   useEffect(() => {
     let btns = Array.from(
-      document.getElementsByClassName('navbtn') as HTMLCollectionOf<HTMLElement>
+      document.getElementsByClassName("navbtn") as HTMLCollectionOf<HTMLElement>
     );
     for (const btn of btns) {
-      btn.style.color = 'white';
+      btn.style.color = "white";
     }
 
     if (currentlyOpenedModule)
-      document.getElementById(currentlyOpenedModule)!.style.color = '#ffe81f';
+      document.getElementById(currentlyOpenedModule)!.style.color = "#ffe81f";
 
-    setSearchValue('');
+    setSearchValue("");
     resetFilters();
   }, [currentlyOpenedModule]);
 
@@ -175,10 +177,8 @@ export default function Home() {
   }, [fetchedData, currentlyOpenedModule]);
 
   useEffect(() => {
-    filterEntries(hideExcludedEntries, 'hideExcluded');
-    searchEntries(searchValue);
     localStorage.setItem(
-      'loretracker',
+      "loretracker",
       JSON.stringify(entriesMarkedAsFinished)
     );
 
@@ -199,17 +199,17 @@ export default function Home() {
     if (searchValue) {
       searchEntries(searchValue);
     }
-  }, [entriesMarkedAsFinished, entriesMarkedAsExcluded])
+  }, [entriesMarkedAsFinished, entriesMarkedAsExcluded]);
 
   function sortBooks(data: EntryData[]) {
-    if (sortBy[0] === 'timeline') {
-      return _.orderBy(data, ['timeline', 'releaseDate'], sortBy[1]);
+    if (sortBy[0] === "timeline") {
+      return _.orderBy(data, ["timeline", "releaseDate"], sortBy[1]);
     }
     return _.orderBy(data, sortBy[0], sortBy[1]);
   }
 
   function calculateProgress() {
-    if (finishedFilterValue === 'finished') return setProgressBarValue(100);
+    if (finishedFilterValue === "finished") return setProgressBarValue(100);
     let finished = 0;
     let total = fetchedData.length;
 
@@ -223,7 +223,7 @@ export default function Home() {
     if (entriesMarkedAsFinished[currentlyOpenedModule]) {
       for (const entry of entriesMarkedAsFinished[currentlyOpenedModule]) {
         for (const data of fetchedData) {
-          if (_.includes(data, entry.replace(/-+/g, ' '))) finished++;
+          if (_.includes(data, entry.replace(/-+/g, " "))) finished++;
         }
       }
     }
@@ -237,7 +237,7 @@ export default function Home() {
   function handleFileRead(event: any) {
     let collection = JSON.parse(event.target.result);
     if (!collection.excluded) collection.excluded = entriesMarkedAsExcluded;
-    window.localStorage.setItem('loretracker', JSON.stringify(collection));
+    window.localStorage.setItem("loretracker", JSON.stringify(collection));
     setEntriesMarkedAsFinished(collection);
     setEntriesMarkedAsExcluded(collection.excluded);
   }
@@ -245,11 +245,11 @@ export default function Home() {
   async function setCardsHeight() {
     let cards = Array.from(
       document.getElementsByClassName(
-        'entryCard'
+        "entryCard"
       ) as HTMLCollectionOf<HTMLElement>
     );
     for await (const card of cards) {
-      card.style.height = 'auto';
+      card.style.height = "auto";
     }
 
     let largestHeight = 0;
@@ -276,13 +276,13 @@ export default function Home() {
   function displayData(target: PossibleModules) {
     setCurrentlyOpenedModule(target);
 
-    if (target === 'books' || target === 'comics') {
-      if (target === 'books' && fetchedBooks.length)
+    if (target === "books" || target === "comics") {
+      if (target === "books" && fetchedBooks.length)
         return setDataIntoStates(fetchedBooks);
 
-      if (target === 'comics' && fetchedComics.length)
+      if (target === "comics" && fetchedComics.length)
         return setDataIntoStates(fetchedComics);
-      
+
       setShowBackdrop(true);
       return useYoutiniFetch(target)
         .then((unformattedBooks: YoutiniData[]) =>
@@ -290,8 +290,8 @@ export default function Home() {
         )
         .then((parsedBooks: EntryData[]) => {
           setDataIntoStates(parsedBooks);
-          if (target === 'books') setFetchedBooks(parsedBooks);
-          if (target === 'comics') setFetchedComics(parsedBooks);
+          if (target === "books") setFetchedBooks(parsedBooks);
+          if (target === "comics") setFetchedComics(parsedBooks);
         });
     }
 
@@ -299,31 +299,19 @@ export default function Home() {
   }
 
   function searchEntries(input: string | undefined | null) {
-    if (!input) {      
+    if (!input) {
       displayData(currentlyOpenedModule);
-      setSearchValue('');
-      return;
+      setSearchValue("");
     }
 
-    if (input.length) setSearchValue(input);
-
-    let results = [];
-    for (const entry of defaultFetchedData) {
-      if (entry.title.toLowerCase().includes(input.toLowerCase())) {
-        results.push(entry);
-      }
-    }
-
-    if (results.length) {
-      setFetchedData(results);
-    }
+    filterEntries(input, "search");
   }
 
   function fetchData(target: string) {
-    setCanonicityFilterValue('all');
+    setCanonicityFilterValue("all");
     setFilteredCreatorsName([]);
     setFilteredEras([]);
-    fetch('./data/' + target + '.json')
+    fetch("./data/" + target + ".json")
       .then((response) => response.json())
       .then((data) => {
         setDataIntoStates(data);
@@ -383,7 +371,7 @@ export default function Home() {
         },
       });
     }
-    setSearchValue('');
+    setSearchValue("");
   }
 
   function removeFromExcluded(category: string, entry: EntryData) {
@@ -405,15 +393,15 @@ export default function Home() {
   }
 
   function toggleEntryAsFinished(entry: EntryData) {
-    const currentTitle = entry.title.replace(/\s+/g, '-');
+    const currentTitle = entry.title.replace(/\s+/g, "-");
     let container = document.getElementById(`${currentTitle}-card`);
 
     const isEntryFinished =
       entriesMarkedAsFinished[currentlyOpenedModule].includes(currentTitle);
 
     if (isEntryFinished) {
-      container?.classList.remove('cardFinished');
-      container?.classList.add('cardUnfinished');
+      container?.classList.remove("cardFinished");
+      container?.classList.add("cardUnfinished");
 
       const arrWithoutEntry = _.without(
         entriesMarkedAsFinished[currentlyOpenedModule],
@@ -426,7 +414,7 @@ export default function Home() {
       });
 
       localStorage.setItem(
-        'loretracker',
+        "loretracker",
         JSON.stringify({
           ...entriesMarkedAsFinished,
           [currentlyOpenedModule]: arrWithoutEntry,
@@ -435,8 +423,8 @@ export default function Home() {
     }
 
     if (!isEntryFinished) {
-      container?.classList.remove('cardUnfinished');
-      container?.classList.add('cardFinished');
+      container?.classList.remove("cardUnfinished");
+      container?.classList.add("cardFinished");
 
       setEntriesMarkedAsFinished({
         ...entriesMarkedAsFinished,
@@ -447,7 +435,7 @@ export default function Home() {
       });
 
       localStorage.setItem(
-        'loretracker',
+        "loretracker",
         JSON.stringify({
           ...entriesMarkedAsFinished,
           [currentlyOpenedModule]: [
@@ -465,76 +453,125 @@ export default function Home() {
       finishedParameter = finishedFilterValue,
       erasParameters = filteredEras,
       categoryParameters = filteredCategories,
-      hideExcluded = hideExcludedEntries;
+      hideExcluded = hideExcludedEntries,
+      searchInput = searchValue;
 
-    if (source === 'canonicity') {
+    if (source === "canonicity") {
       setCanonicityFilterValue(value);
       canonicityParameter = value;
     }
-    if (source === 'creators') {
-      let persons = typeof value === 'string' ? value.split(',') : value;
+    if (source === "creators") {
+      let persons = typeof value === "string" ? value.split(",") : value;
       setFilteredCreatorsName(persons);
       creatorsParameters = persons;
     }
-    if (source === 'eras') {
-      let erasToFilter = typeof value === 'string' ? value.split(',') : value;
+    if (source === "eras") {
+      let erasToFilter = typeof value === "string" ? value.split(",") : value;
       setFilteredEras(erasToFilter);
       erasParameters = erasToFilter;
     }
 
-    if (source === 'categories') {
+    if (source === "categories") {
       let categoriesToFilter =
-        typeof value === 'string' ? value.split(',') : value;
+        typeof value === "string" ? value.split(",") : value;
       setFilteredCategories(categoriesToFilter);
       categoryParameters = categoriesToFilter;
     }
 
-    if (source === 'finished') {
+    if (source === "finished") {
       setFinishedFilterValue(value);
       finishedParameter = value;
     }
 
-    if (source === 'hideExcluded') {
+    if (source === "hideExcluded") {
       if (hideExcluded !== value) setHideExcludedEntries(value);
       hideExcluded = value;
     }
 
-    let filteredResults: any = defaultFetchedData;
-
-    // Filter by Canon
-    if (canonicityParameter === 'legends') {
-      filteredResults = _.filter(defaultFetchedData, { canonicity: false });
+    if (source === "search") {
+      if (searchValue !== value) setSearchValue(value);
+      searchInput = value;
     }
 
-    if (canonicityParameter === 'canon') {
-      filteredResults = _.filter(defaultFetchedData, { canonicity: true });
+    let filteredByCanon = filterByCanonicity(canonicityParameter);
+    let filteredByFinished = filterByFinished(finishedParameter);
+    let filteredByCreators = filterByCreators(creatorsParameters);
+    let filteredByEras = filterByEras(erasParameters);
+    let filteredByCategories = filterByCategories(categoryParameters);
+    let filteredByExcludedEntries = filterExcludedEntries(hideExcluded);
+    let filteredBySearchResults = filterBySearchResults(searchInput);
+
+    const filteredEntries = _.intersection(
+      filteredByCanon,
+      filteredByFinished,
+      filteredByCreators,
+      filteredByEras,
+      filteredByCategories,
+      filteredByExcludedEntries,
+      filteredBySearchResults
+    );
+    
+    const filteredData: EntryData[] = _.flatten(filteredEntries);
+    const sortedData = sortBooks(filteredData);
+    setFetchedData(sortedData);
+  }
+
+  function filterByCanonicity(canonicityParameter: string): EntryData[] {
+    let results: EntryData[] = [];
+
+    if (!canonicityParameter || canonicityParameter === "all") {
+      results = defaultFetchedData;
     }
 
-    // Filter by Finished
+    if (canonicityParameter === "legends") {
+      results = _.filter(defaultFetchedData, { canonicity: false });
+    }
+
+    if (canonicityParameter === "canon") {
+      results = _.filter(defaultFetchedData, { canonicity: true });
+    }
+
+    return results;
+  }
+
+  function filterByFinished(finishedParameter: string): EntryData[] {
     let listOfFinishedEntries = entriesMarkedAsFinished[currentlyOpenedModule];
-    let listFilteredByFinished = [];
+    let listFilteredByFinished: any[] = [];
 
-    if (finishedParameter === 'finished') {
+    if (finishedParameter === "all") {
+      listFilteredByFinished = defaultFetchedData;
+    }
+
+    if (finishedParameter === "finished") {
       for (const entry of listOfFinishedEntries) {
-        const title = entry.replace(/-/g, ' ');
-        let result = _.filter(filteredResults, { title: title });
+        const title = entry.replace(/-/g, " ");
+        let result = _.filter(defaultFetchedData, { title: title });
         listFilteredByFinished.push(result);
       }
-      filteredResults = _.flatten(listFilteredByFinished);
+      listFilteredByFinished = _.flatten(listFilteredByFinished);
     }
 
-    if (finishedParameter === 'unfinished') {
+    if (finishedParameter === "unfinished") {
+      listFilteredByFinished = defaultFetchedData;
       for (const entry of listOfFinishedEntries) {
-        const title = entry.replace(/-/g, ' ');
-        filteredResults = _.reject(filteredResults, { title: title });
+        const title = entry.replace(/-/g, " ");
+        listFilteredByFinished = _.reject(listFilteredByFinished, { title: title });
       }
     }
 
-    // Filter by Creator
+    console.log(listFilteredByFinished)
+    return listFilteredByFinished;
+  }
+
+  function filterByCreators(creatorsParameters: Array<string>): EntryData[] {
+    let listFilteredByCreators: any[] = [];
+    if (!creatorsParameters.length) {
+      listFilteredByCreators = defaultFetchedData;
+    }
+
     if (creatorsParameters.length) {
-      let listFilteredByCreators = [];
       for (const person of creatorsParameters) {
-        let entriesByPerson = _.filter(filteredResults, function (o) {
+        let entriesByPerson = _.filter(defaultFetchedData, function (o) {
           if (
             o.author === person ||
             o.directedBy === person ||
@@ -546,56 +583,92 @@ export default function Home() {
 
         listFilteredByCreators.push(entriesByPerson);
       }
-      filteredResults = _.flatten(listFilteredByCreators);
+      listFilteredByCreators = _.flatten(listFilteredByCreators);
     }
 
-    // Filter by Era
+    return listFilteredByCreators;
+  }
+
+  function filterByEras(erasParameters: Array<string>): EntryData[] {
+    let listFilteredByEras: any[] = [];
+
+    if (!erasParameters.length) {
+      listFilteredByEras = defaultFetchedData;
+    }
+
     if (erasParameters.length) {
-      let listFilteredByEras = [];
       for (const era of erasParameters) {
-        let entriesByEra = _.filter(filteredResults, {
+        let entriesByEra = _.filter(defaultFetchedData, {
           era: era,
         });
 
         listFilteredByEras.push(entriesByEra);
       }
-      filteredResults = _.flatten(listFilteredByEras);
+      listFilteredByEras = _.flatten(listFilteredByEras);
     }
 
-    // Filter by Category
+    return listFilteredByEras;
+  }
+
+  function filterByCategories(categoryParameters: Array<string>): EntryData[] {
+    let listFilteredByCategories: any[] = [];
+
+    if (!categoryParameters.length) {
+      listFilteredByCategories = defaultFetchedData;
+    }
+
     if (categoryParameters.length) {
-      let listFilteredByCategories = [];
       for (const category of categoryParameters) {
-        let entriesByCategory = _.filter(filteredResults, {
+        let entriesByCategory = _.filter(defaultFetchedData, {
           category: category,
         });
 
         listFilteredByCategories.push(entriesByCategory);
       }
-      filteredResults = _.flatten(listFilteredByCategories);
+      listFilteredByCategories = _.flatten(listFilteredByCategories);
     }
 
-    // Filter excluded entries
+    return listFilteredByCategories;
+  }
+
+  function filterExcludedEntries(hideExcluded: boolean): EntryData[] {
+    let results: any[] = defaultFetchedData;
+
     if (hideExcluded && entriesMarkedAsExcluded[currentlyOpenedModule]) {
       const excludedEntries = entriesMarkedAsExcluded[currentlyOpenedModule];
       for (const entry of excludedEntries) {
-        const title = entry.replace(/-/g, ' ');
-        filteredResults = _.reject(filteredResults, { title: title });
+        const title = entry.replace(/-/g, " ");
+        results = _.reject(results, { title: title });
       }
     }
+    return results;
+  }
 
-    const filteredData: EntryData[] = _.flatten(filteredResults);
-    const sortedData = sortBooks(filteredData);
-    setFetchedData(sortedData);
+  function filterBySearchResults(searchInput: string): EntryData[] {
+    let searchResults: any[] = [];
+
+    if (!searchInput.length) {
+      searchResults = defaultFetchedData;
+    }
+
+    if (searchInput.length) {
+      for (const entry of defaultFetchedData) {
+        if (entry.title.toLowerCase().includes(searchInput.toLowerCase())) {
+          searchResults.push(entry);
+        }
+      }
+    }
+    return searchResults;
   }
 
   function resetFilters() {
     setFetchedData(defaultFetchedData);
-    setCanonicityFilterValue('all');
-    setFinishedFilterValue('all');
+    setCanonicityFilterValue("all");
+    setFinishedFilterValue("all");
     setFilteredCreatorsName([]);
     setFilteredEras([]);
     setFilteredCategories([]);
+    setSearchValue('');
     fetchAllCreators(defaultFetchedData);
   }
 
@@ -637,7 +710,7 @@ export default function Home() {
 
   return (
     <div className={styles.appcontainer}>
-      <LoadingBackdrop open={showBackdrop}/>
+      <LoadingBackdrop open={showBackdrop} />
       <HeadContent module={currentlyOpenedModule} />
       <Header displayData={displayData} handleFileRead={handleFileRead} />
       <div className={styles.viewerContainer}>
@@ -654,7 +727,7 @@ export default function Home() {
           ) : null}
           <div id={styles.moduleContainer}>
             {_.slice(fetchedData, 0, paginationEndElement).map((e1, i1) => {
-              let currentTitle = e1.title.replace(/\s+/g, '-');
+              let currentTitle = e1.title.replace(/\s+/g, "-");
               if (
                 hideExcludedEntries &&
                 entriesMarkedAsExcluded[currentlyOpenedModule].includes(
@@ -667,7 +740,7 @@ export default function Home() {
                   {...cardprops}
                   e1={e1}
                   currentTitle={currentTitle}
-                  key={'1' + i1}
+                  key={"1" + i1}
                 />
               );
             })}
