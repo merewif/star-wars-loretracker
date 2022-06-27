@@ -94,6 +94,7 @@
   transition: transform 0.5s ease;
   margin-block: 10px;
   z-index: 1000;
+  cursor: zoom-in;
 }
 
 .coverImage:hover {
