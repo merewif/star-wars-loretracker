@@ -371,7 +371,6 @@ export default function Home() {
         },
       });
     }
-    setSearchValue("");
   }
 
   function removeFromExcluded(category: string, entry: EntryData) {
