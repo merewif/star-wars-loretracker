@@ -27,8 +27,7 @@
   -webkit-transition: all 0.5s ease;
   -ms-transition: all 0.5s ease;
   transition: all 0.5s ease;
-  border-top-left-radius: 25px;
-  border-top-right-radius: 25px;
+  border-radius: 25px;
 }
 
 .canonicityTrue {
@@ -38,6 +37,8 @@
 .canonicityTrue .finishedBtn {
   color: white;
   background-color: black;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
 }
 
 .canonicityFalse {
@@ -47,6 +48,16 @@
 .canonicityFalse .finishedBtn {
   color: black;
   background-color: #ffe81f;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+
+.cardUnfinished .finishedBtn:before {
+  content: '✔ '
+}
+
+.cardFinished .finishedBtn:before {
+  content: '✗ '
 }
 
 .cardUnfinished h2,
