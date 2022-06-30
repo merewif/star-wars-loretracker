@@ -68,6 +68,7 @@
 .canonicityTrue .titleDiv {
   background-color: black;
   color: white;
+  border-inline: 5px solid black;
 }
 
 .cardFinished.canonicityTrue .titleDiv {
