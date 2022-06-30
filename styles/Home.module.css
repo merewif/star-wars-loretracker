@@ -64,13 +64,12 @@
 .cardUnfinished p,
 .cardFinished h2,
 .cardFinished p {
-  margin-left: 20px;
-  padding-inline: 10px;
+  padding-inline: 25px;
+  font-size: 0.9rem;
 }
 
 .cardUnfinished h2,
 .cardFinished h2 {
-  font-size: 1rem;
   font-family: 'Josefin Sans';
   font-weight: 300;
   color: gray;
@@ -85,6 +84,7 @@
   text-transform: uppercase;
   margin-top: 0;
   min-height: 2rem;
+  line-height: 100%;
 }
 
 .cardFinished {
@@ -111,10 +111,10 @@
 .coverImageContainer {
   width: 100px;
   height: 100% !important;
-  margin: 20px;
+  margin: 25px;
   margin-top: auto;
   margin-bottom: auto;
-  float: left;
+  float: right;
   display: grid;
 }
 
@@ -160,7 +160,7 @@
   font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
   font-weight: 900;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   padding: 1px;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
