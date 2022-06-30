@@ -16,8 +16,8 @@ export default function Card({
     <div
       className={
         entriesMarkedAsFinished[currentlyOpenedModule].includes(currentTitle)
-          ? `${styles.cardFinished} entryCard cardFinished`
-          : `${styles.cardUnfinished} entryCard cardUnfinished`
+          ? `${styles.cardFinished} entryCard cardFinished ${e1.canonicity ? styles.canonicityTrue : styles.canonicityFalse}`
+          : `${styles.cardUnfinished} entryCard cardUnfinished ${e1.canonicity ? styles.canonicityTrue : styles.canonicityFalse}`
       }
       id={currentTitle + '-card'}
     >
