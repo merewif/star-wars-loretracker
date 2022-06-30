@@ -66,6 +66,7 @@
 .cardFinished p {
   padding-inline: 25px;
   font-size: 0.9rem;
+  text-align: right;
 }
 
 .cardUnfinished h2,
@@ -114,7 +115,7 @@
   margin: 25px;
   margin-top: auto;
   margin-bottom: auto;
-  float: right;
+  float: left;
   display: grid;
 }
 
