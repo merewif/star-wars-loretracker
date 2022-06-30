@@ -29,7 +29,7 @@ export default function CardContents({
   };
 
   return (
-    <div key={'2' + i2}>
+    <div key={'2' + i2} className={styles[currentKey + "Div"]}>
       {currentKey === 'coverImage' ? (
         <div className={styles.coverImageContainer}>
           <img

@@ -52,6 +52,40 @@
   border-bottom-right-radius: 25px;
 }
 
+.titleDiv {
+  padding-block: 10px;
+}
+
+.titleDiv h2 {
+  display: none;
+}
+
+.titleDiv p {
+  margin-bottom: 0 !important;
+  padding: none;
+}
+
+.canonicityTrue .titleDiv {
+  background-color: black;
+  color: white;
+}
+
+.cardFinished.canonicityTrue .titleDiv {
+  background-color: white;
+}
+
+.cardFinished.canonicityTrue .titleDiv p{
+  color: black;
+}
+
+.canonicityFalse .titleDiv {
+  background-color: #ffe81f;
+}
+
+.canonicityFalse .titleDiv p {
+  color: black;
+}
+
 .cardUnfinished .finishedBtn:before {
   content: '✔ '
 }
@@ -83,7 +117,6 @@
   font-weight: 900 !important;
   text-transform: uppercase;
   margin-top: 0;
-  min-height: 2rem;
   line-height: 100%;
 }
 
