@@ -258,7 +258,7 @@ export default function Home() {
     }
 
     for (const card of cards) {
-      card.style.height = `${largestHeight}px`;
+      card.style.height = `${largestHeight + 20}px`;
     }
   }
 
