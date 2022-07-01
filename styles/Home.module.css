@@ -327,11 +327,16 @@
     grid-template-columns: 1fr;
   }
 
+
   .searchbar {
-    width: 50vw;
-    margin-right: auto !important;
-    margin-left: 0 !important;
+    width: 90%;
+    margin-inline: auto !important;
     padding-left: 0 !important;
+    margin-block: 20px;
+  }
+
+  .searchbar > div {
+    width: 100%;
   }
 
   .autocomplete {
@@ -339,13 +344,15 @@
   }
 
   .filterDiv {
-    margin-left: 0 !important;
-    margin-right: auto !important;
+    margin-inline: auto !important;
   }
 
   .sortByDropdown {
-    width: 50vw;
-    margin-right: auto !important;
-    margin-left: 0 !important;
+    width: 90%;
+    margin-inline: auto !important;
+  }
+
+  .sortByDropdown > div {
+    width: 100%;
   }
 }

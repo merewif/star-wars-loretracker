@@ -35,6 +35,10 @@
     font-size: 0.75rem;
   }
 
+  .timelineWarningContainer li svg {
+    width: 0.75rem;
+  }
+
   .timelineWarningContainer b {
     margin-left: 15px;
   }
