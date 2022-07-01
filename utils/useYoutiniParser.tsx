@@ -45,8 +45,8 @@ export async function useYoutiniParser(
     if (book['Timeline']?.endsWith('ABY') && !timelineIncludesTwoDates) {
       currentBook.timeline = Number(book['Timeline'].replace(/[^0-9]/g, ''));
     }
-
-    const bookIsEssentialLegends = book['Name (Title)'].toUpperCase().includes('Essential Legends'.toUpperCase() || 'The Thrawn Trilogy Boxed Set'.toUpperCase());
+    
+    const bookIsEssentialLegends = ['Essential Legends', 'Boxed Set'].some(condition => book['Name (Title)'].toUpperCase().includes(condition.toUpperCase()));
     const allowedCategories = ['Adult Novel', 'YA Novel', 'Junior Reader', 'Single Issue Comic', 'Graphic Novel', 'Omnibus'];
 
     if (allowedCategories.includes(currentBook.category) && !bookIsEssentialLegends) {
