@@ -9,10 +9,10 @@ body {
 }
 
 #__next {
-  background-image: url('/imgs/bg.jpg');
+  background-image: url('/imgs/bg2.jpg');
   background-attachment: fixed;
   background-size: cover;
-  background-position: center;
+  background-position: top;
   background-repeat: no-repeat;
 }
 a {
