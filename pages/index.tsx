@@ -606,9 +606,10 @@ export default function Home() {
 
     if (!searchInput || !searchInput.length) {
       searchResults = defaultFetchedData;
+      setSearchValue('');
     }
 
-    if (searchInput.length) {
+    if (searchInput && searchInput.length) {
       for (const entry of defaultFetchedData) {
         if (entry.title.toLowerCase().includes(searchInput.toLowerCase())) {
           searchResults.push(entry);
