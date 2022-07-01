@@ -14,9 +14,11 @@ export default function TimelineWarning() {
         <ul>
             <li><FontAwesomeIcon icon={faRebel} color="#ffe81f" /> This doesn't necessarily mean they come after one another storywise.</li>
         </ul>
-        <li><FontAwesomeIcon icon={faJedi}  color="#ffe81f"/> Books that cover multiple years display only the last year of the story.</li>
+        <li><FontAwesomeIcon icon={faJedi}  color="#ffe81f"/> Books that cover multiple years display only the last year the story is set in.</li>
         <ul>
-            <li><FontAwesomeIcon icon={faRebel} color="#ffe81f" /> For example the Lost Tribe of the Sith are set between 5000 BBY-2975 BBY. We decided to display only the final date and omit the first.</li>
+            <li><FontAwesomeIcon icon={faRebel} color="#ffe81f" /> For example the Lost Tribe of the Sith is set between 5000 BBY-2975 BBY.</li>
+            <li><FontAwesomeIcon icon={faRebel} color="#ffe81f" /> We decided to display only the final date and omit the first, as most of the times the starting date refers to flashbacks.</li>
+            <li><FontAwesomeIcon icon={faRebel} color="#ffe81f" /> This was required to give them a definite place in the list and make sorting them possible but it might cause some confusion.</li>
         </ul>
     </ul>
     </div>
