@@ -12,8 +12,7 @@ export default function Filterbox() {
   return (
     <Box
       sx={{
-        display: 'flex',
-        width: '25%',
+        display: 'flex'
       }}
       className={styles.filterDiv}
     >

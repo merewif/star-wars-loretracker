@@ -290,6 +290,10 @@
   border-color: black;
 }
 
+.filterDiv {
+  width: 25%;
+}
+
 @media screen and (max-width: 1500px) {
   #moduleContainer {
     grid-template-columns: 1fr 1fr 1fr;
@@ -327,7 +331,6 @@
     grid-template-columns: 1fr;
   }
 
-
   .searchbar {
     width: 90% !important;
     margin-inline: auto !important;
@@ -344,6 +347,7 @@
   }
 
   .filterDiv {
+    width: auto;
     margin-inline: auto !important;
   }
 
