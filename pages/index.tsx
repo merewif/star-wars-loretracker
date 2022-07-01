@@ -7,12 +7,7 @@ import FiltersContainer from "../comps/Filters/FiltersContainer";
 import CardContents from "../comps/card/CardContents";
 import moment from "moment";
 import { Waypoint } from "react-waypoint";
-import {
-  EntryData,
-  MarkedEntries,
-  PossibleModules,
-  YoutiniData,
-} from "../types";
+import { EntryData, MarkedEntries, PossibleModules, YoutiniData } from "../types";
 import { supabase } from "../utils/supabaseClient";
 import { User } from "@supabase/supabase-js";
 import { FilterContext } from "../utils/useFilterContext";
@@ -30,38 +25,31 @@ export default function Home() {
   const [fetchedTitles, setFetchedTitles] = useState<string[]>([]);
   const [fetchedBooks, setFetchedBooks] = useState<EntryData[]>([]);
   const [fetchedComics, setFetchedComics] = useState<EntryData[]>([]);
-  const [currentlyOpenedModule, setCurrentlyOpenedModule] =
-    useState<PossibleModules>("movies");
+  const [currentlyOpenedModule, setCurrentlyOpenedModule] = useState<PossibleModules>("movies");
   const [moduleKeys, setModuleKeys] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState<any[]>(["title", "asc"]);
-  const [entriesMarkedAsExcluded, setEntriesMarkedAsExcluded] =
-    useState<MarkedEntries>({
-      movies: [],
-      games: [],
-      books: [],
-      comics: [],
-      series: [],
-    });
-  const [entriesMarkedAsFinished, setEntriesMarkedAsFinished] =
-    useState<MarkedEntries>({
-      movies: [],
-      games: [],
-      books: [],
-      comics: [],
-      series: [],
-      excluded: entriesMarkedAsExcluded,
-    });
+  const [entriesMarkedAsExcluded, setEntriesMarkedAsExcluded] = useState<MarkedEntries>({
+    movies: [],
+    games: [],
+    books: [],
+    comics: [],
+    series: [],
+  });
+  const [entriesMarkedAsFinished, setEntriesMarkedAsFinished] = useState<MarkedEntries>({
+    movies: [],
+    games: [],
+    books: [],
+    comics: [],
+    series: [],
+    excluded: entriesMarkedAsExcluded,
+  });
   const [filterboxAnchorEl, setFilterboxAnchorEl] = useState(null);
   const [creators, setCreators] = useState<string[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [filteredCategories, setFilteredCategories] = useState<string[]>([]);
-  const [filteredCreatorsName, setFilteredCreatorsName] = useState<string[]>(
-    []
-  );
+  const [filteredCreatorsName, setFilteredCreatorsName] = useState<string[]>([]);
   const [filteredEras, setFilteredEras] = useState<string[]>([]);
-  const [canonicityFilterValue, setCanonicityFilterValue] = useState<
-    "all" | "legends" | "canon"
-  >("all");
+  const [canonicityFilterValue, setCanonicityFilterValue] = useState<"all" | "legends" | "canon">("all");
   const [finishedFilterValue, setFinishedFilterValue] = useState("all");
   const [hideExcludedEntries, setHideExcludedEntries] = useState<boolean>(true);
   const [searchValue, setSearchValue] = useState("");
@@ -72,10 +60,7 @@ export default function Home() {
 
   async function fetchUserDataFromDatabase(): Promise<void> {
     try {
-      const { data, error } = await supabase
-        .from("userdata")
-        .select("data")
-        .eq("email", user?.email);
+      const { data, error } = await supabase.from("userdata").select("data").eq("email", user?.email);
 
       if (data) {
         setEntriesMarkedAsFinished(data[0].data);
@@ -126,30 +111,28 @@ export default function Home() {
 
     setUser(supabase.auth.user());
 
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        if (event == "SIGNED_IN") {
-          setUser(session?.user ?? null);
-        }
-        if (event == "SIGNED_OUT") {
-          setEntriesMarkedAsExcluded({
-            movies: [],
-            games: [],
-            books: [],
-            comics: [],
-            series: [],
-          });
-          setEntriesMarkedAsFinished({
-            movies: [],
-            games: [],
-            books: [],
-            comics: [],
-            series: [],
-            excluded: entriesMarkedAsExcluded,
-          });
-        }
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event == "SIGNED_IN") {
+        setUser(session?.user ?? null);
       }
-    );
+      if (event == "SIGNED_OUT") {
+        setEntriesMarkedAsExcluded({
+          movies: [],
+          games: [],
+          books: [],
+          comics: [],
+          series: [],
+        });
+        setEntriesMarkedAsFinished({
+          movies: [],
+          games: [],
+          books: [],
+          comics: [],
+          series: [],
+          excluded: entriesMarkedAsExcluded,
+        });
+      }
+    });
     return () => {
       if (authListener) authListener.unsubscribe();
     };
@@ -160,15 +143,12 @@ export default function Home() {
   }, [user]);
 
   useEffect(() => {
-    let btns = Array.from(
-      document.getElementsByClassName("navbtn") as HTMLCollectionOf<HTMLElement>
-    );
+    let btns = Array.from(document.getElementsByClassName("navbtn") as HTMLCollectionOf<HTMLElement>);
     for (const btn of btns) {
       btn.style.color = "white";
     }
 
-    if (currentlyOpenedModule)
-      document.getElementById(currentlyOpenedModule)!.style.color = "#ffe81f";
+    if (currentlyOpenedModule) document.getElementById(currentlyOpenedModule)!.style.color = "#ffe81f";
 
     setSearchValue("");
     resetFilters();
@@ -179,10 +159,7 @@ export default function Home() {
   }, [fetchedData, currentlyOpenedModule]);
 
   useEffect(() => {
-    localStorage.setItem(
-      "loretracker",
-      JSON.stringify(entriesMarkedAsFinished)
-    );
+    localStorage.setItem("loretracker", JSON.stringify(entriesMarkedAsFinished));
 
     if (user) upsertUserDataIntoDatabase();
   }, [entriesMarkedAsFinished]);
@@ -197,8 +174,10 @@ export default function Home() {
   }, [currentlyOpenedModule, sortBy]);
 
   useEffect(() => {
-    setSortBy(["title", "asc"]);
-  }, [currentlyOpenedModule]);
+    if (!moduleKeys.includes("timeline")) {
+      setShowTimelineWarning(false);
+    }
+  }, [moduleKeys]);
 
   useEffect(() => {
     if (sortBy[0] === "timeline") {
@@ -207,8 +186,7 @@ export default function Home() {
     if (sortBy[0] !== "timeline") {
       setShowTimelineWarning(false);
     }
-    
-  }, [sortBy])
+  }, [sortBy]);
 
   useEffect(() => {
     filterEntries();
@@ -231,9 +209,7 @@ export default function Home() {
 
     const dataIsUnfiltered = fetchedData.length === defaultFetchedData.length;
     if (dataIsUnfiltered && hideExcludedEntries) {
-      total =
-        fetchedData.length -
-        entriesMarkedAsExcluded[currentlyOpenedModule].length;
+      total = fetchedData.length - entriesMarkedAsExcluded[currentlyOpenedModule].length;
     }
 
     if (entriesMarkedAsFinished[currentlyOpenedModule]) {
@@ -259,11 +235,7 @@ export default function Home() {
   }
 
   async function setCardsHeight() {
-    let cards = Array.from(
-      document.getElementsByClassName(
-        "entryCard"
-      ) as HTMLCollectionOf<HTMLElement>
-    );
+    let cards = Array.from(document.getElementsByClassName("entryCard") as HTMLCollectionOf<HTMLElement>);
     for await (const card of cards) {
       card.style.height = "auto";
     }
@@ -293,17 +265,13 @@ export default function Home() {
     setCurrentlyOpenedModule(target);
 
     if (target === "books" || target === "comics") {
-      if (target === "books" && fetchedBooks.length)
-        return setDataIntoStates(fetchedBooks);
+      if (target === "books" && fetchedBooks.length) return setDataIntoStates(fetchedBooks);
 
-      if (target === "comics" && fetchedComics.length)
-        return setDataIntoStates(fetchedComics);
+      if (target === "comics" && fetchedComics.length) return setDataIntoStates(fetchedComics);
 
       setShowBackdrop(true);
       return useYoutiniFetch(target)
-        .then((unformattedBooks: YoutiniData[]) =>
-          useYoutiniParser(unformattedBooks)
-        )
+        .then((unformattedBooks: YoutiniData[]) => useYoutiniParser(unformattedBooks))
         .then((parsedBooks: EntryData[]) => {
           setDataIntoStates(parsedBooks);
           if (target === "books") setFetchedBooks(parsedBooks);
@@ -347,12 +315,9 @@ export default function Home() {
     let creators: string[] = [];
 
     for (const entry of data) {
-      if (entry.author && !creators.includes(entry.author))
-        creators.push(entry.author);
-      if (entry.createdBy && !creators.includes(entry.createdBy))
-        creators.push(entry.createdBy);
-      if (entry.directedBy && !creators.includes(entry.directedBy))
-        creators.push(entry.directedBy);
+      if (entry.author && !creators.includes(entry.author)) creators.push(entry.author);
+      if (entry.createdBy && !creators.includes(entry.createdBy)) creators.push(entry.createdBy);
+      if (entry.directedBy && !creators.includes(entry.directedBy)) creators.push(entry.directedBy);
     }
     setCreators(creators.sort());
   }
@@ -370,20 +335,14 @@ export default function Home() {
     if (!_.includes(entriesMarkedAsExcluded[currentlyOpenedModule], entry)) {
       setEntriesMarkedAsExcluded({
         ...entriesMarkedAsExcluded,
-        [currentlyOpenedModule]: [
-          ...entriesMarkedAsExcluded[currentlyOpenedModule],
-          entry,
-        ],
+        [currentlyOpenedModule]: [...entriesMarkedAsExcluded[currentlyOpenedModule], entry],
       });
 
       setEntriesMarkedAsFinished({
         ...entriesMarkedAsFinished,
         excluded: {
           ...entriesMarkedAsFinished.excluded,
-          [currentlyOpenedModule]: [
-            ...entriesMarkedAsFinished.excluded[currentlyOpenedModule],
-            entry,
-          ],
+          [currentlyOpenedModule]: [...entriesMarkedAsFinished.excluded[currentlyOpenedModule], entry],
         },
       });
     }
@@ -394,10 +353,7 @@ export default function Home() {
       ...entriesMarkedAsFinished,
       excluded: {
         ...entriesMarkedAsFinished.excluded,
-        [category]: _.without(
-          entriesMarkedAsFinished.excluded[category],
-          entry
-        ),
+        [category]: _.without(entriesMarkedAsFinished.excluded[category], entry),
       },
     });
 
@@ -411,17 +367,13 @@ export default function Home() {
     const currentTitle = entry.title.replace(/\s+/g, "-");
     let container = document.getElementById(`${currentTitle}-card`);
 
-    const isEntryFinished =
-      entriesMarkedAsFinished[currentlyOpenedModule].includes(currentTitle);
+    const isEntryFinished = entriesMarkedAsFinished[currentlyOpenedModule].includes(currentTitle);
 
     if (isEntryFinished) {
       container?.classList.remove("cardFinished");
       container?.classList.add("cardUnfinished");
 
-      const arrWithoutEntry = _.without(
-        entriesMarkedAsFinished[currentlyOpenedModule],
-        currentTitle
-      );
+      const arrWithoutEntry = _.without(entriesMarkedAsFinished[currentlyOpenedModule], currentTitle);
 
       setEntriesMarkedAsFinished({
         ...entriesMarkedAsFinished,
@@ -443,20 +395,14 @@ export default function Home() {
 
       setEntriesMarkedAsFinished({
         ...entriesMarkedAsFinished,
-        [currentlyOpenedModule]: [
-          ...entriesMarkedAsFinished[currentlyOpenedModule],
-          currentTitle,
-        ],
+        [currentlyOpenedModule]: [...entriesMarkedAsFinished[currentlyOpenedModule], currentTitle],
       });
 
       localStorage.setItem(
         "loretracker",
         JSON.stringify({
           ...entriesMarkedAsFinished,
-          [currentlyOpenedModule]: [
-            ...entriesMarkedAsFinished[currentlyOpenedModule],
-            currentTitle,
-          ],
+          [currentlyOpenedModule]: [...entriesMarkedAsFinished[currentlyOpenedModule], currentTitle],
         })
       );
     }
@@ -487,8 +433,7 @@ export default function Home() {
     }
 
     if (source === "categories") {
-      let categoriesToFilter =
-        typeof value === "string" ? value.split(",") : value;
+      let categoriesToFilter = typeof value === "string" ? value.split(",") : value;
       setFilteredCategories(categoriesToFilter);
       categoryParameters = categoriesToFilter;
     }
@@ -586,12 +531,7 @@ export default function Home() {
     if (creatorsParameters.length) {
       for (const person of creatorsParameters) {
         let entriesByPerson = _.filter(defaultFetchedData, function (o) {
-          if (
-            o.author === person ||
-            o.directedBy === person ||
-            o.createdBy === person
-          )
-            return o;
+          if (o.author === person || o.directedBy === person || o.createdBy === person) return o;
           return;
         });
 
@@ -682,7 +622,7 @@ export default function Home() {
     setFilteredCreatorsName([]);
     setFilteredEras([]);
     setFilteredCategories([]);
-    setSearchValue('');
+    setSearchValue("");
     fetchAllCreators(defaultFetchedData);
   }
 
@@ -736,28 +676,19 @@ export default function Home() {
                   <FiltersContainer />
                 </FilterContext.Provider>
               </div>
-              {showTimelineWarning? <TimelineWarning /> : null}
+              {showTimelineWarning ? <TimelineWarning /> : null}
               <ProgressBar progressBarValue={progressBarValue} />
             </>
-          ) : null}          
+          ) : null}
           <div id={styles.moduleContainer}>
             {_.slice(fetchedData, 0, paginationEndElement).map((e1, i1) => {
               let currentTitle = e1.title.replace(/\s+/g, "-");
               if (
                 hideExcludedEntries &&
-                entriesMarkedAsExcluded[currentlyOpenedModule].includes(
-                  currentTitle
-                )
+                entriesMarkedAsExcluded[currentlyOpenedModule].includes(currentTitle)
               )
                 return;
-              return (
-                <Card
-                  {...cardprops}
-                  e1={e1}
-                  currentTitle={currentTitle}
-                  key={"1" + i1}
-                />
-              );
+              return <Card {...cardprops} e1={e1} currentTitle={currentTitle} key={"1" + i1} />;
             })}
             <Waypoint onEnter={infiniteScroll} />
           </div>
