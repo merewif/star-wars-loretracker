@@ -1,0 +1,25 @@
+.timelineWarningContainer {
+  width: 100%;
+  margin-inline: auto;
+  background-color: rgba(0, 0, 0, 1);
+  box-shadow: 0px 0px 15px 0px black;
+  padding: 20px;
+  color: white;
+  font-family: "Montserrat";
+  padding-right: 2.5rem;
+  
+}
+
+.timelineWarningContainer b {
+  font-weight: 900;
+  color: #ffe81f;
+  margin-left: 2.5rem;
+}
+
+.timelineWarningContainer ul {
+  list-style-type: none;
+}
+
+.timelineWarningContainer li {
+  margin-block: 15px;
+}

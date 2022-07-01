@@ -21,6 +21,7 @@ import { useYoutiniFetch } from "../utils/useYoutiniFetch";
 import HeadContent from "../utils/HeadContent";
 import Card from "../comps/card/Card";
 import LoadingBackdrop from "../comps/MUI/LoadingBackdrop";
+import TimelineWarning from "../comps/TimelineWarning";
 
 export default function Home() {
   const [defaultFetchedData, setDefaultFetchedData] = useState<EntryData[]>([]);
@@ -67,6 +68,7 @@ export default function Home() {
   const [progressBarValue, setProgressBarValue] = useState<number>(0);
   const [user, setUser] = useState<User | null>();
   const [showBackdrop, setShowBackdrop] = useState<boolean>(false);
+  const [showTimelineWarning, setShowTimelineWarning] = useState<boolean>(false);
 
   async function fetchUserDataFromDatabase(): Promise<void> {
     try {
@@ -193,6 +195,20 @@ export default function Home() {
     const sortedBooks = sortBooks(fetchedData);
     setFetchedData(sortedBooks);
   }, [currentlyOpenedModule, sortBy]);
+
+  useEffect(() => {
+    setSortBy(["title", "asc"]);
+  }, [currentlyOpenedModule]);
+
+  useEffect(() => {
+    if (sortBy[0] === "timeline") {
+      setShowTimelineWarning(true);
+    }
+    if (sortBy[0] !== "timeline") {
+      setShowTimelineWarning(false);
+    }
+    
+  }, [sortBy])
 
   useEffect(() => {
     filterEntries();
@@ -720,9 +736,10 @@ export default function Home() {
                   <FiltersContainer />
                 </FilterContext.Provider>
               </div>
+              {showTimelineWarning? <TimelineWarning /> : null}
               <ProgressBar progressBarValue={progressBarValue} />
             </>
-          ) : null}
+          ) : null}          
           <div id={styles.moduleContainer}>
             {_.slice(fetchedData, 0, paginationEndElement).map((e1, i1) => {
               let currentTitle = e1.title.replace(/\s+/g, "-");
