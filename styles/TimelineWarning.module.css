@@ -7,7 +7,6 @@
   color: white;
   font-family: "Montserrat";
   padding-right: 2.5rem;
-  
 }
 
 .timelineWarningContainer b {
@@ -22,4 +21,8 @@
 
 .timelineWarningContainer li {
   margin-block: 15px;
+}
+
+.timelineWarningContainer li svg {
+  width: 1rem;
 }
