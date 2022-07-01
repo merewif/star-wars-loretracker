@@ -686,11 +686,8 @@ export default function Home() {
           <div id={styles.moduleContainer}>
             {_.slice(fetchedData, 0, paginationEndElement).map((e1, i1) => {
               let currentTitle = e1.title.replace(/\s+/g, "-");
-              if (
-                hideExcludedEntries &&
-                entriesMarkedAsExcluded[currentlyOpenedModule].includes(currentTitle)
-              )
-                return;
+              if (hideExcludedEntries && entriesMarkedAsExcluded[currentlyOpenedModule].includes(currentTitle)) return;              
+              
               return <Card {...cardprops} e1={e1} currentTitle={currentTitle} key={"1" + i1} />;
             })}
             <Waypoint onEnter={infiniteScroll} />

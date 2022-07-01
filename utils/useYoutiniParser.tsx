@@ -46,14 +46,10 @@ export async function useYoutiniParser(
       currentBook.timeline = Number(book['Timeline'].replace(/[^0-9]/g, ''));
     }
 
-    if (
-      currentBook.category === 'Adult Novel' ||
-      currentBook.category === 'YA Novel' ||
-      currentBook.category === 'Junior Reader' ||
-      currentBook.category === 'Single Issue Comic' ||
-      currentBook.category === 'Graphic Novel' ||
-      currentBook.category === 'Omnibus'
-    ) {
+    const bookIsEssentialLegends = book['Name (Title)'].includes('Essential Legends'.toUpperCase() || 'The Thrawn Trilogy Boxed Set'.toUpperCase());
+    const allowedCategories = ['Adult Novel', 'YA Novel', 'Junior Reader', 'Single Issue Comic', 'Graphic Novel', 'Omnibus'];
+
+    if (allowedCategories.includes(currentBook.category) && !bookIsEssentialLegends) {
       books.push(currentBook);
     }
   }

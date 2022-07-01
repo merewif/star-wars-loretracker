@@ -40,9 +40,7 @@ export default function Card({
         className={styles.finishedBtn}
         id={e1.title.replace(/\s+/g, '-').toLowerCase() + 'btn'}
       >
-        {entriesMarkedAsFinished[
-          currentlyOpenedModule as keyof MarkedEntries
-        ]?.includes(currentTitle)
+        {entriesMarkedAsFinished[currentlyOpenedModule as keyof MarkedEntries]?.includes(currentTitle)
           ? 'Mark as Unfinished'
           : 'Mark as Finished'}
       </button>

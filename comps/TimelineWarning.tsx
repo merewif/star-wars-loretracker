@@ -14,10 +14,9 @@ export default function TimelineWarning() {
         <ul>
             <li><FontAwesomeIcon icon={faRebel} color="#ffe81f" /> This doesn't necessarily mean they come after one another storywise.</li>
         </ul>
-        <li><FontAwesomeIcon icon={faJedi}  color="#ffe81f"/> Books that were published in the The Essential Legends Collection appear twice.</li>
+        <li><FontAwesomeIcon icon={faJedi}  color="#ffe81f"/> Books that cover multiple years display only the last year of the story.</li>
         <ul>
-            <li><FontAwesomeIcon icon={faRebel} color="#ffe81f" /> The original edition has the correct place in the list.</li>
-            <li><FontAwesomeIcon icon={faRebel} color="#ffe81f" /> Use the exclude button to hide the Essential Legends version.</li>
+            <li><FontAwesomeIcon icon={faRebel} color="#ffe81f" /> For example the Lost Tribe of the Sith are set between 5000 BBY-2975 BBY. We decided to display only the final date and omit the first.</li>
         </ul>
     </ul>
     </div>
