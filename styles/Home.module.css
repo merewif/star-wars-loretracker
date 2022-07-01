@@ -329,14 +329,14 @@
 
 
   .searchbar {
-    width: 90%;
+    width: 90% !important;
     margin-inline: auto !important;
     padding-left: 0 !important;
     margin-block: 20px;
   }
 
   .searchbar > div {
-    width: 100%;
+    width: 100% !important;
   }
 
   .autocomplete {
