@@ -604,7 +604,7 @@ export default function Home() {
   function filterBySearchResults(searchInput: string): EntryData[] {
     let searchResults: any[] = [];
 
-    if (!searchInput.length) {
+    if (!searchInput || !searchInput.length) {
       searchResults = defaultFetchedData;
     }
 
