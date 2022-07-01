@@ -177,6 +177,9 @@ export default function Home() {
     if (!moduleKeys.includes("timeline")) {
       setShowTimelineWarning(false);
     }
+    if (moduleKeys.includes("timeline") && sortBy[0] === "timeline") {
+      setShowTimelineWarning(true);
+    }
   }, [moduleKeys]);
 
   useEffect(() => {
