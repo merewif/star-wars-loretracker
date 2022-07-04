@@ -155,10 +155,6 @@ export default function Home() {
   }, [currentlyOpenedModule]);
 
   useEffect(() => {
-    setCardsHeight();
-  }, [fetchedData, currentlyOpenedModule]);
-
-  useEffect(() => {
     localStorage.setItem("loretracker", JSON.stringify(entriesMarkedAsFinished));
 
     if (user) upsertUserDataIntoDatabase();
@@ -262,6 +258,7 @@ export default function Home() {
     fetchAllCreators(data);
     fetchAllCategories(data);
     setShowBackdrop(false);
+    setCardsHeight();
   }
 
   function displayData(target: PossibleModules) {
