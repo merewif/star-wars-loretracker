@@ -164,7 +164,7 @@
 
 .coverImage:hover {
   transition-delay: 0.5s;
-  transform: scale(3);
+  transform: scale(3) translateX(-2.1rem);
 }
 
 .linksContainer {
@@ -293,6 +293,8 @@
 .filterDiv {
   width: 25%;
 }
+
+
 
 @media screen and (max-width: 1500px) {
   #moduleContainer {
