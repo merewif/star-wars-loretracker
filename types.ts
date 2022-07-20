@@ -92,3 +92,8 @@ export interface AboutProps {
   uploadBackup: (event: React.ChangeEvent<HTMLInputElement>) => void;
   downloadBackup: () => void;
 }
+
+export interface DescriptionDialogProps {
+  title: string;
+  description: string;
+}

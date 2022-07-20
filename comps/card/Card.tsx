@@ -2,7 +2,7 @@ import React from 'react';
 import { CardProps, EntryData, MarkedEntries } from '../../types';
 import CardContents from './CardContents';
 import styles from '../../styles/Home.module.css';
-import Tooltip from '@mui/material/Tooltip';
+import DescriptionDialog from "../MUI/DescriptionDialog"
 
 export default function Card({
   moduleKeys,
@@ -14,7 +14,9 @@ export default function Card({
   currentTitle,
   getDescription
 }: CardProps) {
-  const description = getDescription(e1.title);
+  const description: string = getDescription(e1.title);
+  const displayDescription: boolean = description?.length > 0 && (e1.category === 'Adult Novel' || e1.category === 'YA Novel');
+
   return (
     <div
       className={
@@ -38,10 +40,8 @@ export default function Card({
           />
         );
       })}
-      {description 
-        ? <Tooltip title={description}>
-            <h6 className={styles.descriptionLabel}>description</h6>
-          </Tooltip>
+      {displayDescription 
+        ? <DescriptionDialog title={e1.title} description={description}/>
         : null }
       <button
         onClick={(e) => toggleEntryAsFinished(e1)}

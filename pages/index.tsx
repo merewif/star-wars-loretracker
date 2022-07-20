@@ -166,6 +166,10 @@ export default function Home() {
   }, [defaultFetchedData, fetchedData, entriesMarkedAsFinished]);
 
   useEffect(() => {
+    setCardsHeight();
+  }, [defaultFetchedData, fetchedData])
+
+  useEffect(() => {
     const sortedBooks = sortBooks(fetchedData);
     setFetchedData(sortedBooks);
   }, [currentlyOpenedModule, sortBy]);
@@ -288,13 +292,11 @@ export default function Home() {
     fetchData(target);
   }
 
-  function getDescription(book: string){
-    let description = '';
-    
+  function getDescription(book: string): string {    
     let googleDescription = _.filter(googleBookData, ['youtiniTitle', book.replace(/—|–|−|-/, '-')]);
 
     if (googleDescription.length) return googleDescription[0].description;
-    return description;
+    return '';
   }
 
   function searchEntries(input: string | undefined | null) {

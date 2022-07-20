@@ -308,19 +308,53 @@
   color: white;
 }
 
+.descriptionButtonContainer {
+  width: 100%;
+  display: flex;
+  position: absolute;
+  bottom: 11%;
+}
+
 .descriptionLabel {
   font-family: 'Montserrat';
-  margin-inline: 25px;
   padding-block: 0;
   margin-block: 0;
   line-height: 1;
-  text-align: justify;
+  text-align: center;
+  margin-inline: auto;
   font-size: 12px;
   font-weight: 400 !important;
   text-transform: none;
-  display: none;
+  cursor: pointer;
 }
 
+.descriptionLabel:hover {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
+
+.descriptionContainer div {
+  max-width: 70vw;
+  background-color: black;
+}
+
+.descriptionText, .descriptionWarning {
+  color: white;
+  font-family: 'Montserrat';
+  text-align: justify;
+  line-height: 1.2;
+  font-size: 1rem;
+  padding: 25px;
+  hyphens: auto;
+}
+
+.descriptionWarning {
+  color: white;
+  padding-bottom: 0;
+  text-align: center;
+  color: #cccccc;
+  font-size: 0.75rem;
+}
 
 @media screen and (max-width: 1500px) {
   #moduleContainer {
@@ -338,6 +372,29 @@
   #moduleContainer {
     grid-template-columns: 1fr;
   }
+
+  .descriptionContainer div {
+    max-width: 95vw;
+    background-color: black;
+  }
+
+  .descriptionDialogTitle {
+    padding-inline: 30px !important;
+    font-size: 0.8rem;
+    line-height: 1;
+  }
+
+  .descriptionText {
+    line-height: 1.25;
+    font-size: 0.75rem;
+    padding: 10px;
+  }
+
+  .descriptionWarning {
+    padding: 10px;
+    font-size: 0.7rem;
+  }
+  
 }
 
 @media screen and (max-width: 900px) {
