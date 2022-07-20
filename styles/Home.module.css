@@ -339,6 +339,8 @@
 
 .descriptionButtonContainer svg {
   font-size: 11px;
+  width: 11px;
+  height: auto;
 }
 
 .descriptionContainer div {
