@@ -26,6 +26,7 @@ export default function Card({
       }
       id={currentTitle + '-card'}
     >
+      <div className={styles.cardText}>
       {moduleKeys.map((e2: string, i2: number) => {
         let currentKey = moduleKeys[i2];
         let currentValue = e1[currentKey as keyof EntryData];
@@ -40,6 +41,7 @@ export default function Card({
           />
         );
       })}
+      </div>
       {displayDescription 
         ? <DescriptionDialog title={e1.title} description={description}/>
         : null }

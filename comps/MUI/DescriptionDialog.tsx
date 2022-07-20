@@ -9,6 +9,8 @@ import { DescriptionDialogProps } from '../../types';
 import styles from "../../styles/Home.module.css"
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 
 export default function DescriptionDialog({ title, description }: DescriptionDialogProps) {
   const [open, setOpen] = React.useState(false);
@@ -33,8 +35,8 @@ export default function DescriptionDialog({ title, description }: DescriptionDia
 
   return (
     <>
-      <div className={styles.descriptionButtonContainer}>
-        <h6 className={styles.descriptionLabel} onClick={handleClickOpen()}>View Description</h6>
+      <div className={styles.descriptionButtonContainer} onClick={handleClickOpen()}>
+        <h6 className={styles.descriptionLabel}><FontAwesomeIcon icon={faCircleInfo} /> View Description</h6>
       </div>
       <Dialog
         open={open}

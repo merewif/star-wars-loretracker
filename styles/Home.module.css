@@ -27,6 +27,7 @@
   -ms-transition: all 0.5s ease;
   transition: all 0.5s ease;
   border-radius: 25px;
+  display: grid;
 }
 
 .canonicityTrue {
@@ -304,14 +305,25 @@
   text-transform: none;
 }
 
-.cardFinished .descriptionLabel {
-  color: white;
-}
-
 .descriptionButtonContainer {
   width: 100%;
   display: flex;
-  margin-block: 10px;
+  margin-block: 15px;
+  padding-block: 10px;
+  cursor: pointer;
+  margin-top: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.canonicityTrue .descriptionButtonContainer {
+  background-color: black;
+  color: white;
+}
+
+.canonicityFalse .descriptionButtonContainer {
+  background-color: #ffe81f;
+  color: black;
 }
 
 .descriptionLabel {
@@ -320,15 +332,13 @@
   margin-block: 0;
   line-height: 1;
   margin-left: 25px;
-  font-size: 12px;
-  font-weight: 400 !important;
-  text-transform: none;
-  cursor: pointer;
+  font-size: 13px;
+  text-transform: uppercase;
+  margin-inline: auto;
 }
 
-.descriptionLabel:hover {
-  text-decoration: underline;
-  text-decoration-style: dotted;
+.descriptionButtonContainer svg {
+  font-size: 11px;
 }
 
 .descriptionContainer div {
