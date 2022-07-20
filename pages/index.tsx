@@ -166,10 +166,6 @@ export default function Home() {
   }, [defaultFetchedData, fetchedData, entriesMarkedAsFinished]);
 
   useEffect(() => {
-    setCardsHeight();
-  }, [defaultFetchedData, fetchedData])
-
-  useEffect(() => {
     const sortedBooks = sortBooks(fetchedData);
     setFetchedData(sortedBooks);
   }, [currentlyOpenedModule, sortBy]);
