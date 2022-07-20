@@ -60,14 +60,8 @@ export default function DescriptionDialog({ title, description }: DescriptionDia
           </IconButton>
           <DialogTitle sx={{backgroundColor: '#ffe81f', color: 'black', fontFamily: 'Montserrat', fontWeight: 900, textTransform: 'uppercase', paddingInline: '50px' }} id="scroll-dialog-title" className={styles.descriptionDialogTitle}>{ title }</DialogTitle>
           <DialogContent dividers={true}>
-            <DialogContentText
-              id="scroll-dialog-description"
-              ref={descriptionElementRef}
-              tabIndex={-1}
-            >
               <div className={styles.descriptionWarning}>Description provided by Google Books.</div>
               <div lang='en' className={styles.descriptionText}>{ description }</div>
-            </DialogContentText>
           </DialogContent>
         </div>
       </Dialog>
