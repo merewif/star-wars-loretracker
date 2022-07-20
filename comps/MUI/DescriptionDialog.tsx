@@ -34,7 +34,7 @@ export default function DescriptionDialog({ title, description }: DescriptionDia
   return (
     <>
       <div className={styles.descriptionButtonContainer}>
-        <h6 className={styles.descriptionLabel} onClick={handleClickOpen()}>Show Description</h6>
+        <h6 className={styles.descriptionLabel} onClick={handleClickOpen()}>View Description</h6>
       </div>
       <Dialog
         open={open}

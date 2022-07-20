@@ -311,8 +311,7 @@
 .descriptionButtonContainer {
   width: 100%;
   display: flex;
-  position: absolute;
-  bottom: 11%;
+  margin-block: 10px;
 }
 
 .descriptionLabel {
@@ -320,8 +319,7 @@
   padding-block: 0;
   margin-block: 0;
   line-height: 1;
-  text-align: center;
-  margin-inline: auto;
+  margin-left: 25px;
   font-size: 12px;
   font-weight: 400 !important;
   text-transform: none;
@@ -334,7 +332,7 @@
 }
 
 .descriptionContainer div {
-  max-width: 70vw;
+  max-width: 55vw;
   background-color: black;
 }
 
@@ -381,7 +379,7 @@
   .descriptionDialogTitle {
     padding-inline: 30px !important;
     font-size: 0.8rem;
-    line-height: 1;
+    line-height: 1 !important;
   }
 
   .descriptionText {
