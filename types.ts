@@ -8,6 +8,7 @@ export interface CardProps {
   toggleEntryAsFinished: (entry: EntryData) => void;
   currentlyOpenedModule: string;
   currentTitle: string;
+  getDescription: Function
 }
 
 export interface HeadProps {

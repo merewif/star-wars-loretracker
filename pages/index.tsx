@@ -57,6 +57,7 @@ export default function Home() {
   const [user, setUser] = useState<User | null>();
   const [showBackdrop, setShowBackdrop] = useState<boolean>(false);
   const [showTimelineWarning, setShowTimelineWarning] = useState<boolean>(false);
+  const [googleBookData, setGoogleBookData] = useState<any[]>([])
 
   async function fetchUserDataFromDatabase(): Promise<void> {
     try {
@@ -265,6 +266,11 @@ export default function Home() {
     setCurrentlyOpenedModule(target);
 
     if (target === "books" || target === "comics") {
+      if (target === "books") {
+        fetch('./data/googleBookInfo.json')
+          .then(response => response.json())
+          .then(data => setGoogleBookData(data));
+      }
       if (target === "books" && fetchedBooks.length) return setDataIntoStates(fetchedBooks);
 
       if (target === "comics" && fetchedComics.length) return setDataIntoStates(fetchedComics);
@@ -280,6 +286,15 @@ export default function Home() {
     }
 
     fetchData(target);
+  }
+
+  function getDescription(book: string){
+    let description = '';
+    
+    let googleDescription = _.filter(googleBookData, ['youtiniTitle', book.replace(/—|–|−|-/, '-')]);
+
+    if (googleDescription.length) return googleDescription[0].description;
+    return description;
   }
 
   function searchEntries(input: string | undefined | null) {
@@ -653,6 +668,7 @@ export default function Home() {
     filteredCreatorsName,
     canonicityFilterValue,
     entriesMarkedAsExcluded,
+    
   };
 
   const cardprops = {
@@ -661,6 +677,7 @@ export default function Home() {
     entriesMarkedAsFinished,
     toggleEntryAsFinished,
     currentlyOpenedModule,
+    getDescription
   };
 
   return (

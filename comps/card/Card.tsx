@@ -2,6 +2,7 @@ import React from 'react';
 import { CardProps, EntryData, MarkedEntries } from '../../types';
 import CardContents from './CardContents';
 import styles from '../../styles/Home.module.css';
+import Tooltip from '@mui/material/Tooltip';
 
 export default function Card({
   moduleKeys,
@@ -11,7 +12,9 @@ export default function Card({
   toggleEntryAsFinished,
   currentlyOpenedModule,
   currentTitle,
+  getDescription
 }: CardProps) {
+  const description = getDescription(e1.title);
   return (
     <div
       className={
@@ -35,6 +38,11 @@ export default function Card({
           />
         );
       })}
+      {description 
+        ? <Tooltip title={description}>
+            <h6 className={styles.descriptionLabel}>description</h6>
+          </Tooltip>
+        : null }
       <button
         onClick={(e) => toggleEntryAsFinished(e1)}
         className={styles.finishedBtn}

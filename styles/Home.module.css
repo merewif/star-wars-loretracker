@@ -294,6 +294,32 @@
   width: 25%;
 }
 
+.description {
+  font-family: 'Montserrat';
+  margin-inline: 25px;
+  line-height: 1;
+  text-align: justify;
+  font-size: 12px;
+  font-weight: 400 !important;
+  text-transform: none;
+}
+
+.cardFinished .descriptionLabel {
+  color: white;
+}
+
+.descriptionLabel {
+  font-family: 'Montserrat';
+  margin-inline: 25px;
+  padding-block: 0;
+  margin-block: 0;
+  line-height: 1;
+  text-align: justify;
+  font-size: 12px;
+  font-weight: 400 !important;
+  text-transform: none;
+  display: none;
+}
 
 
 @media screen and (max-width: 1500px) {
