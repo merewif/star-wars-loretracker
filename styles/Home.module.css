@@ -343,7 +343,7 @@
   height: auto;
 }
 
-.descriptionContainer div {
+.descriptionContainer, .descriptionContainer div {
   max-width: 55vw;
   background-color: black;
 }
@@ -383,7 +383,7 @@
     grid-template-columns: 1fr;
   }
 
-  .descriptionContainer div {
+  .descriptionContainer, .descriptionContainer div {
     max-width: 95vw;
     background-color: black;
   }

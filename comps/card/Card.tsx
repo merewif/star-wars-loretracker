@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { CardProps, EntryData, MarkedEntries } from '../../types';
 import CardContents from './CardContents';
 import styles from '../../styles/Home.module.css';
@@ -12,10 +12,19 @@ export default function Card({
   toggleEntryAsFinished,
   currentlyOpenedModule,
   currentTitle,
-  getDescription
+  getDescription,
+  setCardsHeight
 }: CardProps) {
-  const description: string = getDescription(e1.title);
-  const displayDescription: boolean = description?.length > 0 && (e1.category === 'Adult Novel' || e1.category === 'YA Novel');
+  const [description, setDescription] = useState<string>('');
+
+  useEffect(() => {
+    const desc = getDescription(e1.title);
+    setDescription(desc);
+  }, [e1])
+
+  useEffect(() => {
+    setCardsHeight();
+  }, [description])
 
   return (
     <div
@@ -42,9 +51,7 @@ export default function Card({
         );
       })}
       </div>
-      {displayDescription 
-        ? <DescriptionDialog title={e1.title} description={description}/>
-        : null }
+      <DescriptionDialog title={e1.title} description={description}/>
       <button
         onClick={(e) => toggleEntryAsFinished(e1)}
         className={styles.finishedBtn}

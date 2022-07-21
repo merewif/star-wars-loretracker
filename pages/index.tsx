@@ -102,6 +102,7 @@ export default function Home() {
 
     setCurrentlyOpenedModule("movies");
     fetchData("movies");
+    fetchBookDescriptions();
 
     if ("loretracker" in localStorage) {
       let storedData = JSON.parse(localStorage.getItem("loretracker") ?? "");
@@ -266,13 +267,7 @@ export default function Home() {
     setCurrentlyOpenedModule(target);
 
     if (target === "books" || target === "comics") {
-      if (target === "books") {
-        fetch('./data/bookDescriptions.json')
-          .then(response => response.json())
-          .then(data => setBookDescriptions(data));
-      }
       if (target === "books" && fetchedBooks.length) return setDataIntoStates(fetchedBooks);
-
       if (target === "comics" && fetchedComics.length) return setDataIntoStates(fetchedComics);
 
       setShowBackdrop(true);
@@ -291,8 +286,8 @@ export default function Home() {
   function getDescription(book: string): string {    
     let bookDescription = _.filter(bookDescriptions, ['youtiniTitle', book.replace(/—|–|−|-/, '-')]);
 
-    if (bookDescription.length) return bookDescription[0].description;
-    return '';
+    if (!bookDescription.length || currentlyOpenedModule !== 'books') return '';
+    return bookDescription[0].description;
   }
 
   function searchEntries(input: string | undefined | null) {
@@ -313,6 +308,12 @@ export default function Home() {
       .then((data) => {
         setDataIntoStates(data);
       });
+  }
+
+  function fetchBookDescriptions(){
+    fetch('./data/bookDescriptions.json')
+      .then(response => response.json())
+      .then(data => setBookDescriptions(data));
   }
 
   function fetchAllTitles(data: EntryData[]) {
@@ -655,8 +656,8 @@ export default function Home() {
     searchValue,
     resetFilters,
     filterEntries,
-    searchEntries,
     fetchedTitles,
+    searchEntries,    
     filterboxAnchorEl,
     removeFromExcluded,
     filteredCategories,
@@ -665,8 +666,7 @@ export default function Home() {
     setFilterboxAnchorEl,
     filteredCreatorsName,
     canonicityFilterValue,
-    entriesMarkedAsExcluded,
-    
+    entriesMarkedAsExcluded,    
   };
 
   const cardprops = {
@@ -675,7 +675,8 @@ export default function Home() {
     entriesMarkedAsFinished,
     toggleEntryAsFinished,
     currentlyOpenedModule,
-    getDescription
+    getDescription,
+    setCardsHeight
   };
 
   return (
