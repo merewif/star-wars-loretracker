@@ -167,6 +167,12 @@ export default function Home() {
   }, [defaultFetchedData, fetchedData, entriesMarkedAsFinished]);
 
   useEffect(() => {
+    setTimeout(() => {
+      setCardsHeight();
+    }, 1000);
+  }, [fetchedData])
+
+  useEffect(() => {
     const sortedBooks = sortBooks(fetchedData);
     setFetchedData(sortedBooks);
   }, [currentlyOpenedModule, sortBy]);
@@ -247,7 +253,7 @@ export default function Home() {
     }
 
     for (const card of cards) {
-      card.style.height = `${largestHeight + 20}px`;
+      card.style.height = `${largestHeight + 10}px`;
     }
   }
 
@@ -260,7 +266,6 @@ export default function Home() {
     fetchAllCreators(data);
     fetchAllCategories(data);
     setShowBackdrop(false);
-    setCardsHeight();
   }
 
   function displayData(target: PossibleModules) {

@@ -20,11 +20,11 @@ export default function Card({
   useEffect(() => {
     const desc = getDescription(e1.title);
     setDescription(desc);
-  }, [e1])
+  }, [e1]);
 
   useEffect(() => {
     setCardsHeight();
-  }, [description])
+  }, [description]);
 
   return (
     <div
