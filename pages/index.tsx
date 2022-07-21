@@ -57,7 +57,7 @@ export default function Home() {
   const [user, setUser] = useState<User | null>();
   const [showBackdrop, setShowBackdrop] = useState<boolean>(false);
   const [showTimelineWarning, setShowTimelineWarning] = useState<boolean>(false);
-  const [googleBookData, setGoogleBookData] = useState<any[]>([])
+  const [bookDescriptions, setBookDescriptions] = useState<any[]>([])
 
   async function fetchUserDataFromDatabase(): Promise<void> {
     try {
@@ -267,9 +267,9 @@ export default function Home() {
 
     if (target === "books" || target === "comics") {
       if (target === "books") {
-        fetch('./data/googleBookInfo.json')
+        fetch('./data/bookDescriptions.json')
           .then(response => response.json())
-          .then(data => setGoogleBookData(data));
+          .then(data => setBookDescriptions(data));
       }
       if (target === "books" && fetchedBooks.length) return setDataIntoStates(fetchedBooks);
 
@@ -289,9 +289,9 @@ export default function Home() {
   }
 
   function getDescription(book: string): string {    
-    let googleDescription = _.filter(googleBookData, ['youtiniTitle', book.replace(/—|–|−|-/, '-')]);
+    let bookDescription = _.filter(bookDescriptions, ['youtiniTitle', book.replace(/—|–|−|-/, '-')]);
 
-    if (googleDescription.length) return googleDescription[0].description;
+    if (bookDescription.length) return bookDescription[0].description;
     return '';
   }
 
