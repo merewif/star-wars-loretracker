@@ -167,12 +167,6 @@ export default function Home() {
   }, [defaultFetchedData, fetchedData, entriesMarkedAsFinished]);
 
   useEffect(() => {
-    setTimeout(() => {
-      setCardsHeight();
-    }, 1000);
-  }, [fetchedData])
-
-  useEffect(() => {
     const sortedBooks = sortBooks(fetchedData);
     setFetchedData(sortedBooks);
   }, [currentlyOpenedModule, sortBy]);
@@ -239,22 +233,6 @@ export default function Home() {
     window.localStorage.setItem("loretracker", JSON.stringify(collection));
     setEntriesMarkedAsFinished(collection);
     setEntriesMarkedAsExcluded(collection.excluded);
-  }
-
-  async function setCardsHeight() {
-    let cards = Array.from(document.getElementsByClassName("entryCard") as HTMLCollectionOf<HTMLElement>);
-    for await (const card of cards) {
-      card.style.height = "auto";
-    }
-
-    let largestHeight = 0;
-    for await (const card of cards) {
-      if (card.offsetHeight > largestHeight) largestHeight = card.offsetHeight;
-    }
-
-    for (const card of cards) {
-      card.style.height = `${largestHeight + 10}px`;
-    }
   }
 
   function setDataIntoStates(data: EntryData[]) {
@@ -649,7 +627,6 @@ export default function Home() {
   function infiniteScroll() {
     if (fetchedData.length < paginationEndElement) return;
     setPaginationEndElement((currentState) => currentState + 30);
-    setCardsHeight();
   }
 
   const filterprops = {
@@ -680,8 +657,7 @@ export default function Home() {
     entriesMarkedAsFinished,
     toggleEntryAsFinished,
     currentlyOpenedModule,
-    getDescription,
-    setCardsHeight
+    getDescription
   };
 
   return (

@@ -12,8 +12,7 @@ export default function Card({
   toggleEntryAsFinished,
   currentlyOpenedModule,
   currentTitle,
-  getDescription,
-  setCardsHeight
+  getDescription
 }: CardProps) {
   const [description, setDescription] = useState<string>('');
 
@@ -21,10 +20,6 @@ export default function Card({
     const desc = getDescription(e1.title);
     setDescription(desc);
   }, [e1]);
-
-  useEffect(() => {
-    setCardsHeight();
-  }, [description]);
 
   return (
     <div

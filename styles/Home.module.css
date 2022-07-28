@@ -20,9 +20,10 @@
 .cardFinished {
   margin: auto;
   width: 100%;
+  height: 100%;
   max-width: 95vw;
   position: relative;
-  padding-bottom: 30px;
+  padding-bottom: 50px;
   -webkit-transition: all 0.5s ease;
   -ms-transition: all 0.5s ease;
   transition: all 0.5s ease;
@@ -308,7 +309,6 @@
 .descriptionButtonContainer {
   width: 100%;
   display: flex;
-  margin-block: 15px;
   padding-block: 10px;
   cursor: pointer;
   margin-top: auto;

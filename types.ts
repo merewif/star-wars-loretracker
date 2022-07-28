@@ -9,7 +9,6 @@ export interface CardProps {
   currentlyOpenedModule: string;
   currentTitle: string;
   getDescription: Function;
-  setCardsHeight: Function;
 }
 
 export interface HeadProps {
