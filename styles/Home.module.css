@@ -11,9 +11,11 @@
 }
 
 #moduleContainer {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  display: flex;
+  flex-wrap: wrap;
   gap: 1em;
+  max-width: 95vw;
+  margin-inline: auto;
 }
 
 .cardUnfinished,
@@ -21,7 +23,8 @@
   margin: auto;
   width: 100%;
   height: 100%;
-  max-width: 95vw;
+  min-width: 310px;
+  max-width: 375px;
   position: relative;
   padding-bottom: 50px;
   -webkit-transition: all 0.5s ease;
@@ -29,6 +32,7 @@
   transition: all 0.5s ease;
   border-radius: 25px;
   display: grid;
+  flex: 1;
 }
 
 .canonicityTrue {
@@ -366,23 +370,8 @@
   font-size: 0.75rem;
 }
 
-@media screen and (max-width: 1500px) {
-  #moduleContainer {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-}
-
-@media screen and (max-width: 1200px) {
-  #moduleContainer {
-    grid-template-columns: 1fr 1fr;
-  }
-}
 
 @media screen and (max-width: 1000px) {
-  #moduleContainer {
-    grid-template-columns: 1fr;
-  }
-
   .descriptionContainer, .descriptionContainer div {
     max-width: 95vw;
     background-color: black;
@@ -408,10 +397,6 @@
 }
 
 @media screen and (max-width: 900px) {
-  #moduleContainer {
-    grid-template-columns: 1fr;
-  }
-
   #viewer {
     margin: 0;
   }
