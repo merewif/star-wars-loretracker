@@ -97,6 +97,10 @@ a {
   color: white !important;
 }
 
+.MuiDrawer-paper {
+  box-shadow: 10px 10px 15px 15px #ffe81f !important;
+}
+
 @media screen and (max-width: 1500px) {
 }
 
