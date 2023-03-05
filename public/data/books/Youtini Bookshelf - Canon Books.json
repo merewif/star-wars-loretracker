@@ -5394,7 +5394,7 @@
     "Database ID": 4284,
     "Name (Title)": "Hunters: Battle for the Arena",
     "Author / Writer": "Mark Oshiro",
-    "Release Date": "11/1/2022",
+    "Release Date": "3/7/2023",
     "Timeline": "",
     "Cover Image URL": 1,
     "Category": "Junior Reader"
@@ -5554,7 +5554,7 @@
     "Database ID": 4344,
     "Name (Title)": "Star Wars: The Mandalorian Season Two Collector's Edition Volume Two",
     "Author / Writer": "Titan Magazines",
-    "Release Date": "6/21/2022",
+    "Release Date": "11/8/2022",
     "Timeline": "9 ABY",
     "Cover Image URL": "https://dl.airtable.com/.attachments/1249379ed34827d7374701fe45f29fe4/5c1e2ad5/Star_Wars_Insider_Presents_MandoS2_Collectors_Vol_2.jpg",
     "Category": "Reference Book"
@@ -5564,7 +5564,7 @@
     "Database ID": 4346,
     "Name (Title)": "Star Wars: Galactic Baking (Gift Set Edition)",
     "Author / Writer": "Weldon Owen",
-    "Release Date": "6/14/2022",
+    "Release Date": "7/12/2022",
     "Timeline": "",
     "Cover Image URL": "https://dl.airtable.com/.attachments/795456fb9f9484be8db4ab0426bda7f2/459e7d4e/StarWarsGalacticBaking.jpg",
     "Category": "Reference Book"
@@ -5654,7 +5654,7 @@
     "Database ID": 4358,
     "Name (Title)": "Star Wars Insider: The High Republic: Starlight Stories",
     "Author / Writer": "Charles Soule, Justina Ireland, Cavan Scott",
-    "Release Date": "9/27/2022",
+    "Release Date": "11/15/2022",
     "Timeline": "232 - 231 BBY",
     "Cover Image URL": "https://dl.airtable.com/.attachments/90c6663177c4af9d554b1ad3dfcac926/0f6adf02/StarlightStories.jpg",
     "Category": "Adult Novel"
@@ -5704,7 +5704,7 @@
     "Database ID": 4372,
     "Name (Title)": "The High Republic: Path of Deceit",
     "Author / Writer": "Tessa Gratton, Justina Ireland",
-    "Release Date": "11/1/2022",
+    "Release Date": "10/4/2022",
     "Timeline": "382 BBY",
     "Cover Image URL": 1,
     "Category": "YA Novel"
@@ -5784,7 +5784,7 @@
     "Database ID": 4381,
     "Name (Title)": "Star Wars Timelines",
     "Author / Writer": "Kristin Baver, Jason Fry, Cole Horton, Amy Richau, Clayton Sandell",
-    "Release Date": "11/29/2022",
+    "Release Date": "12/6/2022",
     "Timeline": "",
     "Cover Image URL": 1,
     "Category": "Reference Book"
@@ -5796,7 +5796,7 @@
     "Author / Writer": "Marc Sumerak",
     "Release Date": "11/1/2022",
     "Timeline": "",
-    "Cover Image URL": "https://uploads-ssl.webflow.com/5c4117329fc3235735cd430f/60e6945eba448dc38f06b899_Temp%20Cover.jpg",
+    "Cover Image URL": "https://dl.airtable.com/.attachments/ab4fa28600ab85b290f103beaf7ee38b/2180ba04/Secrets_of_the_Bounty_Hunters_cover.jpg",
     "Category": "Reference Book"
   },
   {
@@ -5804,7 +5804,7 @@
     "Database ID": 4411,
     "Name (Title)": "Star Wars Day-at-a-Time Calendar 2023",
     "Author / Writer": "Trends International LLC",
-    "Release Date": "7/15/2022",
+    "Release Date": "8/8/2022",
     "Timeline": "",
     "Cover Image URL": "https://dl.airtable.com/.attachments/12e21c76a2dff6fc12eab9906c79819b/aef40aa6/DayAtATimeCalendar2023.webp",
     "Category": "Reference Book"
@@ -5824,7 +5824,7 @@
     "Database ID": 4432,
     "Name (Title)": "Star Wars 100 Objects: Illuminating finds from a galaxy far, far away....",
     "Author / Writer": "DK",
-    "Release Date": "2/7/2023",
+    "Release Date": "4/4/2023",
     "Timeline": "",
     "Cover Image URL": "https://dl.airtable.com/.attachments/becc015e1bc0307f7be07445cd89ee81/d1e81de4/41OjaIM1qnL._SX393_BO1204203200_.jpg",
     "Category": "Reference Book"
@@ -5896,7 +5896,17 @@
     "Author / Writer": "George Mann",
     "Release Date": "2/14/2023",
     "Timeline": "382 BBY",
-    "Cover Image URL": "https://uploads-ssl.webflow.com/5c4117329fc3235735cd430f/60e6945eba448dc38f06b899_Temp%20Cover.jpg",
+    "Cover Image URL": "https://dl.airtable.com/.attachments/282fa2587775eca1eec6806ae9e108f1/275c0578/High_Republic_Battle_for_Jedha_Script_solicitation_cover.jpg",
     "Category": "Adult Novel"
+  },
+  {
+    "(All Books) Title + Format": "Crimson Climb - YA Novel",
+    "Database ID": 4476,
+    "Name (Title)": "Crimson Climb",
+    "Author / Writer": "E.K.Johnston",
+    "Release Date": "10/10/2023",
+    "Timeline": "10 BBY",
+    "Cover Image URL": "https://dl.airtable.com/.attachments/6aae6b9374098525cd0fbfd43504e884/76d59ecb/cc.jpg",
+    "Category": "YA Novel"
   }
 ]

@@ -8314,9 +8314,9 @@
     "Database ID": 4399,
     "Name (Title)": "The Mandalorian #1",
     "Author / Writer": "Rodney Barnes",
-    "Release Date": "7/6/2022",
+    "Release Date": "7/13/2022",
     "Timeline": "9 ABY",
-    "Cover Image URL": "https://dl.airtable.com/.attachments/9b0c283474c07cec74c6d64b38faa337/98d61c7a/marvel-mandalorian-cover-436.jpg",
+    "Cover Image URL": "https://dl.airtable.com/.attachments/4cba4831ff0a3ca8b7318d18580cff3e/b909ae8e/Mavel-Mandalorian1-final-cover.jpg",
     "Category": "Single Issue Comic"
   },
   {
@@ -8334,7 +8334,7 @@
     "Database ID": 4401,
     "Name (Title)": "Obi-Wan #2",
     "Author / Writer": "Christopher Cantwel",
-    "Release Date": "6/22/2022",
+    "Release Date": "6/29/2022",
     "Timeline": "0 BBY",
     "Cover Image URL": "https://dl.airtable.com/.attachments/fbbd61e950f5925854e03159dd22fd24/a76a5280/Obiwan2-final-cover.jpg",
     "Category": "Single Issue Comic"
@@ -8394,7 +8394,7 @@
     "Database ID": 4407,
     "Name (Title)": "Star Wars Rebels (Trade Paperback)",
     "Author / Writer": "Jeremy Barlow, Martin Fisher, Alec Worley",
-    "Release Date": "7/12/2022",
+    "Release Date": "8/16/2022",
     "Timeline": "",
     "Cover Image URL": "https://dl.airtable.com/.attachments/1b4593186c68c08dfd66bc3dd6004773/17757be8/download.jpg",
     "Category": "Graphic Novel"
@@ -8424,7 +8424,7 @@
     "Database ID": 4412,
     "Name (Title)": "Obi-Wan (Trade Paperback)",
     "Author / Writer": "Christopher Cantwell",
-    "Release Date": "12/6/2022",
+    "Release Date": "11/29/2022",
     "Timeline": "0 BBY",
     "Cover Image URL": "https://dl.airtable.com/.attachments/cbd22a07b185cc439bf62c71a3d0dffd/b93eaee8/Obiwan_1_textless_cover.jpg",
     "Category": "Graphic Novel"
@@ -8504,7 +8504,7 @@
     "Database ID": 4428,
     "Name (Title)": "Doctor Aphra (2020) Vol. 5 (Trade Paperback)",
     "Author / Writer": "Alyssa Wong",
-    "Release Date": "12/27/2022",
+    "Release Date": "12/20/2022",
     "Timeline": "3 ABY",
     "Cover Image URL": "https://dl.airtable.com/.attachments/8d89a1bb7bbba9e376e9e5b99d4be29c/06319e28/Doctor_Aphra_21_textless_cover.jpg",
     "Category": "Graphic Novel"
@@ -8526,7 +8526,7 @@
     "Author / Writer": "Ethan Sacks",
     "Release Date": "12/20/2022",
     "Timeline": "3 ABY",
-    "Cover Image URL": "https://dl.airtable.com/.attachments/1f36f23c923bee847d883380c7d11d99/ea31b36b/Bounty_Hunters_Vol_4_solicitation_cover.jpg",
+    "Cover Image URL": "https://dl.airtable.com/.attachments/9a58e9a0a2e13d1c245e7749494e366f/92e4421b/bh5.jpg",
     "Category": "Graphic Novel"
   },
   {
@@ -8554,7 +8554,7 @@
     "Database ID": 4435,
     "Name (Title)": "Han Solo & Chewbacca #06",
     "Author / Writer": "Marc Guggenheim",
-    "Release Date": "9/21/2022",
+    "Release Date": "9/28/2022",
     "Timeline": "6 BBY",
     "Cover Image URL": "https://dl.airtable.com/.attachments/ccdbe6faa40f1eede7b5703d671658f8/93090755/HanSolo-Chewbacca6-solicit-cover.jpg",
     "Category": "Single Issue Comic"
@@ -8564,7 +8564,7 @@
     "Database ID": 4443,
     "Name (Title)": "The Mandalorian #3",
     "Author / Writer": "Rodney Barnes",
-    "Release Date": "9/14/2022",
+    "Release Date": "9/21/2022",
     "Timeline": "9 ABY",
     "Cover Image URL": "https://dl.airtable.com/.attachments/69cf9fcb9985940eb54863e4f837361f/a454bfb6/TheMandalorian3-solicit-cover.jpg",
     "Category": "Single Issue Comic"
@@ -8604,7 +8604,7 @@
     "Database ID": 4451,
     "Name (Title)": "Tales from the Rancor Pit",
     "Author / Writer": "Cavan Scott",
-    "Release Date": "10/18/2022",
+    "Release Date": "11/15/2022",
     "Timeline": "",
     "Cover Image URL": "https://dl.airtable.com/.attachments/b9763d382e4a1c03a86228d2b868a9c3/2dab545e/TalesfromtheRancorPit-cover.jpg",
     "Category": "Graphic Novel"
@@ -8687,6 +8687,46 @@
     "Release Date": "9/14/2022",
     "Timeline": "3 ABY",
     "Cover Image URL": "https://dl.airtable.com/.attachments/2e51c847816225451d557d88a7500d6c/60d0d61e/BountyHunters27-solicit-cover.jpg",
+    "Category": "Single Issue Comic"
+  },
+  {
+    "(All Books) Title + Format": "Star Wars (2020) Vol. 05 (Trade Paperback) - Graphic Novel",
+    "Database ID": 4469,
+    "Name (Title)": "Star Wars (2020) Vol. 05 (Trade Paperback)",
+    "Author / Writer": "Charles Soule",
+    "Release Date": "5/2/2023",
+    "Timeline": "3 ABY",
+    "Cover Image URL": "https://dl.airtable.com/.attachments/b9f461a564305a7f0e2823f751f135e1/71dc3c13/StarWars2020-25-textless.jpg",
+    "Category": "Graphic Novel"
+  },
+  {
+    "(All Books) Title + Format": "Darth Vader (2020) Vol. 05: The Shadow's Shadow (Trade Paperback) - Graphic Novel",
+    "Database ID": 4473,
+    "Name (Title)": "Darth Vader (2020) Vol. 05: The Shadow's Shadow (Trade Paperback)",
+    "Author / Writer": "Greg Pak",
+    "Release Date": "1/10/2023",
+    "Timeline": "3 ABY",
+    "Cover Image URL": "https://dl.airtable.com/.attachments/e88165684f53d3eae0b0ec7f1f2e5387/e16a3a0b/DarthVader2020-23-textless.jpg",
+    "Category": "Graphic Novel"
+  },
+  {
+    "(All Books) Title + Format": "Visions #01 - Single Issue Comic",
+    "Database ID": 4474,
+    "Name (Title)": "Visions #01",
+    "Author / Writer": "Takashi Okazaki",
+    "Release Date": "9/21/2022",
+    "Timeline": "",
+    "Cover Image URL": "https://dl.airtable.com/.attachments/7fb118982da4e8c886c1ef387956c2b5/f3d843e4/star-wars-visions-1-cover.jpg",
+    "Category": "Single Issue Comic"
+  },
+  {
+    "(All Books) Title + Format": "Hyperspace Stories #02 - Single Issue Comic",
+    "Database ID": 4475,
+    "Name (Title)": "Hyperspace Stories #02",
+    "Author / Writer": "Cecil Castellucci",
+    "Release Date": "9/7/2022",
+    "Timeline": "",
+    "Cover Image URL": "https://dl.airtable.com/.attachments/0335bf93de41cd95b1633aacd3ab6f12/ce65e242/HyperspaceStories2-coverA.jpg",
     "Category": "Single Issue Comic"
   }
 ]
