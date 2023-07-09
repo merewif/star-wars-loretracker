@@ -9,8 +9,8 @@ import { EntryData, MarkedEntries, PossibleModules, YoutiniData } from "../types
 import { supabase } from "../utils/supabaseClient";
 import { User } from "@supabase/supabase-js";
 import { FilterContext } from "../utils/useFilterContext";
-import { youtiniParser } from "../utils/useYoutiniParser";
-import { youtiniFetch } from "../utils/useYoutiniFetch";
+import { youtiniParser } from "../utils/youtiniParser";
+import { youtiniFetch } from "../utils/youtiniFetch";
 import HeadContent from "../utils/HeadContent";
 import Card from "../comps/card/Card";
 import LoadingBackdrop from "../comps/MUI/LoadingBackdrop";
@@ -110,7 +110,6 @@ export default function Home() {
       setEntriesMarkedAsFinished(storedData);
     }
 
-    // @ts-ignore
     setUser(supabase.auth.user());
 
     const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
@@ -136,7 +135,6 @@ export default function Home() {
       }
     });
     return () => {
-      // @ts-ignore
       if (authListener) authListener.unsubscribe();
     };
   }, []);
