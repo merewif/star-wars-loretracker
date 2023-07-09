@@ -43,7 +43,7 @@ Fortunately the amazing [Youtini Team](https://youtini.com) has already assemble
    cp .env.example .env
    ```
 
-4. Retrieve your `NEXT_PUBLIC_SUPABASE_ANON_KEY` and `NEXT_PUBLIC_SUPABASE_URL` environmental variables from your project in [Supabase](https://supabase.com/) and paste them into the `.env` file.
+4. Retrieve your `NEXT_PUBLIC_SUPABASE_ANON_KEY` and `NEXT_PUBLIC_SUPABASE_URL` environmental variables from your project in [Supabase](https://supabase.io/) and paste them into the `.env` file.
 
 5. Install `pnpm` by following the instructions [here](https://pnpm.io/installation).
 
