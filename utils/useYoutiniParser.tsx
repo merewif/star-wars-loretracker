@@ -2,9 +2,7 @@ import dayjs from "dayjs";
 import { EntryData, YoutiniData } from "../types";
 import _ from "lodash";
 
-export async function useYoutiniParser(
-  allBooks: YoutiniData[],
-): Promise<EntryData[]> {
+export async function youtiniParser(allBooks: YoutiniData[]): Promise<EntryData[]> {
   let books: EntryData[] = [];
 
   for await (const book of allBooks) {
@@ -22,10 +20,7 @@ export async function useYoutiniParser(
     const timelineIncludesTwoDates = /\/|—|–|−|-/.test(book["Timeline"]);
 
     if (timelineIncludesTwoDates) {
-      const fullDate = book["Timeline"]!.replace(/\s|,/g, "").replace(
-        /\/|—|–|−/,
-        "-",
-      );
+      const fullDate = book["Timeline"]!.replace(/\s|,/g, "").replace(/\/|—|–|−/, "-");
 
       let eras = fullDate.match(/([A-Z]{3})/g);
       if (eras!.length === 1) eras![1] = eras![0];
@@ -37,32 +32,17 @@ export async function useYoutiniParser(
     }
 
     if (book["Timeline"]?.endsWith("BBY") && !timelineIncludesTwoDates) {
-      currentBook.timeline = Number(
-        `-${book["Timeline"].replace(/[^0-9]/g, "")}`,
-      );
+      currentBook.timeline = Number(`-${book["Timeline"].replace(/[^0-9]/g, "")}`);
     }
 
     if (book["Timeline"]?.endsWith("ABY") && !timelineIncludesTwoDates) {
       currentBook.timeline = Number(book["Timeline"].replace(/[^0-9]/g, ""));
     }
 
-    const bookIsEssentialLegends = ["Essential Legends", "Boxed Set"].some(
-      (condition) =>
-        book["Name (Title)"].toUpperCase().includes(condition.toUpperCase()),
-    );
-    const allowedCategories = [
-      "Adult Novel",
-      "YA Novel",
-      "Junior Reader",
-      "Single Issue Comic",
-      "Graphic Novel",
-      "Omnibus",
-    ];
+    const bookIsEssentialLegends = ["Essential Legends", "Boxed Set"].some((condition) => book["Name (Title)"].toUpperCase().includes(condition.toUpperCase()));
+    const allowedCategories = ["Adult Novel", "YA Novel", "Junior Reader", "Single Issue Comic", "Graphic Novel", "Omnibus"];
 
-    if (
-      allowedCategories.includes(currentBook.category) &&
-      !bookIsEssentialLegends
-    ) {
+    if (allowedCategories.includes(currentBook.category) && !bookIsEssentialLegends) {
       books.push(currentBook);
     }
   }

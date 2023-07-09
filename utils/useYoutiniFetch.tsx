@@ -1,8 +1,6 @@
 import { EntryData, YoutiniData } from "../types";
 
-export async function useYoutiniFetch(
-  parameter: string,
-): Promise<YoutiniData[]> {
+export async function youtiniFetch(parameter: string): Promise<YoutiniData[]> {
   let fetchedData: YoutiniData[] = [];
 
   if (parameter === "books") {

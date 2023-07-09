@@ -7,7 +7,7 @@ import { YoutiniData } from "../../types";
 type Image = { name: string; image: string };
 
 const downloadFile = (name: string, url: string): void => {
-  const filePath = `./public/imgs/fetchedimgs/bookimages/${name
+  /* const filePath = `./public/imgs/fetchedimgs/bookimages/${name
     .replace(/[^a-z0-9]/gi, "_")
     .toLowerCase()}`;
   const file = fs.createWriteStream(filePath, { flags: "wx" });
@@ -27,29 +27,22 @@ const downloadFile = (name: string, url: string): void => {
       });
       file.close();
     });
-  });
+  }); */
 };
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   let fetchedData: Array<Array<YoutiniData>> | undefined;
   let images: Image[] = [];
 
-  const canonBooks = await fetch(
-    "https://star-wars-loretracker.vercel.app/data/books/Youtini%20Bookshelf%20-%20Canon%20Books.json",
-  );
-  const legendBooks = await fetch(
-    "https://star-wars-loretracker.vercel.app/data/books/Youtini%20Bookshelf%20-%20Legends%20Books.json",
-  );
+  const canonBooks = await fetch("https://star-wars-loretracker.vercel.app/data/books/Youtini%20Bookshelf%20-%20Canon%20Books.json");
+  const legendBooks = await fetch("https://star-wars-loretracker.vercel.app/data/books/Youtini%20Bookshelf%20-%20Legends%20Books.json");
 
   await Promise.all([canonBooks, legendBooks])
     .then((responses) => {
       return Promise.all(
         responses.map((response) => {
           return response.json();
-        }),
+        })
       );
     })
     .then((datas: Array<Array<YoutiniData>>) => {
