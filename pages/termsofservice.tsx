@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 
 export default function () {
   return (
     <div
       style={{
-        padding: '10%',
-        backgroundColor: 'black',
-        color: 'white',
-        fontFamily: 'Montserrat',
+        padding: "10%",
+        backgroundColor: "black",
+        color: "white",
+        fontFamily: "Montserrat",
       }}
     >
       <h1>Website Terms and Conditions of Use</h1>
@@ -58,8 +58,8 @@ export default function () {
         of these restrictions. Upon termination, your viewing right will also be
         terminated and you should destroy any downloaded materials in your
         possession whether it is printed or electronic format. These Terms of
-        Service has been created with the help of the{' '}
-        <a href='https://www.termsofservicegenerator.net'>
+        Service has been created with the help of the{" "}
+        <a href="https://www.termsofservicegenerator.net">
           Terms Of Service Generator
         </a>
         .

@@ -9,7 +9,10 @@ import CloseIcon from "@mui/icons-material/Close";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 
-export default function DescriptionDialog({ title, description }: DescriptionDialogProps) {
+export default function DescriptionDialog({
+  title,
+  description,
+}: DescriptionDialogProps) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => () => {
@@ -34,7 +37,10 @@ export default function DescriptionDialog({ title, description }: DescriptionDia
 
   return (
     <>
-      <div className={styles.descriptionButtonContainer} onClick={handleClickOpen()}>
+      <div
+        className={styles.descriptionButtonContainer}
+        onClick={handleClickOpen()}
+      >
         <h6 className={styles.descriptionLabel}>
           <FontAwesomeIcon icon={faCircleInfo} /> View Description
         </h6>
@@ -44,7 +50,8 @@ export default function DescriptionDialog({ title, description }: DescriptionDia
         onClose={handleClose}
         scroll={"body"}
         aria-labelledby="scroll-dialog-title"
-        aria-describedby="scroll-dialog-description">
+        aria-describedby="scroll-dialog-description"
+      >
         <div className={styles.descriptionContainer}>
           <IconButton
             aria-label="close"
@@ -54,7 +61,8 @@ export default function DescriptionDialog({ title, description }: DescriptionDia
               right: 8,
               top: 8,
               color: "#808080",
-            }}>
+            }}
+          >
             <CloseIcon />
           </IconButton>
           <DialogTitle
@@ -68,11 +76,14 @@ export default function DescriptionDialog({ title, description }: DescriptionDia
               lineHeight: 1,
             }}
             id="scroll-dialog-title"
-            className={styles.descriptionDialogTitle}>
+            className={styles.descriptionDialogTitle}
+          >
             {title}
           </DialogTitle>
           <DialogContent dividers={true}>
-            <div className={styles.descriptionWarning}>Description provided by Google Books.</div>
+            <div className={styles.descriptionWarning}>
+              Description provided by Google Books.
+            </div>
             <div lang="en" className={styles.descriptionText}>
               {description}
             </div>

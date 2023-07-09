@@ -1,18 +1,18 @@
-import React from 'react';
-import Popover from '@mui/material/Popover';
-import ListOfExcludedEntriesDialog from '../MUI/ListOfExcludedEntriesDialog';
-import Typography from '@mui/material/Typography';
-import FilterByCanonicity from './FilterByCanonicity';
-import FilterByFinished from './FilterByFinished';
-import FilterByCreators from './FilterByCreators';
-import FilterByCategories from './FilterByCategories';
-import FilterExcludedEntries from './FilterExcludedEntries';
-import ResetFilters from './ResetFilters';
-import styles from '../../styles/Home.module.css';
-import { useFilterContext } from '../../utils/useFilterContext';
-import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
+import React from "react";
+import Popover from "@mui/material/Popover";
+import ListOfExcludedEntriesDialog from "../MUI/ListOfExcludedEntriesDialog";
+import Typography from "@mui/material/Typography";
+import FilterByCanonicity from "./FilterByCanonicity";
+import FilterByFinished from "./FilterByFinished";
+import FilterByCreators from "./FilterByCreators";
+import FilterByCategories from "./FilterByCategories";
+import FilterExcludedEntries from "./FilterExcludedEntries";
+import ResetFilters from "./ResetFilters";
+import styles from "../../styles/Home.module.css";
+import { useFilterContext } from "../../utils/useFilterContext";
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 
 export default function FilterboxContent() {
   const { categories, filterboxAnchorEl, setFilterboxAnchorEl } =
@@ -20,36 +20,36 @@ export default function FilterboxContent() {
 
   return (
     <Popover
-      id={'simple-popover'}
+      id={"simple-popover"}
       open={Boolean(filterboxAnchorEl)}
       anchorEl={filterboxAnchorEl}
       onClose={() => setFilterboxAnchorEl(null)}
       anchorOrigin={{
-        vertical: 'bottom',
-        horizontal: 'left',
+        vertical: "bottom",
+        horizontal: "left",
       }}
     >
       <IconButton
-        aria-label='close'
+        aria-label="close"
         onClick={() => setFilterboxAnchorEl(null)}
         sx={{
-          position: 'absolute',
+          position: "absolute",
           right: 8,
           top: 8,
-          color: '#808080',
+          color: "#808080",
         }}
       >
         <CloseIcon />
       </IconButton>
       <Box id={styles.filterbox}>
         <Typography
-          variant='h5'
+          variant="h5"
           gutterBottom
-          component='div'
+          component="div"
           sx={{
-            fontFamily: 'Montserrat',
+            fontFamily: "Montserrat",
             fontWeight: 900,
-            textAlign: 'center',
+            textAlign: "center",
           }}
         >
           FILTERS
@@ -59,10 +59,10 @@ export default function FilterboxContent() {
 
         <Box
           sx={{
-            marginLeft: '15px',
-            textAlign: 'center',
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
+            marginLeft: "15px",
+            textAlign: "center",
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
           }}
         >
           <FilterByCanonicity />

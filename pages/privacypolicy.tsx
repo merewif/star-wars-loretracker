@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 
 export default function () {
   return (
     <div
       style={{
-        padding: '10%',
-        backgroundColor: 'black',
-        color: 'white',
-        fontFamily: 'Montserrat',
+        padding: "10%",
+        backgroundColor: "black",
+        color: "white",
+        fontFamily: "Montserrat",
       }}
     >
       <h1>Privacy Policy for Star Wars Loretracker</h1>
@@ -30,8 +30,8 @@ export default function () {
         for visitors to our website with regards to the information that they
         shared and/or collect in Star Wars Loretracker. This policy is not
         applicable to any information collected offline or via channels other
-        than this website. Our Privacy Policy was created with the help of the{' '}
-        <a href='https://www.privacypolicygenerator.info'>
+        than this website. Our Privacy Policy was created with the help of the{" "}
+        <a href="https://www.privacypolicygenerator.info">
           Free Privacy Policy Generator
         </a>
         .
@@ -109,8 +109,8 @@ export default function () {
       </p>
 
       <p>
-        For more general information on cookies, please read{' '}
-        <a href='https://www.generateprivacypolicy.com/#cookies'>
+        For more general information on cookies, please read{" "}
+        <a href="https://www.generateprivacypolicy.com/#cookies">
           the Cookies article on Generate Privacy Policy website
         </a>
         .
@@ -145,7 +145,7 @@ export default function () {
         advertisers or websites. Thus, we are advising you to consult the
         respective Privacy Policies of these third-party ad servers for more
         detailed information. It may include their practices and instructions
-        about how to opt-out of certain options.{' '}
+        about how to opt-out of certain options.{" "}
       </p>
 
       <p>

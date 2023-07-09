@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import Slide from '@mui/material/Slide';
-import DoDisturbOnIcon from '@mui/icons-material/DoDisturbOn';
-import Tooltip from '@mui/material/Tooltip';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import { useFilterContext } from '../../utils/useFilterContext';
+import React, { useEffect, useState } from "react";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Slide from "@mui/material/Slide";
+import DoDisturbOnIcon from "@mui/icons-material/DoDisturbOn";
+import Tooltip from "@mui/material/Tooltip";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import { useFilterContext } from "../../utils/useFilterContext";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction='up' ref={ref} {...props} />;
+  return <Slide direction="up" ref={ref} {...props} />;
 });
 
 export default function ListOfExcludedEntriesDialog() {
@@ -29,9 +29,9 @@ export default function ListOfExcludedEntriesDialog() {
   return (
     <Box>
       <Button
-        variant='outlined'
+        variant="outlined"
         onClick={handleClickOpen}
-        sx={{ color: 'white', margin: '15px', marginLeft: '20px' }}
+        sx={{ color: "white", margin: "15px", marginLeft: "20px" }}
       >
         Edit excluded entries
       </Button>
@@ -40,38 +40,38 @@ export default function ListOfExcludedEntriesDialog() {
         TransitionComponent={Transition}
         keepMounted
         onClose={handleClose}
-        aria-describedby='alert-dialog-slide-description'
+        aria-describedby="alert-dialog-slide-description"
       >
         <Box
           sx={{
-            backgroundColor: 'black',
-            maxHeight: '90vh',
-            overflow: 'auto',
+            backgroundColor: "black",
+            maxHeight: "90vh",
+            overflow: "auto",
           }}
         >
           <DialogTitle
             sx={{
-              textTransform: 'uppercase',
-              fontFamily: 'Montserrat',
-              color: 'black',
+              textTransform: "uppercase",
+              fontFamily: "Montserrat",
+              color: "black",
               fontWeight: 900,
-              paddingTop: '40px',
-              textAlign: 'center',
-              color: '#ffe81f',
+              paddingTop: "40px",
+              textAlign: "center",
+              color: "#ffe81f",
             }}
           >
-            {'Excluded content'}
+            {"Excluded content"}
           </DialogTitle>
           <DialogContent>
             {Object.keys(entriesMarkedAsExcluded).map((e1, i1) => {
               return (
                 <Box key={i1}>
                   <Typography
-                    variant='p'
+                    variant="p"
                     sx={{
-                      textTransform: 'uppercase',
-                      fontFamily: 'Montserrat',
-                      color: '#ffe81f',
+                      textTransform: "uppercase",
+                      fontFamily: "Montserrat",
+                      color: "#ffe81f",
                       fontWeight: 900,
                     }}
                   >
@@ -83,30 +83,30 @@ export default function ListOfExcludedEntriesDialog() {
                         <Box
                           key={i2}
                           sx={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            minWidth: '30vw',
+                            display: "flex",
+                            alignItems: "center",
+                            minWidth: "30vw",
                           }}
                         >
-                          <Tooltip title='Remove' placement='left'>
+                          <Tooltip title="Remove" placement="left">
                             <DoDisturbOnIcon
                               sx={{
-                                color: 'red',
-                                fontSize: '1rem',
-                                marginRight: '10px',
-                                cursor: 'pointer',
+                                color: "red",
+                                fontSize: "1rem",
+                                marginRight: "10px",
+                                cursor: "pointer",
                               }}
                               onClick={() => removeFromExcluded(e1, e2)}
                             />
                           </Tooltip>
                           <Typography
                             sx={{
-                              color: 'white',
-                              fontFamily: 'Montserrat',
-                              marginBlock: '0',
+                              color: "white",
+                              fontFamily: "Montserrat",
+                              marginBlock: "0",
                             }}
                           >
-                            {e2.replace(/-+/g, ' ').replace(/—/g, '-')}
+                            {e2.replace(/-+/g, " ").replace(/—/g, "-")}
                           </Typography>
                         </Box>
                       );
@@ -114,16 +114,16 @@ export default function ListOfExcludedEntriesDialog() {
                   ) : (
                     <Box
                       sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        minWidth: '50vw',
+                        display: "flex",
+                        alignItems: "center",
+                        minWidth: "50vw",
                       }}
                     >
                       <Typography
                         sx={{
-                          color: 'white',
-                          fontFamily: 'Montserrat',
-                          marginBlock: '0',
+                          color: "white",
+                          fontFamily: "Montserrat",
+                          marginBlock: "0",
                         }}
                       >
                         Nothing excluded yet.

@@ -4,10 +4,13 @@ import Header from "../comps/Header";
 import ProgressBar from "../comps/ProgressBar";
 import _ from "lodash";
 import FiltersContainer from "../comps/Filters/FiltersContainer";
-import CardContents from "../comps/card/CardContents";
-import moment from "moment";
 import { Waypoint } from "react-waypoint";
-import { EntryData, MarkedEntries, PossibleModules, YoutiniData } from "../types";
+import {
+  EntryData,
+  MarkedEntries,
+  PossibleModules,
+  YoutiniData,
+} from "../types";
 import { supabase } from "../utils/supabaseClient";
 import { User } from "@supabase/supabase-js";
 import { FilterContext } from "../utils/useFilterContext";
@@ -25,43 +28,54 @@ export default function Home() {
   const [fetchedTitles, setFetchedTitles] = useState<string[]>([]);
   const [fetchedBooks, setFetchedBooks] = useState<EntryData[]>([]);
   const [fetchedComics, setFetchedComics] = useState<EntryData[]>([]);
-  const [currentlyOpenedModule, setCurrentlyOpenedModule] = useState<PossibleModules>("movies");
+  const [currentlyOpenedModule, setCurrentlyOpenedModule] =
+    useState<PossibleModules>("movies");
   const [moduleKeys, setModuleKeys] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState<any[]>(["title", "asc"]);
-  const [entriesMarkedAsExcluded, setEntriesMarkedAsExcluded] = useState<MarkedEntries>({
-    movies: [],
-    games: [],
-    books: [],
-    comics: [],
-    series: [],
-  });
-  const [entriesMarkedAsFinished, setEntriesMarkedAsFinished] = useState<MarkedEntries>({
-    movies: [],
-    games: [],
-    books: [],
-    comics: [],
-    series: [],
-    excluded: entriesMarkedAsExcluded,
-  });
+  const [entriesMarkedAsExcluded, setEntriesMarkedAsExcluded] =
+    useState<MarkedEntries>({
+      movies: [],
+      games: [],
+      books: [],
+      comics: [],
+      series: [],
+    });
+  const [entriesMarkedAsFinished, setEntriesMarkedAsFinished] =
+    useState<MarkedEntries>({
+      movies: [],
+      games: [],
+      books: [],
+      comics: [],
+      series: [],
+      excluded: entriesMarkedAsExcluded,
+    });
   const [filterboxAnchorEl, setFilterboxAnchorEl] = useState(null);
   const [creators, setCreators] = useState<string[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [filteredCategories, setFilteredCategories] = useState<string[]>([]);
-  const [filteredCreatorsName, setFilteredCreatorsName] = useState<string[]>([]);
+  const [filteredCreatorsName, setFilteredCreatorsName] = useState<string[]>(
+    [],
+  );
   const [filteredEras, setFilteredEras] = useState<string[]>([]);
-  const [canonicityFilterValue, setCanonicityFilterValue] = useState<"all" | "legends" | "canon">("all");
+  const [canonicityFilterValue, setCanonicityFilterValue] = useState<
+    "all" | "legends" | "canon"
+  >("all");
   const [finishedFilterValue, setFinishedFilterValue] = useState("all");
   const [hideExcludedEntries, setHideExcludedEntries] = useState<boolean>(true);
   const [searchValue, setSearchValue] = useState("");
   const [progressBarValue, setProgressBarValue] = useState<number>(0);
   const [user, setUser] = useState<User | null>();
   const [showBackdrop, setShowBackdrop] = useState<boolean>(false);
-  const [showTimelineWarning, setShowTimelineWarning] = useState<boolean>(false);
-  const [bookDescriptions, setBookDescriptions] = useState<any[]>([])
+  const [showTimelineWarning, setShowTimelineWarning] =
+    useState<boolean>(false);
+  const [bookDescriptions, setBookDescriptions] = useState<any[]>([]);
 
   async function fetchUserDataFromDatabase(): Promise<void> {
     try {
-      const { data, error } = await supabase.from("userdata").select("data").eq("email", user?.email);
+      const { data, error } = await supabase
+        .from("userdata")
+        .select("data")
+        .eq("email", user?.email);
 
       if (data) {
         setEntriesMarkedAsFinished(data[0].data);
@@ -111,31 +125,35 @@ export default function Home() {
       setEntriesMarkedAsFinished(storedData);
     }
 
+    // @ts-ignore
     setUser(supabase.auth.user());
 
-    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event == "SIGNED_IN") {
-        setUser(session?.user ?? null);
-      }
-      if (event == "SIGNED_OUT") {
-        setEntriesMarkedAsExcluded({
-          movies: [],
-          games: [],
-          books: [],
-          comics: [],
-          series: [],
-        });
-        setEntriesMarkedAsFinished({
-          movies: [],
-          games: [],
-          books: [],
-          comics: [],
-          series: [],
-          excluded: entriesMarkedAsExcluded,
-        });
-      }
-    });
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        if (event == "SIGNED_IN") {
+          setUser(session?.user ?? null);
+        }
+        if (event == "SIGNED_OUT") {
+          setEntriesMarkedAsExcluded({
+            movies: [],
+            games: [],
+            books: [],
+            comics: [],
+            series: [],
+          });
+          setEntriesMarkedAsFinished({
+            movies: [],
+            games: [],
+            books: [],
+            comics: [],
+            series: [],
+            excluded: entriesMarkedAsExcluded,
+          });
+        }
+      },
+    );
     return () => {
+      // @ts-ignore
       if (authListener) authListener.unsubscribe();
     };
   }, []);
@@ -145,19 +163,27 @@ export default function Home() {
   }, [user]);
 
   useEffect(() => {
-    let btns = Array.from(document.getElementsByClassName("navbtn") as HTMLCollectionOf<HTMLElement>);
+    let btns = Array.from(
+      document.getElementsByClassName(
+        "navbtn",
+      ) as HTMLCollectionOf<HTMLElement>,
+    );
     for (const btn of btns) {
       btn.style.color = "white";
     }
 
-    if (currentlyOpenedModule) document.getElementById(currentlyOpenedModule)!.style.color = "#ffe81f";
+    if (currentlyOpenedModule)
+      document.getElementById(currentlyOpenedModule)!.style.color = "#ffe81f";
 
     setSearchValue("");
     resetFilters();
   }, [currentlyOpenedModule]);
 
   useEffect(() => {
-    localStorage.setItem("loretracker", JSON.stringify(entriesMarkedAsFinished));
+    localStorage.setItem(
+      "loretracker",
+      JSON.stringify(entriesMarkedAsFinished),
+    );
 
     if (user) upsertUserDataIntoDatabase();
   }, [entriesMarkedAsFinished]);
@@ -210,7 +236,9 @@ export default function Home() {
 
     const dataIsUnfiltered = fetchedData.length === defaultFetchedData.length;
     if (dataIsUnfiltered && hideExcludedEntries) {
-      total = fetchedData.length - entriesMarkedAsExcluded[currentlyOpenedModule].length;
+      total =
+        fetchedData.length -
+        entriesMarkedAsExcluded[currentlyOpenedModule].length;
     }
 
     if (entriesMarkedAsFinished[currentlyOpenedModule]) {
@@ -250,12 +278,16 @@ export default function Home() {
     setCurrentlyOpenedModule(target);
 
     if (target === "books" || target === "comics") {
-      if (target === "books" && fetchedBooks.length) return setDataIntoStates(fetchedBooks);
-      if (target === "comics" && fetchedComics.length) return setDataIntoStates(fetchedComics);
+      if (target === "books" && fetchedBooks.length)
+        return setDataIntoStates(fetchedBooks);
+      if (target === "comics" && fetchedComics.length)
+        return setDataIntoStates(fetchedComics);
 
       setShowBackdrop(true);
       return useYoutiniFetch(target)
-        .then((unformattedBooks: YoutiniData[]) => useYoutiniParser(unformattedBooks))
+        .then((unformattedBooks: YoutiniData[]) =>
+          useYoutiniParser(unformattedBooks),
+        )
         .then((parsedBooks: EntryData[]) => {
           setDataIntoStates(parsedBooks);
           if (target === "books") setFetchedBooks(parsedBooks);
@@ -266,10 +298,13 @@ export default function Home() {
     fetchData(target);
   }
 
-  function getDescription(book: string): string {    
-    let bookDescription = _.filter(bookDescriptions, ['youtiniTitle', book.replace(/—|–|−|-/, '-')]);
+  function getDescription(book: string): string {
+    let bookDescription = _.filter(bookDescriptions, [
+      "youtiniTitle",
+      book.replace(/—|–|−|-/, "-"),
+    ]);
 
-    if (!bookDescription.length || currentlyOpenedModule !== 'books') return '';
+    if (!bookDescription.length || currentlyOpenedModule !== "books") return "";
     return bookDescription[0].description;
   }
 
@@ -293,10 +328,10 @@ export default function Home() {
       });
   }
 
-  function fetchBookDescriptions(){
-    fetch('./data/bookDescriptions.json')
-      .then(response => response.json())
-      .then(data => setBookDescriptions(data));
+  function fetchBookDescriptions() {
+    fetch("./data/bookDescriptions.json")
+      .then((response) => response.json())
+      .then((data) => setBookDescriptions(data));
   }
 
   function fetchAllTitles(data: EntryData[]) {
@@ -312,9 +347,12 @@ export default function Home() {
     let creators: string[] = [];
 
     for (const entry of data) {
-      if (entry.author && !creators.includes(entry.author)) creators.push(entry.author);
-      if (entry.createdBy && !creators.includes(entry.createdBy)) creators.push(entry.createdBy);
-      if (entry.directedBy && !creators.includes(entry.directedBy)) creators.push(entry.directedBy);
+      if (entry.author && !creators.includes(entry.author))
+        creators.push(entry.author);
+      if (entry.createdBy && !creators.includes(entry.createdBy))
+        creators.push(entry.createdBy);
+      if (entry.directedBy && !creators.includes(entry.directedBy))
+        creators.push(entry.directedBy);
     }
     setCreators(creators.sort());
   }
@@ -332,14 +370,20 @@ export default function Home() {
     if (!_.includes(entriesMarkedAsExcluded[currentlyOpenedModule], entry)) {
       setEntriesMarkedAsExcluded({
         ...entriesMarkedAsExcluded,
-        [currentlyOpenedModule]: [...entriesMarkedAsExcluded[currentlyOpenedModule], entry],
+        [currentlyOpenedModule]: [
+          ...entriesMarkedAsExcluded[currentlyOpenedModule],
+          entry,
+        ],
       });
 
       setEntriesMarkedAsFinished({
         ...entriesMarkedAsFinished,
         excluded: {
           ...entriesMarkedAsFinished.excluded,
-          [currentlyOpenedModule]: [...entriesMarkedAsFinished.excluded[currentlyOpenedModule], entry],
+          [currentlyOpenedModule]: [
+            ...entriesMarkedAsFinished.excluded[currentlyOpenedModule],
+            entry,
+          ],
         },
       });
     }
@@ -350,7 +394,10 @@ export default function Home() {
       ...entriesMarkedAsFinished,
       excluded: {
         ...entriesMarkedAsFinished.excluded,
-        [category]: _.without(entriesMarkedAsFinished.excluded[category], entry),
+        [category]: _.without(
+          entriesMarkedAsFinished.excluded[category],
+          entry,
+        ),
       },
     });
 
@@ -364,13 +411,17 @@ export default function Home() {
     const currentTitle = entry.title.replace(/\s+/g, "-");
     let container = document.getElementById(`${currentTitle}-card`);
 
-    const isEntryFinished = entriesMarkedAsFinished[currentlyOpenedModule].includes(currentTitle);
+    const isEntryFinished =
+      entriesMarkedAsFinished[currentlyOpenedModule].includes(currentTitle);
 
     if (isEntryFinished) {
       container?.classList.remove("cardFinished");
       container?.classList.add("cardUnfinished");
 
-      const arrWithoutEntry = _.without(entriesMarkedAsFinished[currentlyOpenedModule], currentTitle);
+      const arrWithoutEntry = _.without(
+        entriesMarkedAsFinished[currentlyOpenedModule],
+        currentTitle,
+      );
 
       setEntriesMarkedAsFinished({
         ...entriesMarkedAsFinished,
@@ -382,7 +433,7 @@ export default function Home() {
         JSON.stringify({
           ...entriesMarkedAsFinished,
           [currentlyOpenedModule]: arrWithoutEntry,
-        })
+        }),
       );
     }
 
@@ -392,15 +443,21 @@ export default function Home() {
 
       setEntriesMarkedAsFinished({
         ...entriesMarkedAsFinished,
-        [currentlyOpenedModule]: [...entriesMarkedAsFinished[currentlyOpenedModule], currentTitle],
+        [currentlyOpenedModule]: [
+          ...entriesMarkedAsFinished[currentlyOpenedModule],
+          currentTitle,
+        ],
       });
 
       localStorage.setItem(
         "loretracker",
         JSON.stringify({
           ...entriesMarkedAsFinished,
-          [currentlyOpenedModule]: [...entriesMarkedAsFinished[currentlyOpenedModule], currentTitle],
-        })
+          [currentlyOpenedModule]: [
+            ...entriesMarkedAsFinished[currentlyOpenedModule],
+            currentTitle,
+          ],
+        }),
       );
     }
   }
@@ -430,7 +487,8 @@ export default function Home() {
     }
 
     if (source === "categories") {
-      let categoriesToFilter = typeof value === "string" ? value.split(",") : value;
+      let categoriesToFilter =
+        typeof value === "string" ? value.split(",") : value;
       setFilteredCategories(categoriesToFilter);
       categoryParameters = categoriesToFilter;
     }
@@ -465,7 +523,7 @@ export default function Home() {
       filteredByEras,
       filteredByCategories,
       filteredByExcludedEntries,
-      filteredBySearchResults
+      filteredBySearchResults,
     );
 
     const filteredData: EntryData[] = _.flatten(filteredEntries);
@@ -512,7 +570,9 @@ export default function Home() {
       listFilteredByFinished = defaultFetchedData;
       for (const entry of listOfFinishedEntries) {
         const title = entry.replace(/-/g, " ");
-        listFilteredByFinished = _.reject(listFilteredByFinished, { title: title });
+        listFilteredByFinished = _.reject(listFilteredByFinished, {
+          title: title,
+        });
       }
     }
 
@@ -528,7 +588,12 @@ export default function Home() {
     if (creatorsParameters.length) {
       for (const person of creatorsParameters) {
         let entriesByPerson = _.filter(defaultFetchedData, function (o) {
-          if (o.author === person || o.directedBy === person || o.createdBy === person) return o;
+          if (
+            o.author === person ||
+            o.directedBy === person ||
+            o.createdBy === person
+          )
+            return o;
           return;
         });
 
@@ -600,7 +665,7 @@ export default function Home() {
 
     if (!searchInput || !searchInput.length) {
       searchResults = defaultFetchedData;
-      setSearchValue('');
+      setSearchValue("");
     }
 
     if (searchInput && searchInput.length) {
@@ -639,7 +704,7 @@ export default function Home() {
     resetFilters,
     filterEntries,
     fetchedTitles,
-    searchEntries,    
+    searchEntries,
     filterboxAnchorEl,
     removeFromExcluded,
     filteredCategories,
@@ -648,7 +713,7 @@ export default function Home() {
     setFilterboxAnchorEl,
     filteredCreatorsName,
     canonicityFilterValue,
-    entriesMarkedAsExcluded,    
+    entriesMarkedAsExcluded,
   };
 
   const cardprops = {
@@ -657,7 +722,7 @@ export default function Home() {
     entriesMarkedAsFinished,
     toggleEntryAsFinished,
     currentlyOpenedModule,
-    getDescription
+    getDescription,
   };
 
   return (
@@ -681,9 +746,22 @@ export default function Home() {
           <div id={styles.moduleContainer}>
             {_.slice(fetchedData, 0, paginationEndElement).map((e1, i1) => {
               let currentTitle = e1.title.replace(/\s+/g, "-");
-              if (hideExcludedEntries && entriesMarkedAsExcluded[currentlyOpenedModule].includes(currentTitle)) return;              
-              
-              return <Card {...cardprops} e1={e1} currentTitle={currentTitle} key={"1" + i1} />;
+              if (
+                hideExcludedEntries &&
+                entriesMarkedAsExcluded[currentlyOpenedModule].includes(
+                  currentTitle,
+                )
+              )
+                return;
+
+              return (
+                <Card
+                  {...cardprops}
+                  e1={e1}
+                  currentTitle={currentTitle}
+                  key={"1" + i1}
+                />
+              );
             })}
             <Waypoint onEnter={infiniteScroll} />
           </div>

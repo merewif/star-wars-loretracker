@@ -1,4 +1,4 @@
-export type PossibleModules = 'movies' | 'books' | 'comics' | 'series';
+export type PossibleModules = "movies" | "books" | "comics" | "series";
 
 export interface CardProps {
   moduleKeys: string[];
@@ -19,7 +19,7 @@ export interface SnackbarProps {
   openSnackbar: boolean;
   closeSnackbar: (
     event: React.MouseEventHandler<HTMLAnchorElement>,
-    reason: string
+    reason: string,
   ) => void;
 }
 
@@ -37,13 +37,13 @@ export interface HeaderProps {
 }
 
 export interface YoutiniData {
-  '(All Books) Title + Format': string;
-  'Database ID': number;
-  'Name (Title)': string;
-  'Author / Writer': string;
-  'Release Date': string;
+  "(All Books) Title + Format": string;
+  "Database ID": number;
+  "Name (Title)": string;
+  "Author / Writer": string;
+  "Release Date": string;
   Timeline: string;
-  'Cover Image URL': string | number;
+  "Cover Image URL": string | number;
   Category: string;
   canonicity: boolean;
 }

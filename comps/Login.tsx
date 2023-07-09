@@ -1,29 +1,29 @@
-import React, { useState } from 'react';
-import styles from '../styles/Login.module.css';
-import logo from '../assets/logo.png';
-import Image from 'next/image';
-import Button from '@mui/material/Button';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import GoogleIcon from '@mui/icons-material/Google';
-import EmailIcon from '@mui/icons-material/Email';
-import LogoutIcon from '@mui/icons-material/Logout';
-import Snackbar from '@mui/material/Snackbar';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
-import { supabase } from '../utils/supabaseClient';
-import { LoginProps } from '../types';
-import { Provider } from '@supabase/supabase-js';
+import React, { useState } from "react";
+import styles from "../styles/Login.module.css";
+import logo from "../assets/logo.png";
+import Image from "next/image";
+import Button from "@mui/material/Button";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import GoogleIcon from "@mui/icons-material/Google";
+import EmailIcon from "@mui/icons-material/Email";
+import LogoutIcon from "@mui/icons-material/Logout";
+import Snackbar from "@mui/material/Snackbar";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+import { supabase } from "../utils/supabaseClient";
+import { LoginProps } from "../types";
+import { Provider } from "@supabase/supabase-js";
 
 export default function Login({ handleClose }: LoginProps) {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const handleCloseSnackbar = (
     event: React.SyntheticEvent | Event,
-    reason?: string
+    reason?: string,
   ) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
 
@@ -33,12 +33,12 @@ export default function Login({ handleClose }: LoginProps) {
   const action = (
     <React.Fragment>
       <IconButton
-        size='small'
-        aria-label='close'
-        color='inherit'
+        size="small"
+        aria-label="close"
+        color="inherit"
         onClick={handleCloseSnackbar}
       >
-        <CloseIcon fontSize='small' />
+        <CloseIcon fontSize="small" />
       </IconButton>
     </React.Fragment>
   );
@@ -52,7 +52,7 @@ export default function Login({ handleClose }: LoginProps) {
   }
 
   function signInWithEmail(
-    event: React.FormEvent<HTMLInputElement> | React.FormEvent<HTMLFormElement>
+    event: React.FormEvent<HTMLInputElement> | React.FormEvent<HTMLFormElement>,
   ) {
     event.preventDefault();
     sendLoginMail();
@@ -68,27 +68,27 @@ export default function Login({ handleClose }: LoginProps) {
   async function signout() {
     handleClose();
     const { error } = await supabase.auth.signOut();
-    localStorage.removeItem('loretracker');
+    localStorage.removeItem("loretracker");
   }
 
   return (
     <>
       <div className={styles.loginContainer}>
         <IconButton
-          aria-label='close'
+          aria-label="close"
           onClick={handleClose}
           sx={{
-            position: 'absolute',
+            position: "absolute",
             right: 8,
             top: 8,
-            color: '#808080',
+            color: "#808080",
           }}
         >
           <CloseIcon />
         </IconButton>
         <div className={styles.loginBox}>
           <div className={styles.logoContainer}>
-            <Image src={logo} alt='Logo' height={200} width={300} />
+            <Image src={logo} alt="Logo" height={200} width={300} />
           </div>
           {user ? (
             <div className={styles.loggedIn}>
@@ -96,7 +96,7 @@ export default function Login({ handleClose }: LoginProps) {
               <Button
                 startIcon={<LogoutIcon />}
                 onClick={() => signout()}
-                sx={{ marginTop: '25px' }}
+                sx={{ marginTop: "25px" }}
               >
                 Sign out
               </Button>
@@ -108,37 +108,37 @@ export default function Login({ handleClose }: LoginProps) {
                 onSubmit={(e) => signInWithEmail(e)}
               >
                 <Button
-                  variant='outlined'
+                  variant="outlined"
                   startIcon={<GoogleIcon />}
-                  onClick={() => signInWithSupabase('google')}
+                  onClick={() => signInWithSupabase("google")}
                 >
                   Login with Google
                 </Button>
                 <Button
-                  variant='outlined'
+                  variant="outlined"
                   startIcon={<TwitterIcon />}
-                  onClick={() => signInWithSupabase('twitter')}
+                  onClick={() => signInWithSupabase("twitter")}
                 >
                   Login with Twitter
                 </Button>
                 <Button
-                  variant='outlined'
+                  variant="outlined"
                   startIcon={<FacebookIcon />}
-                  onClick={() => signInWithSupabase('facebook')}
+                  onClick={() => signInWithSupabase("facebook")}
                 >
                   Login with Facebook
                 </Button>
 
                 <input
-                  type='email'
-                  placeholder='Email'
+                  type="email"
+                  placeholder="Email"
                   onChange={(e) => setEmail(e.target.value)}
                   onSubmit={(e) => signInWithEmail(e)}
                   style={{
-                    backgroundColor: 'black',
-                    color: 'white',
-                    outline: 'none',
-                    border: '1px dotted white',
+                    backgroundColor: "black",
+                    color: "white",
+                    outline: "none",
+                    border: "1px dotted white",
                   }}
                 />
                 <Button startIcon={<EmailIcon />} onClick={sendLoginMail}>
@@ -148,7 +148,7 @@ export default function Login({ handleClose }: LoginProps) {
                   open={openSnackbar}
                   autoHideDuration={6000}
                   onClose={handleCloseSnackbar}
-                  message='We sent you an email with your login link.'
+                  message="We sent you an email with your login link."
                   action={action}
                 />
               </form>

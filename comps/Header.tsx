@@ -1,29 +1,29 @@
-import React, { useState } from 'react';
-import styles from '../styles/Header.module.css';
-import logo from '../assets/logo.png';
-import Image from 'next/image';
-import Dialog from '@mui/material/Dialog';
-import Slide from '@mui/material/Slide';
-import { TransitionProps } from '@mui/material/transitions';
-import { HeaderProps } from '../types';
-import Login from './Login';
-import About from './About';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import MenuDrawer from "./MUI/MenuDrawer"
+import React, { useState } from "react";
+import styles from "../styles/Header.module.css";
+import logo from "../assets/logo.png";
+import Image from "next/image";
+import Dialog from "@mui/material/Dialog";
+import Slide from "@mui/material/Slide";
+import { TransitionProps } from "@mui/material/transitions";
+import { HeaderProps } from "../types";
+import Login from "./Login";
+import About from "./About";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import MenuDrawer from "./MUI/MenuDrawer";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
     children: React.ReactElement<any, any>;
   },
-  ref: React.Ref<unknown>
+  ref: React.Ref<unknown>,
 ) {
-  return <Slide direction='up' ref={ref} {...props} />;
+  return <Slide direction="up" ref={ref} {...props} />;
 });
 
 const Header = ({ displayData, handleFileRead }: HeaderProps) => {
-  const listElements = ['Movies', 'Books', 'Comics', 'Series'];
+  const listElements = ["Movies", "Books", "Comics", "Series"];
   const [open, setOpen] = useState(false);
-  const [dialogContent, setDialogContent] = useState<string>('');
+  const [dialogContent, setDialogContent] = useState<string>("");
 
   const handleClickOpen = (dialogTarget: string) => {
     setDialogContent(dialogTarget);
@@ -41,16 +41,16 @@ const Header = ({ displayData, handleFileRead }: HeaderProps) => {
   }
 
   function downloadBackup() {
-    let storedCollection = localStorage.getItem('loretracker') ?? '';
+    let storedCollection = localStorage.getItem("loretracker") ?? "";
     let collection = JSON.parse(storedCollection) ?? {};
     let collectionAsText = JSON.stringify(collection);
 
-    let a = document.createElement('a');
+    let a = document.createElement("a");
     a.setAttribute(
-      'href',
-      'data:text/plain;charset=utf-8,' + encodeURIComponent(collectionAsText)
+      "href",
+      "data:text/plain;charset=utf-8," + encodeURIComponent(collectionAsText),
     );
-    a.setAttribute('download', 'my-star-wars-loretracker-collection.sw');
+    a.setAttribute("download", "my-star-wars-loretracker-collection.sw");
     a.click();
   }
 
@@ -58,7 +58,7 @@ const Header = ({ displayData, handleFileRead }: HeaderProps) => {
     <>
       <nav id={styles.navbar}>
         <div id={styles.image}>
-          <Image src={logo} alt='Logo' height={100} width={150} />
+          <Image src={logo} alt="Logo" height={100} width={150} />
         </div>
         <ul>
           {listElements.map((e, i) => {
@@ -67,19 +67,19 @@ const Header = ({ displayData, handleFileRead }: HeaderProps) => {
                 onClick={(e) => displayData(listElements[i].toLowerCase())}
                 key={i}
                 id={listElements[i].toLowerCase()}
-                className='navbtn'
+                className="navbtn"
               >
                 {listElements[i]}
               </li>
             );
           })}
 
-          <li onClick={() => handleClickOpen('about')}>About & Backup</li>
+          <li onClick={() => handleClickOpen("about")}>About & Backup</li>
           <li
-            onClick={() => handleClickOpen('login')}
-            style={{ paddingLeft: '0px' }}
+            onClick={() => handleClickOpen("login")}
+            style={{ paddingLeft: "0px" }}
           >
-            <AccountCircleIcon sx={{ color: '#ffe81f ' }} />
+            <AccountCircleIcon sx={{ color: "#ffe81f " }} />
           </li>
           {/* <li>
             <MenuDrawer />
@@ -91,13 +91,13 @@ const Header = ({ displayData, handleFileRead }: HeaderProps) => {
         TransitionComponent={Transition}
         keepMounted
         onClose={handleClose}
-        aria-describedby='alert-dialog-slide-description'
+        aria-describedby="alert-dialog-slide-description"
         sx={{
-          maxHeight: 'none',
-          maxWidth: 'none',
+          maxHeight: "none",
+          maxWidth: "none",
         }}
       >
-        {dialogContent === 'about' ? (
+        {dialogContent === "about" ? (
           <About
             handleClose={handleClose}
             uploadBackup={uploadBackup}
