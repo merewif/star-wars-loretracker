@@ -20,4 +20,4 @@ Fortunately the amazing [Youtini Team](https://youtini.com) has already assemble
   - Material UI
   - Lodash
   - Waypoint
-  - Moment
+  - Dayjs
