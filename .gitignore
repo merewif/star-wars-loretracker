@@ -52,6 +52,14 @@ firestore.rules
 storage.rules
 database.rules.json
 
-**/public/workbox-*.js
+**/public/precache.*.*.js
 **/public/sw.js
+**/public/workbox-*.js
 **/public/worker-*.js
+**/public/fallback-*.js
+**/public/precache.*.*.js.map
+**/public/sw.js.map
+**/public/workbox-*.js.map
+**/public/worker-*.js.map
+**/public/fallback-*.js
+
