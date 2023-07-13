@@ -51,7 +51,7 @@
   },
   {
     "canonicity": true,
-    "coverImage": "./imgs/blips.bmp",
+    "coverImage": "./imgs/series/blips.jpg",
     "title": "Blips",
     "createdBy": "N/A",
     "yearOfRelease": "2017",
@@ -71,7 +71,7 @@
   },
   {
     "canonicity": true,
-    "coverImage": "./imgs/rollout.bmp",
+    "coverImage": "./imgs/series/rollout.jpg",
     "title": "Roll Out",
     "createdBy": "Hideo Itoyanagi",
     "yearOfRelease": "2019",
@@ -81,7 +81,7 @@
   },
   {
     "canonicity": true,
-    "coverImage": "https://m.media-amazon.com/images/M/MV5BYzdiOTk2ZmEtNDU5MS00ZGNjLWFkMGMtYzc2MGQ1NGI3NmJlXkEyXkFqcGdeQXVyNjQzNDI3NzY@._V1_.jpg",
+    "coverImage": "./imgs/series/goc.jpg",
     "title": "Galaxy of Creatures",
     "createdBy": "Matt Martin",
     "yearOfRelease": "2021",
@@ -91,7 +91,7 @@
   },
   {
     "canonicity": false,
-    "coverImage": "https://upload.wikimedia.org/wikipedia/en/7/75/Star_Wars_Droids.jpg",
+    "coverImage": "./imgs/series/droids.jpg",
     "title": "Droids",
     "createdBy": "Peter Sauder, Ben Burtt",
     "yearOfRelease": "1985",
@@ -101,7 +101,7 @@
   },
   {
     "canonicity": false,
-    "coverImage": "https://upload.wikimedia.org/wikipedia/en/7/72/Star_Wars_Ewoks_Title_Card_B.png",
+    "coverImage": "./imgs/series/ewoks.jpg",
     "title": "Ewoks",
     "createdBy": "Paul Dini, Bob Carrau",
     "yearOfRelease": "1985",
@@ -111,7 +111,7 @@
   },
   {
     "canonicity": true,
-    "coverImage": "https://upload.wikimedia.org/wikipedia/commons/0/02/Star_Wars_The_Clone_Wars.png",
+    "coverImage": "./imgs/series/clonewars.jpg",
     "title": "The Clone Wars",
     "createdBy": "George Lucas",
     "yearOfRelease": "2008",
@@ -121,7 +121,7 @@
   },
   {
     "canonicity": true,
-    "coverImage": "https://upload.wikimedia.org/wikipedia/en/1/16/Star_Wars_Rebels_logo.png",
+    "coverImage": "./imgs/series/rebels.jpg",
     "title": "Rebels",
     "createdBy": "Dave Filoni, Simon Kinberg, Carrie Beck",
     "yearOfRelease": "2014",
@@ -132,7 +132,7 @@
   {
     "canonicity": true,
     "coverImage": "https://m.media-amazon.com/images/M/MV5BMTkyMTc3NjAwNF5BMl5BanBnXkFtZTgwNTU1ODIyNjM@._V1_.jpg",
-    "title": "Resistance ",
+    "title": "Resistance",
     "createdBy": "Dave Filoni, Kiri Hart, Carrie Beck",
     "yearOfRelease": "2018",
     "seasons": "2",
@@ -145,18 +145,68 @@
     "title": "The Bad Batch",
     "createdBy": "Dave Filoni, Jennifer Corbett",
     "yearOfRelease": "2021",
-    "seasons": "1",
-    "episodes": 16,
+    "seasons": "2",
+    "episodes": 32,
     "links": {}
   },
   {
     "canonicity": false,
-    "coverImage": "https://upload.wikimedia.org/wikipedia/en/b/b6/Star_Wars_Visions_Logo.jpg",
+    "coverImage": "./imgs/series/visions.jpeg",
     "title": "Visions",
     "createdBy": "Kanako Shirasaki et al.",
     "yearOfRelease": "2021",
+    "seasons": "2",
+    "episodes": 18,
+    "links": {}
+  },
+  {
+    "canonicity": true,
+    "coverImage": "./imgs/series/jedi.jpg",
+    "title": "Tales of the Jedi",
+    "createdBy": "Dave Filoni",
+    "yearOfRelease": "2022",
     "seasons": "1",
-    "episodes": 9,
+    "episodes": 6,
+    "links": {}
+  },
+  {
+    "canonicity": true,
+    "coverImage": "./imgs/series/adventures.webp",
+    "title": "Young Jedi Adventures",
+    "createdBy": "Michael Olson",
+    "yearOfRelease": "2021",
+    "seasons": "1",
+    "episodes": 25,
+    "links": {}
+  },
+  {
+    "canonicity": true,
+    "coverImage": "./imgs/series/andor.jpg",
+    "title": "Andor",
+    "createdBy": "Tony Gilroy",
+    "yearOfRelease": "2022",
+    "seasons": "1",
+    "episodes": 12,
+    "links": {}
+  },
+  {
+    "canonicity": true,
+    "coverImage": "./imgs/series/ahsoka.jpg",
+    "title": "Ahsoka",
+    "createdBy": "Jon Favreau and Dave Filoni",
+    "yearOfRelease": "2023",
+    "seasons": "1",
+    "episodes": 8,
+    "links": {}
+  },
+  {
+    "canonicity": true,
+    "coverImage": "./imgs/series/crew.jpg",
+    "title": "Skeleton Crew",
+    "createdBy": "Jon Watts and Christopher Ford[",
+    "yearOfRelease": "2023",
+    "seasons": "1",
+    "episodes": 8,
     "links": {}
   }
 ]
