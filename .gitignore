@@ -52,6 +52,8 @@ firestore.rules
 storage.rules
 database.rules.json
 
+
+# next-pwa
 **/public/precache.*.*.js
 **/public/sw.js
 **/public/workbox-*.js
